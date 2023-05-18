@@ -1,0 +1,133 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "DB_CasoslegalesContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Entities",
+   "ProjectRootNamespace": "CasosLegales.Entities",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 2,
+   "Tables": [
+      {
+         "Name": "[ACCE].[tbPantallas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[ACCE].[tbRoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[ACCE].[tbRolesPorPantalla]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[ACCE].[tbUsuarios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[CALE].[tbAbogadosJueces]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[CALE].[tbAcusadoPorCaso]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[CALE].[tbCasos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[CALE].[tbCiviles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[CALE].[tbDetallesVeredictos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[CALE].[tbEmpleados]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[CALE].[tbEmpresas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[CALE].[tbEvidenciasPorCaso]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[CALE].[tbTestigosPorCaso]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[CALE].[tbTiposdeCaso]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[CALE].[tbTiposdeEvidencia]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[CALE].[tbVeredictos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[GRAL].[tbCargos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[GRAL].[tbDepartamentos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[GRAL].[tbEstadosCiviles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[GRAL].[tbMunicipios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[CALE].[VW_tbAbogadosJueces]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[GRAL].[VW_tbCargos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[GRAL].[VW_tbDepartamentos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[GRAL].[VW_tbEstadosCiviles]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[GRAL].[VW_tbMunicipios]",
+         "ObjectType": 3
+      }
+   ],
+   "UiHint": "DESKTOP-5RUMQNH\\SQLEXPRESS.DB_CasosLegales",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}

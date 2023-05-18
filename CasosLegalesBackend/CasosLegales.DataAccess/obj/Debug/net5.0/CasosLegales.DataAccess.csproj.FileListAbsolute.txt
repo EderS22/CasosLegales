@@ -1,0 +1,15 @@
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\bin\Debug\net5.0\CasosLegales.DataAccess.deps.json
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\bin\Debug\net5.0\CasosLegales.DataAccess.dll
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\bin\Debug\net5.0\ref\CasosLegales.DataAccess.dll
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\bin\Debug\net5.0\CasosLegales.DataAccess.pdb
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\obj\Debug\net5.0\CasosLegales.DataAccess.csproj.AssemblyReference.cache
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\obj\Debug\net5.0\CasosLegales.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\obj\Debug\net5.0\CasosLegales.DataAccess.AssemblyInfoInputs.cache
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\obj\Debug\net5.0\CasosLegales.DataAccess.AssemblyInfo.cs
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\obj\Debug\net5.0\CasosLegales.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\obj\Debug\net5.0\CasosLegales.DataAccess.dll
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\obj\Debug\net5.0\ref\CasosLegales.DataAccess.dll
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\obj\Debug\net5.0\CasosLegales.DataAccess.pdb
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\bin\Debug\net5.0\CasosLegales.Entities.dll
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\bin\Debug\net5.0\CasosLegales.Entities.pdb
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\obj\Debug\net5.0\CasosLegales.DataAccess.csproj.CopyComplete
