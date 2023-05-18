@@ -196,7 +196,11 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj": {
+                "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

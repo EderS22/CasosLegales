@@ -13,6 +13,8 @@
         public static string UpdateUsuario = "ACCE.UDP_tbUsuarios_EditarUsuarios";
         public static string EliminarUsuario = "ACCE.UDP_tbUsuarios_EliminarUsuario";
         #endregion
+
+
         #endregion
     }
 }

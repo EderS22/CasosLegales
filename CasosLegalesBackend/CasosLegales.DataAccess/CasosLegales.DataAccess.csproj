@@ -15,4 +15,8 @@
 	<ItemGroup>
 	  <Folder Include="Context\" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\CasosLegales.Entities\CasosLegales.Entities.csproj" />
+	</ItemGroup>
 </Project>

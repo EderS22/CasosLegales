@@ -1,10 +1,10 @@
-﻿CREATE DATABASE DB_CasosLegales
-GO
-
-/*
+﻿/*
 USE MASTER
 DROP DATABASE DB_CasosLegales
 */
+
+CREATE DATABASE DB_CasosLegales
+GO
 
 USE DB_CasosLegales
 GO
@@ -18,11 +18,12 @@ GO
 CREATE SCHEMA CALE
 GO
 
---******************************************************************************************************--
---********************************************** ACCESO ************************************************--
+--**********************************************************CREATE TABLES**********************************************************--
 
+--***********************************************************TABLES ACCE***********************************************************--
 
---********** TABLE USUARIOS ***********---
+--**********************************************************TABLE Usuarios*********************************************************--
+
 CREATE TABLE ACCE.tbUsuarios(
 	usua_Id					INT IDENTITY(1,1),
 	usua_Nombre				NVARCHAR(255) NOT NULL,
@@ -40,8 +41,10 @@ CREATE TABLE ACCE.tbUsuarios(
 );
 GO
 
+--*********************************************************/TABLE Usuarios*********************************************************--
 
---****************** TABLE ROLES ************************--
+--**********************************************************TABLE Roles************************************************************--
+
 CREATE TABLE ACCE.tbRoles(
 	role_Id					INT IDENTITY(1,1),
 	role_Nombre				NVARCHAR(150) NOT NULL,
@@ -56,9 +59,10 @@ CREATE TABLE ACCE.tbRoles(
 );
 GO
 
+--*********************************************************/TABLE Roles************************************************************--
 
+--********************************************************TABLE Pantallas**********************************************************--
 
---******************** TABLE PANTALLAS ************************--
 CREATE TABLE ACCE.tbPantallas(
 	pant_Id					INT IDENTITY(1,1),
 	pant_Pantalla			NVARCHAR(150) NOT NULL,
@@ -74,8 +78,9 @@ CREATE TABLE ACCE.tbPantallas(
 );
 GO
 
+--*******************************************************/TABLE Pantallas**********************************************************--
 
---**************TABLE Roles por Pantallas*******************--
+--***************************************************TABLE Roles por Pantallas*****************************************************--
 
 CREATE TABLE ACCE.tbRolesPorPantalla(
 	ropa_Id					INT IDENTITY(1,1),
@@ -91,63 +96,14 @@ CREATE TABLE ACCE.tbRolesPorPantalla(
 );
 GO
 
----******** INSERT ADMIN ********----
-DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
-SET @Clave = '2023';
-SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
+--**************************************************/TABLE Roles por Pantallas*****************************************************--
 
-INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin, usua_IdCreacion)
-VALUES (1, 1, 'Eder', @Pass, 1, 1);
-GO
+--**********************************************************/TABLES ACCE***********************************************************--
 
----******* INSERT ROLES ********----
-INSERT INTO ACCE.tbRoles (role_Nombre, role_Descripcion, usua_IdCreacion)
-VALUES ('Digitador', 'Tiene acceso a ingresar datos', 1)
-GO
+--***********************************************************TABLES GRAL***********************************************************--
 
-INSERT INTO ACCE.tbRoles (role_Nombre, role_Descripcion, usua_IdCreacion)
-VALUES ('Visualizador', 'Tiene acceso a visualizar datos', 1)
-GO
+--*******************************************************TABLE Departamentos*******************************************************--
 
---ALTERS TABLE 'tbUsuarios'
-ALTER TABLE ACCE.tbUsuarios ADD CONSTRAINT FK_ACCE_tbUsuarios_usua_IdCreacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdCreacion) REFERENCES ACCE.tbUsuarios (usua_Id)
-GO
-ALTER TABLE ACCE.tbUsuarios ADD CONSTRAINT FK_ACCE_tbUsuarios_usua_IdModificacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdModificacion) REFERENCES ACCE.tbUsuarios (usua_Id)
-GO
-ALTER TABLE ACCE.tbUsuarios ADD CONSTRAINT FK_ACCE_tbUsuarios_role_Id_ACCE_tbRoles_role_Id FOREIGN KEY (role_Id) REFERENCES ACCE.tbRoles (role_Id)
-GO
-
---ALTERS TABLE 'tbRoles'
-ALTER TABLE ACCE.tbRoles ADD CONSTRAINT FK_ACCE_tbRoles_usua_IdCreacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdCreacion) REFERENCES ACCE.tbUsuarios (usua_Id)
-GO
-ALTER TABLE ACCE.tbRoles ADD CONSTRAINT FK_ACCE_tbRoles_usua_IdModificacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdModificacion) REFERENCES ACCE.tbUsuarios (usua_Id)
-GO
-
---ALTERS TABLE 'tbPantallas'
-ALTER TABLE ACCE.tbPantallas ADD CONSTRAINT FK_ACCE_tbPantallas_usua_IdCreacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdCreacion) REFERENCES ACCE.tbUsuarios (usua_Id)
-GO
-ALTER TABLE ACCE.tbPantallas ADD CONSTRAINT FK_ACCE_tbPantallas_usua_IdModificacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdModificacion) REFERENCES ACCE.tbUsuarios (usua_Id)
-GO
-
---ALTERS TABLE 'tbRolesPorPantalla'
-ALTER TABLE ACCE.tbRolesPorPantalla ADD CONSTRAINT FK_ACCE_tbRolesPorPantalla_role_Id_ACCE_tbRoles_role_Id FOREIGN KEY (role_Id) REFERENCES ACCE.tbRoles (role_Id)
-GO
-ALTER TABLE ACCE.tbRolesPorPantalla ADD CONSTRAINT FK_ACCE_tbRolesPorPantalla_pant_Id_ACCE_tbPantallas_pant_Id FOREIGN KEY (pant_Id) REFERENCES ACCE.tbPantallas (pant_Id)
-GO
-ALTER TABLE ACCE.tbRolesPorPantalla ADD CONSTRAINT FK_ACCE_tbRolesPorPantalla_usua_IdCreacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdCreacion) REFERENCES ACCE.tbUsuarios (usua_Id)
-GO
-ALTER TABLE ACCE.tbRolesPorPantalla ADD CONSTRAINT FK_ACCE_tbRolesPorPantalla_usua_IdModificacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdModificacion) REFERENCES ACCE.tbUsuarios (usua_Id)
-GO
-
-
-
-
-
---******************************************************************************************************--
---********************************************** GRAL ************************************************--
-
---******** TABLE DEPARTAMENTOS ****************---
-GO
 CREATE TABLE GRAL.tbDepartamentos(
 depa_Id                     INT IDENTITY(1,1),
 depa_Nombre 				NVARCHAR(100) NOT NULL,
@@ -162,10 +118,12 @@ CONSTRAINT PK_GRAL_tbDepartamentos_depa_Id 									PRIMARY KEY(depa_Id),
 CONSTRAINT FK_GRAL_tbDepartamentos_ACCE_tbUsuarios_depa_UsuCreacion_usua_Id  		FOREIGN KEY(depa_UsuCreacion) 		REFERENCES acce.tbUsuarios(usua_Id),
 CONSTRAINT FK_GRAL_tbDepartamentos_ACCE_tbUsuarios_depa_UsuModificacion_usua_Id  	FOREIGN KEY(depa_UsuModificacion) 	REFERENCES acce.tbUsuarios(usua_Id)
 );
-
-
---******** TABLE MUNICIPIO ****************---
 GO
+
+--******************************************************/TABLE Departamentos*******************************************************--
+
+--********************************************************TABLE Municipios*********************************************************--
+	
 CREATE TABLE GRAL.tbMunicipios(
 muni_Id                 INT IDENTITY(1,1),
 muni_Nombre				NVARCHAR(80) NOT NULL,
@@ -182,28 +140,29 @@ CONSTRAINT FK_GRAL_tbMunicipios_GRAL_tbDepartamentos_depa_Id 					FOREIGN KEY(de
 CONSTRAINT FK_GRAL_tbMunicipios_ACCE_tbUsuarios_muni_UsuCreacion_usua_Id  		FOREIGN KEY(muni_UsuCreacion) 				REFERENCES acce.tbUsuarios(usua_Id),
 CONSTRAINT FK_GRAL_tbMunicipios_ACCE_tbUsuarios_muni_UsuModificacion_usua_Id  	FOREIGN KEY(muni_UsuModificacion) 			REFERENCES acce.tbUsuarios(usua_Id)
 );
-
-
---********* TABLE ESTADOS CIVILES ***************--
 GO
+
+--********************************************************/TABLE Municipios********************************************************--
+
+--*******************************************************TABLE EstadosCiviles******************************************************--
+
 CREATE TABLE GRAL.tbEstadosCiviles(
-eciv_Id							INT IdENTITY(1,1),
-eciv_Descripcion				NVARCHAR(100),
-eciv_UsuCreacion				INT NOT NULL,
-eciv_FechaCreacion				DATETIME NOT NULL CONSTRAINT DF_GRAL_TbEstadosCiviles_eciv_FechaCreacion    DEFAULT(GETDATE()),
-eciv_UsuModificacion			INT,
-eciv_FechaModificacion			DATETIME,
-eciv_Estado						BIT NOT NULL CONSTRAINT DF_GRAL_TbEstadosCiviles_eciv_Estado    DEFAULT(1)
-
-CONSTRAINT     PK_GRAL_tbEstadosCiviles_ectv_Id PRIMARY KEY(eciv_Id),
-CONSTRAINT     FK_GRAL_tbEstadosCiviles_ACCE_UsuCreacion_usua_Id        FOREIGN KEY(eciv_UsuCreacion) REFERENCES acce.tbUsuarios(usua_Id),
-CONSTRAINT     FK_GRAL_tbEstadosCiviles_ACCE_UsuModificacion_usua_Id    FOREIGN KEY(eciv_UsuModificacion) REFERENCES acce.tbUsuarios(usua_Id)
-);				 
-
-
-
---********** TABLE CARGOS ************--
+	eciv_Id						INT IDENTITY(1,1) NOT NULL,
+	eciv_Descripcion			NVARCHAR(250) NOT NULL,
+	
+	eciv_Estado					BIT DEFAULT 1,
+	eciv_UsuCreacion			INT	NOT NULL,
+	eciv_FechaCreacion			DATETIME DEFAULT GETDATE(),
+	eciv_UsuModificacion		INT DEFAULT NULL,
+	eciv_FechaModificacion		DATETIME DEFAULT NULL
+	CONSTRAINT PK_GRAL_tbEstadosCiviles_eciv_Id	PRIMARY KEY (eciv_Id)
+);
 GO
+
+--*****************************************************/TABLE Estados Civiles*****************************************************--
+
+--***********************************************************TABLE Cargos**********************************************************--
+
 CREATE TABLE GRAL.tbCargos(
 carg_Id INT IDENTITY(1,1),
 carg_Descripcion			NVARCHAR(100) NOT NULL,
@@ -217,15 +176,15 @@ CONSTRAINT PK_GRAL_tbcargos_carg_Id                                  PRIMARY KEY
 CONSTRAINT FK_GRAL_tbCargos_acce_tbUsuarios_carg_UsuCreacion         FOREIGN KEY(carg_UsuCreacion) REFERENCES acce.tbUsuarios(usua_Id),
 CONSTRAINT FK_GRAL_tbCargos_acce_tbUsuarios_carg_UsuModificacion     FOREIGN KEY(carg_UsuModificacion) REFERENCES acce.tbUsuarios(usua_Id)
 );
-
-
-
---******************************************************************************************************--
---********************************************** CALE **************************************************--
-
- 
---********** TABLE  ABOGADOSJUECES ************--
 GO
+
+--**********************************************************/TABLE Cargos**********************************************************--
+
+--**********************************************************/TABLES GRAL***********************************************************--
+
+--***********************************************************TABLES CALE***********************************************************--
+
+--********** TABLE  ABOGADOSJUECES ************--
 CREATE TABLE CALE.tbAbogadosJueces(
 abju_Id						INT IDENTITY(1,1),
 abju_DNI					NVARCHAR(15)	NOT NULL,
@@ -233,7 +192,7 @@ abju_Nombres				NVARCHAR(200)	NOT NULL,
 abju_Apellidos				NVARCHAR(200)	NOT NULL,
 abju_Sexo					CHAR(1)			NOT NULL,
 abju_Telefono				NVARCHAR(20)	NOT NULL,
-abju_CorreoElectronico		NVARCHAR(20)	NOT NULL,
+abju_CorreoElectronico		NVARCHAR(150)	NOT NULL,
 abju_FechaNacimiento		DATE			NOT NULL,
 eciv_Id					    INT				NOT NULL,
 carg_Id						INT				NOT NULL,
@@ -253,11 +212,9 @@ CONSTRAINT FK_CALE_tbAbogadosJueces_GRAL_tbMunicipios_muni_Id					FOREIGN KEY(mu
 CONSTRAINT FK_CALE_tbAbogadosJueces_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(abju_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
 CONSTRAINT FK_CALE_tbAbogadosJueces_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(abju_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id)
 );	
-
-
+GO
 
 --********** TABLE CIVILES ************--
-GO
 CREATE TABLE CALE.tbCiviles(
 civi_Id						INT IDENTITY(1,1),
 civi_DNI					NVARCHAR(15)	NOT NULL,
@@ -265,7 +222,7 @@ civi_Nombres				NVARCHAR(200)	NOT NULL,
 civi_Apellidos				NVARCHAR(200)	NOT NULL,
 civi_Sexo					CHAR(1)			NOT NULL,
 civi_Telefono				NVARCHAR(20)	NOT NULL,
-civi_CorreoElectronico		NVARCHAR(20)	NOT NULL,
+civi_CorreoElectronico		NVARCHAR(150)	NOT NULL,
 civi_FechaNacimiento		DATE			NOT NULL,
 eciv_Id					    INT				NOT NULL,
 muni_Id						INT				NOT NULL,
@@ -286,9 +243,10 @@ CONSTRAINT FK_CALE_tbCiviles_GRAL_tbMunicipios_muni_Id					FOREIGN KEY(muni_Id)	
 CONSTRAINT FK_CALE_tbCiviles_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(civi_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
 CONSTRAINT FK_CALE_tbCiviles_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(civi_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id)
 );	
+GO
+
 
 --********** TABLE EMPLEADOS ************--
-GO
 CREATE TABLE CALE.tbEmpleados(
 empe_Id						INT IDENTITY(1,1),
 empe_DNI					NVARCHAR(15)	NOT NULL,
@@ -296,7 +254,7 @@ empe_Nombres				NVARCHAR(200)	NOT NULL,
 empe_Apellidos				NVARCHAR(200)	NOT NULL,
 empe_Sexo					CHAR(1)			NOT NULL,
 empe_Telefono				NVARCHAR(20)	NOT NULL,
-empe_CorreoElectronico		NVARCHAR(20)	NOT NULL,
+empe_CorreoElectronico		NVARCHAR(150)	NOT NULL,
 empe_FechaNacimiento		DATE			NOT NULL,
 eciv_Id					    INT				NOT NULL,
 muni_Id						INT				NOT NULL,
@@ -314,10 +272,9 @@ CONSTRAINT FK_CALE_tbEmpleados_GRAL_tbMunicipios_muni_Id					FOREIGN KEY(muni_Id
 CONSTRAINT FK_CALE_tbEmpleados_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(empe_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
 CONSTRAINT FK_CALE_tbEmpleados_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(empe_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id)
 );
-
+GO
 
 --********** TABLE EMPRESASA ************--
-GO
 CREATE TABLE CALE.tbEmpresas(
 emsa_Id							INT IDENTITY(1,1),
 emsa_Nombre						NVARCHAR(200),
@@ -345,11 +302,10 @@ CONSTRAINT FK_CALE_tbEmpresas_GRAL_tbMunicipios_muni_Id						FOREIGN KEY(muni_Id
 CONSTRAINT FK_CALE_tbEmpresas_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(emsa_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
 CONSTRAINT FK_CALE_tbEmpresas_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(emsa_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id)
 );
-
+GO
 
 
 --********** TABLE TiposdeCaso ************--
-GO
 CREATE TABLE CALE.tbTiposdeCaso(
 tica_Id INT IDENTITY(1,1),
 tica_Nombre NVARCHAR(100),
@@ -364,11 +320,10 @@ CONSTRAINT PK_CALE_tbTiposdeCaso_tica_Id	PRIMARY KEY(tica_Id),
 CONSTRAINT FK_CALE_tbTiposdeCaso_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(tica_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
 CONSTRAINT FK_CALE_tbTiposdeCaso_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(tica_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
-
+GO
 
 
 --********** TABLE TIPOSDEEVIDENCIA ************--
-GO
 CREATE TABLE CALE.tbTiposdeEvidencia(
 tiev_Id INT IDENTITY(1,1),
 tiev_Nombre NVARCHAR(100),
@@ -384,11 +339,10 @@ CONSTRAINT PK_CALE_tbTiposdeEvidencia_tiev_Id	PRIMARY KEY(tiev_Id),
 CONSTRAINT FK_CALE_tbTiposdeEvidencia_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(tiev_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
 CONSTRAINT FK_CALE_tbTiposdeEvidencia_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(tiev_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
-
+GO
 
 
 --********** TABLE CASOS ************--
-GO
 CREATE TABLE CALE.tbCasos(
 caso_Id						INT IDENTITY(1,1),
 caso_descripcion			NVARCHAR(200),
@@ -416,12 +370,10 @@ CONSTRAINT FK_CALE_tbCasos_CALE_tbAbogadosJueces_caso_AbogadoDemandado	FOREIGN K
 CONSTRAINT FK_CALE_tbCasos_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(caso_UsuCreacion)		REFERENCES ACCE.tbUsuarios(usua_Id),
 CONSTRAINT FK_CALE_tbCasos_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(caso_UsuModificacion)	REFERENCES ACCE.tbUsuarios(usua_Id),
 );
-
-
+GO
 
 
 --********** TABLE ACUSADOSPORCASO ************--
-GO
 CREATE TABLE CALE.tbAcusadoPorCaso(
 acus_Id						INT IDENTITY(1,1),
 caso_Id						INT,
@@ -440,11 +392,10 @@ CONSTRAINT CK_CALE_tbAcusadoPorCaso_CALE_acus_TipoAcusado						CHECK(acus_Acusad
 CONSTRAINT FK_CALE_tbAcusadoPorCaso_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(acus_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
 CONSTRAINT FK_CALE_tbAcusadoPorCaso_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(acus_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
-
+GO
 
 
 --********** TABLE EVIDENCIASPORCASO ************--
-GO
 CREATE TABLE CALE.tbEvidenciasPorCaso(
 evca_Id INT IDENTITY(1,1),
 tiev_Id INT,
@@ -463,10 +414,9 @@ CONSTRAINT FK_CALE_tbEvidenciasPorCaso_CALE_tbCasos_caso_Id							FOREIGN KEY(ca
 CONSTRAINT FK_CALE_tbEvidenciasPorCaso_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(evca_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
 CONSTRAINT FK_CALE_tbEvidenciasPorCaso_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(evca_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
-
+GO
 
 --********** TABLE TESTIGOSPORCASO ************--
-GO
 CREATE TABLE CALE.tbTestigosPorCaso(
 teca_Id INT IDENTITY(1,1),
 caso_Id INT,
@@ -485,8 +435,7 @@ CONSTRAINT FK_CALE_tbTestigosPorCaso_CALE_tbCiviles_civi_Id					FOREIGN KEY(teca
 CONSTRAINT FK_CALE_tbTestigosPorCaso_ACCE_tbUsuarios_UserCreate				FOREIGN KEY(teca_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
 CONSTRAINT FK_CALE_tbTestigosPorCaso_ACCE_tbUsuarios_UserUpdate				FOREIGN KEY(teca_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
-
-
+GO
 
 --********** TABLE VEREDICTO ************--
 CREATE TABLE CALE.tbVeredictos (
@@ -504,7 +453,7 @@ CONSTRAINT FK_CALE_tbVeredictos_CALE_tbCasos_caso_Id					FOREIGN KEY(caso_Id)			
 CONSTRAINT FK_CALE_tbVeredictos_ACCE_tbUsuarios_UserCreate				FOREIGN KEY(vere_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
 CONSTRAINT FK_CALE_tbVeredictos_ACCE_tbUsuarios_UserUpdate				FOREIGN KEY(vere_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
-
+GO
 
 --********** TABLE DTALLESVEREDICTO ************--
 CREATE TABLE CALE.tbDetallesVeredictos (
@@ -527,25 +476,89 @@ CONSTRAINT FK_CALE_tbDetallesVeredictos_CALE_TBvEREDICTOS_vere_Id				FOREIGN KEY
 CONSTRAINT FK_CALE_tbDetallesVeredictos_ACCE_tbUsuarios_UserCreate				FOREIGN KEY(deve_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
 CONSTRAINT FK_CALE_tbDetallesVeredictos_ACCE_tbUsuarios_UserUpdate				FOREIGN KEY(deve_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
-
-
-
-
-
---*******	INSERTS **********--
-
---********** ESTADOS CIVILES TABLE ***************--
 GO
-INSERT INTO gral.tbEstadosCiviles (eciv_Descripcion, eciv_Estado, eciv_UsuCreacion, eciv_FechaCreacion, eciv_UsuModificacion, eciv_FechaModificacion)
-VALUES	('Soltero(a)', '1', 1, GETDATE(), NULL, NULL),
-		('Casado(a)', '1', 1, GETDATE(), NULL, NULL),
-		('Divorciado(a)', '1', 1, GETDATE(), NULL, NULL),
-		('Viudo(a)', '1', 1, GETDATE(), NULL, NULL),
-		('Union Libre', '1', 1, GETDATE(), NULL, NULL)
 
+--**********************************************************/TABLES CALE***********************************************************--
 
---********** DEPARTAMENTOS TABLE ***************--
+--*********************************************************/CREATE TABLES**********************************************************--
+-------------------------------------------------------------------------------------------------------------------------------------
+
+--*********************************************************INSERTS TABLES**********************************************************--
+
+--***********************************************************TABLES ACCE***********************************************************--
+
+--**********************************************************TABLE Usuarios*********************************************************--
+
+DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
+SET @Clave = '2023';
+SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
+
+INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin, usua_IdCreacion)
+VALUES (1, 1, 'Eder', @Pass, 1, 1);
 GO
+
+DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
+SET @Clave = 'algo';
+SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
+
+INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin, usua_IdCreacion)
+VALUES (2, 2, 'Francisco', @Pass, 1, 1);
+GO
+
+DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
+SET @Clave = 'nose';
+SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
+
+INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin, usua_IdCreacion)
+VALUES (2, 3, 'Cristian', @Pass, 1, 1);
+
+GO
+DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
+SET @Clave = 'ESDRINHA';
+SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
+
+INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin, usua_IdCreacion)
+VALUES (1, 4, 'ESDRINHA', @Pass, 1, 1);
+GO
+
+DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
+SET @Clave = '2022';
+SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
+
+INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin, usua_IdCreacion)
+VALUES (1, 5, 'Sofia', @Pass, 0, 1);
+GO
+
+--*********************************************************/TABLE Usuarios*********************************************************--
+
+--**********************************************************TABLE Roles************************************************************--
+
+INSERT INTO ACCE.tbRoles (role_Nombre, role_Descripcion, usua_IdCreacion)
+VALUES ('Digitador', 'Tiene acceso a ingresar datos', 1)
+GO
+
+INSERT INTO ACCE.tbRoles (role_Nombre, role_Descripcion, usua_IdCreacion)
+VALUES ('Visualizador', 'Tiene acceso a visualizar datos', 1)
+GO
+
+--*********************************************************/TABLE Roles************************************************************--
+
+--********************************************************TABLE Pantallas**********************************************************--
+
+
+
+--*******************************************************/TABLE Pantallas**********************************************************--
+
+--***************************************************TABLE Roles por Pantallas*****************************************************--
+
+
+--**************************************************/TABLE Roles por Pantallas*****************************************************--
+
+--**********************************************************/TABLES ACCE***********************************************************--
+
+--***********************************************************TABLES GRAL***********************************************************--
+
+--*******************************************************TABLE Departamentos*******************************************************--
 INSERT INTO gral.tbDepartamentos(depa_Codigo, depa_Nombre, depa_Estado, depa_UsuCreacion, depa_FechaCreacion, depa_UsuModificacion, depa_FechaModificacion)
 VALUES	('01','Atlántida', '1', 1, GETDATE(), NULL, NULL),
 		('02','Colón', '1', 1, GETDATE(), NULL, NULL),
@@ -565,11 +578,14 @@ VALUES	('01','Atlántida', '1', 1, GETDATE(), NULL, NULL),
 		('16','Santa Bárbara', '1', 1, GETDATE(), NULL, NULL),
 		('17','Valle', '1', 1, GETDATE(), NULL, NULL),
 		('18','Yoro', '1', 1, GETDATE(), NULL, NULL);
-
-
-
---********** MUNICIPIOS TABLE ***************--
 GO
+
+
+
+--******************************************************/TABLE Departamentos*******************************************************--
+
+--********************************************************TABLE Municipios*********************************************************--
+
 INSERT INTO gral.tbMunicipios(depa_Id, muni_Codigo, muni_Nombre, muni_Estado, muni_UsuCreacion, muni_FechaCreacion, muni_UsuModificacion, muni_FechaModificacion)
 VALUES	('1','0101','La Ceiba', '1', 1, GETDATE(), NULL, GETDATE()),
 		('1','0102','El Porvenir', '1', 1, GETDATE(), NULL, GETDATE()),
@@ -901,9 +917,36 @@ VALUES	('1','0101','La Ceiba', '1', 1, GETDATE(), NULL, GETDATE()),
 		('18', '1809', 'Sulaco', '1', 1, GETDATE(), NULL, GETDATE()),
 		('18', '1810', 'Victoria', '1', 1, GETDATE(), NULL, GETDATE()),
 		('18', '1811', 'Yorito', '1', 1, GETDATE(), NULL, GETDATE());
-
-
 GO
+
+--********************************************************/TABLE Municipios********************************************************--
+
+--*******************************************************TABLE EstadosCiviles******************************************************--
+
+INSERT INTO GRAL.tbEstadosCiviles (eciv_Descripcion, eciv_UsuCreacion)
+VALUES ('Soltero(a)', 1);
+GO
+
+INSERT INTO GRAL.tbEstadosCiviles (eciv_Descripcion, eciv_UsuCreacion)
+VALUES ('Casado(a)', 1);
+GO
+
+INSERT INTO GRAL.tbEstadosCiviles (eciv_Descripcion, eciv_UsuCreacion)
+VALUES ('Viudo(a)', 1);
+GO
+
+INSERT INTO GRAL.tbEstadosCiviles (eciv_Descripcion, eciv_UsuCreacion)
+VALUES ('Divorciado(a)', 1);
+GO
+
+INSERT INTO GRAL.tbEstadosCiviles (eciv_Descripcion, eciv_UsuCreacion)
+VALUES ('Union Libre', 1);
+GO
+
+--*****************************************************/TABLE Estados Civiles*****************************************************--
+
+--**********************************************************TABLE Cargos**********************************************************--
+
 INSERT INTO GRAL.tbCargos (carg_Descripcion, carg_UsuCreacion)
 VALUES ('Gerente', 1),
 		('Supervisor', 1),
@@ -911,8 +954,14 @@ VALUES ('Gerente', 1),
 		('Ejecutivo de Ventas', 1),
 		('Analista Financiero', 1),
 		('Coordinador de Proyectos', 1);
+GO	
 
-GO		
+--*********************************************************/TABLE Cargos**********************************************************--
+
+--**********************************************************/TABLES GRAL***********************************************************--
+
+--***********************************************************TABLES CALE***********************************************************--
+
 INSERT INTO CALE.tbAbogadosJueces (abju_DNI, abju_Nombres, abju_Apellidos, abju_Sexo, abju_Telefono, abju_CorreoElectronico, abju_FechaNacimiento, eciv_Id, carg_Id, muni_Id, abju_Direccion, abju_UsuCreacion)
 VALUES ('123456789', 'Juan',	'Pérez',	'M', '123456789', 'juan.perez@gmail.com',		'1990-01-01', 1, 1, 1, 'Calle Principal 123',	1),
 		('987654321', 'María',	'López',	'F', '987654321', 'maria.lopez@gmail.com',		'1995-05-10', 2, 2, 2, 'Avenida Secundaria 456',1),
@@ -920,9 +969,8 @@ VALUES ('123456789', 'Juan',	'Pérez',	'M', '123456789', 'juan.perez@gmail.com',
 		('111111111', 'Ana',	'García',	'F', '111111111', 'ana.garcia@gmail.com',		'1988-06-20', 2, 2, 1, 'Calle Secundaria 234',	1),
 		('222222222', 'Luis',	'Martínez', 'M', '222222222', 'luis.martinez@gmail.com',	'1992-09-08', 1, 3, 2, 'Avenida Principal 567', 1),
 		('333333333', 'Laura', 'Rodríguez', 'F', '333333333', 'laura.rodriguez@gmail.com',	'1997-03-12', 3, 1, 3, 'Plaza Secundaria 890',	1);
-
-
 GO
+
 INSERT INTO CALE.tbCiviles (civi_DNI, civi_Nombres, civi_Apellidos, civi_Sexo, civi_Telefono, civi_CorreoElectronico, civi_FechaNacimiento, eciv_Id, muni_Id, civi_Direccion, civi_EsDemandante, civi_EsAcusado, civi_EsTestigo, civi_UsuCreacion)
 VALUES ('123456789', 'Juan',	'Pérez',		'M', '123456789', 'juan.perez@example.com',		'1990-01-01', 1, 1, 'Calle Principal 123',		1, 0, 0, 1),
 		('987654321', 'María',	'López',		'F', '987654321', 'maria.lopez@example.com',	'1995-05-10', 2, 2, 'Avenida Secundaria 456',	0, 1, 0, 1),
@@ -930,8 +978,9 @@ VALUES ('123456789', 'Juan',	'Pérez',		'M', '123456789', 'juan.perez@example.co
 		('111111111', 'Ana',	'García',		'F', '111111111', 'ana.garcia@example.com',		'1988-06-20', 2, 2, 'Calle Secundaria 234',		1, 0, 1, 1),
 		('222222222', 'Luis',	'Martínez',		'M', '222222222', 'luis.martinez@example.com',	'1992-09-08', 1, 3, 'Avenida Principal 567',	0, 1, 0, 1),
 		('333333333', 'Laura',	'Rodríguez',	'F', '333333333', 'laura.rodriguez@example.com','1997-03-12', 3, 1, 'Plaza Secundaria 890',		0, 0, 1, 1);
-
 GO
+
+
 INSERT INTO CALE.tbEmpleados (empe_DNI, empe_Nombres, empe_Apellidos, empe_Sexo, empe_Telefono, empe_CorreoElectronico, empe_FechaNacimiento, eciv_Id, muni_Id, empe_Direccion, empe_UsuCreacion)
 VALUES ('111111111', 'Juan',	'Pérez',	'M', '111111111', 'juan.perez@example.com',			'1990-01-01', 1, 1, 'Calle Principal 123',		1),
 		('222222222', 'María',	'López',	'F', '222222222', 'maria.lopez@example.com',		'1995-05-10', 2, 2, 'Avenida Secundaria 456',	1),
@@ -943,3 +992,50 @@ VALUES ('111111111', 'Juan',	'Pérez',	'M', '111111111', 'juan.perez@example.com
 		('888888888', 'María',	'Torres',	'F', '888888888', 'maria.torres@example.com',		'1993-07-18', 3, 1, 'Avenida Secundaria 456',	1),
 		('999999999', 'Manuel', 'Sánchez',	'M', '999999999', 'manuel.sanchez@example.com',		'1991-04-30', 1, 3, 'Plaza Central 789',		1),
 		('101010101', 'Susana', 'López',	'F', '101010101', 'susana.lopez@example.com',		'1996-08-05', 2, 2, 'Calle Secundaria 234',		1);
+GO
+
+
+--***********************************************************TABLES CALE***********************************************************--
+
+--********************************************************/INSERTS TABLES**********************************************************--
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+--**********************************************************ALTERS TABLES**********************************************************--
+
+--***********************************************************TABLES ACCE***********************************************************--
+
+--ALTERS TABLE 'tbUsuarios'
+ALTER TABLE ACCE.tbUsuarios ADD CONSTRAINT FK_ACCE_tbUsuarios_usua_IdCreacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdCreacion) REFERENCES ACCE.tbUsuarios (usua_Id)
+GO
+ALTER TABLE ACCE.tbUsuarios ADD CONSTRAINT FK_ACCE_tbUsuarios_usua_IdModificacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdModificacion) REFERENCES ACCE.tbUsuarios (usua_Id)
+GO
+ALTER TABLE ACCE.tbUsuarios ADD CONSTRAINT FK_ACCE_tbUsuarios_role_Id_ACCE_tbRoles_role_Id FOREIGN KEY (role_Id) REFERENCES ACCE.tbRoles (role_Id)
+GO
+
+--ALTERS TABLE 'tbRoles'
+ALTER TABLE ACCE.tbRoles ADD CONSTRAINT FK_ACCE_tbRoles_usua_IdCreacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdCreacion) REFERENCES ACCE.tbUsuarios (usua_Id)
+GO
+ALTER TABLE ACCE.tbRoles ADD CONSTRAINT FK_ACCE_tbRoles_usua_IdModificacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdModificacion) REFERENCES ACCE.tbUsuarios (usua_Id)
+GO
+
+--ALTERS TABLE 'tbPantallas'
+ALTER TABLE ACCE.tbPantallas ADD CONSTRAINT FK_ACCE_tbPantallas_usua_IdCreacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdCreacion) REFERENCES ACCE.tbUsuarios (usua_Id)
+GO
+ALTER TABLE ACCE.tbPantallas ADD CONSTRAINT FK_ACCE_tbPantallas_usua_IdModificacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdModificacion) REFERENCES ACCE.tbUsuarios (usua_Id)
+GO
+
+--ALTERS TABLE 'tbRolesPorPantalla'
+ALTER TABLE ACCE.tbRolesPorPantalla ADD CONSTRAINT FK_ACCE_tbRolesPorPantalla_role_Id_ACCE_tbRoles_role_Id FOREIGN KEY (role_Id) REFERENCES ACCE.tbRoles (role_Id)
+GO
+ALTER TABLE ACCE.tbRolesPorPantalla ADD CONSTRAINT FK_ACCE_tbRolesPorPantalla_pant_Id_ACCE_tbPantallas_pant_Id FOREIGN KEY (pant_Id) REFERENCES ACCE.tbPantallas (pant_Id)
+GO
+ALTER TABLE ACCE.tbRolesPorPantalla ADD CONSTRAINT FK_ACCE_tbRolesPorPantalla_usua_IdCreacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdCreacion) REFERENCES ACCE.tbUsuarios (usua_Id)
+GO
+ALTER TABLE ACCE.tbRolesPorPantalla ADD CONSTRAINT FK_ACCE_tbRolesPorPantalla_usua_IdModificacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdModificacion) REFERENCES ACCE.tbUsuarios (usua_Id)
+GO
+
+--**********************************************************/TABLES ACCE***********************************************************--
+
+
+--*********************************************************/ALTERS TABLES**********************************************************--

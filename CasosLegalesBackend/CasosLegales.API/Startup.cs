@@ -1,3 +1,6 @@
+using AutoMapper;
+using CasosLegales.API.Extensions;
+using CasosLegales.BusinessLogic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,11 +29,23 @@ namespace CasosLegales.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.DataAcces(Configuration.GetConnectionString("ConnectionDB"));
+            services.BusinessLogic();
+            services.AddAutoMapper(x => x.AddProfile<MappingProfileExtensions>(), AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CasosLegales.API", Version = "v1" });
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                {
+                    builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
             });
         }
 
@@ -47,6 +62,8 @@ namespace CasosLegales.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 

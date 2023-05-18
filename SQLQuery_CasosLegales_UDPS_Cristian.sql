@@ -1,3 +1,8 @@
+/*
+USE MASTER
+DROP DATABASE DB_CasosLegales
+*/
+
 USE DB_CasosLegales;
 GO
 
