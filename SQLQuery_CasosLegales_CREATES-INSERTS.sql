@@ -28,7 +28,7 @@ CREATE TABLE ACCE.tbUsuarios(
 	usua_Id					INT IDENTITY(1,1),
 	usua_Nombre				NVARCHAR(255) NOT NULL,
 	usua_Clave				NVARCHAR(MAX) NOT NULL,
-	role_Id					INT NOT NULL,
+	role_Id					INT,
 	empe_Id					INT NOT NULL,
 	usua_EsAdmin			BIT DEFAULT 0,
 

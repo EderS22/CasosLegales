@@ -8,7 +8,13 @@ namespace CasosLegales.API.Extensions
     {
         public MappingProfileExtensions()
         {
-            CreateMap<UsuarioViewModel, tbUsuarios>().ReverseMap();
+
+            #region Acceso
+            CreateMap<UsuariosViewModel, tbUsuarios>().ReverseMap();
+            CreateMap<RolesViewModel, tbRoles>().ReverseMap();
+            CreateMap<PantallasViewModel, tbPantallas>().ReverseMap();
+            CreateMap<RolesPorPantallaViewModel, tbRolesPorPantalla>().ReverseMap();
+            #endregion
         }
     }
 }

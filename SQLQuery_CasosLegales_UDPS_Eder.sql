@@ -18,6 +18,7 @@ BEGIN
 		   role_Nombre,
 		   tb1.empe_Id,
 		   empe_Nombres,
+		   empe_Apellidos,		   
 		   usua_EsAdmin
 	  FROM ACCE.tbUsuarios tb1
 INNER JOIN ACCE.tbRoles tb2
@@ -38,6 +39,7 @@ BEGIN
 		   role_Nombre,
 		   tb1.empe_Id,
 		   empe_Nombres,
+		   empe_Apellidos,
 		   tb1.usua_EsAdmin,
 		   tb1.usua_IdCreacion,
 		   tb4.usua_Nombre usua_NombreCreacion,
@@ -78,10 +80,13 @@ BEGIN
 	DECLARE @Pass AS NVARCHAR(MAX)
 	SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @usua_Clave), 2)
 	
-	SELECT usua_Id, 
-		   empe_Nombres, 
-		   usua_EsAdmin,
-		   role_Id
+	SELECT usua_Id,
+		   usua_Nombre,
+		   tb1.role_Id,
+		   tb1.empe_Id,
+		   empe_Nombres,
+		   empe_Apellidos,		   
+		   usua_EsAdmin
 	  FROM ACCE.tbUsuarios tb1
 INNER JOIN CALE.tbEmpleados tb2
 		ON tb1.empe_Id = tb2.empe_Id
@@ -197,7 +202,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_empelitadorTieneUsuario
+CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_EmpleadosTienenUsuario
 AS
 BEGIN
 	SELECT empe_Id,
