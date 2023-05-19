@@ -37,5 +37,17 @@ namespace CasosLegales.DataAccess.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public tbUsuarios ValidarLogin(tbUsuarios item)
+        {
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@usua_Nombre", item.usua_Nombre, DbType.String, ParameterDirection.Input);
+            parametros.Add("@usua_Clave", item.usua_Clave, DbType.String, ParameterDirection.Input);
+
+            return db.QueryFirst<tbUsuarios>(ScriptsDataBase.ValidarLogin, parametros, commandType: CommandType.StoredProcedure);
+        }
     }
 }

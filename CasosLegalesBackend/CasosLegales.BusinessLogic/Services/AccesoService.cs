@@ -1,4 +1,5 @@
 ﻿using CasosLegales.DataAccess.Repositories;
+using CasosLegales.Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,20 @@ namespace CasosLegales.BusinessLogic.Services
             }
         }
 
+        public ServiceResult ValidarLogin(tbUsuarios item)
+        {
+            var resultado = new ServiceResult();
 
+            try
+            {
+                var usuario = _usuariosRepository.ValidarLogin(item);
+                return resultado.Ok(usuario);
+            }
+            catch (Exception ex)
+            {
+                return resultado.Error(ex.Message);
+            }
+        }
 
         #endregion
 

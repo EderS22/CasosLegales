@@ -20,10 +20,16 @@ namespace CasosLegales.API.Models
 
         public int? empe_Id { get; set; }
 
-        public string empe_CorreoElectronico { get; set; }
+        public string empe_Nombres { get; set; }
 
-        public int? usua_UsuCreacion { get; set; }
+        public string empe_Apellidos { get; set; }
 
-        public int? usua_UsuModificacion { get; set; }
+        public int? usua_IdCreacion { get; set; }
+
+        public string usua_NombreCreacion { get; set; }
+
+        public int? usua_IdModificacion { get; set; }
+
+        public string usua_NombreModificacion { get; set; }
     }
 }
