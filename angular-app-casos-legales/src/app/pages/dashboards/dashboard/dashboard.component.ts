@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
   RecentSelling: any;
   SalesCategoryChart!: ChartType;
   statData!: any;
+  userData!: any;
 
   // Current Date
   currentDate: any;
@@ -42,14 +43,10 @@ export class DashboardComponent implements OnInit {
      * BreadCrumb
      */
     this.breadCrumbItems = [
-      { label: 'Dashboards' },
-      { label: 'Dashboard', active: true }
+      { label: 'Inicio' },
+      { label: 'Inicio', active: true }
     ];
-
-    if (localStorage.getItem('toast')) {
-      this.toastService.show('Logged in Successfull.', { classname: 'bg-success text-center text-white', delay: 5000 });
-      localStorage.removeItem('toast');
-    }
+    this.userData = JSON.parse(localStorage.getItem("currentUser") || '');
 
     /**
     * Fetches the data

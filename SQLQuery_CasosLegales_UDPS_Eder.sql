@@ -77,21 +77,39 @@ CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_ValidarLogin
 	@usua_Clave   NVARCHAR(255)
 AS
 BEGIN
-	DECLARE @Pass AS NVARCHAR(MAX)
-	SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @usua_Clave), 2)
-	
-	SELECT usua_Id,
-		   usua_Nombre,
-		   tb1.role_Id,
-		   tb1.empe_Id,
-		   empe_Nombres,
-		   empe_Apellidos,		   
-		   usua_EsAdmin
-	  FROM ACCE.tbUsuarios tb1
-INNER JOIN CALE.tbEmpleados tb2
-		ON tb1.empe_Id = tb2.empe_Id
-	 WHERE usua_Nombre = @usua_Nombre AND usua_Clave = @Pass
-	   AND usua_Estado = 1
+	BEGIN TRY
+		DECLARE @Pass AS NVARCHAR(MAX), @usua_Id INT
+		SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @usua_Clave), 2)
+		
+		SELECT @usua_Id = usua_Id 
+		  FROM ACCE.tbUsuarios 
+		 WHERE usua_Nombre = @usua_Nombre 
+		   AND usua_Clave = @Pass
+		   AND usua_Estado = 1
+
+		   IF @usua_Id > 0
+		   BEGIN
+				SELECT usua_Id,
+					   usua_Nombre,
+					   tb1.role_Id,
+					   tb1.empe_Id,
+					   empe_Nombres,
+					   empe_Apellidos,		   
+					   usua_EsAdmin
+				  FROM ACCE.tbUsuarios tb1
+			INNER JOIN CALE.tbEmpleados tb2
+					ON tb1.empe_Id = tb2.empe_Id
+				 WHERE usua_Nombre = @usua_Nombre AND usua_Clave = @Pass
+				   AND usua_Estado = 1
+		   END
+		   ELSE
+		   BEGIN
+				SELECT 0
+		   END
+	END TRY
+	BEGIN CATCH
+		SELECT 0
+	END CATCH
 END
 GO
 
