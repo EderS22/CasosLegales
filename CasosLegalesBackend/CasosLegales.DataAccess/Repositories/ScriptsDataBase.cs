@@ -39,10 +39,12 @@
         public static string EliminarPantallasDeRol = "ACCE.UDP_tbRolesPorPantalla_EliminarPantallasdeRol";
         #endregion
 
+        #endregion
+
         #region GENERAL
 
-            #region UDPS Departamentos  
-                public static string InsertarDeparatemto        = "GRAL.UDP_tbDepartamentos_Insert";
+        #region UDPS Departamentos  
+        public static string InsertarDeparatemto        = "GRAL.UDP_tbDepartamentos_Insert";
                 public static string ActualizarDepartamento     = "GRAL.UDP_tbDepartamentos_Update";
                 public static string EliminarDepartamento       = "GRAL.UDP_tbDepartamentos_Delete";
                 public static string ListadoDepartamento        = "GRAL.UDP_tbDepartamentos_Index";
@@ -71,10 +73,9 @@
                 public static string EliminarEstadoCivil        = "GRAL.UDP_tbEstadosCiviles_Delete";
                 public static string ListadoEstadosCiviles      = "GRAL.UDP_tbEstadosCiviles_Index";
                 public static string CargarEstadoCivil          = "GRAL.UDP_tbEstadosCiviles_Find";
-            #endregion
-
         #endregion
 
+        #endregion
 
     }
 }

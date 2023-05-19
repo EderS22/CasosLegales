@@ -29,7 +29,6 @@ namespace CasosLegales.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            AddSwagger(services);
             services.DataAcces(Configuration.GetConnectionString("ConnectionDB"));
             services.BusinessLogic();
             services.AddAutoMapper(x => x.AddProfile<MappingProfileExtensions>(), AppDomain.CurrentDomain.GetAssemblies());
@@ -46,27 +45,6 @@ namespace CasosLegales.API
                     builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
                     .AllowAnyHeader()
                     .AllowAnyMethod();
-                });
-            });
-        }
-
-        private void AddSwagger(IServiceCollection services)
-        {
-            services.AddSwaggerGen(options =>
-            {
-                var groupName = "v1";
-
-                options.SwaggerDoc(groupName, new OpenApiInfo
-                {
-                    Title = $"Foo {groupName}",
-                    Version = groupName,
-                    Description = "Casos Legales API",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Casos Legales",
-                        Email = string.Empty,
-                        Url = new Uri("https://foo.com/"),
-                    }
                 });
             });
         }
