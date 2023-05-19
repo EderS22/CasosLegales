@@ -68,12 +68,16 @@ export class LoginComponent implements OnInit {
     // Login Api
     this.authenticationService.login(this.f['email'].value, this.f['password'].value).subscribe((data: any) => {
         if (data.code === 200) {
-            localStorage.setItem('toast', 'true');
-            localStorage.setItem('currentUser', JSON.stringify(data.data));
-    
-            this.router.navigate(['/']);
+            if(data.data.usua_Id > 0){
+              localStorage.setItem('toast', 'true');
+              localStorage.setItem('currentUser', JSON.stringify(data.data));
+      
+              this.router.navigate(['/']);
+            } else{
+              this.toastService.show('Usuario y/o contraseña incorrectos', { classname: 'bg-warning text-center text-white', delay: 8000 });
+            }
           } else {
-            this.toastService.show(data.data, { classname: 'bg-danger text-white', delay: 15000 });
+            this.toastService.show('Error de conexión', { classname: 'bg-danger text-center text-white', delay: 8000 });
           }
     });
 
