@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cGmh+eeG4mc3Y4uhk6aW+8MTeYEn0NwZSjisgWbuDUoFNCRUjuvPi0K/9vQPtrSunr/gDLaEzJZN3PTB1VOMYw==",
+  "dgSpecHash": "p02Zr4yy2J+cPbeZBEYXhCMxtwDoN426k4K4weblOEo1964juhbIjbnpeKRigeApX+CvVaTHwDYTEzZEPkCkeQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\CasosLegales.API.csproj",
+  "projectFilePath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\CasosLegales.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\LAB01\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\LAB01\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
