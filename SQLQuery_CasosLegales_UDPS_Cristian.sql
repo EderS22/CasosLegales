@@ -30,8 +30,8 @@ SELECT	depa_Id,
 		depa_FechaModificacion, 
 		depa_Estado
 FROM [gral].[tbDepartamentos] AS T1 INNER JOIN [acce].[tbUsuarios] AS T2
-ON T1.depa_UsuCreacion = T2.usua_Nombre LEFT JOIN acce.tbUsuarios AS T3 
-ON T1.depa_UsuModificacion = T3.usua_Nombre;
+ON T1.depa_UsuCreacion = T2.usua_Id LEFT JOIN acce.tbUsuarios AS T3 
+ON T1.depa_UsuModificacion = T3.usua_Id;
 
 
 --**************  INSERT ******************--
@@ -659,7 +659,138 @@ BEGIN
 END	
 
 --************** CREATE ******************--
-/*GO
-CREATE OR ALTER PROCEDURE CALE.UDP_tbAbogadosJueces_Find
+GO
+CREATE OR ALTER PROCEDURE CALE.UDP_tbAbogadosJueces_Insert
 (@abju_DNI NVARCHAR(20),
- @abju_Nombres NVARCHAR(200)*/
+ @abju_Nombres NVARCHAR(200),
+ @abju_Apellidos NVARCHAR(200),
+ @abju_Sexo CHAR(1),
+ @abju_Telefono NVARCHAR(20),
+ @abju_CorreoElectronico NVARCHAR(200),
+ @abju_FechaNacimiento DATE,
+ @eciv_Id INT,
+ @carg_Id INT,
+ @muni_Id INT,
+ @abju_Direccion NVARCHAR(250),
+ @abju_UsuCreacion INT)
+AS
+BEGIN
+	BEGIN TRY
+		IF EXISTS (SELECT * FROM CALE.tbAbogadosJueces WHERE abju_DNI = @abju_DNI AND abju_Estado = 1)
+		 BEGIN 
+		 	SELECT 2 AS codeStatus
+		 END
+		ELSE IF NOT EXISTS (SELECT * FROM CALE.tbAbogadosJueces WHERE abju_DNI = @abju_DNI)
+		 BEGIN
+				
+				IF EXISTS (SELECT * FROM CALE.tbAbogadosJueces WHERE abju_CorreoElectronico = @abju_CorreoElectronico AND abju_Estado = 1)
+				 BEGIN 
+		 			SELECT 2 AS codeStatus
+				 END
+				ELSE 
+				 BEGIN
+
+					INSERT INTO [CALE].[tbAbogadosJueces] (abju_DNI, abju_Nombres, abju_Apellidos, abju_Sexo, abju_Telefono, abju_CorreoElectronico, abju_FechaNacimiento, eciv_Id, carg_Id, muni_Id, abju_Direccion, abju_UsuCreacion, abju_UsuModificacion, abju_FechaModificacion)
+					VALUES (@abju_DNI, @abju_Nombres, @abju_Apellidos, @abju_Sexo, @abju_Telefono, @abju_CorreoElectronico, @abju_FechaNacimiento, @eciv_Id, @carg_Id, @muni_Id, @abju_Direccion, @abju_UsuCreacion, NULL, NULL);
+
+					SELECT 1 AS codeStatus
+				 END
+				
+		 END
+        ELSE
+			BEGIN
+				UPDATE [CALE].[tbAbogadosJueces]
+				SET abju_DNI = @abju_DNI, 
+					abju_Nombres = @abju_Nombres, 
+					abju_Apellidos = @abju_Apellidos, 
+					abju_Sexo = @abju_Sexo, 
+					abju_Telefono = @abju_Telefono, 
+					abju_CorreoElectronico = @abju_CorreoElectronico, 
+					abju_FechaNacimiento = @abju_FechaNacimiento, 
+					eciv_Id = @eciv_Id, 
+					carg_Id = @carg_Id, 
+					muni_Id = muni_Id, 
+					abju_Direccion =@abju_Direccion, 
+					abju_UsuCreacion = @abju_UsuCreacion, 
+					abju_FechaCreacion = GETDATE(), 
+					abju_UsuModificacion = NULL, 
+					abju_FechaModificacion = NULL, 
+					abju_Estado = 1
+					WHERE abju_DNI = @abju_DNI OR abju_CorreoElectronico = @abju_CorreoElectronico
+
+					SELECT 1 AS codeStatus
+			END
+	END TRY
+	BEGIN CATCH 
+		SELECT 0 AS codeStatus
+	END CATCH
+END
+
+
+--**************  UPDATE ******************--
+GO
+CREATE OR ALTER PROCEDURE CALE.UDP_tbAbogadosJueces_Update
+(@abju_Id INT,
+ @abju_DNI NVARCHAR(20),
+ @abju_Nombres NVARCHAR(200),
+ @abju_Apellidos NVARCHAR(200),
+ @abju_Sexo CHAR(1),
+ @abju_Telefono NVARCHAR(20),
+ @abju_CorreoElectronico NVARCHAR(200),
+ @abju_FechaNacimiento DATE,
+ @eciv_Id INT,
+ @carg_Id INT,
+ @muni_Id INT,
+ @abju_Direccion NVARCHAR(250),
+ @abju_UsuModificacion INT)
+AS
+BEGIN
+	BEGIN TRY
+
+		IF EXISTS (SELECT * FROM CALE.tbAbogadosJueces WHERE (@abju_DNI = abju_DNI AND abju_Id != @abju_Id))
+			BEGIN
+				SELECT 2 codeStatus
+			END
+		ELSE 
+		 BEGIN
+			UPDATE	[CALE].[tbAbogadosJueces]
+			SET	abju_DNI = @abju_DNI, 
+				abju_Nombres =@abju_Nombres, 
+				abju_Apellidos = @abju_Apellidos, 
+				abju_Sexo =@abju_Sexo, 
+				abju_Telefono =@abju_Telefono, 
+				abju_CorreoElectronico = @abju_CorreoElectronico, 
+				abju_FechaNacimiento = @abju_FechaNacimiento, 
+				eciv_Id = @eciv_Id, 
+				carg_Id = @carg_Id, 
+				muni_Id = muni_Id, 
+				abju_Direccion = @abju_Direccion, 
+				abju_UsuModificacion = @abju_UsuModificacion, 
+				abju_FechaModificacion = GETDATE()
+			WHERE	abju_Id = @abju_Id
+
+			SELECT 1 codeStatus
+		 END
+	END TRY
+	BEGIN CATCH
+		SELECT 0 codeStatus
+	END CATCH
+END
+
+
+GO
+CREATE OR ALTER PROCEDURE CALE.UDP_tbAbogadosJueces_Delete
+(@abju_Id INT)
+AS
+BEGIN 
+	BEGIN TRY
+		UPDATE	[CALE].[tbAbogadosJueces]
+			SET	abju_Estado = 0 
+		WHERE	abju_Id = @abju_Id;
+
+		SELECT 1 codeStatus
+	END TRY
+	BEGIN CATCH
+		SELECT 0 codeStatus
+	END CATCH
+END
