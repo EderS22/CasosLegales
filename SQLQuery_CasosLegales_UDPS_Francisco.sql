@@ -32,7 +32,7 @@ ON T1.civi_UsuModificacion = T3.usua_Id;
 
 --**************  CREATE ******************--
 GO
-CREATE OR ALTER PROCEDURE GRAL.UDP_tbCiviles_Insert
+CREATE OR ALTER PROCEDURE CALE.UDP_tbCiviles_Insert
 (@civi_DNI NVARCHAR(15),
  @civi_Nombres NVARCHAR(200),
  @civi_Apellidos NVARCHAR(200),
@@ -535,7 +535,7 @@ BEGIN
 		ELSE
 			BEGIN
 						UPDATE	cale.tbEmpleados
-				SET		empe_DNI = @empe_DNI
+				SET		empe_DNI = @empe_DNI,
 						empe_Nombres = @empe_Nombres,
 						empe_Apellidos = @empe_Apellidos,
 						empe_Sexo = @empe_Sexo,
