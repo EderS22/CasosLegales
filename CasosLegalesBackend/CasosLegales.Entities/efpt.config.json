@@ -98,6 +98,26 @@
          "ObjectType": 3
       },
       {
+         "Name": "[CALE].[VW_tbCiviles]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[CALE].[VW_tbEmpleados]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[CALE].[VW_tbEmpresas]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[CALE].[VW_tbTiposdeCaso]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[CALE].[VW_tbTiposdeEvidencia]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[GRAL].[VW_tbCargos]",
          "ObjectType": 3
       },
@@ -114,7 +134,7 @@
          "ObjectType": 3
       }
    ],
-   "UiHint": "DESKTOP-5RUMQNH\\SQLEXPRESS.DB_CasosLegales",
+   "UiHint": "DESKTOP-6FS11M8\\MSSQLSERVER1.DB_CasosLegales",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

@@ -21,7 +21,7 @@ namespace CasosLegales.DataAccess.Repositories
             var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.EliminarDepartamento, parametros, commandType: System.Data.CommandType.StoredProcedure);
             return result;
         }
-
+        
         public VW_tbDepartamentos Find(int? id)
         {
             using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
