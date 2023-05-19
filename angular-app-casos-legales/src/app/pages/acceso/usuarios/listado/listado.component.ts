@@ -13,9 +13,9 @@ export class ListadoComponent implements OnInit {
      /**
     * BreadCrumb
     */
-     this.breadCrumbItems = [
-      { label: 'Usuarios' },
-      { label: 'Listado', active: true }
-    ];
+    //  this.breadCrumbItems = [
+    //   { label: 'Cargos' },
+    //   { label: 'Listado', active: true }
+    // ];
   }
 }

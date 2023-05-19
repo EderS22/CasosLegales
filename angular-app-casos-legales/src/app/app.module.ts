@@ -22,6 +22,7 @@ import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 // Language
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { ListadoComponent } from './pages/casoslegales/cargos/listado/listado.component';
 
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -35,7 +36,8 @@ if (environment.defaultauth === 'firebase') {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ListadoComponent
   ],
   imports: [
     TranslateModule.forRoot({

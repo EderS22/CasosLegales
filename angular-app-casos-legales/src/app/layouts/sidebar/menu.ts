@@ -34,4 +34,12 @@ export const MENU: MenuItem[] = [
         icon: 'ri-honour-line',
         link: '/'
     },
+    {
+        id: 5,
+        label: 'Cargos',
+        icon: 'ri-honour-line',
+        link: 'casoslegales/cargos/listado'
+    },
+
+    
 ];
