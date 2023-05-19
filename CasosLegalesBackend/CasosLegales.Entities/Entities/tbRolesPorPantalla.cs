@@ -20,6 +20,7 @@ namespace CasosLegales.Entities.Entities
 
         [NotMapped]
         public string pant_Pantalla { get; set; }
+
         public virtual tbPantallas pant { get; set; }
         public virtual tbRoles role { get; set; }
         public virtual tbUsuarios usua_IdCreacionNavigation { get; set; }

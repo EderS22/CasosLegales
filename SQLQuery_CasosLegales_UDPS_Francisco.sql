@@ -435,8 +435,8 @@ SELECT	T1.[empe_Id],
 FROM cale.tbEmpleados AS T1 INNER JOIN acce.tbUsuarios AS T2
 ON T1.empe_UsuCreacion = T2.usua_Id LEFT JOIN acce.tbUsuarios AS T3
 ON T1.empe_UsuModificacion = T3.usua_Id INNER JOIN GRAL.tbMunicipios AS T4
-ON T1.muni_Id = T4.muni_Nombre INNER JOIN GRAL.tbEstadosCiviles AS T5
-ON T1.eciv_Id = T5.eciv_Descripcion;
+ON T1.muni_Id = T4.muni_Id INNER JOIN GRAL.tbEstadosCiviles AS T5
+ON T1.eciv_Id = T5.eciv_Id;
 
 --**************  CREATE ******************--
 GO
@@ -703,7 +703,7 @@ BEGIN
 		
 		IF EXISTS(SELECT * FROM CALE.tbTiposdeCaso WHERE tica_Id = @tica_Id)
 		 BEGIN
-			SELECT 2 codeStatu
+			SELECT 2 codeStatus
 		 END
 		ELSE
 		 BEGIN 

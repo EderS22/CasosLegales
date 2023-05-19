@@ -97,7 +97,27 @@
         public static string EliminarCiviles = "CALE.UDP_tbCiviles_Delete";
         public static string CargarCiviles = "cale.UDP_tbCiviles_Find";
 
+        public static string ListadoEmpleados       = "CALE.UDP_tbEmpleados_Index";
+        public static string InsertarEmpleados      = "CALE.UDP_tbEmpleados_Insert";
+        public static string ActualizarEmpleados    = "CALE.UDP_tbEmpleados_Update";
+        public static string EliminarEmpleados      = "CALE.UDP_tbEmpleados_Delete";
+        public static string CargarEmpleados        = "cale.UDP_tbEmpleados_Find";
+
+
+        public static string ListadoTiposDeCaso     = "CALE.UDP_tbTiposdeCaso_Index";
+        public static string InsertarTiposDeCaso    = "CALE.UDP_tbTiposdeCaso_Insert";
+        public static string ActualizarTipodDeCaso  = "CALE.UDP_tbTiposdeCaso_Update";
+        public static string EliminarTipoDeCaso     = "CALE.UDP_tbTiposdeCaso_Delete";
+        public static string CargarTopoDeCaso       = "cale.UDP_tbTiposdeCaso_Find";
+
+        public static string ListadoAbogadosJueces      = "CALE.UDP_tbAbogadosJueces_Index";
+        public static string InsertarAbogadosJueces     = "CALE.UDP_tbAbogadosJueces_Insert";
+        public static string ActualizarAbogadosJueces   = "CALE.UDP_tbAbogadosJueces_Update";
+        public static string EliminarAbogadosJueces     = "CALE.UDP_tbAbogadosJueces_Delete";
+        public static string CargarAbogadosJueces       = "cale.UDP_tbAbogadosJueces_Find";
         #endregion
+
+
 
     }
 }

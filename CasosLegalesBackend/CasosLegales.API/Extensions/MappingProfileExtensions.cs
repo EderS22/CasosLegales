@@ -14,6 +14,15 @@ namespace CasosLegales.API.Extensions
             CreateMap<RolesViewModel, tbRoles>().ReverseMap();
             CreateMap<PantallasViewModel, tbPantallas>().ReverseMap();
             CreateMap<RolesPorPantallaViewModel, tbRolesPorPantalla>().ReverseMap();
+
+            CreateMap<DepartamentoViewModel,    tbDepartamentos>().ReverseMap();
+            CreateMap<MunicipioViewModel,       tbMunicipios>().ReverseMap();
+            CreateMap<EstadoCivilViewModel,     tbEstadosCiviles>().ReverseMap();
+            CreateMap<CargoViewModel,           tbCargos>().ReverseMap();
+
+            CreateMap<EmpleadoViewModel, tbEmpleados>().ReverseMap();
+            CreateMap<TipoDeCasoViewModel, tbTiposdeCaso>().ReverseMap();
+            CreateMap<AbogadoJuezViewModel, tbAbogadosJueces>().ReverseMap();
             #endregion
         }
     }
