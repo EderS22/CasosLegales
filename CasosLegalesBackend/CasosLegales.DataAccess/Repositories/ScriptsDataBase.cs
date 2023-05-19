@@ -78,6 +78,19 @@
         #endregion
 
         #region CASOSLEGALES
+
+        public static string ListadoTipodeEvidencia = "cale.UDP_tbTiposdeEvidencia_Index";
+        public static string InsertarTipodeEvidencia = "CALE.UDP_tbTiposdeEvidencia_Insert";
+        public static string ActualizarTipodeEvidencia = "cale.UDP_tbTiposdeEvidencia_Update";
+        public static string EliminarTipodeEvidencia = "cale.UDP_tbTiposdeEvidencia_Delete";
+        public static string CargarTipodeEvidencia = "cale.UDP_tbTiposdeEvidencia_Find";
+
+        public static string ListadoEmpresas = "cale.UDP_tbEmpresas_Index";
+        public static string InsertarEmpresas = "CALE.UDP_tbEmpresas_Insert";
+        public static string ActualizarEmpresas = "CALE.UDP_tbEmpresas_Update";
+        public static string EliminarEmpresas = "CALE.UDP_tbEmpresas_Delete";
+        public static string CargarEmpresas = "cale.UDP_tbEmpresas_Find";
+
         public static string ListadoCiviles = "cale.UDP_tbCiviles_Index";
         public static string InsertarCiviles = "CALE.UDP_tbCiviles_Insert";
         public static string ActualizarCiviles = "CALE.UDP_tbCiviles_Update";

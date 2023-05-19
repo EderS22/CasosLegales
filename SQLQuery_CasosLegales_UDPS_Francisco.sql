@@ -241,7 +241,7 @@ ON T1.muni_Id = T4.muni_Nombre;
 
 --**************  CREATE ******************--
 GO
-CREATE OR ALTER PROCEDURE GRAL.UDP_tbEmpresas_Insert
+CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpresas_Insert
 (@emsa_Nombre NVARCHAR(200),
  @emsa_RTN NVARCHAR(20),
  @muni_Id INT,
