@@ -8,14 +8,14 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAw0UNTp1P0Ea4ZpgEwtp2+gAAAAACAAAAAAAQZgAAAAEAACAAAADC4UCzoDvxZVglk9y8sAQabiWiDLnnPs2t1FPY8mrqzQAAAAAOgAAAAAIAACAAAACJxGyLqPlR3m3WVuPJ+JfIoVCqw+GMgI2lS4c39j7OyjAAAAD68/Y5klE+ZQ6WyDgwHTgNS7tCRuoxrFroGOrtMjYnIrDPU061PypwEoTAVJ4dDCxAAAAAr3T+rYTzGXggDzj6vAWTDEGXMjidx/V3JhMZvpbAEzp7eHYxjNbxEaH+HrS7D/YWGv26SmbmtDOzqg2nYYn++g==</EncryptedPassword>
     <_PublishTargetUrl>ftp://casoslegales.somee.com/www.CasosLegales.somee.com</_PublishTargetUrl>
-    <History>True|2023-05-17T21:28:01.6180717Z;</History>
+    <History>True|2023-05-19T06:23:12.5454397Z;True|2023-05-19T00:14:21.9266869-06:00;True|2023-05-17T15:28:01.6180717-06:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.Development.json">
-      <publishTime>05/17/2023 14:20:54</publishTime>
+      <publishTime>05/18/2023 17:09:54</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>05/17/2023 14:20:54</publishTime>
+      <publishTime>05/19/2023 00:12:17</publishTime>
     </File>
     <File Include="AutoMapper.dll">
       <publishTime>01/05/2022 09:27:54</publishTime>
@@ -24,37 +24,37 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>08/12/2019 07:19:42</publishTime>
     </File>
     <File Include="CasosLegales.API.deps.json">
-      <publishTime>05/17/2023 15:24:38</publishTime>
+      <publishTime>05/19/2023 00:22:13</publishTime>
     </File>
     <File Include="CasosLegales.API.dll">
-      <publishTime>05/17/2023 15:24:35</publishTime>
+      <publishTime>05/19/2023 00:21:53</publishTime>
     </File>
     <File Include="CasosLegales.API.exe">
-      <publishTime>05/17/2023 15:24:35</publishTime>
+      <publishTime>05/19/2023 00:21:53</publishTime>
     </File>
     <File Include="CasosLegales.API.pdb">
-      <publishTime>05/17/2023 15:24:35</publishTime>
+      <publishTime>05/19/2023 00:21:53</publishTime>
     </File>
     <File Include="CasosLegales.API.runtimeconfig.json">
-      <publishTime>05/17/2023 15:24:36</publishTime>
+      <publishTime>05/19/2023 00:12:58</publishTime>
     </File>
     <File Include="CasosLegales.BusinessLogic.dll">
-      <publishTime>05/17/2023 15:24:34</publishTime>
+      <publishTime>05/19/2023 00:12:57</publishTime>
     </File>
     <File Include="CasosLegales.BusinessLogic.pdb">
-      <publishTime>05/17/2023 15:24:34</publishTime>
+      <publishTime>05/19/2023 00:12:57</publishTime>
     </File>
     <File Include="CasosLegales.DataAccess.dll">
-      <publishTime>05/17/2023 15:24:34</publishTime>
+      <publishTime>05/19/2023 00:12:57</publishTime>
     </File>
     <File Include="CasosLegales.DataAccess.pdb">
-      <publishTime>05/17/2023 15:24:34</publishTime>
+      <publishTime>05/19/2023 00:12:57</publishTime>
     </File>
     <File Include="CasosLegales.Entities.dll">
-      <publishTime>05/17/2023 15:24:34</publishTime>
+      <publishTime>05/19/2023 00:12:56</publishTime>
     </File>
     <File Include="CasosLegales.Entities.pdb">
-      <publishTime>05/17/2023 15:24:34</publishTime>
+      <publishTime>05/19/2023 00:12:56</publishTime>
     </File>
     <File Include="cs/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 11:08:58</publishTime>
@@ -183,7 +183,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>10/24/2020 00:40:08</publishTime>
     </File>
     <File Include="Microsoft.EntityFrameworkCore.SqlServer.dll">
-      <publishTime>10/24/2020 00:41:00</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Microsoft.Extensions.DependencyModel.dll">
       <publishTime>05/15/2018 15:01:34</publishTime>
@@ -363,7 +363,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>09/12/2019 11:08:36</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>05/17/2023 15:24:39</publishTime>
+      <publishTime>05/19/2023 00:22:13</publishTime>
     </File>
     <File Include="zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 11:09:00</publishTime>

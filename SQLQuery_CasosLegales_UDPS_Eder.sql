@@ -202,7 +202,7 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_empelitadorTieneUsuario
+CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_EmpleadosTienenUsuario
 AS
 BEGIN
 	SELECT empe_Id,

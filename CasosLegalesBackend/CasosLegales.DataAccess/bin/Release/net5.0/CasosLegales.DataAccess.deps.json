@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v5.0": {
       "CasosLegales.DataAccess/1.0.0": {
         "dependencies": {
+          "CasosLegales.Entities": "1.0.0",
           "Dapper": "2.0.123",
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
@@ -1355,6 +1356,11 @@
           "System.Xml.ReaderWriter": "4.3.0",
           "System.Xml.XmlDocument": "4.3.0"
         }
+      },
+      "CasosLegales.Entities/1.0.0": {
+        "runtime": {
+          "CasosLegales.Entities.dll": {}
+        }
       }
     }
   },
@@ -2217,6 +2223,11 @@
       "sha512": "sha512-MYoTCP7EZ98RrANESW05J5ZwskKDoN0AuZ06ZflnowE50LTpbR5yRg3tHckTVm5j/m47stuGgCrCHWePyHS70Q==",
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    },
+    "CasosLegales.Entities/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

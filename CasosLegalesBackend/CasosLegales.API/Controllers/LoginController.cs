@@ -34,7 +34,26 @@ namespace CasosLegales.API.Controllers
             };
 
             var respuesta = _accesoService.ValidarLogin(resultMapeado);
-            respuesta.Data = _mapper.Map<UsuarioViewModel>(respuesta.Data);
+            respuesta.Data = _mapper.Map<UsuariosViewModel>(respuesta.Data);
+            return Ok(respuesta);
+        }
+
+        [HttpGet("ValidarUsernameExiste/{username}")]
+        public IActionResult ValidarUserNameExiste(string username)
+        {
+            var resultado = _accesoService.ValidarUsernameExiste(username);
+
+            return Ok(resultado);
+        }
+
+
+        [HttpPost("ActualizarContrasenia")]
+        public IActionResult ActualizarContrasenia(UsuariosViewModel item)
+        {
+            var resultMapeado = _mapper.Map<tbUsuarios>(item);
+
+            var respuesta = _accesoService.ActualizarContrasenia(resultMapeado);
+
             return Ok(respuesta);
         }
     }
