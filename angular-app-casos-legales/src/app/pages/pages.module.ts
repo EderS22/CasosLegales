@@ -38,7 +38,7 @@ import { ListadoComponent } from './acceso/usuarios/listado/listado.component';
   declarations: [
     DashboardComponent,
     ToastsContainer,
-    ListadoComponent
+    ListadoComponent,
   ],
   imports: [
     CommonModule,

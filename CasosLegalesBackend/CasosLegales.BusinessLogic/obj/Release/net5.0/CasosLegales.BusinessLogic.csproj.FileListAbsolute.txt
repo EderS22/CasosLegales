@@ -30,3 +30,5 @@ C:\Users\eders\OneDrive\Documentos\GitHub\CasosLegales\CasosLegalesBackend\Casos
 C:\Users\eders\OneDrive\Documentos\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.BusinessLogic\obj\Release\net5.0\CasosLegales.BusinessLogic.dll
 C:\Users\eders\OneDrive\Documentos\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.BusinessLogic\obj\Release\net5.0\ref\CasosLegales.BusinessLogic.dll
 C:\Users\eders\OneDrive\Documentos\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.BusinessLogic\obj\Release\net5.0\CasosLegales.BusinessLogic.pdb
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.BusinessLogic\bin\Release\net5.0\CasosLegales.Entities.dll
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.BusinessLogic\bin\Release\net5.0\CasosLegales.Entities.pdb
