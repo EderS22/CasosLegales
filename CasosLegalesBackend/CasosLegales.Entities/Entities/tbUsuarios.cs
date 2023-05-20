@@ -54,6 +54,7 @@ namespace CasosLegales.Entities.Entities
         public string usua_Nombre { get; set; }
         public string usua_Clave { get; set; }
         public int? role_Id { get; set; }
+        public string role_Nombre { get; set; }
         public int empe_Id { get; set; }
         public bool? usua_EsAdmin { get; set; }
         public bool? usua_Estado { get; set; }

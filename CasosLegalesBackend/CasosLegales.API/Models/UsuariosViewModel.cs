@@ -18,6 +18,8 @@ namespace CasosLegales.API.Models
 
         public int? role_Id { get; set; }
 
+        public string role_Nombre { get; set; }
+
         public int? empe_Id { get; set; }
 
         public string empe_Nombres { get; set; }

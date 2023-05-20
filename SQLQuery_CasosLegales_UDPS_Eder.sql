@@ -92,6 +92,7 @@ BEGIN
 				SELECT usua_Id,
 					   usua_Nombre,
 					   tb1.role_Id,
+					   role_Nombre,
 					   tb1.empe_Id,
 					   empe_Nombres,
 					   empe_Apellidos,		   
@@ -99,6 +100,8 @@ BEGIN
 				  FROM ACCE.tbUsuarios tb1
 			INNER JOIN CALE.tbEmpleados tb2
 					ON tb1.empe_Id = tb2.empe_Id
+			INNER JOIN ACCE.tbRoles tb3
+					ON tb1.role_Id = tb3.role_Id
 				 WHERE usua_Nombre = @usua_Nombre AND usua_Clave = @Pass
 				   AND usua_Estado = 1
 		   END
