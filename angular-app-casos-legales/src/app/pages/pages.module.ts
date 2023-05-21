@@ -32,6 +32,7 @@ import { DashboardsModule } from "./dashboards/dashboards.module";
 import { AppsModule } from "./apps/apps.module";
 import { EcommerceModule } from "./ecommerce/ecommerce.module";
 import { ListadoComponent } from './acceso/usuarios/listado/listado.component';
+import { DataTablesModule } from 'angular-datatables';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { ListadoComponent } from './acceso/usuarios/listado/listado.component';
     LightboxModule,
     DashboardsModule,
     AppsModule,
-    EcommerceModule
+    EcommerceModule,
+    DataTablesModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

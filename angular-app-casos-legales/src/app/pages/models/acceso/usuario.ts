@@ -4,6 +4,7 @@ export class usuario{
     usua_Clave!: string;
     usua_EsAdmin!: boolean;
     role_Id!: number;
+    role_Nombre!: string;
     empe_Id!: number;
     empe_Nombres!: string;
     empe_Apellidos!: string
