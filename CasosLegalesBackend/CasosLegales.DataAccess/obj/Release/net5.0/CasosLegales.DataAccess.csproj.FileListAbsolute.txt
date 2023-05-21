@@ -25,3 +25,6 @@ C:\Users\eders\OneDrive\Documentos\GitHub\CasosLegales\CasosLegalesBackend\Casos
 C:\Users\eders\OneDrive\Documentos\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\obj\Release\net5.0\CasosLegales.DataAccess.dll
 C:\Users\eders\OneDrive\Documentos\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\obj\Release\net5.0\ref\CasosLegales.DataAccess.dll
 C:\Users\eders\OneDrive\Documentos\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\obj\Release\net5.0\CasosLegales.DataAccess.pdb
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\bin\Release\net5.0\CasosLegales.Entities.dll
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\bin\Release\net5.0\CasosLegales.Entities.pdb
+C:\Users\LAB02\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\obj\Release\net5.0\CasosLegales.DataAccess.csproj.CopyComplete

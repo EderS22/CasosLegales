@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 
 import { LayoutsModule} from "./layouts/layouts.module";
 import { PagesModule } from "./pages/pages.module";
+import { DataTablesModule } from "angular-datatables";
 
 // Auth
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS  } from '@angular/common/http';
@@ -38,6 +39,7 @@ if (environment.defaultauth === 'firebase') {
     AppComponent
   ],
   imports: [
+    DataTablesModule,
     TranslateModule.forRoot({
       defaultLanguage: 'es',
       loader: {
@@ -52,7 +54,7 @@ if (environment.defaultauth === 'firebase') {
     AppRoutingModule,
     LayoutsModule,
     PagesModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

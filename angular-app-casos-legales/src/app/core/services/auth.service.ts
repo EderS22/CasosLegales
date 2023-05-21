@@ -65,7 +65,6 @@ export class AuthenticationService {
         });
     }
 
-
     /**
      * Returns the current user
      */
