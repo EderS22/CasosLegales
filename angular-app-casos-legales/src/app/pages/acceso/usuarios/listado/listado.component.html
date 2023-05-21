@@ -2,3 +2,59 @@
 <app-breadcrumbs title="Usuarios" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
 <!-- End Breadcrumbs -->
 
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Agregar, editar y eliminar</h4>
+            </div><!-- end card header -->
+
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="row g-4 mb-3">
+                        <div class="col-sm-auto">
+                            <div class="d-flex gap-1">
+                                <button type="button" class="btn btn-primary add-btn" ><i
+                                        class="ri-add-line align-bottom me-1"></i> Add</button>
+                                <button class="btn btn-soft-danger" ><i
+                                        class="ri-delete-bin-2-line"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive table-card mt-3 mb-1">
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
+                            <thead>
+                                <tr class="bg-light">
+                                   <th>Id</th>
+                                   <th>Nombre</th>
+                                   <th>¿Es admin?</th>
+                                   <th>Rol</th>
+                                   <th>Nombre empleado</th>
+                                   <th>Apellido empleado</th>
+                                   <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of usuarios">
+                                    <td>{{item.usua_Id}}</td>
+                                    <td>{{item.usua_Nombre}}</td>
+                                    <td>{{item.usua_EsAdmin}}</td>
+                                    <td>{{item.role_Nombre}}</td>
+                                    <td>{{item.empe_Nombres}}</td>
+                                    <td>{{item.empe_Apellidos}}</td>
+                                    <td>
+                                        
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>  
+                </div>
+            </div><!-- end card -->
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
