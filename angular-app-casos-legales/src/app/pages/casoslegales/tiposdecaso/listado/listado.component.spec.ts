@@ -6,13 +6,6 @@ describe('ListadoComponent', () => {
   let component: ListadoComponent;
   let fixture: ComponentFixture<ListadoComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ ListadoComponent ]
-    })
-    .compileComponents();
-  });
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ListadoComponent]

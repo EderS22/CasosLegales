@@ -695,20 +695,14 @@ END
 
 --**************  DELETE ******************--
 GO
-CREATE OR ALTER PROCEDURE cale.UDP_tbTiposdeCaso_Delete
+CREATE OR ALTER PROCEDURE cale.UDP_tbTiposdeCaso_Delete 
 (@tica_Id INT)
 AS
 BEGIN
 	BEGIN TRY
-		
-		IF EXISTS(SELECT * FROM CALE.tbTiposdeCaso WHERE tica_Id = @tica_Id)
-		 BEGIN
-			SELECT 2 codeStatus
-		 END
-		ELSE
 		 BEGIN 
 			UPDATE	CALE.tbTiposdeCaso
-			SET		@tica_Id = 0
+			SET		tica_Estado = 0
 			WHERE	tica_Id = @tica_Id
 
 			SELECT 1 codeStatus

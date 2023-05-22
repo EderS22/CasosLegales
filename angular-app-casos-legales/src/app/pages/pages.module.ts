@@ -32,6 +32,7 @@ import { DashboardsModule } from "./dashboards/dashboards.module";
 import { AppsModule } from "./apps/apps.module";
 import { EcommerceModule } from "./ecommerce/ecommerce.module";
 import { ListadoComponent } from './acceso/usuarios/listado/listado.component';
+import { ListadoComponent as ListadoTiposDeCaso } from './casoslegales/tiposdecaso/listado/listado.component'; 
 import { DataTablesModule } from 'angular-datatables';
 
 
@@ -40,6 +41,7 @@ import { DataTablesModule } from 'angular-datatables';
     DashboardComponent,
     ToastsContainer,
     ListadoComponent,
+    ListadoTiposDeCaso
   ],
   imports: [
     CommonModule,
