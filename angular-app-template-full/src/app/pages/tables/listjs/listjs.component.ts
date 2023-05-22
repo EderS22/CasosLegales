@@ -88,7 +88,7 @@ export class ListjsComponent {
    */
    openModal(content: any) {
     this.submitted = false;
-    this.modalService.open(content, { size: 'md', centered: true });
+    this.modalService.open(content, { size: 'md', centered: true, backdrop: 'static' });
   }
 
   /**

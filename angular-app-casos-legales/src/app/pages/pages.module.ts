@@ -31,19 +31,21 @@ import { ToastsContainer } from './dashboards/dashboard/toasts-container.compone
 import { DashboardsModule } from "./dashboards/dashboards.module";
 import { AppsModule } from "./apps/apps.module";
 import { EcommerceModule } from "./ecommerce/ecommerce.module";
-import { ListadoComponent } from './acceso/usuarios/listado/listado.component';
+import { ListadoComponent as ListadoUsuarios } from './acceso/usuarios/listado/listado.component';
 import { ListadoComponent as ListadoTiposDeCaso } from './casoslegales/tiposdecaso/listado/listado.component'; 
+import { ListadoComponent as ListadoDepartamento } from './general/departamento/listado/listado.component';
 import { DataTablesModule } from 'angular-datatables';
-import { DetallesComponent } from './acceso/usuarios/detalles/detalles.component';
+import { DetallesComponent as DetallesUsuarios } from './acceso/usuarios/detalles/detalles.component';
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
     ToastsContainer,
-    ListadoComponent,
+    ListadoUsuarios,
     ListadoTiposDeCaso,
-    DetallesComponent,
+    ListadoDepartamento,
+    DetallesUsuarios,
   ],
   imports: [
     CommonModule,

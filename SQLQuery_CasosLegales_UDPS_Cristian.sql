@@ -177,7 +177,7 @@ ON T1.muni_UsuModificacion = t4.usua_Id
 
 --********************  CREATE *************************--
 GO
-CREATE OR ALTER PROCEDURE GRAL.UDP_tbMunicipios_Insert
+CREATE OR ALTER PROCEDURE GRAL.UDP_tbMunicipios_Insert 
 (@muni_Nombre NVARCHAR(100),
  @muni_Codigo char(4),
  @depa_Id INT,
@@ -192,10 +192,18 @@ BEGIN
 		ELSE IF NOT EXISTS (SELECT * FROM gral.tbMunicipios WHERE muni_Codigo = @muni_Codigo)
 			BEGIN
 
-				INSERT INTO [gral].[tbMunicipios] (muni_Nombre, muni_Codigo, depa_Id, muni_UsuCreacion, muni_UsuModificacion, muni_FechaModificacion)
-				VALUES (@muni_Nombre, @muni_Codigo, @depa_Id, @muni_UsuCreacion, NULL, NULL);
 
-				SELECT 1 codeStatus
+				IF EXISTS (SELECT * FROM gral.tbMunicipios WHERE (muni_Nombre = @muni_Nombre AND depa_Id = @depa_Id) AND muni_Estado = 1)
+					BEGIN
+						SELECT 3 codeStatus
+					END
+				ELSE
+					BEGIN 
+						INSERT INTO [gral].[tbMunicipios] (muni_Nombre, muni_Codigo, depa_Id, muni_UsuCreacion, muni_UsuModificacion, muni_FechaModificacion)
+						VALUES (@muni_Nombre, @muni_Codigo, @depa_Id, @muni_UsuCreacion, NULL, NULL);
+
+						SELECT 1 codeStatus
+					END	
 			END
 		ELSE 
 			BEGIN
@@ -221,7 +229,7 @@ END
 
 --**************  UPDATE  ******************--
 GO
-CREATE OR ALTER PROCEDURE GRAL.UDP_tbMunicipios_Update
+CREATE OR ALTER PROCEDURE GRAL.UDP_tbMunicipios_Update 
 (@muni_Id INT,
  @muni_Nombre NVARCHAR(100),
  @depa_Id INT,
@@ -229,14 +237,22 @@ CREATE OR ALTER PROCEDURE GRAL.UDP_tbMunicipios_Update
 AS
 BEGIN
 	BEGIN TRY
-		UPDATE gral.tbMunicipios
-		SET muni_Nombre = @muni_Nombre, 
-			depa_Id = @depa_Id, 
-			muni_UsuModificacion = @muni_UsuModificacion, 
-			muni_FechaModificacion = GETDATE()
-		WHERE muni_Id = @muni_Id
+
+		IF EXISTS (SELECT * FROM GRAL.tbMunicipios WHERE (muni_Nombre = @muni_Nombre AND depa_Id = @depa_Id) AND muni_Id != @muni_Id)
+		BEGIN
+			SELECT 3 codeStatus
+		END
+		ELSE
+		BEGIN 
+			UPDATE gral.tbMunicipios
+			SET muni_Nombre = @muni_Nombre, 
+				depa_Id = @depa_Id, 
+				muni_UsuModificacion = @muni_UsuModificacion, 
+				muni_FechaModificacion = GETDATE()
+			WHERE muni_Id = @muni_Id
 		
-		SELECT 1 codeStatus
+			SELECT 1 codeStatus
+		END
 	END TRY
 	BEGIN CATCH
 		SELECT 0 codeStatus
@@ -784,11 +800,27 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbAbogadosJueces_Delete
 AS
 BEGIN 
 	BEGIN TRY
-		UPDATE	[CALE].[tbAbogadosJueces]
-			SET	abju_Estado = 0 
-		WHERE	abju_Id = @abju_Id;
 
-		SELECT 1 codeStatus
+		IF EXISTS (SELECT * FROM CALE.tbCasos WHERE caso_Juez = @abju_Id AND caso_Estado = 1)
+		BEGIN
+			SELECT 2 codeStatus
+		END
+		ELSE IF EXISTS (SELECT * FROM CALE.tbCasos WHERE caso_AbogadoDemandante = @abju_Id AND caso_Estado = 1)
+		 BEGIN
+			SELECT 2 codeStatus
+		 END
+		 ELSE IF EXISTS (SELECT * FROM CALE.tbCasos WHERE caso_AbogadoDemandado = @abju_Id AND caso_Estado = 1)
+		 BEGIN
+			SELECT 2 codeStatus
+		 END
+		 ELSE
+		 BEGIN
+			UPDATE	[CALE].[tbAbogadosJueces]
+			SET	abju_Estado = 0 
+			WHERE	abju_Id = @abju_Id;
+
+			SELECT 1 codeStatus
+		 END
 	END TRY
 	BEGIN CATCH
 		SELECT 0 codeStatus

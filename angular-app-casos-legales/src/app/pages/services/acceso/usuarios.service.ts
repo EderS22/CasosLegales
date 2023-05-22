@@ -12,7 +12,7 @@ const API_URL = GlobalComponent.API_URL;
 })
 export class UsuariosService {
 
-    constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
     getUsuarios(){
         return this.http.get<usuario[]>(API_URL + 'Usuarios/List');
