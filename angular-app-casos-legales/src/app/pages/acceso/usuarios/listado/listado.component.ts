@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 import { UsuariosService } from '../../../services/acceso/usuarios.service';
 import { usuario } from '../../../models/acceso/usuario';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-listado',
@@ -15,25 +16,25 @@ export class ListadoComponent {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
 
-  constructor(private service: UsuariosService){}
+  constructor(private service: UsuariosService) { }
 
   ngOnInit(): void {
-    
+
     this.dtOptions = {
-        pagingType: 'full_numbers',
-        language: {
-          url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
+      pagingType: 'full_numbers',
+      language: {
+        url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
+      },
+      columnDefs: [
+        {
+          targets: 6,
+          orderable: false,
         },
-        columnDefs: [
-            {
-                targets: 6, 
-                orderable: false,
-            },
-            {
-                targets: 2, 
-                orderable: false,
-            },   
-        ]
+        {
+          targets: 2,
+          orderable: false,
+        },
+      ]
     };
     this.LoadUsuarios();
 
@@ -43,12 +44,15 @@ export class ListadoComponent {
     ];
   }
 
-  LoadUsuarios(){
-    this.service.getUsuarios().subscribe((data:any) => {
-        if(data.code === 200){
-          this.usuarios = data.data;
-          this.dtTrigger.next(null);
-        }
+  LoadUsuarios() {
+    this.service.getUsuarios().subscribe((data: any) => {
+      if (data.code === 200) {
+        this.usuarios = data.data;
+        this.dtTrigger.next(null);
+      }
     })
   }
+
+
+
 }

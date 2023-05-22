@@ -14,10 +14,10 @@
                     <div class="row g-4 mb-3">
                         <div class="col-sm-auto">
                             <div class="d-flex gap-1">
-                                <button type="button" class="btn btn-primary add-btn" ><i
-                                        class="ri-add-line align-bottom me-1"></i> Add</button>
-                                <button class="btn btn-soft-danger" ><i
-                                        class="ri-delete-bin-2-line"></i></button>
+                                <button type="button" class="btn btn-primary add-btn" >
+                                    <i class="ri-add-line align-bottom me-1"></i> 
+                                    Agregar
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                     <div class="table-responsive table-card mt-3 mb-1">
                         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
                             <thead>
-                                <tr class="bg-light">
+                                <tr class="bg-light" >
                                    <th>Id</th>
                                    <th>Nombre</th>
                                    <th>¿Es admin?</th>
@@ -44,7 +44,22 @@
                                     <td>{{item.empe_Nombres}}</td>
                                     <td>{{item.empe_Apellidos}}</td>
                                     <td>
-                                        
+                                        <div class="col-sm-auto">
+                                            <div class="d-flex gap-1">
+                                                <button type="button" class="btn btn-soft-primary" >
+                                                    <i class="ri-edit-2-line"></i> 
+                                                    Editar
+                                                </button>
+                                                <button class="btn btn-soft-danger" >
+                                                    <i class="ri-delete-bin-line"></i>
+                                                    Eliminar
+                                                </button>
+                                                <button class="btn btn-soft-secondary" >
+                                                    <i class="ri-file-list-2-line"></i>
+                                                    Detalles
+                                                </button>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>

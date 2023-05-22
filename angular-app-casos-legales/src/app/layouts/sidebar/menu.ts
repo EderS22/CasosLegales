@@ -21,7 +21,7 @@ export const MENU: MenuItem[] = [
         id: 2,
         label: 'Departamentos',
         icon: 'ri-honour-line',
-        link: '/'
+        link: '/general/departamento/listado'
     },
     {
         id: 5,
