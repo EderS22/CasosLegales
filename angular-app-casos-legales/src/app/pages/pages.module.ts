@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   NgbToastModule, NgbProgressbarModule
@@ -60,7 +60,8 @@ import { DataTablesModule } from 'angular-datatables';
     DashboardsModule,
     AppsModule,
     EcommerceModule,
-    DataTablesModule
+    DataTablesModule,
+    ReactiveFormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

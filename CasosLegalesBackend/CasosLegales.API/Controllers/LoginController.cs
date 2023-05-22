@@ -38,15 +38,6 @@ namespace CasosLegales.API.Controllers
             return Ok(respuesta);
         }
 
-        [HttpGet("ValidarUsernameExiste/{username}")]
-        public IActionResult ValidarUserNameExiste(string username)
-        {
-            var resultado = _accesoService.ValidarUsernameExiste(username);
-
-            return Ok(resultado);
-        }
-
-
         [HttpPost("ActualizarContrasenia")]
         public IActionResult ActualizarContrasenia(UsuariosViewModel item)
         {

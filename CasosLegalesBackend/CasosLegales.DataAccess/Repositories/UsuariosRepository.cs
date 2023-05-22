@@ -144,11 +144,11 @@ namespace CasosLegales.DataAccess.Repositories
             return request;
         }
 
-        public IEnumerable<tbUsuarios> EmpleadosNoTienenUsuario()
+        public IEnumerable<tbEmpleados> EmpleadosNoTienenUsuario()
         {
             using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
 
-            return db.Query<tbUsuarios>(ScriptsDataBase.EmpleadosNoTienenUsuario, null, commandType: CommandType.StoredProcedure);
+            return db.Query<tbEmpleados>(ScriptsDataBase.EmpleadosNoTienenUsuario, null, commandType: CommandType.StoredProcedure);
         }
 
         public RequestStatus ValidarUsuariosPoseenRol(int role_Id)
@@ -168,14 +168,6 @@ namespace CasosLegales.DataAccess.Repositories
             };
 
             return request;
-        }
-
-        public tbUsuarios CargarDatosUsuario(tbUsuarios item)
-        {
-            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
-            var parametro = new DynamicParameters();
-            parametro.Add("@usua_Id", item.usua_Id, DbType.Int32, ParameterDirection.Input);
-            return db.QueryFirst<tbUsuarios>(ScriptsDataBase.CargarDatosUsuario, parametro, commandType: CommandType.StoredProcedure);
         }
 
     }
