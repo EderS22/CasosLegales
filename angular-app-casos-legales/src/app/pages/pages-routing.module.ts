@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 // Component pages
 import { DashboardComponent } from "./dashboards/dashboard/dashboard.component";
 import { ListadoComponent as ListadoUsuarios} from './acceso/usuarios/listado/listado.component';
+import { DetallesComponent as DetallesUsaurios } from './acceso/usuarios/detalles/detalles.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,10 @@ const routes: Routes = [
     {
       path: "acceso/usuarios/listado",
       component: ListadoUsuarios
+    },
+    {
+      path: "acceso/usuarios/detalles",
+      component: DetallesUsaurios
     }
 ];
 

@@ -33,6 +33,7 @@ import { AppsModule } from "./apps/apps.module";
 import { EcommerceModule } from "./ecommerce/ecommerce.module";
 import { ListadoComponent } from './acceso/usuarios/listado/listado.component';
 import { DataTablesModule } from 'angular-datatables';
+import { DetallesComponent } from './acceso/usuarios/detalles/detalles.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { DataTablesModule } from 'angular-datatables';
     DashboardComponent,
     ToastsContainer,
     ListadoComponent,
+    DetallesComponent,
   ],
   imports: [
     CommonModule,

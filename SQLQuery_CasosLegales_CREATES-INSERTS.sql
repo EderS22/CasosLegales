@@ -68,7 +68,8 @@ CREATE TABLE ACCE.tbPantallas(
 	pant_Pantalla			NVARCHAR(150) NOT NULL,
 	pant_Href				NVARCHAR(150) NOT NULL,
 	pant_Esquema			NVARCHAR(150) NOT NULL,
-	
+	pant_Icono				NVARCHAR(100) NOT NULL,
+
 	pant_Estado				BIT DEFAULT 1,
 	usua_IdCreacion			INT NOT NULL,
 	pant_FechaCreacion		DATETIME DEFAULT GETDATE(),
@@ -545,6 +546,25 @@ GO
 
 --********************************************************TABLE Pantallas**********************************************************--
 
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Usuarios', 'acceso/usuarios/listado', 'Acceso', 'ri-group-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Roles', 'acceso/roles/listado', 'Acceso', 'ri-team-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Departamentos', 'general/departamentos/listado', 'General', 'ri-function-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Municipios', 'general/municipios/listado', 'General', 'ri-dashboard-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Cargos', 'general/cargos/listado', 'General', 'ri-filter-3-line', 1)
+GO
 
 
 --*******************************************************/TABLE Pantallas**********************************************************--

@@ -287,7 +287,6 @@ CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_EliminarUsuario
 AS
 BEGIN
 	BEGIN TRY
-		
 		BEGIN TRAN
 			DELETE FROM	ACCE.tbUsuarios
 				  WHERE usua_Id = @usua_Id

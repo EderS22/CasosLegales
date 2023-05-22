@@ -34,7 +34,7 @@
                                    <th>Rol</th>
                                    <th>Nombre empleado</th>
                                    <th>Apellido empleado</th>
-                                   <th>Acciones</th>
+                                   <th style="text-align: center;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,7 +60,9 @@
                                                     <i class="ri-delete-bin-line"></i>
                                                     Eliminar
                                                 </button>
-                                                <button class="btn btn-soft-secondary" >
+                                                <button class="btn btn-soft-secondary" 
+                                                    (click)="detallesUsuario(item.usua_Id)"
+                                                >
                                                     <i class="ri-file-list-2-line"></i>
                                                     Detalles
                                                 </button>
@@ -82,7 +84,7 @@
 
 
 <!-- Add ListJs Data -->
-<ng-template #content role="document" let-modal data-backdrop="static">
+<ng-template #content role="document" let-modal>
     <div class="modal-header bg-light p-3">
         <h5 class="modal-title">{{isEdit ? 'Editar' : 'Agregar'}} usuario</h5>
         <button type="button" class="btn-close" #closeContent aria-label="Cerrar" id="close-modal"

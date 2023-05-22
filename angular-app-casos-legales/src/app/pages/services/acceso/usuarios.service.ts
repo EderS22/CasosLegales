@@ -5,7 +5,6 @@ import { usuario } from '../../models/acceso/usuario';
 import { empleado } from '../../models/casoslegales/empleados';
 import { rol } from '../../models/acceso/rol';
 
-
 const API_URL = GlobalComponent.API_URL;
 
 @Injectable({
@@ -36,10 +35,14 @@ export class UsuariosService {
     }
 
     insertarNuevoUsuario(usuario: usuario){
-        return this.http.post(API_URL + 'Usuarios/Insert', usuario);
+        return this.http.post<usuario>(API_URL + 'Usuarios/Insert', usuario);
     }
 
     editarUsuario(usuario: usuario){
-        return this.http.post(API_URL + 'Usuarios/Update', usuario);
+        return this.http.post<usuario>(API_URL + 'Usuarios/Update', usuario);
+    }
+
+    eliminarUsuario(usuario: usuario){
+        return this.http.post(API_URL + `Usuarios/Delete`, usuario);
     }
 }
