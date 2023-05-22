@@ -11,9 +11,8 @@
         public static string CargarUsuarioPorId = "ACCE.UDP_tbUsuarios_CargarUsuarioPorId";
         public static string ValidarUsuariosPoseenRol = "ACCE.UDP_tbUsuarios_ValidarUsuariosPoseenRol";
 
-        public static string EmpleadosNoTienenUsuario = "ACCE.UDP_tbUsuarios_FacilitadorTieneUsuario";
+        public static string EmpleadosNoTienenUsuario = "ACCE.UDP_tbUsuarios_EmpleadosNoTienenUsuario";
         public static string InsertarUsuario = "ACCE.UDP_tbUsuarios_InsertarNuevoUsuario";
-        public static string CargarDatosUsuario = "ACCE.UDP_tbUsuarios_CargarDatosUsuarios";
         public static string UpdateUsuario = "ACCE.UDP_tbUsuarios_EditarUsuarios";
         public static string EliminarUsuario = "ACCE.UDP_tbUsuarios_EliminarUsuario";
         #endregion

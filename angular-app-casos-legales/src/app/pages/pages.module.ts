@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   NgbToastModule, NgbProgressbarModule
@@ -33,6 +33,7 @@ import { AppsModule } from "./apps/apps.module";
 import { EcommerceModule } from "./ecommerce/ecommerce.module";
 import { ListadoComponent } from './acceso/usuarios/listado/listado.component';
 import { DataTablesModule } from 'angular-datatables';
+import { DetallesComponent } from './acceso/usuarios/detalles/detalles.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { DataTablesModule } from 'angular-datatables';
     DashboardComponent,
     ToastsContainer,
     ListadoComponent,
+    DetallesComponent,
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { DataTablesModule } from 'angular-datatables';
     DashboardsModule,
     AppsModule,
     EcommerceModule,
-    DataTablesModule
+    DataTablesModule,
+    ReactiveFormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

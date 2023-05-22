@@ -56,6 +56,7 @@ namespace CasosLegales.API.Controllers
         public IActionResult ListarEmpleados()
         {
             var list = _accesoService.EmpleadosNoTienenUsuario();
+            list.Data = _mapper.Map<IEnumerable<EmpleadoViewModel>>(list.Data);
             return Ok(list);
         }
 
@@ -66,14 +67,6 @@ namespace CasosLegales.API.Controllers
             var item = _mapper.Map<tbUsuarios>(usuariosViewModel);
             var respuesta = _accesoService.InsertarUsuario(item);
             return Ok(respuesta);
-        }
-
-        [HttpPost("CargarDatosUsuarios")]
-        public IActionResult Editar(UsuariosViewModel usuariosViewModel)
-        {
-            var item = _mapper.Map<tbUsuarios>(usuariosViewModel);
-            var usuario = _accesoService.CargarDatosUsuario(item);
-            return Ok(usuario);
         }
 
         [HttpPost("Update")]
@@ -91,6 +84,14 @@ namespace CasosLegales.API.Controllers
             var item = _mapper.Map<tbUsuarios>(usuariosViewModel);
             var respuesta = _accesoService.EliminarUsuario(item);
             return Ok(respuesta);
+        }
+
+        [HttpGet("ValidarUsernameExiste/{username}")]
+        public IActionResult ValidarUserNameExiste(string username)
+        {
+            var resultado = _accesoService.ValidarUsernameExiste(username);
+
+            return Ok(resultado);
         }
 
     }

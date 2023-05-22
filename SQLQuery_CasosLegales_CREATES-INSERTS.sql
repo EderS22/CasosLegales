@@ -68,7 +68,8 @@ CREATE TABLE ACCE.tbPantallas(
 	pant_Pantalla			NVARCHAR(150) NOT NULL,
 	pant_Href				NVARCHAR(150) NOT NULL,
 	pant_Esquema			NVARCHAR(150) NOT NULL,
-	
+	pant_Icono				NVARCHAR(100) NOT NULL,
+
 	pant_Estado				BIT DEFAULT 1,
 	usua_IdCreacion			INT NOT NULL,
 	pant_FechaCreacion		DATETIME DEFAULT GETDATE(),
@@ -545,6 +546,25 @@ GO
 
 --********************************************************TABLE Pantallas**********************************************************--
 
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Usuarios', 'acceso/usuarios/listado', 'Acceso', 'ri-group-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Roles', 'acceso/roles/listado', 'Acceso', 'ri-team-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Departamentos', 'general/departamentos/listado', 'General', 'ri-function-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Municipios', 'general/municipios/listado', 'General', 'ri-dashboard-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Cargos', 'general/cargos/listado', 'General', 'ri-filter-3-line', 1)
+GO
 
 
 --*******************************************************/TABLE Pantallas**********************************************************--
@@ -1039,45 +1059,3 @@ GO
 
 
 --*********************************************************/ALTERS TABLES**********************************************************--
-
-
-INSERT INTO CALE.tbAbogadosJueces (abju_DNI, abju_Nombres, abju_Apellidos, abju_Sexo, abju_Telefono, abju_CorreoElectronico, abju_FechaNacimiento, eciv_Id, carg_Id, muni_Id, abju_Direccion, abju_UsuCreacion)
-VALUES ('123456789', 'Juan', 'P�rez', 'M', '123456789', 'juan.perez@gmail.com', '1990-01-01', 1, 1, 1, 'Calle Principal 123', 1),
-		('987654321', 'Mar�a', 'L�pez', 'F', '987654321', 'maria.lopez@gmail.com', '1995-05-10', 2, 2, 2, 'Avenida Secundaria 456', 1),
-		('555555555', 'Pedro', 'Gonz�lez', 'M', '555555555', 'pedro.gonzalez@gmail.com', '1985-12-15', 3, 1, 3, 'Plaza Central 789', 1),
-		('111111111', 'Ana', 'Garc�a', 'F', '111111111', 'ana.garcia@gmail.com', '1988-06-20', 2, 2, 1, 'Calle Secundaria 234', 1),
-		('222222222', 'Luis', 'Mart�nez', 'M', '222222222', 'luis.martinez@gmail.com', '1992-09-08', 1, 3, 2, 'Avenida Principal 567', 1),
-		('333333333', 'Laura', 'Rodr�guez', 'F', '333333333', 'laura.rodriguez@gmail.com', '1997-03-12', 3, 1, 3, 'Plaza Secundaria 890', 1);
-
-
-INSERT INTO GRAL.tbCargos (carg_Descripcion, carg_UsuCreacion)
-VALUES ('Gerente', 1),
-		('Supervisor', 1),
-		('Analista', 1),
-		('Ejecutivo de Ventas', 1),
-		('Analista Financiero', 1),
-		('Coordinador de Proyectos', 1);
-
-
-INSERT INTO CALE.tbCiviles (civi_DNI, civi_Nombres, civi_Apellidos, civi_Sexo, civi_Telefono, civi_CorreoElectronico, civi_FechaNacimiento, eciv_Id, muni_Id, civi_Direccion, civi_EsDemandante, civi_EsAcusado, civi_EsTestigo, civi_UsuCreacion)
-VALUES ('123456789', 'Juan', 'P�rez', 'M', '123456789', 'juan.perez@example.com', '1990-01-01', 1, 1, 'Calle Principal 123', 1, 0, 0, 1),
-		('987654321', 'Mar�a', 'L�pez', 'F', '987654321', 'maria.lopez@example.com', '1995-05-10', 2, 2, 'Avenida Secundaria 456', 0, 1, 0, 1),
-		('555555555', 'Pedro', 'Gonz�lez', 'M', '555555555', 'pedro.gonzalez@example.com', '1985-12-15', 3, 1, 'Plaza Central 789', 1, 0, 0, 1),
-		('111111111', 'Ana', 'Garc�a', 'F', '111111111', 'ana.garcia@example.com', '1988-06-20', 2, 2, 'Calle Secundaria 234', 1, 0, 1, 1),
-		('222222222', 'Luis', 'Mart�nez', 'M', '222222222', 'luis.martinez@example.com', '1992-09-08', 1, 3, 'Avenida Principal 567', 0, 1, 0, 1),
-		('333333333', 'Laura', 'Rodr�guez', 'F', '333333333', 'laura.rodriguez@example.com', '1997-03-12', 3, 1, 'Plaza Secundaria 890', 0, 0, 1, 1);
-
--- Insert 1
-INSERT INTO CALE.tbEmpleados (empe_DNI, empe_Nombres, empe_Apellidos, empe_Sexo, empe_Telefono, empe_CorreoElectronico, empe_FechaNacimiento, eciv_Id, muni_Id, empe_Direccion, empe_UsuCreacion)
-VALUES ('111111111', 'Juan', 'P�rez', 'M', '111111111', 'juan.perez@example.com', '1990-01-01', 1, 1, 'Calle Principal 123', 1),
-		('222222222', 'Mar�a', 'L�pez', 'F', '222222222', 'maria.lopez@example.com', '1995-05-10', 2, 2, 'Avenida Secundaria 456', 1),
-		('333333333', 'Pedro', 'Gonz�lez', 'M', '333333333', 'pedro.gonzalez@example.com', '1985-12-15', 3, 1, 'Plaza Central 789', 1),
-		('444444444', 'Ana', 'Garc�a', 'F', '444444444', 'ana.garcia@example.com', '1992-06-20', 2, 2, 'Calle Secundaria 234', 1),
-		('555555555', 'Luis', 'Mart�nez', 'M', '555555555', 'luis.martinez@example.com', '1997-09-08', 1, 3, 'Avenida Principal 567', 1),
-		('666666666', 'Laura', 'Rodr�guez', 'F', '666666666', 'laura.rodriguez@example.com', '1994-03-12', 3, 1, 'Plaza Secundaria 890', 1),
-		('777777777', 'Carlos', 'G�mez', 'M', '777777777', 'carlos.gomez@example.com', '1989-11-25', 2, 2, 'Calle Principal 789', 1),
-		('888888888', 'Mar�a', 'Torres', 'F', '888888888', 'maria.torres@example.com', '1993-07-18', 3, 1, 'Avenida Secundaria 456', 1),
-		('999999999', 'Manuel', 'S�nchez', 'M', '999999999', 'manuel.sanchez@example.com', '1991-04-30', 1, 3, 'Plaza Central 789', 1),
-		('101010101', 'Susana', 'L�pez', 'F', '101010101', 'susana.lopez@example.com', '1996-08-05', 2, 2, 'Calle Secundaria 234', 1);
-
-
