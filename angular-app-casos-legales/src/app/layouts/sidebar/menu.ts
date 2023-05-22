@@ -9,7 +9,7 @@ export const MENU: MenuItem[] = [
     {
         id: 4,
         label: 'Usuarios',
-        icon: 'ri-user-5-line',
+        icon: ' ri-group-line',
         link: '/acceso/usuarios/listado'
     },
     {

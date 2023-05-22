@@ -146,21 +146,6 @@ namespace CasosLegales.BusinessLogic.Services
             }
         }
 
-        public ServiceResult CargarDatosUsuario(tbUsuarios item)
-        {
-            var resultado = new ServiceResult();
-
-            try
-            {
-                var list = _usuariosRepository.CargarDatosUsuario(item);
-                return resultado.Ok(list);
-            }
-            catch (Exception ex)
-            {
-
-                return resultado.Error(ex.Message);
-            }
-        }
 
         public ServiceResult UpdateUsuario(tbUsuarios item)
         {

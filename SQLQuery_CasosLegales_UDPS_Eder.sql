@@ -21,7 +21,7 @@ BEGIN
 		   empe_Apellidos,		   
 		   usua_EsAdmin
 	  FROM ACCE.tbUsuarios tb1
-INNER JOIN ACCE.tbRoles tb2
+ LEFT JOIN ACCE.tbRoles tb2
 		ON tb1.role_Id = tb2.role_Id
 INNER JOIN CALE.tbEmpleados tb3
 		ON tb1.empe_Id = tb3.empe_Id
@@ -48,7 +48,7 @@ BEGIN
 		   tb5.usua_Nombre usua_NombreModificacion,
 		   tb1.usua_FechaModificacion
 	  FROM ACCE.tbUsuarios tb1
-INNER JOIN ACCE.tbRoles tb2
+ LEFT JOIN ACCE.tbRoles tb2
 		ON tb1.role_Id = tb2.role_Id
 INNER JOIN CALE.tbEmpleados tb3
 		ON tb1.empe_Id = tb3.empe_Id
@@ -200,19 +200,18 @@ BEGIN
 			 DECLARE @Pass AS NVARCHAR(MAX);
 			 SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Usua_Clave), 2);
 
-			 DECLARE @Role INT;
+			
 			 IF @role_Id = 0
 			 BEGIN 
-				SET @Role = 1;
+				 INSERT INTO ACCE.tbUsuarios(usua_Nombre,usua_Clave,empe_Id,usua_EsAdmin,usua_Estado,usua_IdCreacion)
+				 VALUES (@usua_Nombre, @Pass, @empe_Id, @usua_EsAdmin, 1, @usua_IdCreacion)
 			 END
 			 ELSE
 			 BEGIN
-				SET @Role = @role_Id;
+				 INSERT INTO ACCE.tbUsuarios(usua_Nombre,usua_Clave,role_Id,empe_Id,usua_EsAdmin,usua_Estado,usua_IdCreacion)
+				 VALUES (@usua_Nombre, @Pass, @role_Id, @empe_Id, @usua_EsAdmin, 1, @usua_IdCreacion)
 			 END
 			 
-			 INSERT INTO ACCE.tbUsuarios(usua_Nombre,usua_Clave,role_Id,empe_Id,usua_EsAdmin,usua_Estado,usua_IdCreacion)
-			 VALUES (@usua_Nombre, @Pass, @Role, @empe_Id, @usua_EsAdmin, 1, @usua_IdCreacion)
-
 		COMMIT
 		SELECT 1
 	END TRY
@@ -223,33 +222,17 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_EmpleadosTienenUsuario
+CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_EmpleadosNoTienenUsuario
 AS
 BEGIN
 	SELECT empe_Id,
-		   empe_Nombres
+		   empe_Nombres,
+		   empe_Apellidos
 	  FROM CALE.tbEmpleados
 	 WHERE empe_Estado = 1
 	   AND empe_Id NOT IN (SELECT empe_Id 
 							  FROM ACCE.tbUsuarios 
 							 WHERE usua_Estado = 1)
-END
-GO
-
-CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_CargarDatosUsuarios
-	@usua_Id	INT	
-AS
-BEGIN
-	 SELECT tb2.usua_Id,
-			tb2.usua_EsAdmin,
-			tb2.usua_Nombre,
-			tb2.empe_Id,
-			tb2.role_Id,
-			tb1.empe_Nombres
-	   FROM ACCE.tbUsuarios tb2 
- INNER JOIN CALE.tbEmpleados tb1
-		 ON tb2.empe_Id = tb1.empe_Id
-	  WHERE usua_Id = @usua_Id
 END
 GO
 
@@ -265,25 +248,28 @@ BEGIN
 	BEGIN TRY
 
 		BEGIN TRAN 
-			DECLARE @Role INT
 
 			IF @role_Id = 0
 			BEGIN 
-				SET @Role = 1
+				UPDATE ACCE.tbUsuarios
+				   SET usua_Nombre = @usua_Nombre,
+					   usua_EsAdmin = @usua_EsAdmin,
+					   empe_Id = @empe_Id,
+					   usua_IdModificacion = @usua_IdModificacion,
+					   usua_FechaModificacion = GETDATE()
+				 WHERE usua_Id = @usua_Id
 			END
 			ELSE
 			BEGIN
-				SET @Role = @role_Id
+				UPDATE ACCE.tbUsuarios
+				   SET usua_Nombre = @usua_Nombre,
+					   usua_EsAdmin = @usua_EsAdmin,
+					   role_Id = @role_Id,
+					   empe_Id = @empe_Id,
+					   usua_IdModificacion = @usua_IdModificacion,
+					   usua_FechaModificacion = GETDATE()
+				 WHERE usua_Id = @usua_Id
 			END
-
-			UPDATE ACCE.tbUsuarios
-			   SET usua_Nombre = @usua_Nombre,
-				   usua_EsAdmin = @usua_EsAdmin,
-				   role_Id = @Role,
-				   empe_Id = @empe_Id,
-				   usua_IdModificacion = @usua_IdModificacion,
-				   usua_FechaModificacion = GETDATE()
-			 WHERE usua_Id = @usua_Id
 		
 		COMMIT
 		SELECT 1
@@ -301,7 +287,6 @@ CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_EliminarUsuario
 AS
 BEGIN
 	BEGIN TRY
-		
 		BEGIN TRAN
 			DELETE FROM	ACCE.tbUsuarios
 				  WHERE usua_Id = @usua_Id

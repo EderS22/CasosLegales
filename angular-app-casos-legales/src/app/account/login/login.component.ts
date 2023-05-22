@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     });
 
     document.documentElement.setAttribute('data-layout-mode', 'dark');
-    document.documentElement.setAttribute('data-body-image', 'img-3');
+    document.documentElement.setAttribute('data-body-image', 'img-1');
   }
 
   // convenience getter for easy access to form fields

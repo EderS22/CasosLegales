@@ -14,7 +14,9 @@
                     <div class="row g-4 mb-3">
                         <div class="col-sm-auto">
                             <div class="d-flex gap-1">
-                                <button type="button" class="btn btn-primary add-btn" >
+                                <button type="button" 
+                                        class="btn btn-primary add-btn" 
+                                        (click)="openModal(content, 0)">
                                     <i class="ri-add-line align-bottom me-1"></i> 
                                     Agregar
                                 </button>
@@ -25,7 +27,7 @@
                     <div class="table-responsive table-card mt-3 mb-1">
                         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
                             <thead>
-                                <tr class="bg-light ">
+                                <tr class="bg-light">
                                    <th>Id</th>
                                    <th>Nombre</th>
                                    <th>¿Es admin?</th>
@@ -39,22 +41,28 @@
                                 <tr *ngFor="let item of usuarios">
                                     <td>{{item.usua_Id}}</td>
                                     <td>{{item.usua_Nombre}}</td>
-                                    <td>{{item.usua_EsAdmin}}</td>
+                                    <td>{{item.usua_EsAdmin ? 'Sí' : 'No'}}</td>
                                     <td>{{item.role_Nombre}}</td>
                                     <td>{{item.empe_Nombres}}</td>
                                     <td>{{item.empe_Apellidos}}</td>
                                     <td>
                                         <div class="col-sm-auto">
                                             <div class="d-flex gap-1">
-                                                <button type="button" class="btn btn-soft-primary" >
+                                                <button type="button" class="btn btn-soft-primary" 
+                                                    (click)="openModal(content, item.usua_Id)"
+                                                >
                                                     <i class="ri-edit-2-line"></i> 
                                                     Editar
                                                 </button>
-                                                <button class="btn btn-soft-danger" >
+                                                <button class="btn btn-soft-danger"
+                                                    (click)="openEliminar(modalEliminar, item.usua_Id)"    
+                                                >
                                                     <i class="ri-delete-bin-line"></i>
                                                     Eliminar
                                                 </button>
-                                                <button class="btn btn-soft-secondary" >
+                                                <button class="btn btn-soft-secondary" 
+                                                    (click)="detallesUsuario(item.usua_Id)"
+                                                >
                                                     <i class="ri-file-list-2-line"></i>
                                                     Detalles
                                                 </button>
@@ -73,3 +81,113 @@
     <!-- end col -->
 </div>
 <!-- end row -->
+
+
+<!-- Add ListJs Data -->
+<ng-template #content role="document" let-modal>
+    <div class="modal-header bg-light p-3">
+        <h5 class="modal-title">{{isEdit ? 'Editar' : 'Agregar'}} usuario</h5>
+        <button type="button" class="btn-close" #closeContent aria-label="Cerrar" id="close-modal"
+            (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <form (ngSubmit)="guardarUsuario()" [formGroup]="usuarioForm" class="tablelist-form" autocomplete="off">
+        <div class="modal-body">
+
+            <div class="mb-3">
+                <label for="usua_Nombre" class="form-label">Nombre de usuario</label>
+                <input type="text" id="usua_Nombre" class="form-control" placeholder="Ingrese nombre de usuario"
+                    formControlName="usua_Nombre"
+                    [ngClass]="{ 'is-invalid': submitted && form['usua_Nombre'].errors }" 
+                    />
+                <div class="invalid-feedback">Por favor ingrese un nombre de usuario.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="empe_Id" class="form-label">Empleado</label>
+                <select class="form-control" name="empe_Id" id="empe_Id" formControlName="empe_Id"
+                    [ngClass]="{ 'is-invalid': submitted && form['empe_Id'].errors }"
+                    >
+                    <option [ngValue]="empe_IdEditar" selected hidden>{{isEdit ? usua_NombreEdit : 'Seleccione un empleado'}}</option>
+                    <option *ngFor="let item of empleadosNoTienenUsuario" [ngValue]="item.empe_Id">
+                        {{item.empe_Nombres}} {{item.empe_Apellidos}}
+                    </option>
+                </select>
+                <div class="invalid-feedback">Por favor seleccione un empleado.</div>
+            </div>
+
+            <div class="mb-3" [ngStyle]="{'display': isEdit ? 'none' : ''}">
+                <label class="form-label" for="usua_Clave">Contraseña</label>
+                <div class="position-relative auth-pass-inputgroup mb-3">
+                    <input [type]="fieldTextType ? 'text' : 'password'" class="form-control pe-5" placeholder="Ingrese una contraseña" id="usua_Clave" name="usua_Clave" formControlName="usua_Clave"
+                    [ngClass]="{ 'is-invalid': submitted && form['usua_Clave'].errors }">
+                    <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon">
+                        <i class="mdi align-middle" [ngClass]="{'mdi-eye-off-outline': !fieldTextType, 'mdi-eye-outline': fieldTextType}" 
+                        (click)="toggleFieldTextType()"></i>
+                    </button>
+                    <div class="invalid-feedback">Por favor ingrese una contraseña.</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="usua_EsAdmin" class="form-label">¿Es admin?</label>
+                    <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
+                        <input class="form-check-input" type="checkbox" id="usua_EsAdmin" name="usua_EsAdmin" formControlName="usua_EsAdmin">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="role_Id" class="form-label">Rol</label>
+                    <select class="form-control" name="role_Id" id="role_Id" formControlName="role_Id"
+                        [ngClass]="{ 'is-invalid': submitted && form['role_Id'].errors}">
+                       <option value="" selected hidden>Seleccione un rol</option>
+                       <option *ngFor="let item of listadoRoles" [ngValue]="item.role_Id">
+                        {{item.role_Nombre}}
+                       </option>
+                    </select>
+                    <div class="invalid-feedback">Por favor seleccione un rol.</div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="hstack gap-2 justify-content-end">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                    (click)="modal.close('Close click')">Cerrar</button>
+                <button type="submit" class="btn btn-success" id="add-btn">{{isEdit ? 'Editar' : 'Agregar'}} usuario</button>
+            </div>
+        </div>
+    </form>
+</ng-template>
+
+<ng-template #modalEliminar let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="btn-close" aria-label="Cerrar" id="btn-close"
+                (click)="modal.dismiss('Cross click')">
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="mt-2 text-center">
+                <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
+                    colors="primary:#405189,secondary:#f06548" style="width:90px;height:90px"></lord-icon>
+                <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
+                    <h4>¿Está seguro que desea eliminar el registro?</h4>
+                    <p class="text-muted mx-4 mb-0">
+                        Al eliminar el registro se eliminará de forma permanente 
+                        de nuestra base de datos.
+                    </p>
+                </div>
+            </div>
+            <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                <button class="btn btn-link link-success fw-medium text-decoration-none" data-bs-dismiss="modal"
+                    (click)="modal.close('Close click')">
+                    <i class="ri-close-line me-1 align-middle"></i>
+                    Cerrar
+                </button>
+                <button type="button" class="btn w-sm btn-danger " id="delete-product" 
+                    (click)="modal.close('Close click')" (click)="eliminarUsuario(usua_IdEliminar)">
+                    Sí, eliminarlo.
+                </button>
+            </div>
+        </div>
+    </div><!-- /.modal-content -->
+</ng-template>
