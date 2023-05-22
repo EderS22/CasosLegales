@@ -88,6 +88,7 @@
     "rxjs": "^7.6.0",
     "simplebar-angular": "^2.5.0",
     "sweetalert2": "^11.6.15",
+    "swiper": "^9.3.2",
     "tslib": "^2.4.1",
     "zone.js": "^0.12.0"
   },
