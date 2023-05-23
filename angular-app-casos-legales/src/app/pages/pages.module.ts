@@ -12,6 +12,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { SimplebarAngularModule } from 'simplebar-angular';
+import { NgxMaskModule } from 'ngx-mask';
 
 // Swiper Slider
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
@@ -75,7 +76,8 @@ import { CrearComponent as InsertarEmpleados} from './casoslegales/empleado/crea
     AppsModule,
     EcommerceModule,
     DataTablesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

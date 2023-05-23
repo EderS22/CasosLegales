@@ -140,6 +140,7 @@
                     <label for="role_Id" class="form-label">Rol</label>
                     <select class="form-control" name="role_Id" id="role_Id" formControlName="role_Id"
                         [ngClass]="{ 'is-invalid': submitted && form['role_Id'].errors}">
+                        
                        <option value="" selected hidden>Seleccione un rol</option>
                        <option *ngFor="let item of listadoRoles" [ngValue]="item.role_Id">
                         {{item.role_Nombre}}

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './listado.component.html',
   styleUrls: ['./listado.component.scss']
 })
+
 export class ListadoComponent {
 
   breadCrumbItems!: Array<{}>;
@@ -18,9 +19,11 @@ export class ListadoComponent {
   dtTrigger: Subject<any> = new Subject<any>();
 
   constructor(
-    private service: EmpleadoService, 
+    private service: EmpleadoService,
     private modalService: NgbModal,
-    private router: Router) { }
+    private router: Router
+  ) { }
+
   ngOnInit(): void {
 
     this.dtOptions = {
@@ -39,7 +42,7 @@ export class ListadoComponent {
     this.loadEmpleados();
 
     this.breadCrumbItems = [
-      { label: 'Departamentos' },
+      { label: 'Empleados' },
       { label: 'Listado', active: true }
     ];
   }
@@ -53,7 +56,7 @@ export class ListadoComponent {
     })
   }
 
-  InsertarUsuario(){
+  InsertarUsuario() {
     this.router.navigate(["casoslegales/empleado/crear"]);
   }
 

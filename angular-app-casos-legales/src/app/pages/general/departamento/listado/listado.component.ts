@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DepartamentoService } from 'src/app/pages/services/general/departamentoservice/departamento.service';
 import { departamento } from 'src/app/pages/models/general/departeamento';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { DataTableDirective } from 'angular-datatables';
+import { render } from '@fullcalendar/core/preact';
 
 @Component({
   selector: 'app-listado',
@@ -13,6 +15,9 @@ import Swal from 'sweetalert2';
 })
 
 export class ListadoComponent {
+
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement!: DataTableDirective;
 
   depa: departamento = new departamento();
   breadCrumbItems!: Array<{}>;
@@ -55,6 +60,20 @@ export class ListadoComponent {
     })
   }
 
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+      // Call the dtTrigger to rerender again
+      this.service.getDepartamentos().subscribe((data: any) => {
+        if (data.code === 200) {
+          this.depto = data.data;
+          this.dtTrigger.next(null);
+        }
+      })
+    });
+  }
+
   openModal(content: any) {
     this.depa.depa_Id = 0;
     this.depa.depa_Nombre = '';
@@ -79,6 +98,7 @@ export class ListadoComponent {
           if (data.data.codeStatus == 1) {
             this.mensajeSuccess('Departamento Ingresado Correctamente');
             this.modalService.dismissAll();
+            this.rerender();
           }
           else if (data.data.codeStatus == 2) {
             this.mensajeWarning('Ya existe un departamento con este Nombre');
@@ -91,7 +111,7 @@ export class ListadoComponent {
   }
 
   EditarDepartamento(d: departamento, contentEdit: any): void {
-    this.depa = d;
+    this.depa = {...d };
     this.openModalEdit(contentEdit)
   }
   openModalEdit(contentEdit: any) {
@@ -115,6 +135,7 @@ export class ListadoComponent {
           if (data.data.codeStatus == 1) {
             this.mensajeSuccess('Departamento Editado Correctamente');
             this.modalService.dismissAll();
+            this.rerender();
           }
           else if (data.data.codeStatus == 2) {
             this.mensajeWarning('Ya existe un departamento con este Nombre');
@@ -141,6 +162,7 @@ export class ListadoComponent {
         if (data.data.codeStatus == 1) {
           this.mensajeSuccess('Departamento Eliminado Correctamente');
           this.modalService.dismissAll();
+          this.rerender();
         }
         else if (data.data.codeStatus == 2) {
           this.mensajeWarning('No es posible eliminar el registro, ya que el mismo está siendo utilizado por otra tabla');
