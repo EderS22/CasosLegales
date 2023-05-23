@@ -22,7 +22,13 @@ export class DepartamentoService {
   }
 
 
-  
+  EditarDepartamento(depto: departamento) {
+    return this.http.post(API_URL + 'Departamentos/Editar', depto)
+  }
+
+  EliminarDepartamento(depto: departamento){
+    return this.http.post(API_URL + 'Departamentos/Eliminar', depto)
+  }
 
 }
 
