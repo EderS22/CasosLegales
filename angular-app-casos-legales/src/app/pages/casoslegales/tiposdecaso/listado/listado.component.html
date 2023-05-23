@@ -14,7 +14,8 @@
                     <div class="row g-4 mb-3">
                         <div class="col-sm-auto">
                             <div class="d-flex gap-1">
-                                <button data-bs-toggle="modal" data-bs-target="#showModal" (click)="openModal(content)" type="button" class="btn btn-primary add-btn" id="create-btn" >
+                                <button data-bs-toggle="modal" data-bs-target="#showModal" (click)="openModal(content)" 
+                                        type="button" class="btn btn-primary add-btn" id="create-btn" >
                                     <i class="ri-add-line align-bottom me-1"></i> 
                                     Agregar
                                 </button>
@@ -40,11 +41,12 @@
                                     <td>
                                         <div class="col-sm-auto">
                                             <div class="d-flex gap-1">
-                                                <button type="button" class="btn btn-soft-primary" >
+                                                <button type="button" class="btn btn-soft-primary" (click)="EditarTipoDeCaso(item,contentEdit)">
                                                     <i class="ri-edit-2-line"></i> 
                                                     Editar
                                                 </button>
-                                                <button data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="openModalDelete(deleteModel, item)" class="btn btn-soft-danger" >
+                                                <button data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="optenerIdEliminar(item, deleteModel)"
+                                                 class="btn btn-soft-danger" >
                                                     <i class="ri-delete-bin-line"></i>
                                                     Eliminar
                                                 </button>
@@ -75,7 +77,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
             (click)="modal.dismiss('Cross click')"></button>
     </div>
-    <form class="tablelist-form" autocomplete="on">
         <div class="modal-body">
 
             <input type="hidden" name="id" value="" />
@@ -87,12 +88,14 @@
             <div class="row">
                 <div class="mb-3 col-6">
                     <label for="customername-field" class="form-label">Nombre</label>
-                    <input type="text" id="customername-field" class="form-control" placeholder="Ingrese Nombre" required/>
+                    <input [(ngModel)]="tdp.tica_Nombre" [ngClass]="{ 'is-invalid': submitted && form['tica_Nombre'].errors }" 
+                    type="text" id="customername-field" class="form-control" placeholder="Ingrese Nombre" required/>
                     <div class="invalid-feedback">El Nombre es requerido.</div>
                 </div>
                 <div class="mb-3 col-6">
                     <label for="customername-field" class="form-label">Descripcion</label>
-                    <input type="text" id="customername-field" class="form-control" placeholder="Ingrese Descripcion" required/>
+                    <input [(ngModel)]="tdp.tica_Descripcion" [ngClass]="{ 'is-invalid': submitted && form['tica_Descripcion'].errors }" 
+                    type="text" id="customername-field" class="form-control" placeholder="Ingrese Descripcion" required/>
                     <div class="invalid-feedback">La Descripcion es requerida.</div>
                 </div>
             </div>
@@ -101,12 +104,45 @@
             <div class="hstack gap-2 justify-content-end">
                 <button type="button" class="btn btn-dark" data-bs-dismiss="modal"
                     (click)="modal.close('Close click')">Cerrar</button>
-                <button type="submit" class="btn btn-success" id="add-btn">Guardar</button>
+                <button type="submit" (click)="GuardarTipoDeCaso()" class="btn btn-success" id="add-btn">Guardar</button>
             </div>
         </div>
-    </form>
+
 </ng-template>
 
+
+<ng-template #contentEdit role="document" let-modal>
+    <div class="modal-header bg-light p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Tipo de Caso</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
+            (click)="modal.dismiss('Cross click')"></button>
+    </div>
+        <div class="modal-body mb-3">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label>Nombre</label>
+                    <input [(ngModel)]="tdp.tica_Nombre" type="text" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && form['tica_Nombre'].errors }" />
+                    <div class="invalid-feedback">Por favor ingrese un nombre</div>
+                </div>
+                <div class="col-sm-12">
+                    <label>Descripcion</label>
+                    <input [(ngModel)]="tdp.tica_Descripcion" type="text" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && form['tica_Descripcion'].errors }" />
+                    <div class="invalid-feedback">Por favor ingrese una descripcion</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <div class="hstack gap-2 justify-content-end">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                    (click)="modal.close('Close click')">Cancelar</button>
+                <button type="submit" (click)="GuardarDatosEditados()" class="btn btn-success" id="add-btn">Guardar Tipo de Caso</button>
+            </div>
+        </div>
+    
+</ng-template>
 
 <ng-template #deleteModel let-modal>
     <div class="modal-content">
@@ -119,16 +155,16 @@
                 <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
                     colors="primary:#405189,secondary:#f06548" style="width:90px;height:90px"></lord-icon>
                 <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
-                    <h4>You are about to delete a order ?</h4>
-                    <p class="text-muted mx-4 mb-0">Deleting your order will remove all of your information from our
-                        database.</p>
+                    <h4>¿Está seguro que desea eliminar el registro?</h4>
+                    <p class="text-muted mx-4 mb-0">Al eliminar el registro se eliminará de forma permanente 
+                        de nuestra base de datos.</p>
                 </div>
             </div>
             <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                 <button class="btn btn-link link-success fw-medium text-decoration-none" data-bs-dismiss="modal"
                     (click)="modal.close('Close click')"><i class="ri-close-line me-1 align-middle"></i> Close</button>
-                <button type="button" class="btn w-sm btn-danger " id="delete-product" (click)="deleteData()"
-                    (click)="modal.close('Close click')">Yes, Delete It!</button>
+                <button type="button" class="btn w-sm btn-danger " id="delete-product" (click)="MandarDatosEliminar()"
+                    (click)="modal.close('Close click')">Sí, eliminarlo.</button>
             </div>
         </div>
     </div><!-- /.modal-content -->

@@ -24,6 +24,12 @@ export const MENU: MenuItem[] = [
         link: '/general/departamento/listado'
     },
     {
+        id: 6,
+        label: 'Cargos',
+        icon: 'ri-honour-line',
+        link: '/general/cargo/listado'
+    },
+    {
         id: 5,
         label: 'CASOS LEGALES',
         isTitle: true

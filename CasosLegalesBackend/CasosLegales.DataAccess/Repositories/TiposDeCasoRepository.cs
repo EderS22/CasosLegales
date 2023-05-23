@@ -56,7 +56,7 @@ namespace CasosLegales.DataAccess.Repositories
             parametros.Add("@tica_Id", item.tica_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@tica_Nombre", item.tica_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@tica_Descripcion", item.tica_Descripcion, DbType.String, ParameterDirection.Input);
-            parametros.Add("@tica_UsuCreacion", item.tica_UsuCreacion, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@tica_UsuModificacion", item.tica_UsuModificacion, DbType.Int32, ParameterDirection.Input);
 
             var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.ActualizarTipodDeCaso, parametros, commandType: System.Data.CommandType.StoredProcedure);
             return result;
