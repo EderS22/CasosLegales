@@ -17,7 +17,6 @@ export class ListadoComponent {
 
   depa: departamento = new departamento();
 
-
   breadCrumbItems!: Array<{}>;
   depto!: departamento[];
   dtOptions: DataTables.Settings = {};
@@ -66,9 +65,9 @@ export class ListadoComponent {
   }
 
   openModal(content: any) {
-    this.depa.depa_Id = NaN;
+    this.depa.depa_Id = 0;
     this.depa.depa_Nombre = '';
-    this.depa.depa_UsuModificacion = NaN;
+    this.depa.depa_UsuModificacion = 0;
     this.submitted = false;
     this.modalService.open(content, { size: 'md', centered: true, backdrop: 'static' });
   }
@@ -77,17 +76,19 @@ export class ListadoComponent {
     this.depa.depa_UsuCreacion = 1;
     this.service.InsertDepartameto(this.depa)
       .subscribe((data: any) => {
+        console.log(data)
         if (data.data.codeStatus == 1) {
           this.mensajeSuccess('Departamento Ingresado Correctamente');
           this.modalService.dismissAll();
-          this.depa.depa_Id = NaN;
-          this.depa.depa_Nombre = '';
-          this.depa.depa_UsuModificacion = NaN;
         }
         else if (data.data.codeStatus == 2) {
           this.mensajeWarning('Ya existe un departamento con este Nombre');
         }
+        else {
+          this.mensajeError('Ups, Algo Salio Mal!!');
+        }
       })
+      
   }
 
   EditarDepartamento(d: departamento, contentEdit: any): void {
@@ -103,12 +104,10 @@ export class ListadoComponent {
     this.depa.depa_UsuModificacion = 1;
     this.service.EditarDepartamento(this.depa)
     .subscribe((data : any)=>{
+      console.log(data);
       if (data.data.codeStatus == 1) {
         this.mensajeSuccess('Departamento Editado Correctamente');
         this.modalService.dismissAll();
-        this.depa.depa_Id = NaN;
-        this.depa.depa_Nombre = '';
-        this.depa.depa_UsuModificacion = NaN;
       }
       else if (data.data.codeStatus == 2) {
         this.mensajeWarning('Ya existe un departamento con este Nombre');
