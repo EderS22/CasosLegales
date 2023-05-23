@@ -838,7 +838,7 @@ BEGIN
 		ELSE
 		 BEGIN 
 			UPDATE	CALE.tbTiposdeEvidencia
-			SET		@tiev_Id = 0
+			SET		tiev_Estado = 0
 			WHERE	tiev_Id = @tiev_Id
 
 			SELECT 1 codeStatus

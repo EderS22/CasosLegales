@@ -33,9 +33,11 @@ import { AppsModule } from "./apps/apps.module";
 import { EcommerceModule } from "./ecommerce/ecommerce.module";
 import { ListadoComponent as ListadoUsuarios } from './acceso/usuarios/listado/listado.component';
 import { ListadoComponent as ListadoTiposDeCaso } from './casoslegales/tiposdecaso/listado/listado.component'; 
+import { ListadoComponent as ListadoTiposDeEvidencia } from './casoslegales/tipodeevidencia/listado/listado.component';
 import { ListadoComponent as ListadoDepartamento } from './general/departamento/listado/listado.component';
 import { DataTablesModule } from 'angular-datatables';
 import { DetallesComponent as DetallesUsuarios } from './acceso/usuarios/detalles/detalles.component';
+import { ListadoComponent } from './casoslegales/tipodeevidencia/listado/listado.component';
 
 
 @NgModule({
@@ -46,6 +48,8 @@ import { DetallesComponent as DetallesUsuarios } from './acceso/usuarios/detalle
     ListadoTiposDeCaso,
     ListadoDepartamento,
     DetallesUsuarios,
+    ListadoTiposDeEvidencia,
+    ListadoComponent,
   ],
   imports: [
     CommonModule,

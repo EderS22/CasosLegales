@@ -33,5 +33,10 @@ export const MENU: MenuItem[] = [
         label: 'Tipos de Casos',
         icon: 'ri-honour-line',
         link: 'casoslegales/tiposdecaso/listado'
-    },
+    },{
+        id: 5,
+        label: 'Tipos de Evidencia',
+        icon: 'ri-honour-line',
+        link: 'casoslegales/tiposdeevidencia/listado'
+    }
 ];
