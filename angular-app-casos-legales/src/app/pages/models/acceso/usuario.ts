@@ -10,6 +10,8 @@ export class usuario{
     empe_Apellidos!: string
     usua_IdCreacion!: number;
     usua_NombreCreacion!: string;
+    usua_FechaCreacion!: Date;
     usua_IdModificacion!: number;
     usua_NombreModificacion!: string;
+    usua_FechaModificacion!: Date;
 }

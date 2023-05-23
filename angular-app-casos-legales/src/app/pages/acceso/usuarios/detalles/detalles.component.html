@@ -9,7 +9,81 @@
                 <h4 class="card-title mb-0">Detalles de usuario</h4>
             </div>
             <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-sm-6">
+                        <label for="" class="form-label">Id usuario</label>
+                        <input type="text" class="form-control" [(ngModel)]="usuario.usua_Id" disabled="">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="" class="form-label">Nombre de usuario</label>
+                        <input type="text" class="form-control" [(ngModel)]="usuario.usua_Nombre" disabled="">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-6">
+                        <label for="" class="form-label">¿Es admin?</label>
+                        <input type="text" class="form-control" value="{{usuario.usua_EsAdmin ? 'Sí' : 'No'}}" disabled="">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="" class="form-label">Id empleado</label>
+                        <input type="text" class="form-control" [(ngModel)]="usuario.empe_Id" disabled="">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-6">
+                        <label for="" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" [(ngModel)]="usuario.empe_Nombres" disabled="">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="" class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" [(ngModel)]="usuario.empe_Apellidos" disabled="">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-sm-6">
+                        <label for="" class="form-label">Id rol</label>
+                        <input type="text" class="form-control" [(ngModel)]="usuario.role_Id" disabled="">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="" class="form-label">Rol</label>
+                        <input type="text" class="form-control" [(ngModel)]="usuario.role_Nombre" disabled="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Auditoría</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive table-card mt-3 mb-1">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="bg-light">
+                                <th>Accion</th>
+                                <th>Usuario</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Creación</td>
+                                <td>{{usuario.usua_NombreCreacion}}</td>
+                                <td>{{usuario.usua_FechaCreacion}}</td>
+                            </tr>
+                            <tr>
+                                <td>Modificación</td>
+                                <td>{{usuario.usua_NombreModificacion}}</td>
+                                <td>{{usuario.usua_FechaModificacion}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

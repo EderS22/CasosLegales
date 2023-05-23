@@ -65,6 +65,12 @@ namespace CasosLegales.Entities.Entities
         public DateTime? usua_FechaModificacion { get; set; }
 
         [NotMapped]
+        public string usua_NombreCreacion { get; set; }
+
+        [NotMapped]
+        public string usua_NombreModificacion { get; set; }
+
+        [NotMapped]
         public string empe_Nombres { get; set; }
         [NotMapped]
         public string empe_Apellidos { get; set; }

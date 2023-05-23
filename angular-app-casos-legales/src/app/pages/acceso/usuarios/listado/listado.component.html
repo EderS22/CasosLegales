@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="table-responsive table-card mt-3 mb-1">
-                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table">
+                        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered">
                             <thead>
                                 <tr class="bg-light">
                                    <th>Id</th>
@@ -47,7 +47,7 @@
                                     <td>{{item.empe_Apellidos}}</td>
                                     <td>
                                         <div class="col-sm-auto">
-                                            <div class="d-flex gap-1">
+                                            <div class="d-flex gap-1" style="justify-content: center;">
                                                 <button type="button" class="btn btn-soft-primary" 
                                                     (click)="openModal(content, item.usua_Id)"
                                                 >
