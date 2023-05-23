@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
-import { CargoService } from 'src/app/pages/services/general/cargosservice/cargo.service';
-import { cargos } from 'src/app/pages/models/general/cargo';
+import { EstadocivilService } from 'src/app/pages/services/general/estadocivilservice/estadocivil.service';
+import { estadosciviles } from 'src/app/pages/models/general/estadocivil';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -15,21 +15,21 @@ import { DataTableDirective } from 'angular-datatables';
 export class ListadoComponent {
   @ViewChild(DataTableDirective, { static: false })
   dtElement!: DataTableDirective;
-  carg: cargos = new cargos();
+  estado: estadosciviles = new estadosciviles();
 
   breadCrumbItems!: Array<{}>;
-  cargo!: cargos[];
+  esta!: estadosciviles[];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   submitted = false;
-  cg!: UntypedFormGroup;
-  cargDescripcionInValid = false;
+  ec!: UntypedFormGroup;
+  ecivDescripcionInValid = false;
 
-  constructor(private service: CargoService, private modalService: NgbModal, private formBuilder: UntypedFormBuilder) { }
+  constructor(private service: EstadocivilService, private modalService: NgbModal, private formBuilder: UntypedFormBuilder) { }
   ngOnInit(): void {
 
-    this.cg = this.formBuilder.group({
-      depa_Nombre: ['', [Validators.required]]
+    this.ec = this.formBuilder.group({
+      eciv_Descripcion: ['', [Validators.required]]
     });
 
     this.dtOptions = {
@@ -44,29 +44,30 @@ export class ListadoComponent {
         },
       ]
     };
-    this.loadCargos();
+    this.loadEsCiv();
 
     this.breadCrumbItems = [
-      { label: 'Cargos' },
+      { label: 'EstadosCiviles' },
       { label: 'Listado', active: true }
     ];
   }
-  loadCargos() {
-    this.service.getCargos().subscribe((data: any) => {
+  loadEsCiv() {
+    this.service.getEstadosCiviles().subscribe((data: any) => {
       if (data.code === 200) {
-        this.cargo = data.data
+        this.esta = data.data
         this.dtTrigger.next(null);
       }
     })
   }
+
   get form() {
-    return this.cg.controls;
+    return this.ec.controls;
   }
-  
+
   openModal(content: any) {
-    this.carg.carg_Id = 0;
-    this.carg.carg_Descripcion = '';
-    this.carg.carg_UsuModificacion = 0;
+    this.estado.eciv_Id = 0;
+    this.estado.eciv_Descripcion = '';
+    this.estado.eciv_UsuModificacion = 0;
     this.submitted = false;
     this.modalService.open(content, { size: 'md', centered: true, backdrop: 'static' });
   }
@@ -83,34 +84,33 @@ export class ListadoComponent {
       // Destroy the table first
       dtInstance.destroy();
       // Call the dtTrigger to rerender again
-      this.service.getCargos().subscribe((data: any) => {
+      this.service.getEstadosCiviles().subscribe((data: any) => {
         if (data.code === 200) {
-          this.cargo = data.data;
+          this.esta = data.data;
           this.dtTrigger.next(null);
         }
       })
     });
   }
 
-  GuardarCargo() {
+  GuardarEstadoCivil() {
     this.submitted = true;
-    this.cargDescripcionInValid = this.carg.carg_Descripcion.trim().length === 0;
+    this.ecivDescripcionInValid = this.estado.eciv_Descripcion.trim().length === 0;
 
-    if(this.cargDescripcionInValid){
+    if(this.ecivDescripcionInValid){
       
     }
     else{
-    this.carg.carg_UsuCreacion = 1;
-    this.service.InsertCargo(this.carg)
+    this.estado.eciv_UsuCreacion = 1;
+    this.service.InsertEstadoCivil(this.estado)
       .subscribe((data: any) => {
-        console.log(data)
         if (data.data.codeStatus == 1) {
           this.rerender()
-          this.mensajeSuccess('Cargo Ingresado Correctamente');
+          this.mensajeSuccess('Estado Civil Ingresado Correctamente');
           this.modalService.dismissAll();
         }
         else if (data.data.codeStatus == 2) {
-          this.mensajeWarning('Ya existe un cargo con este Nombre');
+          this.mensajeWarning('Ya existe un estado civil con este Nombre');
         }
         else {
           this.mensajeError('Ups, Algo Salio Mal!!');
@@ -119,30 +119,29 @@ export class ListadoComponent {
     }
   }
 
-
-  EditarCargo(c: cargos, contentEdit: any): void {
-    this.carg = { ...c };
+  EditarEstadoCivil(e: estadosciviles, contentEdit: any): void {
+    this.estado = { ...e };
     this.openModalEdit(contentEdit)
   }
+
   GaurdarDatosEditados(){
     this.submitted = true;
-    this.cargDescripcionInValid = this.carg.carg_Descripcion.trim().length === 0;
+    this.ecivDescripcionInValid = this.estado.eciv_Descripcion.trim().length === 0;
 
-    if(this.cargDescripcionInValid){
+    if(this.ecivDescripcionInValid){
       
     }
     else{
-    this.carg.carg_UsuModificacion = 1;
-    this.service.EditarCargo(this.carg)
+    this.estado.eciv_UsuModificacion = 1;
+    this.service.EditarEstadoCivil(this.estado)
     .subscribe((data : any)=>{
-      console.log(data);
       if (data.data.codeStatus == 1) {
         this.rerender()
-        this.mensajeSuccess('Cargo Editado Correctamente');
+        this.mensajeSuccess('Estado Civil Editado Correctamente');
         this.modalService.dismissAll();
       }
       else if (data.data.codeStatus == 2) {
-        this.mensajeWarning('Ya existe un Cargo con este Nombre');
+        this.mensajeWarning('Ya existe un estado civil con este Nombre');
       }
       else{
         this.mensajeError('Ups, Algo Salio Mal!!');
@@ -151,20 +150,25 @@ export class ListadoComponent {
   }
   }
 
+  optenerIdEliminar(e: estadosciviles, contentDelete: any){
+    this.estado = e;
+    this.openModalDelet(contentDelete)
+  }
+
 
   MandarDatosEliminar(){
     this.submitted = true;
-    this.cargDescripcionInValid = this.carg.carg_Descripcion.trim().length === 0;
+    this.ecivDescripcionInValid = this.estado.eciv_Descripcion.trim().length === 0;
 
-    if(this.cargDescripcionInValid){
+    if(this.ecivDescripcionInValid){
       
     }
     else{
-    this.service.EliminarCargo(this.carg)
+    this.service.EliminarEstadoCivil(this.estado)
     .subscribe((data: any)=> {
       if (data.data.codeStatus == 1) {
         this.rerender()
-        this.mensajeSuccess('Cargo Eliminado Correctamente');
+        this.mensajeSuccess('Estado Civil Eliminado Correctamente');
         this.modalService.dismissAll();
       }
       else if (data.data.codeStatus == 2) {
@@ -175,11 +179,6 @@ export class ListadoComponent {
       }
     })
   }
-  }
-
-  optenerIdEliminar(c: cargos, contentDelete: any){
-    this.carg = c;
-    this.openModalDelet(contentDelete)
   }
 
 
@@ -212,4 +211,5 @@ export class ListadoComponent {
       timer: 2000,
     });
   }
+
 }

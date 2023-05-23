@@ -1,12 +1,12 @@
 
-<app-breadcrumbs title="Cargos" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<app-breadcrumbs title="Estados Civiles" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
 
 
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h1 class="mb-2 mt-2 text-center flex-grow-1">CARGOS</h1>
+                <h1 class="mb-2 mt-2 text-center flex-grow-1">ESTADOS CIVILES</h1>
             </div>
 
             <div class="card-body">
@@ -34,14 +34,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of cargo">
-                                    <td>{{item.carg_Id}}</td>
-                                    <td>{{item.carg_Descripcion}}</td>
+                                <tr *ngFor="let item of esta">
+                                    <td>{{item.eciv_Id}}</td>
+                                    <td>{{item.eciv_Descripcion}}</td>
 
                                     <td>
                                         <div class="col-sm-auto">
                                             <div class="d-flex gap-1">
-                                                <button type="button" class="btn btn-soft-primary" (click)="EditarCargo(item,contentEdit)">
+                                                <button type="button" class="btn btn-soft-primary" (click)="EditarEstadoCivil(item,contentEdit)">
                                                     <i class="ri-edit-2-line"></i>
                                                     Editar
                                                 </button>
@@ -71,7 +71,7 @@
 
 <ng-template #content role="document" let-modal>
     <div class="modal-header bg-light p-3">
-        <h5 class="modal-title" id="exampleModalLabel">Agregar Cargo</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Estado Civil</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
             (click)="modal.dismiss('Cross click')"></button>
     </div>
@@ -81,9 +81,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <label>Descripcion</label>
-                    <input [(ngModel)]="carg.carg_Descripcion" type="text" class="form-control " 
-                    [ngClass]="{ 'is-invalid': submitted && cargDescripcionInValid }"  />
-                    <div class="invalid-feedback" *ngIf="submitted && cargDescripcionInValid">Por favor ingrese un cargo</div>
+                    <input [(ngModel)]="estado.eciv_Descripcion" type="text" class="form-control " 
+                    [ngClass]="{ 'is-invalid': submitted && ecivDescripcionInValid }"  />
+                    <div class="invalid-feedback" *ngIf="submitted && ecivDescripcionInValid">Por favor ingrese un estado civil</div>
                 </div>
             </div>
 
@@ -92,8 +92,8 @@
             <div class="hstack gap-2 justify-content-end">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal"
                     (click)="modal.close('Close click')">Cancelar</button>
-                <button type="submit" (click)="GuardarCargo()" class="btn btn-success" id="add-btn">Agregar
-                    Cargo</button>
+                <button type="submit" (click)="GuardarEstadoCivil()" class="btn btn-success" id="add-btn">Agregar
+                    Estado Civil</button>
             </div>
         </div>
 </ng-template>
@@ -102,7 +102,7 @@
 
 <ng-template #contentEdit role="document" let-modal>
     <div class="modal-header bg-light p-3">
-        <h5 class="modal-title" id="exampleModalLabel">Editar Cargo</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Editar Estado Civil</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
             (click)="modal.dismiss('Cross click')"></button>
     </div>
@@ -111,9 +111,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <label>Nombre</label>
-                    <input [(ngModel)]="carg.carg_Descripcion" type="text" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && cargDescripcionInValid }"  />
-                    <div class="invalid-feedback" *ngIf="submitted && cargDescripcionInValid">Por favor ingrese un cargo</div>
+                    <input [(ngModel)]="estado.eciv_Descripcion" type="text" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && ecivDescripcionInValid }"  />
+                    <div class="invalid-feedback" *ngIf="submitted && ecivDescripcionInValid">Por favor ingrese un estado civil</div>
                 </div>
             </div>
 
@@ -122,7 +122,7 @@
             <div class="hstack gap-2 justify-content-end">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal"
                     (click)="modal.close('Close click')">Cancelar</button>
-                <button type="submit" (click)="GaurdarDatosEditados()" class="btn btn-success" id="add-btn">Guardar Cargo</button>
+                <button type="submit" (click)="GaurdarDatosEditados()" class="btn btn-success" id="add-btn">Guardar Estado Civil</button>
             </div>
         </div>
     

@@ -26,6 +26,8 @@ export class ListadoComponent {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   tp!: UntypedFormGroup;
+  ticaNombreInvalid = false;
+  ticaDescripcionInvalid = false;
 
   constructor(private service: TiposdecasoService, private modalService: NgbModal) { }
 
@@ -91,10 +93,17 @@ export class ListadoComponent {
   }
 
   GuardarTipoDeCaso() {
+    this.submitted = true;
+    this.ticaNombreInvalid = this.tdp.tica_Nombre.trim().length === 0;
+    this.ticaDescripcionInvalid = this.tdp.tica_Descripcion.trim().length === 0;
+
+    if(this.ticaNombreInvalid || this.ticaDescripcionInvalid){
+      
+    }
+    else{
     this.tdp.tica_UsuCreacion = 1;
     this.service.InsertTipoDeCaso(this.tdp)
       .subscribe((data: any) => {
-        console.log(data)
         if (data.data.codeStatus == 1) {
           this.rerender()
           this.mensajeSuccess('Tipo de Caso Ingresado Correctamente');
@@ -107,15 +116,24 @@ export class ListadoComponent {
           this.mensajeError('Ups, Algo Salio Mal!!');
         }
       })
-
+    }
   }
 
   EditarTipoDeCaso(tc: tiposdecaso, contentEdit: any): void {
     this.tdp = { ...tc };
     this.openModalEdit(contentEdit)
   }
+
   GuardarDatosEditados() {
-    console.log(this.tdp)
+    this.submitted = true;
+    this.ticaNombreInvalid = this.tdp.tica_Nombre.trim().length === 0;
+    this.ticaDescripcionInvalid = this.tdp.tica_Descripcion.trim().length === 0;
+
+
+    if(this.ticaNombreInvalid || this.ticaDescripcionInvalid){
+      
+    }
+    else{
     this.tdp.tica_UsuModificacion = 1;
     this.service.EditarTipoDeCaso(this.tdp)
       .subscribe((data: any) => {
@@ -133,6 +151,7 @@ export class ListadoComponent {
           this.mensajeError('Ups, Algo Salio Mal!!');
         }
       })
+    }
   }
 
 

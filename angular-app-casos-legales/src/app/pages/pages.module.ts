@@ -36,6 +36,7 @@ import { ListadoComponent as ListadoTiposDeCaso } from './casoslegales/tiposdeca
 import { ListadoComponent as ListadoTiposDeEvidencia } from './casoslegales/tipodeevidencia/listado/listado.component';
 import { ListadoComponent as ListadoDepartamento } from './general/departamento/listado/listado.component';
 import { ListadoComponent as ListadoCargo } from './general/cargo/listado/listado.component';
+import { ListadoComponent as ListadoEstadoCivil } from './general/estadocivil/listado/listado.component';
 import { DataTablesModule } from 'angular-datatables';
 import { DetallesComponent as DetallesUsuarios } from './acceso/usuarios/detalles/detalles.component';
 import { ListadoComponent } from './casoslegales/tipodeevidencia/listado/listado.component';
@@ -49,6 +50,7 @@ import { ListadoComponent } from './casoslegales/tipodeevidencia/listado/listado
     ListadoTiposDeCaso,
     ListadoDepartamento,
     ListadoCargo,
+    ListadoEstadoCivil,
     DetallesUsuarios,
     ListadoTiposDeEvidencia,
     ListadoComponent,

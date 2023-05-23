@@ -28,7 +28,7 @@ namespace CasosLegales.API.Controllers
         [HttpGet("Listado")]
         public IActionResult List()
         {
-            var list = _casosLegalesService.ListadoCiviles();
+            var list = _casosLegalesService.ListadoEmpresas();
             return Ok(list);
         }
 

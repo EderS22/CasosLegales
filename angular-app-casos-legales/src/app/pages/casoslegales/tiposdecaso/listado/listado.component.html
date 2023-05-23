@@ -6,7 +6,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title mb-0">Agregar, editar y eliminar</h4>
+                <h1 class="mb-2 mt-2 text-center flex-grow-1">TIPO DE CASO</h1>
             </div><!-- end card header -->
 
             <div class="card-body">
@@ -67,8 +67,7 @@
         <!-- end col -->
     </div>
     <!-- end col -->
-</div>
-<!-- end row -->
+</div>  
 
 
 <ng-template #content role="document" let-modal>
@@ -78,31 +77,24 @@
             (click)="modal.dismiss('Cross click')"></button>
     </div>
         <div class="modal-body">
-
-            <input type="hidden" name="id" value="" />
-
-            <div class="mb-3" id="modal-id" style="display: none;">
-                <label for="id-field" class="form-label">ID</label>
-                <input type="text" id="id-field" class="form-control" placeholder="ID" readonly />
-            </div>
             <div class="row">
                 <div class="mb-3 col-6">
                     <label for="customername-field" class="form-label">Nombre</label>
-                    <input [(ngModel)]="tdp.tica_Nombre" [ngClass]="{ 'is-invalid': submitted && form['tica_Nombre'].errors }" 
+                    <input [(ngModel)]="tdp.tica_Nombre" [ngClass]="{ 'is-invalid': submitted && ticaNombreInvalid }" 
                     type="text" id="customername-field" class="form-control" placeholder="Ingrese Nombre" required/>
-                    <div class="invalid-feedback">El Nombre es requerido.</div>
+                    <div class="invalid-feedback" *ngIf="submitted && ticaNombreInvalid">El Nombre es requerido.</div>
                 </div>
                 <div class="mb-3 col-6">
                     <label for="customername-field" class="form-label">Descripcion</label>
-                    <input [(ngModel)]="tdp.tica_Descripcion" [ngClass]="{ 'is-invalid': submitted && form['tica_Descripcion'].errors }" 
+                    <input [(ngModel)]="tdp.tica_Descripcion" [ngClass]="{ 'is-invalid': submitted && ticaDescripcionInvalid }" 
                     type="text" id="customername-field" class="form-control" placeholder="Ingrese Descripcion" required/>
-                    <div class="invalid-feedback">La Descripcion es requerida.</div>
+                    <div class="invalid-feedback" *ngIf="submitted && ticaDescripcionInvalid">La Descripcion es requerida.</div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
             <div class="hstack gap-2 justify-content-end">
-                <button type="button" class="btn btn-dark" data-bs-dismiss="modal"
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal"
                     (click)="modal.close('Close click')">Cerrar</button>
                 <button type="submit" (click)="GuardarTipoDeCaso()" class="btn btn-success" id="add-btn">Guardar</button>
             </div>
@@ -119,16 +111,16 @@
     </div>
         <div class="modal-body mb-3">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-6">
                     <label>Nombre</label>
                     <input [(ngModel)]="tdp.tica_Nombre" type="text" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && form['tica_Nombre'].errors }" />
+                    [ngClass]="{ 'is-invalid': submitted && ticaNombreInvalid }" />
                     <div class="invalid-feedback">Por favor ingrese un nombre</div>
                 </div>
-                <div class="col-sm-12">
+                <div class="col-6">
                     <label>Descripcion</label>
                     <input [(ngModel)]="tdp.tica_Descripcion" type="text" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && form['tica_Descripcion'].errors }" />
+                    [ngClass]="{ 'is-invalid': submitted && ticaDescripcionInvalid }" />
                     <div class="invalid-feedback">Por favor ingrese una descripcion</div>
                 </div>
             </div>
@@ -161,8 +153,8 @@
                 </div>
             </div>
             <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                <button class="btn btn-link link-success fw-medium text-decoration-none" data-bs-dismiss="modal"
-                    (click)="modal.close('Close click')"><i class="ri-close-line me-1 align-middle"></i> Close</button>
+                <button class="btn btn-light link-success fw-medium text-decoration-none" data-bs-dismiss="modal"
+                    (click)="modal.close('Close click')"><i class="ri-close-line me-1 align-middle"></i> Cerrar</button>
                 <button type="button" class="btn w-sm btn-danger " id="delete-product" (click)="MandarDatosEliminar()"
                     (click)="modal.close('Close click')">Sí, eliminarlo.</button>
             </div>
