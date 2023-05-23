@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { usuario } from '../../../../pages/models/acceso/usuario';
+import { UsuariosService } from 'src/app/pages/services/acceso/usuarios.service';
 
 @Component({
   selector: 'app-detalles',
@@ -11,9 +13,11 @@ import { Router } from '@angular/router';
 export class DetallesComponent implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private service: UsuariosService
   ) { }
 
+  usuario: usuario = new usuario();
   breadCrumbItems!: Array<{}>;
   
   ngOnInit(): void {
@@ -26,6 +30,13 @@ export class DetallesComponent implements OnInit {
       { label: 'Detalles', active: true }
     ];
     
+    this.service.getUsuarioEditar(parseInt(localStorage.getItem("usua_IdDetalles") ?? '0', 0))
+    .subscribe((data: any) => {
+        if (data.code === 200) {
+            this.usuario = data.data;
+        }
+      })
+
     localStorage.removeItem("usua_IdDetalles");
   }
 
