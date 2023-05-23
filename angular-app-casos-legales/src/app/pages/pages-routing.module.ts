@@ -7,7 +7,8 @@ import { ListadoComponent as ListadoUsuarios} from './acceso/usuarios/listado/li
 import { ListadoComponent as ListadoTiposdeCaso} from './casoslegales/tiposdecaso/listado/listado.component';
 import { ListadoComponent as ListadoDepartamento} from './general/departamento/listado/listado.component';
 import { DetallesComponent as DetallesUsaurios } from './acceso/usuarios/detalles/detalles.component';
-
+import { ListadoComponent  as ListadoEmpleado} from './casoslegales/empleado/listado/listado.component';
+import { CrearComponent as CrearEmpleados } from './casoslegales/empleado/crear/crear.component';
 
 const routes: Routes = [
     {
@@ -32,6 +33,14 @@ const routes: Routes = [
     { 
       path: "acceso/usuarios/detalles",
       component: DetallesUsaurios
+    },
+    {
+      path: "casoslegales/empleado/listado",
+      component: ListadoEmpleado
+    },
+    {
+      path: "casoslegales/empleado/crear",
+      component: CrearEmpleados
     }
 ];
 

@@ -37,6 +37,8 @@ import { ListadoComponent as ListadoDepartamento } from './general/departamento/
 import { DataTablesModule } from 'angular-datatables';
 import { DetallesComponent as DetallesUsuarios } from './acceso/usuarios/detalles/detalles.component';
 
+import { ListadoComponent as ListadoEmpleados} from './casoslegales/empleado/listado/listado.component';
+import { CrearComponent as InsertarEmpleados} from './casoslegales/empleado/crear/crear.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { DetallesComponent as DetallesUsuarios } from './acceso/usuarios/detalle
     ListadoTiposDeCaso,
     ListadoDepartamento,
     DetallesUsuarios,
+    ListadoEmpleados,
+    InsertarEmpleados,
   ],
   imports: [
     CommonModule,

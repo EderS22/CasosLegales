@@ -32,6 +32,13 @@ namespace CasosLegales.API.Controllers
             return Ok(list);
         }
 
+        [HttpPut("MunicipioDDL")]
+        public IActionResult MunicipioDDL(int id)
+        {
+            var list = _generalService.MunicipioDDL(id);
+            return Ok(list);
+        }
+
         [HttpPost("Eliminar")]
         public IActionResult Delete(MunicipioViewModel municipio)
         {

@@ -120,6 +120,21 @@ namespace CasosLegales.BusinessLogic.Services
         #endregion
 
         #region Municipios
+
+        public ServiceResult MunicipioDDL(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _municipiosRepository.MunicipioDDL(id);
+                return result.Ok(list);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public ServiceResult ListadoMunicipios()
         {
             var result = new ServiceResult();

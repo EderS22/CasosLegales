@@ -5,7 +5,6 @@ import { departamento } from 'src/app/pages/models/general/departeamento';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { isValidDate } from '@fullcalendar/core/internal';
 
 @Component({
   selector: 'app-listado',
@@ -16,20 +15,15 @@ import { isValidDate } from '@fullcalendar/core/internal';
 export class ListadoComponent {
 
   depa: departamento = new departamento();
-
   breadCrumbItems!: Array<{}>;
   depto!: departamento[];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   submitted = false;
-  dp!: UntypedFormGroup;
+  depaNombreInvalid = false;
 
-  constructor(private service: DepartamentoService, private modalService: NgbModal, private formBuilder: UntypedFormBuilder) { }
+  constructor(private service: DepartamentoService, private modalService: NgbModal) { }
   ngOnInit(): void {
-
-    this.dp = this.formBuilder.group({
-      depa_Nombre: ['', [Validators.required]]
-    });
 
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -43,6 +37,7 @@ export class ListadoComponent {
         },
       ]
     };
+
     this.loadDeptos();
 
     this.breadCrumbItems = [
@@ -60,10 +55,6 @@ export class ListadoComponent {
     })
   }
 
-  get form() {
-    return this.dp.controls;
-  }
-
   openModal(content: any) {
     this.depa.depa_Id = 0;
     this.depa.depa_Nombre = '';
@@ -73,22 +64,30 @@ export class ListadoComponent {
   }
 
   GuardarDepartamento() {
-    this.depa.depa_UsuCreacion = 1;
-    this.service.InsertDepartameto(this.depa)
-      .subscribe((data: any) => {
-        console.log(data)
-        if (data.data.codeStatus == 1) {
-          this.mensajeSuccess('Departamento Ingresado Correctamente');
-          this.modalService.dismissAll();
-        }
-        else if (data.data.codeStatus == 2) {
-          this.mensajeWarning('Ya existe un departamento con este Nombre');
-        }
-        else {
-          this.mensajeError('Ups, Algo Salio Mal!!');
-        }
-      })
-      
+
+    this.submitted = true;
+    this.depaNombreInvalid = this.depa.depa_Nombre.trim().length === 0;
+
+    if (this.depaNombreInvalid) {
+
+    }
+    else {
+
+      this.depa.depa_UsuCreacion = 1;
+      this.service.InsertDepartameto(this.depa)
+        .subscribe((data: any) => {
+          if (data.data.codeStatus == 1) {
+            this.mensajeSuccess('Departamento Ingresado Correctamente');
+            this.modalService.dismissAll();
+          }
+          else if (data.data.codeStatus == 2) {
+            this.mensajeWarning('Ya existe un departamento con este Nombre');
+          }
+          else {
+            this.mensajeError('Ups, Algo Salio Mal!!');
+          }
+        })
+    }
   }
 
   EditarDepartamento(d: departamento, contentEdit: any): void {
@@ -100,49 +99,57 @@ export class ListadoComponent {
     this.modalService.open(contentEdit, { size: 'md', centered: true, backdrop: 'static' });
   }
 
-  GaurdarDatosEditados(){
-    this.depa.depa_UsuModificacion = 1;
-    this.service.EditarDepartamento(this.depa)
-    .subscribe((data : any)=>{
-      console.log(data);
-      if (data.data.codeStatus == 1) {
-        this.mensajeSuccess('Departamento Editado Correctamente');
-        this.modalService.dismissAll();
-      }
-      else if (data.data.codeStatus == 2) {
-        this.mensajeWarning('Ya existe un departamento con este Nombre');
-      }
-      else{
-        this.mensajeError('Ups, Algo Salio Mal!!');
-      }
-    })
+  GaurdarDatosEditados() {
+
+    this.submitted = true;
+    this.depaNombreInvalid = this.depa.depa_Nombre.trim().length === 0;
+
+    if (this.depaNombreInvalid) {
+
+    }
+    else {
+      this.depa.depa_UsuModificacion = 1;
+      this.service.EditarDepartamento(this.depa)
+        .subscribe((data: any) => {
+          console.log(data);
+          if (data.data.codeStatus == 1) {
+            this.mensajeSuccess('Departamento Editado Correctamente');
+            this.modalService.dismissAll();
+          }
+          else if (data.data.codeStatus == 2) {
+            this.mensajeWarning('Ya existe un departamento con este Nombre');
+          }
+          else {
+            this.mensajeError('Ups, Algo Salio Mal!!');
+          }
+        })
+    }
   }
 
-  optenerIdEliminar(d: departamento, contentDelete: any){
+  optenerIdEliminar(d: departamento, contentDelete: any) {
     this.depa = d;
     this.openModalDelet(contentDelete)
   }
 
-  openModalDelet(contentDelete : any){
+  openModalDelet(contentDelete: any) {
     this.modalService.open(contentDelete, { size: 'md', centered: true, backdrop: 'static' });
   }
 
-  MandarDatosEliminar(){
+  MandarDatosEliminar() {
     this.service.EliminarDepartamento(this.depa)
-    .subscribe((data: any)=> {
-      if (data.data.codeStatus == 1) {
-        this.mensajeSuccess('Departamento Eliminado Correctamente');
-        this.modalService.dismissAll();
-      }
-      else if (data.data.codeStatus == 2) {
-        this.mensajeWarning('No es posible eliminar el registro, ya que el mismo está siendo utilizado por otra tabla');
-      }
-      else{
-        this.mensajeError('Ups, Algo Salio Mal!!');
-      }
-    })
+      .subscribe((data: any) => {
+        if (data.data.codeStatus == 1) {
+          this.mensajeSuccess('Departamento Eliminado Correctamente');
+          this.modalService.dismissAll();
+        }
+        else if (data.data.codeStatus == 2) {
+          this.mensajeWarning('No es posible eliminar el registro, ya que el mismo está siendo utilizado por otra tabla');
+        }
+        else {
+          this.mensajeError('Ups, Algo Salio Mal!!');
+        }
+      })
   }
-
 
   mensajeSuccess(messageBody: string) {
     Swal.fire({
@@ -153,7 +160,7 @@ export class ListadoComponent {
       timer: 2000,
     });
   }
-  
+
   mensajeWarning(messageBody: string) {
     Swal.fire({
       position: 'center',
@@ -173,5 +180,4 @@ export class ListadoComponent {
       timer: 2000,
     });
   }
-
 }

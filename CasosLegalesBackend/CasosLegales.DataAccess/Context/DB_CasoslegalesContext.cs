@@ -4,7 +4,6 @@ using CasosLegales.Entities.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-
 #nullable disable
 
 namespace CasosLegales.DataAccess.Context
@@ -239,6 +238,20 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.ToView("VW_tbEmpleados", "CALE");
 
+                entity.Property(e => e.depa_Codigo)
+                    .IsRequired()
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.depa_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.eciv_Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
                 entity.Property(e => e.empe_Apellidos)
                     .IsRequired()
                     .HasMaxLength(200);
@@ -261,6 +274,10 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.Property(e => e.empe_FechaNacimiento).HasColumnType("date");
 
+                entity.Property(e => e.empe_NombreCompleto)
+                    .IsRequired()
+                    .HasMaxLength(401);
+
                 entity.Property(e => e.empe_Nombres)
                     .IsRequired()
                     .HasMaxLength(200);
@@ -275,9 +292,21 @@ namespace CasosLegales.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(20);
 
+                entity.Property(e => e.muni_Codigo)
+                    .IsRequired()
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
                 entity.Property(e => e.muni_Nombre)
                     .IsRequired()
                     .HasMaxLength(80);
+
+                entity.Property(e => e.user_Creacion)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.user_Modificacion).HasMaxLength(255);
             });
 
             modelBuilder.Entity<VW_tbEmpresas>(entity =>
@@ -339,6 +368,10 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.ToView("VW_tbMunicipios", "GRAL");
 
+                entity.Property(e => e.depa_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
                 entity.Property(e => e.muni_Codigo)
                     .IsRequired()
                     .HasMaxLength(4)
@@ -352,10 +385,6 @@ namespace CasosLegales.DataAccess.Context
                 entity.Property(e => e.muni_Nombre)
                     .IsRequired()
                     .HasMaxLength(80);
-
-                entity.Property(e => e.muni_UsuCreacion)
-                    .IsRequired()
-                    .HasMaxLength(100);
 
                 entity.Property(e => e.user_Creacion)
                     .IsRequired()

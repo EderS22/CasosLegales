@@ -420,24 +420,33 @@ SELECT	T1.[empe_Id],
 		T1.[empe_DNI],
 		T1.[empe_Nombres],
 		T1.[empe_Apellidos],
+		T1.empe_Nombres + ' ' + T1.empe_Apellidos AS empe_NombreCompleto,
 		T1.[empe_Sexo], 
 		T1.[empe_Telefono], 
 		T1.[empe_CorreoElectronico], 
 		T1.[empe_FechaNacimiento],
 		T1.[eciv_Id],
+		t5.eciv_Descripcion,
 		T1.[muni_Id],
-		T4.muni_Nombre,
+		t4.muni_Codigo,
+		t4.muni_Nombre,
+		T4.depa_Id,
+		T6.depa_Codigo,
+		T6.depa_Nombre,
 		T1.[empe_Direccion], 
 		T1.[empe_UsuCreacion], 
+		T2.usua_Nombre AS user_Creacion,
 		T1.[empe_FechaCreacion], 
 		T1.[empe_UsuModificacion], 
 		T1.[empe_FechaModificacion],
+		T3.usua_Nombre AS user_Modificacion,
 		T1.[empe_Estado]
 FROM cale.tbEmpleados AS T1 INNER JOIN acce.tbUsuarios AS T2
 ON T1.empe_UsuCreacion = T2.usua_Id LEFT JOIN acce.tbUsuarios AS T3
 ON T1.empe_UsuModificacion = T3.usua_Id INNER JOIN GRAL.tbMunicipios AS T4
 ON T1.muni_Id = T4.muni_Id INNER JOIN GRAL.tbEstadosCiviles AS T5
-ON T1.eciv_Id = T5.eciv_Id;
+ON T1.eciv_Id = T5.eciv_Id INNER JOIN GRAL.tbDepartamentos AS T6
+ON T4.depa_Id = T6.depa_Id
 
 --**************  CREATE ******************--
 GO

@@ -63,5 +63,14 @@ namespace CasosLegales.DataAccess.Repositories
             var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.ActualizarMunicipio, parametros, commandType: System.Data.CommandType.StoredProcedure);
             return result;
         }
+
+        public IEnumerable<VW_tbMunicipios> MunicipioDDL(int id)
+        {
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@depa_Id", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.Query<VW_tbMunicipios>(ScriptsDataBase.UDP_tbMunicipios_DDL, parametros, commandType: System.Data.CommandType.StoredProcedure);
+        }
     }
 }

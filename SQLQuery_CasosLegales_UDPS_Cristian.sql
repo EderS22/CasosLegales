@@ -160,7 +160,7 @@ SELECT	muni_Id,
 		muni_Nombre, 
 		muni_Codigo, 
 		T1.depa_Id, 
-		T2.depa_Nombre
+		T2.depa_Nombre,
 		muni_UsuCreacion, 
 		T3.usua_Nombre AS user_Creacion,
 		muni_FechaCreacion, 
@@ -316,6 +316,15 @@ BEGIN
 	WHERE muni_Id = @muni_Id;
 END
 
+--**************  MUNICIPIO DDL  ******************--
+GO
+CREATE OR ALTER PROCEDURE gral.tbMunicipios_DDL  
+(@depa_Id INT)
+AS
+BEGIN
+	SELECT * FROM gral.VW_tbMunicipios
+	WHERE depa_Id = @depa_Id AND muni_Estado = 1;
+END
 
 --********************************************************--
 --********************** TABLA CARGOS *********************--

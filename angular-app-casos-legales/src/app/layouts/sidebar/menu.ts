@@ -34,4 +34,10 @@ export const MENU: MenuItem[] = [
         icon: 'ri-honour-line',
         link: 'casoslegales/tiposdecaso/listado'
     },
+    {
+        id: 4,
+        label: 'Empleados',
+        icon: 'ri-honour-line',
+        link: 'casoslegales/empleado/listado'
+    }
 ];
