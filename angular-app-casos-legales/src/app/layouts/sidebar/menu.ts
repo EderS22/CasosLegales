@@ -24,6 +24,12 @@ export const MENU: MenuItem[] = [
         link: '/general/departamento/listado'
     },
     {
+        id: 6,
+        label: 'Cargos',
+        icon: 'ri-honour-line',
+        link: '/general/cargo/listado'
+    },
+    {
         id: 5,
         label: 'CASOS LEGALES',
         isTitle: true
@@ -39,5 +45,10 @@ export const MENU: MenuItem[] = [
         label: 'Empleados',
         icon: 'ri-honour-line',
         link: 'casoslegales/empleado/listado'
+    },{
+        id: 5,
+        label: 'Tipos de Evidencia',
+        icon: 'ri-honour-line',
+        link: 'casoslegales/tiposdeevidencia/listado'
     }
 ];

@@ -5,7 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from "./dashboards/dashboard/dashboard.component";
 import { ListadoComponent as ListadoUsuarios} from './acceso/usuarios/listado/listado.component';
 import { ListadoComponent as ListadoTiposdeCaso} from './casoslegales/tiposdecaso/listado/listado.component';
+import { ListadoComponent as ListadoTiposdeEvidencia} from './casoslegales/tipodeevidencia/listado/listado.component';
 import { ListadoComponent as ListadoDepartamento} from './general/departamento/listado/listado.component';
+import { ListadoComponent as ListadoCargo} from './general/cargo/listado/listado.component';
 import { DetallesComponent as DetallesUsaurios } from './acceso/usuarios/detalles/detalles.component';
 import { ListadoComponent  as ListadoEmpleado} from './casoslegales/empleado/listado/listado.component';
 import { CrearComponent as CrearEmpleados } from './casoslegales/empleado/crear/crear.component';
@@ -31,6 +33,10 @@ const routes: Routes = [
       component: ListadoDepartamento
     },
     { 
+      path: "general/cargo/listado",
+      component: ListadoCargo
+    },
+    { 
       path: "acceso/usuarios/detalles",
       component: DetallesUsaurios
     },
@@ -41,6 +47,10 @@ const routes: Routes = [
     {
       path: "casoslegales/empleado/crear",
       component: CrearEmpleados
+    },
+    { 
+      path: "casoslegales/tiposdeevidencia/listado",
+      component: ListadoTiposdeEvidencia
     }
 ];
 
