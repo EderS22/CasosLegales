@@ -35,7 +35,7 @@ namespace CasosLegales.DataAccess.Repositories
         {
             using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
             var parametros = new DynamicParameters();
-            parametros.Add("@civi_Nombre", item.tiev_Nombre, DbType.String, ParameterDirection.Input);
+            parametros.Add("@tiev_Nombre", item.tiev_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@tiev_Descripcion", item.tiev_Descripcion, DbType.String, ParameterDirection.Input);
             parametros.Add("@tiev_UsuCreacion", item.tiev_UsuCreacion, DbType.Int32, ParameterDirection.Input);
 
@@ -53,7 +53,8 @@ namespace CasosLegales.DataAccess.Repositories
         {
             using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
             var parametros = new DynamicParameters();
-            parametros.Add("@civi_Nombre", item.tiev_Nombre, DbType.String, ParameterDirection.Input);
+            parametros.Add("@tiev_Id", item.tiev_Id, DbType.String, ParameterDirection.Input);
+            parametros.Add("@tiev_Nombre", item.tiev_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@tiev_Descripcion", item.tiev_Descripcion, DbType.String, ParameterDirection.Input);
             parametros.Add("@tiev_UsuModificacion", item.tiev_UsuModificacion, DbType.Int32, ParameterDirection.Input);
 

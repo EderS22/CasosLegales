@@ -4,7 +4,8 @@ import { DepartamentoService } from 'src/app/pages/services/general/departamento
 import { departamento } from 'src/app/pages/models/general/departeamento';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators } from '@angular/forms';
-
+import Swal from 'sweetalert2';
+import { isValidDate } from '@fullcalendar/core/internal';
 
 @Component({
   selector: 'app-listado',
@@ -15,7 +16,6 @@ import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators } from '@an
 export class ListadoComponent {
 
   depa: departamento = new departamento();
-  
 
   breadCrumbItems!: Array<{}>;
   depto!: departamento[];
@@ -28,7 +28,6 @@ export class ListadoComponent {
   ngOnInit(): void {
 
     this.dp = this.formBuilder.group({
-
       depa_Nombre: ['', [Validators.required]]
     });
 
@@ -47,14 +46,14 @@ export class ListadoComponent {
     this.loadDeptos();
 
     this.breadCrumbItems = [
-      { label: 'Departamentos' }, 
+      { label: 'Departamentos' },
       { label: 'Listado', active: true }
     ];
   }
 
-  loadDeptos(){
-    this.service.getDepartamentos().subscribe((data:any) => {
-      if(data.code === 200){
+  loadDeptos() {
+    this.service.getDepartamentos().subscribe((data: any) => {
+      if (data.code === 200) {
         this.depto = data.data
         this.dtTrigger.next(null);
       }
@@ -66,31 +65,113 @@ export class ListadoComponent {
   }
 
   openModal(content: any) {
+    this.depa.depa_Id = 0;
+    this.depa.depa_Nombre = '';
+    this.depa.depa_UsuModificacion = 0;
     this.submitted = false;
     this.modalService.open(content, { size: 'md', centered: true, backdrop: 'static' });
   }
 
-  GuardarDepartamento(){
+  GuardarDepartamento() {
     this.depa.depa_UsuCreacion = 1;
     this.service.InsertDepartameto(this.depa)
-    .subscribe((data: any) => {
-      if(data.data.codeStatus == 1){
+      .subscribe((data: any) => {
+        console.log(data)
+        if (data.data.codeStatus == 1) {
+          this.mensajeSuccess('Departamento Ingresado Correctamente');
+          this.modalService.dismissAll();
+        }
+        else if (data.data.codeStatus == 2) {
+          this.mensajeWarning('Ya existe un departamento con este Nombre');
+        }
+        else {
+          this.mensajeError('Ups, Algo Salio Mal!!');
+        }
+      })
+      
+  }
+
+  EditarDepartamento(d: departamento, contentEdit: any): void {
+    this.depa = d;
+    this.openModalEdit(contentEdit)
+  }
+  openModalEdit(contentEdit: any) {
+    this.submitted = false;
+    this.modalService.open(contentEdit, { size: 'md', centered: true, backdrop: 'static' });
+  }
+
+  GaurdarDatosEditados(){
+    this.depa.depa_UsuModificacion = 1;
+    this.service.EditarDepartamento(this.depa)
+    .subscribe((data : any)=>{
+      console.log(data);
+      if (data.data.codeStatus == 1) {
+        this.mensajeSuccess('Departamento Editado Correctamente');
         this.modalService.dismissAll();
       }
-      else if(data.data.codeStatus == 2){
-        alert("departamento repetido")
+      else if (data.data.codeStatus == 2) {
+        this.mensajeWarning('Ya existe un departamento con este Nombre');
+      }
+      else{
+        this.mensajeError('Ups, Algo Salio Mal!!');
       }
     })
   }
 
-  EditarDepartamento(d: departamento, contentEdit: any):void {
+  optenerIdEliminar(d: departamento, contentDelete: any){
     this.depa = d;
-    console.log(this.depa);
-    this.openModalEdit(contentEdit)
+    this.openModalDelet(contentDelete)
   }
 
-  openModalEdit(contentEdit: any){
-    this.submitted = false;
-    this.modalService.open(contentEdit, { size: 'md', centered: true, backdrop: 'static' });
+  openModalDelet(contentDelete : any){
+    this.modalService.open(contentDelete, { size: 'md', centered: true, backdrop: 'static' });
   }
+
+  MandarDatosEliminar(){
+    this.service.EliminarDepartamento(this.depa)
+    .subscribe((data: any)=> {
+      if (data.data.codeStatus == 1) {
+        this.mensajeSuccess('Departamento Eliminado Correctamente');
+        this.modalService.dismissAll();
+      }
+      else if (data.data.codeStatus == 2) {
+        this.mensajeWarning('No es posible eliminar el registro, ya que el mismo está siendo utilizado por otra tabla');
+      }
+      else{
+        this.mensajeError('Ups, Algo Salio Mal!!');
+      }
+    })
+  }
+
+
+  mensajeSuccess(messageBody: string) {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: messageBody,
+      showConfirmButton: false,
+      timer: 2000,
+    });
+  }
+  
+  mensajeWarning(messageBody: string) {
+    Swal.fire({
+      position: 'center',
+      icon: 'warning',
+      title: messageBody,
+      showConfirmButton: false,
+      timer: 2000,
+    });
+  }
+
+  mensajeError(messageBody: string) {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: messageBody,
+      showConfirmButton: false,
+      timer: 2000,
+    });
+  }
+
 }

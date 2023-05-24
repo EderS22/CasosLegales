@@ -5,7 +5,7 @@ export class departamento{
     depa_UsuCreacion!: number;
     user_Creacion!: string;
     depa_FechaCreacion!: string;
-    depa_UsuModificacion!: string;
+    depa_UsuModificacion!: number;
     user_Modificacion!: string;
     depa_FechaModificacion!: string;
     depa_Estado!: boolean;

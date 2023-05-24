@@ -1,0 +1,30 @@
+import { DataTableDirective } from 'angular-datatables';
+
+//En ListComponent
+@ViewChild(DataTableDirective, { static: false })
+dtElement!: DataTableDirective;
+
+//Una Funcion más
+rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+      // Call the dtTrigger to rerender again
+      this.service.getTiposdecaso().subscribe((data: any) => {
+        if (data.code === 200) {
+          this.tiposdecasos = data.data;
+          this.dtTrigger.next(null);
+        }
+      })
+    });
+  }
+
+//Al abrir el modal
+this.tdp.tica_Nombre = '';
+this.tdp.tica_Descripcion = '';
+
+//Para que no edite en tiempo real en funcion editar
+this.tdp = { ...tc };
+
+//En cada funcion(CUD)
+this.rerender()

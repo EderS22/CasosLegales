@@ -338,6 +338,10 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.ToView("VW_tbMunicipios", "GRAL");
 
+                entity.Property(e => e.depa_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
                 entity.Property(e => e.muni_Codigo)
                     .IsRequired()
                     .HasMaxLength(4)
@@ -351,10 +355,6 @@ namespace CasosLegales.DataAccess.Context
                 entity.Property(e => e.muni_Nombre)
                     .IsRequired()
                     .HasMaxLength(80);
-
-                entity.Property(e => e.muni_UsuCreacion)
-                    .IsRequired()
-                    .HasMaxLength(100);
 
                 entity.Property(e => e.user_Creacion)
                     .IsRequired()

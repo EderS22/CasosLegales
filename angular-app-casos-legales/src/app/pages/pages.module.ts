@@ -33,13 +33,18 @@ import { AppsModule } from "./apps/apps.module";
 import { EcommerceModule } from "./ecommerce/ecommerce.module";
 import { ListadoComponent as ListadoUsuarios } from './acceso/usuarios/listado/listado.component';
 import { ListadoComponent as ListadoTiposDeCaso } from './casoslegales/tiposdecaso/listado/listado.component'; 
+import { ListadoComponent as ListadoTiposDeEvidencia } from './casoslegales/tipodeevidencia/listado/listado.component';
 import { ListadoComponent as ListadoDepartamento } from './general/departamento/listado/listado.component';
+import { ListadoComponent as ListadoCargo } from './general/cargo/listado/listado.component';
+import { ListadoComponent as ListadoEstadoCivil } from './general/estadocivil/listado/listado.component';
 import { DataTablesModule } from 'angular-datatables';
 import { DetallesComponent as DetallesUsuarios } from './acceso/usuarios/detalles/detalles.component';
 import { ListadoComponent as ListadoRoles } from './acceso/roles/listado/listado.component';
 import { CdkDrag, CdkDropList, CdkDropListGroup } from '@angular/cdk/drag-drop';
 import { DetallesComponent } from './acceso/roles/detalles/detalles.component';
 import { TablesModule } from './tables/tables.module';
+import { ListadoComponent } from './casoslegales/tipodeevidencia/listado/listado.component';
+import { ListadoComponent as ListadoMunicipio } from './general/municipio/listado/listado.component';
 
 
 @NgModule({
@@ -49,9 +54,14 @@ import { TablesModule } from './tables/tables.module';
     ListadoUsuarios,
     ListadoTiposDeCaso,
     ListadoDepartamento,
+    ListadoCargo,
+    ListadoEstadoCivil,
     DetallesUsuarios,
     ListadoRoles,
     DetallesComponent,
+    ListadoTiposDeEvidencia,
+    ListadoMunicipio,
+    ListadoComponent,
   ],
   imports: [
     CommonModule,

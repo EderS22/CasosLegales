@@ -831,14 +831,14 @@ AS
 BEGIN
 	BEGIN TRY
 		
-		IF EXISTS(SELECT * FROM CALE.tbTiposdeEvidencia WHERE tiev_Id = @tiev_Id)
+		IF EXISTS(SELECT * FROM CALE.tbEvidenciasPorCaso WHERE tiev_Id = @tiev_Id)
 		 BEGIN
 			SELECT 2 codeStatu
 		 END
 		ELSE
 		 BEGIN 
 			UPDATE	CALE.tbTiposdeEvidencia
-			SET		@tiev_Id = 0
+			SET		tiev_Estado = 0
 			WHERE	tiev_Id = @tiev_Id
 
 			SELECT 1 codeStatus

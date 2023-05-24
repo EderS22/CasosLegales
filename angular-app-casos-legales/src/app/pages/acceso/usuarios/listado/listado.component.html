@@ -116,6 +116,7 @@
                 <div class="position-relative auth-pass-inputgroup mb-3">
                     <input [type]="fieldTextType ? 'text' : 'password'" class="form-control pe-5" placeholder="Ingrese una contraseña" id="usua_Clave" name="usua_Clave" formControlName="usua_Clave"
                     [ngClass]="{ 'is-invalid': submitted && form['usua_Clave'].errors }">
+                    
                     <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon">
                         <i class="mdi align-middle" [ngClass]="{'mdi-eye-off-outline': !fieldTextType, 'mdi-eye-outline': fieldTextType}" 
                         (click)="toggleFieldTextType()"></i>

@@ -5,7 +5,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from "./dashboards/dashboard/dashboard.component";
 import { ListadoComponent as ListadoUsuarios} from './acceso/usuarios/listado/listado.component';
 import { ListadoComponent as ListadoTiposdeCaso} from './casoslegales/tiposdecaso/listado/listado.component';
+import { ListadoComponent as ListadoTiposdeEvidencia} from './casoslegales/tipodeevidencia/listado/listado.component';
 import { ListadoComponent as ListadoDepartamento} from './general/departamento/listado/listado.component';
+import { ListadoComponent as ListadoCargo} from './general/cargo/listado/listado.component';
+import { ListadoComponent as ListadoEstadoCivil } from './general/estadocivil/listado/listado.component';
+import { ListadoComponent as ListadoMunicipio } from './general/municipio/listado/listado.component';
 import { DetallesComponent as DetallesUsaurios } from './acceso/usuarios/detalles/detalles.component';
 import { ListadoComponent as ListadoRoles } from './acceso/roles/listado/listado.component';
 import { DetallesComponent as DetallesRoles } from './acceso/roles/detalles/detalles.component';
@@ -31,6 +35,18 @@ const routes: Routes = [
       component: ListadoDepartamento
     },
     { 
+      path: "general/cargo/listado",
+      component: ListadoCargo
+    },
+    { 
+      path: "general/estadocivil/listado",
+      component: ListadoEstadoCivil
+    },
+    { 
+      path: "general/municipio/listado",
+      component: ListadoMunicipio
+    },
+    { 
       path: "acceso/usuarios/detalles",
       component: DetallesUsaurios
     },
@@ -41,6 +57,10 @@ const routes: Routes = [
     {
       path: "acceso/roles/detalles",
       component: DetallesRoles
+    },
+    { 
+      path: "casoslegales/tiposdeevidencia/listado",
+      component: ListadoTiposdeEvidencia
     }
 ];
 
