@@ -575,9 +575,9 @@ AS
 BEGIN
 	BEGIN TRY
 		
-		IF EXISTS(SELECT * FROM CALE.tbEmpleados WHERE empe_Id = @empe_Id)
+		IF EXISTS(SELECT * FROM ACCE.tbUsuarios WHERE empe_Id = @empe_Id)
 		 BEGIN
-			SELECT 2 codeStatu
+			SELECT 2 codeStatus
 		 END
 		ELSE
 		 BEGIN 

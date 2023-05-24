@@ -32,44 +32,110 @@
                     </div>
 
                     <div class="col-6 mt-3">
-
                         <label class="form-label">Sexo</label><br />
                         <div class="row">
-                            <div class="col-6 ">
-                                <input class="form-check-input" type="radio" name="RadioSexo">
-                                <label class="form-check-label">
-                                    Masculino 
-                                </label>
+                            <div class="col-6 mt-2">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <input class="form-check-input" type="radio" name="RadioSexo">
+                                    </div>
+                                    <div class="col-10">
+                                        <label class="form-check-label">
+                                            Masculino
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <input class="form-check-input" type="radio" name="RadioSexo">
-                                <label class="form-check-label">
-                                    Femenino 
-                                </label>
+                            <div class="col-6 mt-2">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <input class="form-check-input" type="radio" name="RadioSexo">
+                                    </div>
+                                    <div class="col-10">
+                                        <label class="form-check-label">
+                                            Femenino
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-6 mt-3">
+                        <label class="form-label">Telefono</label>
+                        <input type="text" class="form-control" placeholder="+000 0000-0000" mask="+000 0000-0000">
+                    </div>
+
+                    <div class="col-6 mt-3">
+
+                        <label class="form-label">Correo Electronico</label>
+                        <div class="form-icon">
+                            <input type="email" class="form-control form-control-icon" placeholder="ejemplo@gmail.com">
+                            <i class="ri-mail-unread-line"></i>
+                        </div>
 
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-6 mt-3">
+
+                        <label class="form-label">Fecha de Nacimiento</label>
+                        <div class="input-group">
+                            <input class="form-control flatpickr-input" type="text" mwlFlatpickr [altInput]="true"
+                                [convertModelValue]="true" [options]="flatpickrOptions">
+
+
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="ri-calendar-2-fill"></i>
+                                </span>
+                            </div>
+
+                        </div>
 
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-6 mt-3">
+                        <label class="form-label">Estado Civil</label>
+                        <select class="form-control">
+
+                            <option value="" selected hidden>Seleccione un Estado Civil</option>
+
+                            <option *ngFor="let item of EstadoCivilDLL" [ngValue]="item.eciv_Id">
+                                {{item.eciv_Descripcion}}
+                            </option>
+
+                        </select>
+                    </div>
+
+                    <div class="col-6 mt-3">
+                        <label class="form-label">Departamento</label>
+                        <select class="form-control" #selectDepartamento
+                            (change)="CargarMunicipios(selectDepartamento.value)">
+                            <option value="" selected hidden>Seleccione un Departamento</option>
+                            <option *ngFor="let item of DepartamentoDLL" [value]="item.depa_Id">
+                                {{item.depa_Nombre}}
+                            </option>
+                        </select>
 
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-6 mt-3">
+                        <label class="form-label">Municipios</label>
+                        <select class="form-control" [disabled]="MunicipioDesactivado">
 
+                            <option value="" selected hidden>Seleccione un Municipio</option>
+                            
+                            <option *ngFor="let item of MunicipioDDL" [value]="item.muni_Id">
+                                {{item.muni_Nombre}}
+                            </option>
+
+                        </select>
                     </div>
 
-                    <div class="col-6">
-
+                    <div class="col-12 mt-3">
+                        <label class="form-label">Direccion Exacta</label>
+                        <textarea class="form-control" rows="3"></textarea>
                     </div>
-
 
                 </div>
             </div><!-- end card -->

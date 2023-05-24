@@ -14,4 +14,9 @@ export class EmpleadoService {
   getempleados(){
     return this.http.get<empleado[]>(API_URL + 'Empleados/Listado')
   }
+
+  EliminarEmpleados(empleado: empleado) {
+    return this.http.post<empleado[]>(API_URL + 'Empleados/Eliminar', empleado)
+  }
+
 }

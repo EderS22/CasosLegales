@@ -24,28 +24,35 @@ export class CrearComponent implements OnInit {
 
   empe: empleado = new empleado();
 
-  EstadoCivilDLL! : estadocivil[];
-  DepartamentoDLL! : departamento[];
+  EstadoCivilDLL! : estadocivil[]; //estdo civil ddl
+  DepartamentoDLL! : departamento[]; //departamento ddl
+
+  MunicipioDDL! : municipio[];// municipio ddl
+  MunicipioDesactivado = true;
 
   breadCrumbItems!: Array<{}>;
+  modelValueAsDate: Date = new Date(); // se usa para el calendario 
 
   constructor(
     private service: EmpleadoService,
     private EstadoCivilService : EstadoscivilesService,
     private DepartamentoService: DepartamentoService,
+    private MunicipioService: MunicipioService,
     private router: Router
   ) { }
 
+
+
   ngOnInit(): void {
 
-    this.EstadoCivilService.getEstadoCivil()
+    this.EstadoCivilService.getEstadoCivil() //cargar estado civil
     .subscribe((data: any)=> {
       if(data.code === 200){
         this.EstadoCivilDLL= data.data;
       }
     })
 
-    this.DepartamentoService.getDepartamentos()
+    this.DepartamentoService.getDepartamentos() //cargar departamentos
     .subscribe((data: any)=> {
       if(data.code === 200){
         this.DepartamentoDLL= data.data;
@@ -56,7 +63,21 @@ export class CrearComponent implements OnInit {
       { label: 'Empleados' },
       { label: 'Crear', active: true }
     ];
-
   }
 
+  flatpickrOptions: any = {
+    maxDate: new Date() // Deshabilitar fechas futuras
+  };
+
+
+  CargarMunicipios(id: any) { //cargar municipios por departamento 
+    console.log(id);
+    this.MunicipioService.getMunicipioByDepto(id)
+    .subscribe((data: any)=>{
+      if(data.code === 200){
+        this.MunicipioDDL= data.data;
+        this.MunicipioDesactivado = false;
+      }
+    })
+  }
 }

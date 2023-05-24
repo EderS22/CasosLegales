@@ -3,10 +3,8 @@ import { Subject } from 'rxjs';
 import { DepartamentoService } from 'src/app/pages/services/general/departamentoservice/departamento.service';
 import { departamento } from 'src/app/pages/models/general/departeamento';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
-import { render } from '@fullcalendar/core/preact';
 
 @Component({
   selector: 'app-listado',

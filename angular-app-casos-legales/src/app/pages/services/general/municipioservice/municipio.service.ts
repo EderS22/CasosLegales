@@ -16,6 +16,9 @@ export class MunicipioService {
 
   getMunicipios() {
     return this.http.get<municipio[]>(API_URL + 'Municipios/Listado');
+  }
 
+  getMunicipioByDepto(id: any) {
+    return this.http.put<municipio[]>(API_URL + 'Municipios/MunicipioDDL?id='+id, null);
   }
 }
