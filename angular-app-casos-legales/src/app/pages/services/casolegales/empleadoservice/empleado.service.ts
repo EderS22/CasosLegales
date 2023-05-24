@@ -19,4 +19,11 @@ export class EmpleadoService {
     return this.http.post<empleado[]>(API_URL + 'Empleados/Eliminar', empleado)
   }
 
+  InsertarEmpleados(empleado: any){
+    return this.http.post<empleado[]>(API_URL + 'Empleados/Insertar', empleado)
+  }
+
+  BuscarEmpleado(id:any){
+    return this.http.get<empleado[]>(API_URL + 'Empleados/Buscar?='+ id)
+  }
 }

@@ -42,7 +42,7 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbCiviles_Insert
  @civi_Correoelectronico NVARCHAR(150),
  @civi_FechaNacimiento DATE,
  @eciv_Id INT,
- @muni_Id INT,
+ @muni_Id CHAR(4),
  @civi_Direccion NVARCHAR(250),
  @civi_EsDemandante BIT,
  @civi_EsAcusado BIT,
@@ -124,7 +124,7 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbCiviles_Update
  @civi_Correoelectronico NVARCHAR(150),
  @civi_FechaNacimiento DATE,
  @eciv_Id INT,
- @muni_Id INT,
+ @muni_Id CHAR(4),
  @civi_Direccion NVARCHAR(250),
  @civi_EsDemandante BIT,
  @civi_EsAcusado BIT,
@@ -245,7 +245,7 @@ GO
 CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpresas_Insert
 (@emsa_Nombre NVARCHAR(200),
  @emsa_RTN NVARCHAR(20),
- @muni_Id INT,
+ @muni_Id CHAR(4),
  @emsa_Direccion NVARCHAR(250),
  @emsa_RepresentanteNombre NVARCHAR(200),
  @emsa_RepresentanteDNI NVARCHAR(20),
@@ -321,7 +321,7 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpresas_Update
 (@emsa_Id INT,
  @emsa_Nombre NVARCHAR(200),
  @emsa_RTN NVARCHAR(20),
- @muni_Id INT,
+ @muni_Id CHAR(4),
  @emsa_Direccion NVARCHAR(250),
  @emsa_RepresentanteNombre NVARCHAR(200),
  @emsa_RepresentanteDNI NVARCHAR(20),
@@ -428,10 +428,8 @@ SELECT	T1.[empe_Id],
 		T1.[eciv_Id],
 		t5.eciv_Descripcion,
 		T1.[muni_Id],
-		t4.muni_Codigo,
 		t4.muni_Nombre,
 		T4.depa_Id,
-		T6.depa_Codigo,
 		T6.depa_Nombre,
 		T1.[empe_Direccion], 
 		T1.[empe_UsuCreacion], 
@@ -450,7 +448,7 @@ ON T4.depa_Id = T6.depa_Id
 
 --**************  CREATE ******************--
 GO
-CREATE OR ALTER PROCEDURE GRAL.UDP_tbEmpleados_Insert
+CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpleados_Insert
 (@empe_DNI NVARCHAR(15),
  @empe_Nombres NVARCHAR(200),
  @empe_Apellidos NVARCHAR(200),
@@ -459,7 +457,7 @@ CREATE OR ALTER PROCEDURE GRAL.UDP_tbEmpleados_Insert
  @empe_CorreoElectronico NVARCHAR(150),
  @empe_FechaNacimiento DATE,
  @eciv_Id INT,
- @muni_Id INT,
+ @muni_Id CHAR(4),
  @empe_Direccion NVARCHAR(250),
  @empe_UsuCreacion INT)
 AS
@@ -532,7 +530,7 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpleados_Update
  @empe_CorreoElectronico NVARCHAR(150),
  @empe_FechaNacimiento DATE,
  @eciv_Id INT,
- @muni_Id INT,
+ @muni_Id CHAR(4),
  @empe_Direccion NVARCHAR(250),
  @empe_UsuModificacion INT)
 AS

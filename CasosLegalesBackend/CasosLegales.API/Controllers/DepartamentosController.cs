@@ -57,7 +57,7 @@ namespace CasosLegales.API.Controllers
         }
 
         [HttpGet("Buscar")]
-        public IActionResult Find(int? id)
+        public IActionResult Find(string id)
         {
             var list = _generalService.BuscarDepartamentos(id);
             return Ok(list);

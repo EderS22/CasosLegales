@@ -104,7 +104,7 @@ namespace CasosLegales.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(100);
 
-                entity.Property(e => e.depa_Codigo)
+                entity.Property(e => e.depa_Id)
                     .IsRequired()
                     .HasMaxLength(2)
                     .IsUnicode(false)
@@ -118,7 +118,7 @@ namespace CasosLegales.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(250);
 
-                entity.Property(e => e.muni_Codigo)
+                entity.Property(e => e.muni_Id)
                     .IsRequired()
                     .HasMaxLength(4)
                     .IsUnicode(false)
@@ -198,6 +198,12 @@ namespace CasosLegales.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(20);
 
+                entity.Property(e => e.muni_Id)
+                    .IsRequired()
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
                 entity.Property(e => e.user_Creacion)
                     .IsRequired()
                     .HasMaxLength(255);
@@ -211,15 +217,15 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.ToView("VW_tbDepartamentos", "GRAL");
 
-                entity.Property(e => e.depa_Codigo)
+                entity.Property(e => e.depa_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.depa_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.depa_Id)
                     .IsRequired()
                     .HasMaxLength(2)
                     .IsUnicode(false)
                     .IsFixedLength(true);
-
-                entity.Property(e => e.depa_FechaCreacion).HasColumnType("datetime");
-
-                entity.Property(e => e.depa_FechaModificacion).HasColumnType("datetime");
 
                 entity.Property(e => e.depa_Nombre)
                     .IsRequired()
@@ -238,7 +244,7 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.ToView("VW_tbEmpleados", "CALE");
 
-                entity.Property(e => e.depa_Codigo)
+                entity.Property(e => e.depa_Id)
                     .IsRequired()
                     .HasMaxLength(2)
                     .IsUnicode(false)
@@ -292,7 +298,7 @@ namespace CasosLegales.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(20);
 
-                entity.Property(e => e.muni_Codigo)
+                entity.Property(e => e.muni_Id)
                     .IsRequired()
                     .HasMaxLength(4)
                     .IsUnicode(false)
@@ -336,6 +342,12 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.Property(e => e.emsa_RepresentanteTelefono).HasMaxLength(20);
 
+                entity.Property(e => e.muni_Id)
+                    .IsRequired()
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
                 entity.Property(e => e.muni_Nombre)
                     .IsRequired()
                     .HasMaxLength(80);
@@ -368,19 +380,25 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.ToView("VW_tbMunicipios", "GRAL");
 
+                entity.Property(e => e.depa_Id)
+                    .IsRequired()
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
                 entity.Property(e => e.depa_Nombre)
                     .IsRequired()
                     .HasMaxLength(100);
 
-                entity.Property(e => e.muni_Codigo)
+                entity.Property(e => e.muni_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.muni_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.muni_Id)
                     .IsRequired()
                     .HasMaxLength(4)
                     .IsUnicode(false)
                     .IsFixedLength(true);
-
-                entity.Property(e => e.muni_FechaCreacion).HasColumnType("datetime");
-
-                entity.Property(e => e.muni_FechaModificacion).HasColumnType("datetime");
 
                 entity.Property(e => e.muni_Nombre)
                     .IsRequired()
@@ -471,6 +489,12 @@ namespace CasosLegales.DataAccess.Context
                 entity.Property(e => e.abju_Telefono)
                     .IsRequired()
                     .HasMaxLength(20);
+
+                entity.Property(e => e.muni_Id)
+                    .IsRequired()
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
 
                 entity.HasOne(d => d.abju_UsuCreacionNavigation)
                     .WithMany(p => p.tbAbogadosJuecesabju_UsuCreacionNavigation)
@@ -672,6 +696,12 @@ namespace CasosLegales.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(20);
 
+                entity.Property(e => e.muni_Id)
+                    .IsRequired()
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
                 entity.HasOne(d => d.civi_UsuCreacionNavigation)
                     .WithMany(p => p.tbCivilescivi_UsuCreacionNavigation)
                     .HasForeignKey(d => d.civi_UsuCreacion)
@@ -703,8 +733,7 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.ToTable("tbDepartamentos", "GRAL");
 
-                entity.Property(e => e.depa_Codigo)
-                    .IsRequired()
+                entity.Property(e => e.depa_Id)
                     .HasMaxLength(2)
                     .IsUnicode(false)
                     .IsFixedLength(true);
@@ -823,6 +852,12 @@ namespace CasosLegales.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(20);
 
+                entity.Property(e => e.muni_Id)
+                    .IsRequired()
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
                 entity.HasOne(d => d.eciv)
                     .WithMany(p => p.tbEmpleados)
                     .HasForeignKey(d => d.eciv_Id)
@@ -881,6 +916,12 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.Property(e => e.emsa_RepresentanteTelefono).HasMaxLength(20);
 
+                entity.Property(e => e.muni_Id)
+                    .IsRequired()
+                    .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
                 entity.HasOne(d => d.eciv)
                     .WithMany(p => p.tbEmpresas)
                     .HasForeignKey(d => d.eciv_Id)
@@ -900,6 +941,7 @@ namespace CasosLegales.DataAccess.Context
                 entity.HasOne(d => d.muni)
                     .WithMany(p => p.tbEmpresas)
                     .HasForeignKey(d => d.muni_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CALE_tbEmpresas_GRAL_tbMunicipios_muni_Id");
             });
 
@@ -971,9 +1013,14 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.ToTable("tbMunicipios", "GRAL");
 
-                entity.Property(e => e.muni_Codigo)
-                    .IsRequired()
+                entity.Property(e => e.muni_Id)
                     .HasMaxLength(4)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.depa_Id)
+                    .IsRequired()
+                    .HasMaxLength(2)
                     .IsUnicode(false)
                     .IsFixedLength(true);
 
@@ -1031,6 +1078,10 @@ namespace CasosLegales.DataAccess.Context
                 entity.Property(e => e.pant_Href)
                     .IsRequired()
                     .HasMaxLength(150);
+
+                entity.Property(e => e.pant_Icono)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.pant_Pantalla)
                     .IsRequired()

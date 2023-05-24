@@ -10,7 +10,7 @@ namespace CasosLegales.API.Models
         public int emsa_Id { get; set; }
         public string emsa_Nombre { get; set; }
         public string emsa_RNT { get; set; }
-        public int? muni_Id { get; set; }
+        public string muni_Id { get; set; }
         public string emsa_Direccion { get; set; }
         public string emsa_RepresentanteNombre { get; set; }
         public string emsa_RepresentanteDNI { get; set; }

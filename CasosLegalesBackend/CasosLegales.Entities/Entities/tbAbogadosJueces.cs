@@ -25,7 +25,7 @@ namespace CasosLegales.Entities.Entities
         public DateTime abju_FechaNacimiento { get; set; }
         public int eciv_Id { get; set; }
         public int carg_Id { get; set; }
-        public int muni_Id { get; set; }
+        public string muni_Id { get; set; }
         public string abju_Direccion { get; set; }
         public int abju_UsuCreacion { get; set; }
         public DateTime abju_FechaCreacion { get; set; }

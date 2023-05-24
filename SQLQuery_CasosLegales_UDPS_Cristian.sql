@@ -21,7 +21,6 @@ CREATE OR ALTER VIEW GRAL.VW_tbDepartamentos
 AS
 SELECT	depa_Id, 
 		depa_Nombre, 
-		depa_Codigo, 
 		depa_UsuCreacion, 
 		T2.usua_Nombre AS user_Creacion,
 		depa_FechaCreacion, 
@@ -36,27 +35,89 @@ ON T1.depa_UsuModificacion = T3.usua_Id;
 
 --**************  INSERT ******************--
 GO
-CREATE OR ALTER PROCEDURE GRAL.UDP_tbDepartamentos_Insert
-(@depa_Nombre NVARCHAR(100),
+CREATE OR ALTER PROCEDURE GRAL.UDP_tbDepartamentos_Insert --'91', '343434',1
+(@depa_Id CHAR(2),
+ @depa_Nombre NVARCHAR(100),
  @depa_UsuCreacion	INT)
 AS
 BEGIN
-	BEGIN TRY
-		IF EXISTS (SELECT * FROM gral.tbDepartamentos WHERE depa_Nombre = @depa_Nombre AND depa_Estado = 1)
+	BEGIN TRY 
+		IF EXISTS (SELECT * FROM gral.tbDepartamentos WHERE depa_Id = @depa_Id AND depa_Estado = 0)
 			BEGIN
-				SELECT 2 codeStatus
-			END
-		ELSE IF NOT EXISTS (SELECT * FROM gral.tbDepartamentos WHERE depa_Nombre = @depa_Nombre)
-			BEGIN
-				INSERT INTO [gral].[tbDepartamentos] (depa_Nombre, depa_Codigo, depa_UsuCreacion, depa_UsuModificacion, depa_FechaModificacion)
-				VALUES (@depa_Nombre, (SELECT COUNT(depa_codigo) + 1 FROM gral.tbDepartamentos WHERE depa_Estado = 1), @depa_UsuCreacion, NULL, NULL);
 
-				SELECT 1 codeStatus
+				IF  EXISTS (SELECT * FROM gral.tbDepartamentos WHERE depa_Id = @depa_Id AND depa_Estado = 1)
+					BEGIN
+						SELECT 2 codeStatus
+					END
+				ELSE IF EXISTS (SELECT * FROM gral.tbDepartamentos WHERE depa_Nombre = @depa_Nombre AND depa_Estado = 1)
+					BEGIN
+						SELECT 3 codeStatus
+					END	
+				ELSE IF NOT EXISTS (SELECT * FROM gral.tbDepartamentos WHERE (depa_Nombre = @depa_Nombre AND depa_Id = @depa_Id) AND depa_Id = 1)
+					BEGIN
+						
+						IF EXISTS (SELECT * FROM gral.tbDepartamentos WHERE depa_Id = @depa_Id AND depa_Estado = 0)
+						BEGIN
+							UPDATE gral.tbDepartamentos
+							SET depa_Nombre = @depa_Nombre, 
+								depa_UsuCreacion = @depa_UsuCreacion, 
+								depa_FechaCreacion = GETDATE(), 
+								depa_UsuModificacion = NULL, 
+								depa_FechaModificacion = NULL, 
+								depa_Estado = 1
+							WHERE depa_Id = @depa_Id
+
+							SELECT 1 codeStatus
+						END
+						ELSE
+						 BEGIN 
+							INSERT INTO [gral].[tbDepartamentos] (depa_Id,depa_Nombre, depa_UsuCreacion, depa_UsuModificacion, depa_FechaModificacion)
+							VALUES (@depa_Id, @depa_Nombre, @depa_UsuCreacion, NULL, NULL);
+
+							SELECT 1 codeStatus
+						 END
+					END
+			ELSE 
+				BEGIN
+
+					UPDATE gral.tbDepartamentos
+					SET depa_Nombre = @depa_Nombre, 
+						depa_UsuCreacion = @depa_UsuCreacion, 
+						depa_FechaCreacion = GETDATE(), 
+						depa_UsuModificacion = NULL, 
+						depa_FechaModificacion = NULL, 
+						depa_Estado = 1
+					WHERE depa_Id = @depa_Id
+
+					SELECT 1 codeStatus
+				END
 			END
-		ELSE 
+		ELSE
+		 BEGIN 
+			IF  EXISTS (SELECT * FROM gral.tbDepartamentos WHERE depa_Id = @depa_Id AND depa_Estado = 1)
+				BEGIN
+					SELECT 2 codeStatus
+				END
+			ELSE IF EXISTS (SELECT * FROM gral.tbDepartamentos WHERE depa_Nombre = @depa_Nombre AND depa_Estado = 1)
+				BEGIN
+					SELECT 3 codeStatus
+				END	
+			ELSE IF NOT EXISTS (SELECT * FROM gral.tbDepartamentos WHERE depa_Nombre = @depa_Nombre AND depa_Id = @depa_Id)
+				BEGIN
+					INSERT INTO [gral].[tbDepartamentos] (depa_Id,depa_Nombre, depa_UsuCreacion, depa_UsuModificacion, depa_FechaModificacion)
+					VALUES (@depa_Id, @depa_Nombre, @depa_UsuCreacion, NULL, NULL);
+
+					SELECT 1 codeStatus
+				END
+		 END
+
+		
+		
+		/*ELSE 
 			BEGIN
 				UPDATE gral.tbDepartamentos
 				SET depa_Nombre = @depa_Nombre, 
+					depa_Id = @depa_Id,
 					depa_UsuCreacion = @depa_UsuCreacion, 
 					depa_FechaCreacion = GETDATE(), 
 					depa_UsuModificacion = NULL, 
@@ -65,7 +126,7 @@ BEGIN
 				WHERE depa_Nombre = @depa_Nombre
 
 				SELECT 1 codeStatus
-			END
+			END*/
 	END TRY
 	BEGIN CATCH
 		SELECT 0 codeStatus
@@ -76,7 +137,7 @@ END
 --**************  UPDATE ******************--
 GO
 CREATE OR ALTER PROCEDURE GRAL.UDP_tbDepartamentos_Update
-(@depa_Id INT,
+(@depa_Id CHAR(2),
  @depa_Nombre NVARCHAR(100),
  @depa_UsuModificacion INT)
 AS
@@ -140,7 +201,7 @@ END
 --**************  FIND ******************--
 GO
 CREATE OR ALTER PROCEDURE GRAL.UDP_tbDepartamentos_Find 
-(@depa_Id INT)
+(@depa_Id CHAR(2))
 AS
 BEGIN
 	SELECT * FROM gral.VW_tbDepartamentos
@@ -158,7 +219,6 @@ CREATE OR ALTER VIEW GRAL.VW_tbMunicipios
 AS
 SELECT	muni_Id, 
 		muni_Nombre, 
-		muni_Codigo, 
 		T1.depa_Id, 
 		T2.depa_Nombre,
 		muni_UsuCreacion, 
@@ -178,18 +238,18 @@ ON T1.muni_UsuModificacion = t4.usua_Id
 --********************  CREATE *************************--
 GO
 CREATE OR ALTER PROCEDURE GRAL.UDP_tbMunicipios_Insert 
-(@muni_Nombre NVARCHAR(100),
- @muni_Codigo char(4),
- @depa_Id INT,
+(@muni_Id char(4),
+ @muni_Nombre NVARCHAR(100),
+ @depa_Id CHAR(2),
  @muni_UsuCreacion INT)
 AS
 BEGIN
 	BEGIN TRY
-		IF EXISTS (SELECT * FROM gral.tbMunicipios WHERE muni_Codigo = @muni_Codigo AND muni_Estado = 1)
+		IF EXISTS (SELECT * FROM gral.tbMunicipios WHERE @muni_Id = @muni_Id AND muni_Estado = 1)
 			BEGIN
 				SELECT 2 codeStatus
 			END
-		ELSE IF NOT EXISTS (SELECT * FROM gral.tbMunicipios WHERE muni_Codigo = @muni_Codigo)
+		ELSE IF NOT EXISTS (SELECT * FROM gral.tbMunicipios WHERE muni_Id = @muni_Id)
 			BEGIN
 
 
@@ -199,8 +259,8 @@ BEGIN
 					END
 				ELSE
 					BEGIN 
-						INSERT INTO [gral].[tbMunicipios] (muni_Nombre, muni_Codigo, depa_Id, muni_UsuCreacion, muni_UsuModificacion, muni_FechaModificacion)
-						VALUES (@muni_Nombre, @muni_Codigo, @depa_Id, @muni_UsuCreacion, NULL, NULL);
+						INSERT INTO [gral].[tbMunicipios] (muni_Nombre, muni_Id, depa_Id, muni_UsuCreacion, muni_UsuModificacion, muni_FechaModificacion)
+						VALUES (@muni_Nombre, @muni_Id, @depa_Id, @muni_UsuCreacion, NULL, NULL);
 
 						SELECT 1 codeStatus
 					END	
@@ -215,7 +275,7 @@ BEGIN
 					muni_UsuModificacion = NULL, 
 					muni_FechaModificacion = NULL, 
 					muni_Estado = 1
-				WHERE muni_Codigo = @muni_Codigo
+				WHERE muni_Id = @muni_Id
 				
 
 				SELECT 1 codeStatus
@@ -230,7 +290,7 @@ END
 --**************  UPDATE  ******************--
 GO
 CREATE OR ALTER PROCEDURE GRAL.UDP_tbMunicipios_Update 
-(@muni_Id INT,
+(@muni_Id CHAR(4),
  @muni_Nombre NVARCHAR(100),
  @depa_Id INT,
  @muni_UsuModificacion INT)
@@ -262,7 +322,7 @@ END
 --**************  DELETE  ******************--
 GO
 CREATE OR ALTER PROCEDURE GRAL.UDP_tbMunicipios_Delete
-(@muni_Id INT)
+(@muni_Id CHAR(4))
 AS
 BEGIN
 	BEGIN TRY
@@ -309,7 +369,7 @@ END
 --**************  FIND  ******************--
 GO
 CREATE OR ALTER PROCEDURE GRAL.UDP_tbMunicipios_Find 
-(@muni_Id INT)
+(@muni_Id CHAR(4))
 AS
 BEGIN
 	SELECT * FROM GRAL.VW_tbMunicipios
@@ -641,10 +701,8 @@ SELECT	abju_Id,
 		T1.carg_Id,
 		T5.carg_Descripcion,
 		T1.muni_Id, 
-		T2.muni_Codigo,
 		T2.muni_Nombre,
 		T2.depa_Id,
-		T3.depa_Codigo,
 		T3.depa_Nombre,
 		abju_Direccion, 
 		abju_UsuCreacion, 
@@ -695,7 +753,7 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbAbogadosJueces_Insert
  @abju_FechaNacimiento DATE,
  @eciv_Id INT,
  @carg_Id INT,
- @muni_Id INT,
+ @muni_Id CHAR(4),
  @abju_Direccion NVARCHAR(250),
  @abju_UsuCreacion INT)
 AS
@@ -765,7 +823,7 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbAbogadosJueces_Update
  @abju_FechaNacimiento DATE,
  @eciv_Id INT,
  @carg_Id INT,
- @muni_Id INT,
+ @muni_Id CHAR(4),
  @abju_Direccion NVARCHAR(250),
  @abju_UsuModificacion INT)
 AS

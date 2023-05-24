@@ -16,7 +16,7 @@ namespace CasosLegales.DataAccess.Repositories
         {
             using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
             var parametros = new DynamicParameters();
-            parametros.Add("@depa_Id", item.depa_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@depa_Id", item.depa_Id, DbType.String, ParameterDirection.Input);
 
             var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.EliminarDepartamento, parametros, commandType: System.Data.CommandType.StoredProcedure);
             return result;
@@ -26,7 +26,17 @@ namespace CasosLegales.DataAccess.Repositories
         {
             using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
             var parametros = new DynamicParameters();
-            parametros.Add("@depa_Id", id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@depa_Id", id, DbType.String, ParameterDirection.Input);
+
+            return db.QueryFirst<VW_tbDepartamentos>(ScriptsDataBase.CargarDepartamento, parametros, commandType: System.Data.CommandType.StoredProcedure);
+
+        }
+
+        public VW_tbDepartamentos Find2(string id)
+        {
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@depa_Id", id, DbType.String, ParameterDirection.Input);
 
             return db.QueryFirst<VW_tbDepartamentos>(ScriptsDataBase.CargarDepartamento, parametros, commandType: System.Data.CommandType.StoredProcedure);
 
@@ -36,6 +46,7 @@ namespace CasosLegales.DataAccess.Repositories
         {
             using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
             var parametros = new DynamicParameters();
+            parametros.Add("@depa_Id", item.depa_Id, DbType.String, ParameterDirection.Input);
             parametros.Add("@depa_Nombre", item.depa_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@depa_UsuCreacion", item.depa_UsuCreacion, DbType.Int32, ParameterDirection.Input);
 
@@ -54,7 +65,7 @@ namespace CasosLegales.DataAccess.Repositories
         {
             using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
             var parametros = new DynamicParameters();
-            parametros.Add("@depa_Id", item.depa_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@depa_Id", item.depa_Id, DbType.String, ParameterDirection.Input);
             parametros.Add("@depa_Nombre", item.depa_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@depa_UsuModificacion", item.depa_UsuModificacion, DbType.Int32, ParameterDirection.Input);
 

@@ -33,7 +33,7 @@ namespace CasosLegales.API.Controllers
         }
 
         [HttpPut("MunicipioDDL")]
-        public IActionResult MunicipioDDL(int id)
+        public IActionResult MunicipioDDL(string id)
         {
             var list = _generalService.MunicipioDDL(id);
             return Ok(list);
@@ -64,7 +64,7 @@ namespace CasosLegales.API.Controllers
         }
 
         [HttpGet("Buscar")]
-        public IActionResult Find(int? id)
+        public IActionResult Find(string id)
         {
             var list = _generalService.BuscarMunicipios(id);
             return Ok(list);

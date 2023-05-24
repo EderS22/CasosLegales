@@ -23,7 +23,11 @@ export class ListadoComponent {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   submitted = false;
+  depaIdInvalid = false;
   depaNombreInvalid = false;
+
+  depaNombre!: string;
+
 
   constructor(private service: DepartamentoService, private modalService: NgbModal) { }
   ngOnInit(): void {
@@ -35,7 +39,7 @@ export class ListadoComponent {
       },
       columnDefs: [
         {
-          targets: 3,
+          targets: 2,
           orderable: false,
         },
       ]
@@ -73,19 +77,27 @@ export class ListadoComponent {
   }
 
   openModal(content: any) {
-    this.depa.depa_Id = 0;
+    this.depa.depa_Id = '';
     this.depa.depa_Nombre = '';
     this.depa.depa_UsuModificacion = 0;
     this.submitted = false;
     this.modalService.open(content, { size: 'md', centered: true, backdrop: 'static' });
   }
 
+
+
+  trimDepaNombre() {
+    this.depaNombre = this.depaNombre.trim();
+  }
+
+
   GuardarDepartamento() {
 
     this.submitted = true;
     this.depaNombreInvalid = this.depa.depa_Nombre.trim().length === 0;
+    this.depaIdInvalid = this.depa.depa_Id.trim().length === 0;
 
-    if (this.depaNombreInvalid) {
+    if (this.depaNombreInvalid || this.depaIdInvalid) {
 
     }
     else {
@@ -93,12 +105,16 @@ export class ListadoComponent {
       this.depa.depa_UsuCreacion = 1;
       this.service.InsertDepartameto(this.depa)
         .subscribe((data: any) => {
+          console.log(data);
           if (data.data.codeStatus == 1) {
             this.mensajeSuccess('Departamento Ingresado Correctamente');
             this.modalService.dismissAll();
             this.rerender();
           }
           else if (data.data.codeStatus == 2) {
+            this.mensajeWarning('Ya existe un departamento con este Codigo');
+          }
+          else if (data.data.codeStatus == 3) {
             this.mensajeWarning('Ya existe un departamento con este Nombre');
           }
           else {
@@ -109,7 +125,7 @@ export class ListadoComponent {
   }
 
   EditarDepartamento(d: departamento, contentEdit: any): void {
-    this.depa = {...d };
+    this.depa = { ...d };
     this.openModalEdit(contentEdit)
   }
   openModalEdit(contentEdit: any) {

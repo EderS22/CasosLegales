@@ -19,11 +19,9 @@ namespace CasosLegales.Entities.Entities
         public DateTime empe_FechaNacimiento { get; set; }
         public int eciv_Id { get; set; }
         public string eciv_Descripcion { get; set; }
-        public int muni_Id { get; set; }
-        public string muni_Codigo { get; set; }
+        public string muni_Id { get; set; }
         public string muni_Nombre { get; set; }
-        public int depa_Id { get; set; }
-        public string depa_Codigo { get; set; }
+        public string depa_Id { get; set; }
         public string depa_Nombre { get; set; }
         public string empe_Direccion { get; set; }
         public int empe_UsuCreacion { get; set; }

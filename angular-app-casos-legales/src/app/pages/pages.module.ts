@@ -42,6 +42,7 @@ import { DetallesComponent as DetallesUsuarios } from './acceso/usuarios/detalle
 
 import { ListadoComponent as ListadoEmpleados} from './casoslegales/empleado/listado/listado.component';
 import { CrearComponent as InsertarEmpleados} from './casoslegales/empleado/crear/crear.component';
+import { EditarComponent } from './casoslegales/empleado/editar/editar.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { CrearComponent as InsertarEmpleados} from './casoslegales/empleado/crea
     ListadoEmpleados,
     InsertarEmpleados,
     ListadoTiposDeEvidencia,
+    EditarComponent,
   ],
   imports: [
     CommonModule,
