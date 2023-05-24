@@ -18,4 +18,15 @@ export class MunicipioService {
     return this.http.get<municipio[]>(API_URL + 'Municipios/Listado');
 
   }
+  InsertMunicipio(muni: municipio) {
+    return this.http.post(API_URL + 'Municipios/Insertar', muni)
+  }
+
+  EditarMunicipio(muni: municipio) {
+    return this.http.post(API_URL + 'Municipios/Editar', muni)
+  }
+
+  EliminarMunicipio(muni: municipio) {
+    return this.http.post(API_URL + 'Municipios/Eliminar', muni)
+  }
 }

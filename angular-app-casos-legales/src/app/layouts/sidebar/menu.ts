@@ -36,6 +36,12 @@ export const MENU: MenuItem[] = [
         link: '/general/estadocivil/listado'
     },
     {
+        id: 8,
+        label: 'Municipios',
+        icon: 'ri-honour-line',
+        link: '/general/municipio/listado'
+    },
+    {
         id: 5,
         label: 'CASOS LEGALES',
         isTitle: true

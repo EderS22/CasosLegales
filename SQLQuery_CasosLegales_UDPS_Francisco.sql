@@ -831,7 +831,7 @@ AS
 BEGIN
 	BEGIN TRY
 		
-		IF EXISTS(SELECT * FROM CALE.tbTiposdeEvidencia WHERE tiev_Id = @tiev_Id)
+		IF EXISTS(SELECT * FROM CALE.tbEvidenciasPorCaso WHERE tiev_Id = @tiev_Id)
 		 BEGIN
 			SELECT 2 codeStatu
 		 END

@@ -40,6 +40,7 @@ import { ListadoComponent as ListadoEstadoCivil } from './general/estadocivil/li
 import { DataTablesModule } from 'angular-datatables';
 import { DetallesComponent as DetallesUsuarios } from './acceso/usuarios/detalles/detalles.component';
 import { ListadoComponent } from './casoslegales/tipodeevidencia/listado/listado.component';
+import { ListadoComponent as ListadoMunicipio } from './general/municipio/listado/listado.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { ListadoComponent } from './casoslegales/tipodeevidencia/listado/listado
     ListadoEstadoCivil,
     DetallesUsuarios,
     ListadoTiposDeEvidencia,
+    ListadoMunicipio,
     ListadoComponent,
   ],
   imports: [

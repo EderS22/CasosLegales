@@ -18,8 +18,20 @@ export class TiposdeevidenciaService {
     return this.http.get<tiposdeevidencia[]>(API_URL + 'TiposDeEvidencia/Listado');
 
 }
+  InsertTipoDeEvidencia(tiev: tiposdeevidencia) {
+    console.log(tiev)
+    return this.http.post(API_URL + 'TiposDeEvidencia/Insertar', tiev)
+  }
 
-deleteData(tiposdeevidencia: tiposdeevidencia): Observable<any> {
-  return this.http.post<tiposdeevidencia[]>(API_URL + 'TiposDeEvidencia/Eliminar', tiposdeevidencia);
-}
+  EditarTipoDeEvidencia(tiev: tiposdeevidencia) {
+    return this.http.post(API_URL + 'TiposDeEvidencia/Editar', tiev)
+  }
+
+  deleteData(tiev: tiposdeevidencia): Observable<any> {
+    return this.http.post<tiposdeevidencia[]>(API_URL + 'TiposDeEvidencia/Eliminar', tiev);
+  }
+
+  EliminarTipoDeEvidencia(tiev: tiposdeevidencia) {
+    return this.http.post(API_URL + 'TiposDeEvidencia/Eliminar', tiev)
+  }
 }
