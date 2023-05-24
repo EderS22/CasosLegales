@@ -134,7 +134,11 @@
          "ObjectType": 3
       }
    ],
+<<<<<<< HEAD
    "UiHint": "EJSM\\SQLEXPRESS.DB_CasosLegales",
+=======
+   "UiHint": "DESKTOP-BPGLHI0\\SQLEXPRESSLOCAL.DB_CasosLegales",
+>>>>>>> Cristian
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

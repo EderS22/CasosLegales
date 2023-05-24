@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { data } from 'jquery';
 import { DataTableDirective } from 'angular-datatables';
 
+
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',

@@ -56,6 +56,8 @@
         public static string EliminarMunicipio          = "GRAL.UDP_tbMunicipios_Delete";
         public static string ListadoMunicipios          = "GRAL.UDP_tbMunicipios_Index";
         public static string CargarMunicipios           = "GRAL.UDP_tbMunicipios_Find";
+
+        public static string UDP_tbMunicipios_DDL       = "GRAL.tbMunicipios_DDL";
         #endregion
 
         #region UDPS Cargos  

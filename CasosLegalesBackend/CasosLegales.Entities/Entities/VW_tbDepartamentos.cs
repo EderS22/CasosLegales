@@ -8,9 +8,8 @@ namespace CasosLegales.Entities.Entities
 {
     public partial class VW_tbDepartamentos
     {
-        public int depa_Id { get; set; }
+        public string depa_Id { get; set; }
         public string depa_Nombre { get; set; }
-        public string depa_Codigo { get; set; }
         public int depa_UsuCreacion { get; set; }
         public string user_Creacion { get; set; }
         public DateTime depa_FechaCreacion { get; set; }

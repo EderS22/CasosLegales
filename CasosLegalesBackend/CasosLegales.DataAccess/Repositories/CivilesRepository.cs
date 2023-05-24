@@ -34,7 +34,7 @@ namespace CasosLegales.DataAccess.Repositories
             parametros.Add("@civi_CorreoElectronico", item.civi_CorreoElectronico, DbType.String, ParameterDirection.Input);
             parametros.Add("@civi_FechaNacimiento", item.civi_FechaNacimiento, DbType.Date, ParameterDirection.Input);
             parametros.Add("@eciv_Id", item.eciv_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@muni_Id", item.muni_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@muni_Id", item.muni_Id, DbType.String, ParameterDirection.Input);
             parametros.Add("@civi_Direccion", item.civi_Direccion, DbType.String, ParameterDirection.Input);
             parametros.Add("@civi_EsDemandante", item.civi_EsDemandante, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@civi_EsAcusado", item.civi_EsAcusado, DbType.Int32, ParameterDirection.Input);
@@ -64,7 +64,7 @@ namespace CasosLegales.DataAccess.Repositories
             parametros.Add("@civi_CorreoElectronico", item.civi_CorreoElectronico, DbType.String, ParameterDirection.Input);
             parametros.Add("@civi_FechaNacimiento", item.civi_FechaNacimiento, DbType.Date, ParameterDirection.Input);
             parametros.Add("@eciv_Id", item.eciv_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@muni_Id", item.muni_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@muni_Id", item.muni_Id, DbType.String, ParameterDirection.Input);
             parametros.Add("@civi_Direccion", item.civi_Direccion, DbType.String, ParameterDirection.Input);
             parametros.Add("@civi_EsDemandante", item.civi_EsDemandante, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@civi_EsAcusado", item.civi_EsAcusado, DbType.Int32, ParameterDirection.Input);

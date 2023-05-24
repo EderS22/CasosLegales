@@ -42,7 +42,7 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbCiviles_Insert
  @civi_Correoelectronico NVARCHAR(150),
  @civi_FechaNacimiento DATE,
  @eciv_Id INT,
- @muni_Id INT,
+ @muni_Id CHAR(4),
  @civi_Direccion NVARCHAR(250),
  @civi_EsDemandante BIT,
  @civi_EsAcusado BIT,
@@ -124,7 +124,7 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbCiviles_Update
  @civi_Correoelectronico NVARCHAR(150),
  @civi_FechaNacimiento DATE,
  @eciv_Id INT,
- @muni_Id INT,
+ @muni_Id CHAR(4),
  @civi_Direccion NVARCHAR(250),
  @civi_EsDemandante BIT,
  @civi_EsAcusado BIT,
@@ -245,7 +245,7 @@ GO
 CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpresas_Insert
 (@emsa_Nombre NVARCHAR(200),
  @emsa_RTN NVARCHAR(20),
- @muni_Id INT,
+ @muni_Id CHAR(4),
  @emsa_Direccion NVARCHAR(250),
  @emsa_RepresentanteNombre NVARCHAR(200),
  @emsa_RepresentanteDNI NVARCHAR(20),
@@ -321,7 +321,7 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpresas_Update
 (@emsa_Id INT,
  @emsa_Nombre NVARCHAR(200),
  @emsa_RTN NVARCHAR(20),
- @muni_Id INT,
+ @muni_Id CHAR(4),
  @emsa_Direccion NVARCHAR(250),
  @emsa_RepresentanteNombre NVARCHAR(200),
  @emsa_RepresentanteDNI NVARCHAR(20),
@@ -420,28 +420,35 @@ SELECT	T1.[empe_Id],
 		T1.[empe_DNI],
 		T1.[empe_Nombres],
 		T1.[empe_Apellidos],
+		T1.empe_Nombres + ' ' + T1.empe_Apellidos AS empe_NombreCompleto,
 		T1.[empe_Sexo], 
 		T1.[empe_Telefono], 
 		T1.[empe_CorreoElectronico], 
 		T1.[empe_FechaNacimiento],
 		T1.[eciv_Id],
+		t5.eciv_Descripcion,
 		T1.[muni_Id],
-		T4.muni_Nombre,
+		t4.muni_Nombre,
+		T4.depa_Id,
+		T6.depa_Nombre,
 		T1.[empe_Direccion], 
 		T1.[empe_UsuCreacion], 
+		T2.usua_Nombre AS user_Creacion,
 		T1.[empe_FechaCreacion], 
 		T1.[empe_UsuModificacion], 
 		T1.[empe_FechaModificacion],
+		T3.usua_Nombre AS user_Modificacion,
 		T1.[empe_Estado]
 FROM cale.tbEmpleados AS T1 INNER JOIN acce.tbUsuarios AS T2
 ON T1.empe_UsuCreacion = T2.usua_Id LEFT JOIN acce.tbUsuarios AS T3
 ON T1.empe_UsuModificacion = T3.usua_Id INNER JOIN GRAL.tbMunicipios AS T4
 ON T1.muni_Id = T4.muni_Id INNER JOIN GRAL.tbEstadosCiviles AS T5
-ON T1.eciv_Id = T5.eciv_Id;
+ON T1.eciv_Id = T5.eciv_Id INNER JOIN GRAL.tbDepartamentos AS T6
+ON T4.depa_Id = T6.depa_Id
 
 --**************  CREATE ******************--
 GO
-CREATE OR ALTER PROCEDURE GRAL.UDP_tbEmpleados_Insert
+CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpleados_Insert
 (@empe_DNI NVARCHAR(15),
  @empe_Nombres NVARCHAR(200),
  @empe_Apellidos NVARCHAR(200),
@@ -450,7 +457,7 @@ CREATE OR ALTER PROCEDURE GRAL.UDP_tbEmpleados_Insert
  @empe_CorreoElectronico NVARCHAR(150),
  @empe_FechaNacimiento DATE,
  @eciv_Id INT,
- @muni_Id INT,
+ @muni_Id CHAR(4),
  @empe_Direccion NVARCHAR(250),
  @empe_UsuCreacion INT)
 AS
@@ -523,7 +530,7 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpleados_Update
  @empe_CorreoElectronico NVARCHAR(150),
  @empe_FechaNacimiento DATE,
  @eciv_Id INT,
- @muni_Id INT,
+ @muni_Id CHAR(4),
  @empe_Direccion NVARCHAR(250),
  @empe_UsuModificacion INT)
 AS
@@ -566,9 +573,9 @@ AS
 BEGIN
 	BEGIN TRY
 		
-		IF EXISTS(SELECT * FROM CALE.tbEmpleados WHERE empe_Id = @empe_Id)
+		IF EXISTS(SELECT * FROM ACCE.tbUsuarios WHERE empe_Id = @empe_Id)
 		 BEGIN
-			SELECT 2 codeStatu
+			SELECT 2 codeStatus
 		 END
 		ELSE
 		 BEGIN 

@@ -17,7 +17,7 @@ namespace CasosLegales.Entities.Entities
         public string empe_CorreoElectronico { get; set; }
         public DateTime empe_FechaNacimiento { get; set; }
         public int eciv_Id { get; set; }
-        public int muni_Id { get; set; }
+        public string muni_Id { get; set; }
         public string empe_Direccion { get; set; }
         public int empe_UsuCreacion { get; set; }
         public DateTime empe_FechaCreacion { get; set; }

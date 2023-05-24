@@ -2,6 +2,7 @@
   "format": 1,
   "restore": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\CasosLegales.API.csproj": {}
   },
   "projects": {
@@ -15,28 +16,35 @@
         "outputPath": "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\obj\\",
 =======
     "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\CasosLegales.API.csproj": {}
+=======
+    "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\CasosLegales.API.csproj": {}
+>>>>>>> Cristian
   },
   "projects": {
-    "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\CasosLegales.API.csproj": {
+    "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\CasosLegales.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\CasosLegales.API.csproj",
+        "projectUniqueName": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\CasosLegales.API.csproj",
         "projectName": "CasosLegales.API",
-        "projectPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\CasosLegales.API.csproj",
+        "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\CasosLegales.API.csproj",
         "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
+<<<<<<< HEAD
         "outputPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\obj\\",
 >>>>>>> Francisco
+=======
+        "outputPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\obj\\",
+>>>>>>> Cristian
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
 <<<<<<< HEAD
           "C:\\Users\\LAB02\\AppData\\Roaming\\NuGet\\NuGet.Config",
 =======
           "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
+<<<<<<< HEAD
 >>>>>>> Francisco
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+=======
+>>>>>>> Cristian
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -51,6 +59,7 @@
             "targetAlias": "net5.0",
             "projectReferences": {
 <<<<<<< HEAD
+<<<<<<< HEAD
               "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj": {
                 "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj"
               },
@@ -62,13 +71,22 @@
 =======
               "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj": {
                 "projectPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj"
+=======
+              "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj": {
+                "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj"
+>>>>>>> Cristian
               },
-              "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj"
+              "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj"
               },
+<<<<<<< HEAD
               "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj": {
                 "projectPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj"
 >>>>>>> Francisco
+=======
+              "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj": {
+                "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj"
+>>>>>>> Cristian
               }
             }
           }
@@ -137,6 +155,7 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -147,25 +166,32 @@
         "outputPath": "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\obj\\",
 =======
     "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj": {
+=======
+    "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj": {
+>>>>>>> Cristian
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
+        "projectUniqueName": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
         "projectName": "CasosLegales.BusinessLogic",
-        "projectPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
+        "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
         "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
+<<<<<<< HEAD
         "outputPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\obj\\",
 >>>>>>> Francisco
+=======
+        "outputPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\obj\\",
+>>>>>>> Cristian
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
 <<<<<<< HEAD
           "C:\\Users\\LAB02\\AppData\\Roaming\\NuGet\\NuGet.Config",
 =======
           "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
+<<<<<<< HEAD
 >>>>>>> Francisco
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+=======
+>>>>>>> Cristian
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -180,12 +206,17 @@
             "targetAlias": "net5.0",
             "projectReferences": {
 <<<<<<< HEAD
+<<<<<<< HEAD
               "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj": {
                 "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj"
 =======
               "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj": {
                 "projectPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj"
 >>>>>>> Francisco
+=======
+              "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj"
+>>>>>>> Cristian
               }
             }
           }
@@ -219,6 +250,7 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -229,25 +261,32 @@
         "outputPath": "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\obj\\",
 =======
     "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj": {
+=======
+    "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj": {
+>>>>>>> Cristian
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj",
         "projectName": "CasosLegales.DataAccess",
-        "projectPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj",
+        "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj",
         "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
+<<<<<<< HEAD
         "outputPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\obj\\",
 >>>>>>> Francisco
+=======
+        "outputPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\obj\\",
+>>>>>>> Cristian
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
 <<<<<<< HEAD
           "C:\\Users\\LAB02\\AppData\\Roaming\\NuGet\\NuGet.Config",
 =======
           "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
+<<<<<<< HEAD
 >>>>>>> Francisco
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+=======
+>>>>>>> Cristian
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -262,12 +301,17 @@
             "targetAlias": "net5.0",
             "projectReferences": {
 <<<<<<< HEAD
+<<<<<<< HEAD
               "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj": {
                 "projectPath": "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj"
 =======
               "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj": {
                 "projectPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj"
 >>>>>>> Francisco
+=======
+              "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj": {
+                "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj"
+>>>>>>> Cristian
               }
             }
           }
@@ -323,6 +367,7 @@
       }
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
     "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -333,25 +378,32 @@
         "outputPath": "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\obj\\",
 =======
     "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj": {
+=======
+    "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj": {
+>>>>>>> Cristian
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
         "projectName": "CasosLegales.Entities",
-        "projectPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
+        "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
         "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
+<<<<<<< HEAD
         "outputPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\obj\\",
 >>>>>>> Francisco
+=======
+        "outputPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\obj\\",
+>>>>>>> Cristian
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
 <<<<<<< HEAD
           "C:\\Users\\LAB02\\AppData\\Roaming\\NuGet\\NuGet.Config",
 =======
           "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
+<<<<<<< HEAD
 >>>>>>> Francisco
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+=======
+>>>>>>> Cristian
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

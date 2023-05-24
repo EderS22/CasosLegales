@@ -6,9 +6,13 @@
       "C:\\Users\\LAB02\\.nuget\\packages",
 =======
       "C:\\Users\\LAB01\\.dotnet\\store\\|arch|\\|tfm|",
+<<<<<<< HEAD
       "C:\\Users\\LAB01\\.nuget\\packages",
 >>>>>>> Francisco
       "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+=======
+      "C:\\Users\\LAB01\\.nuget\\packages"
+>>>>>>> Cristian
     ]
   }
 }

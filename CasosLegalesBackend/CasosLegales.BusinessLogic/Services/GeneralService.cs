@@ -104,11 +104,11 @@ namespace CasosLegales.BusinessLogic.Services
             }
         }
 
-        public VW_tbDepartamentos BuscarDepartamentos(int? id)
+        public VW_tbDepartamentos BuscarDepartamentos(string id)
         {
             try
             {
-                var list = _departamentosRepository.Find(id);
+                var list = _departamentosRepository.Find2(id);
                 return list;
             }
             catch (Exception)
@@ -120,6 +120,21 @@ namespace CasosLegales.BusinessLogic.Services
         #endregion
 
         #region Municipios
+
+        public ServiceResult MunicipioDDL(string id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _municipiosRepository.MunicipioDDL(id);
+                return result.Ok(list);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public ServiceResult ListadoMunicipios()
         {
             var result = new ServiceResult();
@@ -199,11 +214,11 @@ namespace CasosLegales.BusinessLogic.Services
             }
         }
 
-        public VW_tbMunicipios BuscarMunicipios(int? id)
+        public VW_tbMunicipios BuscarMunicipios(string id)
         {
             try
             {
-                var list = _municipiosRepository.Find(id);
+                var list = _municipiosRepository.Find2(id);
                 return list;
             }
             catch (Exception)

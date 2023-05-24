@@ -12,6 +12,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { SimplebarAngularModule } from 'simplebar-angular';
+import { NgxMaskModule } from 'ngx-mask';
 
 // Swiper Slider
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
@@ -46,6 +47,9 @@ import { TablesModule } from './tables/tables.module';
 import { ListadoComponent } from './casoslegales/tipodeevidencia/listado/listado.component';
 import { ListadoComponent as ListadoMunicipio } from './general/municipio/listado/listado.component';
 
+import { ListadoComponent as ListadoEmpleados} from './casoslegales/empleado/listado/listado.component';
+import { CrearComponent as InsertarEmpleados} from './casoslegales/empleado/crear/crear.component';
+import { EditarComponent } from './casoslegales/empleado/editar/editar.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +66,10 @@ import { ListadoComponent as ListadoMunicipio } from './general/municipio/listad
     ListadoTiposDeEvidencia,
     ListadoMunicipio,
     ListadoComponent,
+    ListadoEmpleados,
+    InsertarEmpleados,
+    ListadoTiposDeEvidencia,
+    EditarComponent,
   ],
   imports: [
     CommonModule,
@@ -87,7 +95,8 @@ import { ListadoComponent as ListadoMunicipio } from './general/municipio/listad
     CdkDropListGroup, 
     CdkDropList, 
     CdkDrag,
-    TablesModule
+    TablesModule,
+    NgxMaskModule.forRoot()
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

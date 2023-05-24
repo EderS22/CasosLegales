@@ -64,7 +64,7 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     WizardComponent,
     EditorsComponent,
     FileUploadsComponent,
-    LayoutsComponent
+    LayoutsComponent,
   ],
   imports: [
     CommonModule,

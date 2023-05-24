@@ -1,6 +1,7 @@
 {
   "version": 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
   "dgSpecHash": "ha4VUgUuytg1biUz6qjJqFi+dAecU8v5JvBn+BBNQG1cTgBCY4IIQFCabAg4b9eBW9LQd3uqsxDP5vU32kX/Jg==",
   "success": true,
   "projectFilePath": "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj",
@@ -129,8 +130,11 @@
     "C:\\Users\\LAB02\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
 =======
   "dgSpecHash": "bSPAQRLO3PzJME7V9Lfti/cH4Ep2QDpshELcfcKd91l+VLkAsbQR28xUx/W1krGHAJS5NwGyAZ8hq9CRiw5n2A==",
+=======
+  "dgSpecHash": "AbX6fvYixpZ1gwHJPEhHgqTEI9qlFK+otit5J+IbbeuE3+uBiYv++mRA+oLFoBNgyfLKaV9xK+hxV/rF0OTVuQ==",
+>>>>>>> Cristian
   "success": true,
-  "projectFilePath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj",
+  "projectFilePath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\LAB01\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\LAB01\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

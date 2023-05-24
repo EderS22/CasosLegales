@@ -28,7 +28,6 @@
                             <thead>
                                 <tr class="bg-light">
                                     <th>Id</th>
-                                    <th>Codigo</th>
                                     <th>Nombre</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -36,17 +35,18 @@
                             <tbody>
                                 <tr *ngFor="let item of depto">
                                     <td>{{item.depa_Id}}</td>
-                                    <td>{{item.depa_Codigo}}</td>
                                     <td>{{item.depa_Nombre}}</td>
 
                                     <td>
                                         <div class="col-sm-auto">
                                             <div class="d-flex gap-1">
-                                                <button type="button" class="btn btn-soft-primary" (click)="EditarDepartamento(item,contentEdit)" >
+                                                <button type="button" class="btn btn-soft-primary"
+                                                    (click)="EditarDepartamento(item,contentEdit)">
                                                     <i class="ri-edit-2-line"></i>
                                                     Editar
                                                 </button>
-                                                <button class="btn btn-soft-danger" (click)="optenerIdEliminar(item, modalEliminar)">
+                                                <button class="btn btn-soft-danger"
+                                                    (click)="optenerIdEliminar(item, modalEliminar)">
                                                     <i class="ri-delete-bin-line"></i>
                                                     Eliminar
                                                 </button>
@@ -76,28 +76,41 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
             (click)="modal.dismiss('Cross click')"></button>
     </div>
-    
-        <div class="modal-body mb-3">
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <label>Nombre</label>
-                    <input [(ngModel)]="depa.depa_Nombre" type="text" class="form-control " 
-                        [ngClass]="{ 'is-invalid': submitted && form['depa_Nombre'].errors }" />
-                    <div class="invalid-feedback">Por favor ingrese un Nombre</div>
+    <div class="modal-body mb-3">
+
+        <div class="row">
+
+            <div class="col-6">
+                <label>Codigo</label>
+                <input [(ngModel)]="depa.depa_Id" type="text" class="form-control" placeholder="00" mask="00"
+                    [ngClass]="{ 'is-invalid': submitted && depaIdInvalid }" />
+                <div class="invalid-feedback" *ngIf="submitted && depaIdInvalid">
+                    Por favor, ingrese el codigo
                 </div>
             </div>
 
-        </div>
-        <div class="modal-footer">
-            <div class="hstack gap-2 justify-content-end">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal"
-                    (click)="modal.close('Close click')">Cancelar</button>
-                <button type="submit" (click)="GuardarDepartamento()" class="btn btn-success" id="add-btn">Agregar
-                    Departamento</button>
+            <div class="col-6">
+                <label>Nombre</label>
+                <input [(ngModel)]="depa.depa_Nombre" type="text" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && depaNombreInvalid }"  (blur)="trimDepaNombre()"/>
+
+                <div class="invalid-feedback" *ngIf="submitted && depaNombreInvalid">
+                    Por favor ingrese un Nombre
+                </div>
             </div>
         </div>
-    
+
+    </div>
+    <div class="modal-footer">
+        <div class="hstack gap-2 justify-content-end">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                (click)="modal.close('Close click')">Cancelar</button>
+            <button type="submit" (click)="GuardarDepartamento()" class="btn btn-success" id="add-btn">Agregar
+                Departamento</button>
+        </div>
+    </div>
+
 </ng-template>
 
 
@@ -108,27 +121,31 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
             (click)="modal.dismiss('Cross click')"></button>
     </div>
-    
-        <div class="modal-body mb-3">
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <label>Nombre</label>
-                    <input [(ngModel)]="depa.depa_Nombre" type="text" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && form['depa_Nombre'].errors }" />
-                    <div class="invalid-feedback">Por favor ingrese un Nombre</div>
+    <div class="modal-body mb-3">
+
+        <div class="row">
+
+            <div class="col-12">
+                <label>Nombre</label>
+                <input [(ngModel)]="depa.depa_Nombre" type="text" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && depaNombreInvalid }" (blur)="trimDepaNombre()"/>
+                <div class="invalid-feedback" *ngIf="submitted && depaNombreInvalid">
+                    Por favor ingrese un Nombre
                 </div>
             </div>
+        </div>
 
+    </div>
+    <div class="modal-footer">
+        <div class="hstack gap-2 justify-content-end">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                (click)="modal.close('Close click')">Cancelar</button>
+            <button type="submit" (click)="GaurdarDatosEditados()" class="btn btn-success" id="add-btn">Guardar
+                Departamento</button>
         </div>
-        <div class="modal-footer">
-            <div class="hstack gap-2 justify-content-end">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal"
-                    (click)="modal.close('Close click')">Cancelar</button>
-                <button type="submit" (click)="GaurdarDatosEditados()" class="btn btn-success" id="add-btn">Guardar Departamento</button>
-            </div>
-        </div>
-    
+    </div>
+
 </ng-template>
 
 
@@ -146,7 +163,7 @@
                 <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
                     <h4>¿Está seguro que desea eliminar el registro?</h4>
                     <p class="text-muted mx-4 mb-0">
-                        Al eliminar el registro se eliminará de forma permanente 
+                        Al eliminar el registro se eliminará de forma permanente
                         de nuestra base de datos.
                     </p>
                 </div>
@@ -157,8 +174,7 @@
                     <i class="ri-close-line me-1 align-middle"></i>
                     Cerrar
                 </button>
-                <button type="button" class="btn w-sm btn-danger " id="delete-product" 
-                    (click)="MandarDatosEliminar()">
+                <button type="button" class="btn w-sm btn-danger " id="delete-product" (click)="MandarDatosEliminar()">
                     Sí, eliminarlo.
                 </button>
             </div>

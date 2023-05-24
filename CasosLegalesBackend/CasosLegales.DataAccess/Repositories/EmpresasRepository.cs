@@ -37,7 +37,7 @@ namespace CasosLegales.DataAccess.Repositories
             var parametros = new DynamicParameters();
             parametros.Add("@emsa_Nombre", item.emsa_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@emsa_RNT", item.emsa_RNT, DbType.String, ParameterDirection.Input);
-            parametros.Add("@muni_Id", item.muni_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@muni_Id", item.muni_Id, DbType.String, ParameterDirection.Input);
             parametros.Add("@emsa_Direccion", item.emsa_Direccion, DbType.String, ParameterDirection.Input);
             parametros.Add("@emsa_RepresentanteNombre", item.emsa_RepresentanteNombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@emsa_RepresentanteDNI", item.emsa_RepresentanteDNI, DbType.String, ParameterDirection.Input);
@@ -65,7 +65,7 @@ namespace CasosLegales.DataAccess.Repositories
             parametros.Add("@emsa_Id", item.emsa_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@emsa_Nombre", item.emsa_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@emsa_RNT", item.emsa_RNT, DbType.String, ParameterDirection.Input);
-            parametros.Add("@muni_Id", item.muni_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@muni_Id", item.muni_Id, DbType.String, ParameterDirection.Input);
             parametros.Add("@emsa_Direccion", item.emsa_Direccion, DbType.String, ParameterDirection.Input);
             parametros.Add("@emsa_RepresentanteNombre", item.emsa_RepresentanteNombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@emsa_RepresentanteDNI", item.emsa_RepresentanteDNI, DbType.String, ParameterDirection.Input);

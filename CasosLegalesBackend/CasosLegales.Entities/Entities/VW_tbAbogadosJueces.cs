@@ -21,11 +21,9 @@ namespace CasosLegales.Entities.Entities
         public string eciv_Descripcion { get; set; }
         public int carg_Id { get; set; }
         public string carg_Descripcion { get; set; }
-        public int muni_Id { get; set; }
-        public string muni_Codigo { get; set; }
+        public string muni_Id { get; set; }
         public string muni_Nombre { get; set; }
-        public int depa_Id { get; set; }
-        public string depa_Codigo { get; set; }
+        public string depa_Id { get; set; }
         public string depa_Nombre { get; set; }
         public string abju_Direccion { get; set; }
         public int abju_UsuCreacion { get; set; }

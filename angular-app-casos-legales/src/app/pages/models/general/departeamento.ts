@@ -1,7 +1,6 @@
 export class departamento{
-    depa_Id!: number;
+    depa_Id!: string;
     depa_Nombre!: string ;
-    depa_Codigo!: string;
     depa_UsuCreacion!: number;
     user_Creacion!: string;
     depa_FechaCreacion!: string;

@@ -13,6 +13,8 @@ import { ListadoComponent as ListadoMunicipio } from './general/municipio/listad
 import { DetallesComponent as DetallesUsaurios } from './acceso/usuarios/detalles/detalles.component';
 import { ListadoComponent as ListadoRoles } from './acceso/roles/listado/listado.component';
 import { DetallesComponent as DetallesRoles } from './acceso/roles/detalles/detalles.component';
+import { ListadoComponent  as ListadoEmpleado} from './casoslegales/empleado/listado/listado.component';
+import { CrearComponent as CrearEmpleados } from './casoslegales/empleado/crear/crear.component';
 
 const routes: Routes = [
     {
@@ -57,6 +59,14 @@ const routes: Routes = [
     {
       path: "acceso/roles/detalles",
       component: DetallesRoles
+    },
+    { 
+      path: "casoslegales/empleado/listado",
+      component: ListadoEmpleado
+    },
+    {
+      path: "casoslegales/empleado/crear",
+      component: CrearEmpleados
     },
     { 
       path: "casoslegales/tiposdeevidencia/listado",

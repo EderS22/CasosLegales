@@ -16,7 +16,7 @@ namespace CasosLegales.API.Models
         public string civi_CorreoElectronico { get; set; }
         public DateTime civi_FechaNacimiento { get; set; }
         public int eciv_Id { get; set; }
-        public int muni_Id { get; set; }
+        public string muni_Id { get; set; }
         public string civi_Direccion { get; set; }
         public bool civi_EsDemandante { get; set; }
         public bool civi_EsAcusado { get; set; }

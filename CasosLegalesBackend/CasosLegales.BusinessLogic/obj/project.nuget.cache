@@ -1,6 +1,7 @@
 {
   "version": 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
   "dgSpecHash": "WZsSvXmd3VoD2AgTJb5obpIFNoYscZ4Q6ZfnLbz/nErdoonjBJbL51WI/KBS9z8ZYPpz2QgB31BKRZgDUt/5pQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
@@ -129,8 +130,11 @@
     "C:\\Users\\LAB02\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
 =======
   "dgSpecHash": "ZgaMLnHluhX5LNQ3KhtG4sy8QSpP2ObxdLJU3KakkOEqVzsFHtwVjqBDK0MPndlRRuo23vLqFzjFlxcnZXaOfg==",
+=======
+  "dgSpecHash": "jBH/gIK+826wiYl/RrXWlEeghC8bbD+guxsoShBdC2XGPRJK2EeJzQqsNuB5iM3cSbAq6dZmPBr3pam93iORmg==",
+>>>>>>> Cristian
   "success": true,
-  "projectFilePath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
+  "projectFilePath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\LAB01\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\LAB01\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
