@@ -11,6 +11,7 @@ import { rol } from 'src/app/pages/models/acceso/rol';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
+import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
 
 @Component({
   selector: 'app-listado',
@@ -45,6 +46,20 @@ export class ListadoComponent implements AfterViewInit, OnInit {
   ) { }
 
   ngOnInit(): void {
+    if(!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin){
+      const ropaAcceso = new ropa();
+      ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+      ropaAcceso.pant_Pantalla = "Usuarios";
+      this.rolService.validarRolTienePantalla(ropaAcceso)
+      .subscribe((data:any) => {
+          if(data.code === 200){
+              if(data.data.codeStatus === 0){
+                  this.router.navigate([""]);
+              }
+          }
+      })
+    }
+
     this.breadCrumbItems = [
       { label: 'Usuarios' },
       { label: 'Listado', active: true }
@@ -145,7 +160,7 @@ export class ListadoComponent implements AfterViewInit, OnInit {
       this.form['role_Id'].setValue('');
     }
 
-    this.modalService.open(content, { size: 'md', centered: true, backdrop: 'static' });
+    this.modalService.open(content, { size: 'md', centered: true, backdrop: 'static', keyboard: false });
   }
 
 
@@ -158,7 +173,7 @@ export class ListadoComponent implements AfterViewInit, OnInit {
       this.mensajeWarning('No puede eliminar su propio usuario');
     }else{
       this.usua_IdEliminar = id;
-      this.modalService.open(content, { centered: true, backdrop: 'static' });
+      this.modalService.open(content, { centered: true, backdrop: 'static', keyboard: false });
     }
   }
 

@@ -65,5 +65,14 @@ namespace CasosLegales.API.Controllers
 
             return Ok(respuesta);
         }
+
+        [HttpPost("BuscarRolPorId")]
+        public IActionResult BuscarRolPorId(int role_Id)
+        {
+            var respuesta = _accesoService.CargarRolPorId(role_Id);
+            respuesta.Data = _mapper.Map<RolesViewModel>(respuesta.Data);
+
+            return Ok(respuesta);
+        }
     }
 }

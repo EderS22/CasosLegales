@@ -56,4 +56,20 @@ export class RolService {
     eliminarPantallasdeRol(ropa:ropa){
         return this.http.post(API_URL + 'RolesPorPantalla/EliminarPantallasdeRol', ropa);
     }
+
+    validarUsuarioPoseeRol(role_Id: number){
+        return this.http.get(API_URL + `Usuarios/ValidarUsuariosPoseenRol/${role_Id}`);
+    }
+
+    cargarRolById(role_Id:number){
+        return this.http.post(API_URL + 'Roles/BuscarRolPorId', {}, {
+            params: {
+                role_Id: role_Id
+            }
+        })
+    }
+
+    validarRolTienePantalla(ropa: ropa){
+        return this.http.post(API_URL + 'RolesPorPantalla/ValidarRolTienePantalla', ropa);
+    }
 }

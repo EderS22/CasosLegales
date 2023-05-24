@@ -8,6 +8,7 @@ import { ListadoComponent as ListadoTiposdeCaso} from './casoslegales/tiposdecas
 import { ListadoComponent as ListadoDepartamento} from './general/departamento/listado/listado.component';
 import { DetallesComponent as DetallesUsaurios } from './acceso/usuarios/detalles/detalles.component';
 import { ListadoComponent as ListadoRoles } from './acceso/roles/listado/listado.component';
+import { DetallesComponent as DetallesRoles } from './acceso/roles/detalles/detalles.component';
 
 const routes: Routes = [
     {
@@ -36,6 +37,10 @@ const routes: Routes = [
     {
       path: "acceso/roles/listado",
       component: ListadoRoles
+    },
+    {
+      path: "acceso/roles/detalles",
+      component: DetallesRoles
     }
 ];
 

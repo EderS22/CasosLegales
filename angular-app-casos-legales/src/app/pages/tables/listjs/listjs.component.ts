@@ -39,7 +39,12 @@ export class ListjsComponent {
   total: Observable<number>;
   @ViewChildren(NgbdOrdersSortableHeader) headers!: QueryList<NgbdOrdersSortableHeader>;
 
-  constructor(private modalService: NgbModal,public service: OrdersService, private formBuilder: UntypedFormBuilder) {
+  constructor(
+    private modalService: NgbModal,
+    public service: OrdersService, 
+    private formBuilder: UntypedFormBuilder
+  ) 
+  {
     this.ListJsList = service.countries$;
     this.total = service.total$;
   }

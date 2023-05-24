@@ -47,7 +47,8 @@
                                                 <i class="ri-delete-bin-line"></i>
                                                 Eliminar
                                             </button>
-                                            <button type="button" class="btn btn-soft-secondary">
+                                            <button type="button" class="btn btn-soft-secondary"
+                                                (click)="detallesRol(item.role_Id)">
                                                 <i class="ri-file-list-2-line"></i>
                                                 Detalles
                                             </button>
@@ -98,6 +99,7 @@
             <br/>
             <div>
                 <h4 style="text-align: center;">Pantallas</h4>
+                <div class="text-danger" [ngStyle]="{'display': !pantallasValid ? '' : 'none'}">Debe asignarle al menos una pantalla al rol</div>
             </div>
             <br/>
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 1fr; gap: 23px;">
@@ -149,7 +151,8 @@
                     Cerrar
                 </button>
                 <button type="button" class="btn w-sm btn-danger" id="delete-product"
-                    (click)="modal.close('Close click')">
+                    (click)="modal.close('Close click')"
+                    (click)="eliminarRol(rol_IdEliminar)">
                     Sí, eliminarlo.
                 </button>
             </div>

@@ -176,7 +176,7 @@ BEGIN
 
 	IF @usua_Id > 0
 	BEGIN	
-		SELECT @usua_Id
+		SELECT 1
 	END
 	ELSE
 	BEGIN
@@ -370,11 +370,30 @@ BEGIN
 	BEGIN TRY
 
 		BEGIN TRAN
-			INSERT INTO ACCE.tbRoles (role_Nombre, role_Descripcion, usua_IdCreacion)
-			VALUES (@role_Nombre, @role_Descripcion, @usua_IdCreacion)
+			DECLARE @role_Id INT
+
+			SELECT @role_Id = role_Id FROM ACCE.tbRoles WHERE role_Nombre = @role_Nombre AND role_Estado = 0
+
+			IF @role_Id > 0
+			BEGIN
+				
+				UPDATE ACCE.tbRoles
+				   SET role_Estado = 1,
+				       role_Descripcion = @role_Descripcion,
+				       usua_IdModificacion = @usua_IdCreacion,
+					   role_FechaModificacion = GETDATE()
+				 WHERE role_Id = @role_Id
+			END
+			ELSE
+			BEGIN
+				INSERT INTO ACCE.tbRoles (role_Nombre, role_Descripcion, usua_IdCreacion)
+				VALUES (@role_Nombre, @role_Descripcion, @usua_IdCreacion)
+				
+				SELECT TOP 1 @role_Id = role_Id FROM ACCE.tbRoles WHERE role_Estado = 1 ORDER BY role_Id DESC
+			END
 
 		COMMIT
-		SELECT TOP 1 role_Id FROM ACCE.tbRoles WHERE role_Estado = 1 ORDER BY role_Id DESC
+		SELECT @role_Id
 	END TRY
 	BEGIN CATCH
 		ROLLBACK
@@ -415,14 +434,13 @@ CREATE OR ALTER PROCEDURE ACCE.UDP_tbRoles_EliminarRol
 AS
 BEGIN
 	BEGIN TRY
-		
 		BEGIN TRAN
 			 UPDATE ACCE.tbRoles
 				SET role_Estado = 0,
 					usua_IdModificacion = @usua_IdModificacion,
 					role_FechaModificacion = GETDATE()
 			  WHERE role_Id = @role_Id
-		
+			  EXEC ACCE.UDP_tbRolesPorPantalla_EliminarPantallasdeRol @role_Id, @usua_IdModificacion
 		COMMIT
 		SELECT 1
 	END TRY
@@ -553,10 +571,24 @@ CREATE OR ALTER PROCEDURE ACCE.UDP_tbRolesPorPantalla_GuardarNuevo
 AS
 BEGIN
 	BEGIN TRY
-		
 		BEGIN TRAN
-			INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
-			VALUES (@role_Id, @pant_Id, @usua_IdCreacion)
+			DECLARE @ropa_Id INT
+
+			SELECT @ropa_Id = ropa_Id FROM ACCE.tbRolesPorPantalla WHERE role_Id = @role_Id AND pant_Id = @pant_Id AND ropa_Estado = 0
+
+			IF @ropa_Id > 0
+			BEGIN
+				UPDATE ACCE.tbRolesPorPantalla
+				   SET ropa_Estado = 1,
+				       usua_IdModificacion = @usua_IdCreacion,
+					   ropa_FechaModificacion = GETDATE()
+				 WHERE ropa_Id = @ropa_Id AND pant_Id = @pant_Id
+			END
+			ELSE
+			BEGIN
+				INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
+				VALUES (@role_Id, @pant_Id, @usua_IdCreacion)
+			END
 
 		COMMIT
 		SELECT 1
@@ -574,7 +606,6 @@ CREATE OR ALTER PROCEDURE ACCE.UDP_tbRolesPorPantalla_EliminarPantallasdeRol
 AS
 BEGIN
 	BEGIN TRY
-		
 		BEGIN TRAN
 			UPDATE ACCE.tbRolesPorPantalla
 			   SET ropa_Estado = 0,

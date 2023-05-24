@@ -1,0 +1,14 @@
+/CasosLegales.API/appsettings.json
+/CasosLegales.API/obj
+/CasosLegales.API/bin
+
+/CasosLegales.BusinessLogic/obj
+/CasosLegales.BusinessLogic/bin
+
+/CasosLegales.DataAccess/obj
+/CasosLegales.DataAccess/bin
+
+/CasosLegales.Entities/obj
+/CasosLegales.Entities/bin
+
+/.vs
