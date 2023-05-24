@@ -10,6 +10,7 @@ namespace CasosLegales.API.Models
         public int pant_Id { get; set; }
         public string pant_Pantalla { get; set; }
         public string pant_Href { get; set; }
+        public string pant_Icono { get; set; }
         public string pant_Esquema { get; set; }
         public int usua_IdCreacion { get; set; }
         public DateTime? pant_FechaCreacion { get; set; }

@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { usuario } from '../../../../pages/models/acceso/usuario';
-import { UsuariosService } from 'src/app/pages/services/acceso/usuarios.service';
+import { UsuariosService } from '../../../services/acceso/usuario/usuarios.service';
 
 @Component({
   selector: 'app-detalles',
   templateUrl: './detalles.component.html',
   styleUrls: ['./detalles.component.scss']
 })
-
 
 export class DetallesComponent implements OnInit {
 

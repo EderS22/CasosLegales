@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { UsuariosService } from '../../../services/acceso/usuarios.service';
+import { UsuariosService } from '../../../services/acceso/usuario/usuarios.service';
+import { RolService } from 'src/app/pages/services/acceso/rol/rol.service';
 import { usuario } from '../../../models/acceso/usuario';
 import { empleado } from 'src/app/pages/models/casoslegales/empleados';
 import { rol } from 'src/app/pages/models/acceso/rol';
 // Sweet Alert
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-listado',
@@ -16,7 +18,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./listado.component.scss']
 })
 
-export class ListadoComponent implements OnInit {
+export class ListadoComponent implements AfterViewInit, OnInit {
+  @ViewChild(DataTableDirective, {static: false})
+  dtElement!:DataTableDirective;
+
   breadCrumbItems!: Array<{}>;
   usuarios!: usuario[];
   empleadosNoTienenUsuario!: empleado[];
@@ -34,6 +39,7 @@ export class ListadoComponent implements OnInit {
   constructor(
     private modalService: NgbModal, 
     private service: UsuariosService, 
+    private rolService: RolService,
     private formBuilder: UntypedFormBuilder,
     private router: Router
   ) { }
@@ -44,23 +50,6 @@ export class ListadoComponent implements OnInit {
       { label: 'Listado', active: true }
     ];
 
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      language: {
-        url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
-      },
-      columnDefs: [
-        {
-          targets: 6,
-          orderable: false,
-        },
-        {
-          targets: 2,
-          orderable: false,
-        },
-      ]
-    };
-    this.LoadUsuarios();
     this.LoadEmpleadosNoTienenUsuario();
     this.LoadRoles();
 
@@ -71,7 +60,34 @@ export class ListadoComponent implements OnInit {
       role_Id: [''],
       empe_Id: ['', [Validators.required]],
     });
+  }
 
+  ngAfterViewInit(): void {
+    this.dtOptions = {
+        pagingType: 'simple_numbers',
+        language: {
+          url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
+        },
+        columnDefs: [
+          {
+            targets: 6,
+            orderable: false,
+          },
+          {
+            targets: 2,
+            orderable: false,
+          },
+        ]
+      };
+      this.LoadUsuarios();
+  }
+
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      // Destroy the table first
+      dtInstance.destroy();
+      this.LoadUsuarios();
+    });
   }
 
   LoadUsuarios() {
@@ -92,7 +108,7 @@ export class ListadoComponent implements OnInit {
   }
 
   LoadRoles() {
-    this.service.getListadoRoles().subscribe((data: any) => {
+    this.rolService.getListadoRoles().subscribe((data: any) => {
       if (data.code === 200) {
         this.listadoRoles = data.data;
       }
@@ -192,7 +208,16 @@ export class ListadoComponent implements OnInit {
                   if (data.code === 200) {
                     if (data.data.codeStatus === 1) {
                       this.mensajeSuccess('Datos del usuario editados con exito');
-                      this.modalService.dismissAll();
+                      this.modalService.dismissAll();   
+                      this.rerender();
+
+                      localStorage.removeItem("currentUser");
+                      this.service.getUsuarioEditar(usuarioEdit.usua_Id)
+                      .subscribe((data:any) => {
+                        if(data.code === 200){
+                            localStorage.setItem("currentUser", JSON.stringify(data.data));
+                        }
+                      });
                     } else {
                       this.mensajeError('Ocurrio un error al intentar editar el usuario');
                     }
@@ -228,6 +253,7 @@ export class ListadoComponent implements OnInit {
                 if (data.code === 200) {
                   if (data.data.codeStatus === 1) {
                     this.mensajeSuccess('Usuario agregado con exito');
+                    this.rerender();
                   } else {
                     this.mensajeError('Ocurrio un error al intentar agregar el usuario');
                   }
@@ -254,6 +280,7 @@ export class ListadoComponent implements OnInit {
           if (data.code === 200) {
             if (data.data.codeStatus === 1) {
               this.mensajeSuccess('Usuario eliminado con exito');
+              this.rerender();
             } else {
               this.mensajeError('Ocurrio un error al intentar eliminar el usuario');
             }

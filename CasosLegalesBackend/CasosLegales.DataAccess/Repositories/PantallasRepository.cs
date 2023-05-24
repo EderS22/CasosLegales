@@ -43,14 +43,14 @@ namespace CasosLegales.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<tbPantallas> ListadoPantallasPorIdRolyAdmin(tbUsuarios item)
+        public IEnumerable<tbPantallas> ListadoPantallasPorIdRolyAdmin(int role_Id, bool usua_EsAdmin)
         {
             using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
 
             var parametros = new DynamicParameters();
 
-            parametros.Add("@role_Id", item.role_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@usua_EsAdmin", item.usua_EsAdmin, DbType.Boolean, ParameterDirection.Input);
+            parametros.Add("@role_Id", role_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@usua_EsAdmin", usua_EsAdmin, DbType.Boolean, ParameterDirection.Input);
 
             return db.Query<tbPantallas>(ScriptsDataBase.ListadoPantallasPorIdRolyAdmin, parametros, commandType: CommandType.StoredProcedure);
         }

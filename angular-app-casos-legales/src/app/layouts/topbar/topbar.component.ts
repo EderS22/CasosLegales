@@ -16,6 +16,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { CartModel } from './topbar.model';
 import { cartData } from './data';
+import { usuario } from '../../pages/models/acceso/usuario';
 
 @Component({
   selector: 'app-topbar',
@@ -36,7 +37,7 @@ export class TopbarComponent implements OnInit {
   valueset: any;
   countryName: any;
   cookieValue: any;
-  userData!: any;
+  userData: usuario = new usuario();
 
   constructor(@Inject(DOCUMENT) private document: any, private eventService: EventService, public languageService: LanguageService,
     public _cookiesService: CookieService, public translate: TranslateService, private authService: AuthenticationService, private authFackservice: AuthfakeauthenticationService,
@@ -44,7 +45,6 @@ export class TopbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userData = JSON.parse(localStorage.getItem("currentUser") || '');
-
     this.element = document.documentElement;
 
     // Cookies wise Language set
@@ -52,7 +52,7 @@ export class TopbarComponent implements OnInit {
     const val = this.listLang.filter(x => x.lang === this.cookieValue);
     this.countryName = val.map(element => element.text);
     if (val.length === 0) {
-      if (this.flagvalue === undefined) { this.valueset = 'assets/images/flags/us.svg'; }
+      if (this.flagvalue === undefined) { this.valueset = 'https://cdn4.iconfinder.com/data/icons/world-flags-6/900/honduras_national_country_flag-512.png'; }
     } else {
       this.flagvalue = val.map(element => element.flag);
     }

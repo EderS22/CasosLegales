@@ -25,11 +25,10 @@ namespace CasosLegales.API.Controllers
         }
 
         [HttpPost("ListadoPantallasPorIdRol")]
-        public IActionResult ListadoPantallasPorIdRol(UsuariosViewModel item)
+        public IActionResult ListadoPantallasPorIdRol(int role_Id, bool usua_EsAdmin)
         {
-            var resultMapeado = _mapper.Map<tbUsuarios>(item);
 
-            var respuesta = _accesoService.ListadoPantallasPorIdRolyAdmin(resultMapeado);
+            var respuesta = _accesoService.ListadoPantallasPorIdRolyAdmin(role_Id, usua_EsAdmin);
 
             var listado = _mapper.Map<IEnumerable<PantallasViewModel>>(respuesta.Data);
             

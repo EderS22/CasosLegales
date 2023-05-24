@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GlobalComponent } from 'src/app/global-component';
-import { usuario } from '../../models/acceso/usuario';
-import { empleado } from '../../models/casoslegales/empleados';
-import { rol } from '../../models/acceso/rol';
+import { usuario } from '../../../models/acceso/usuario';
+import { empleado } from '../../../models/casoslegales/empleados';
 
 const API_URL = GlobalComponent.API_URL;
 
@@ -20,10 +19,6 @@ export class UsuariosService {
 
     getEmpleadosNoTienenUsuario(){
         return this.http.get<empleado[]>(API_URL + 'Usuarios/ListarEmpleadosNoTienenUsuario');
-    }
-
-    getListadoRoles(){
-        return this.http.get<rol[]>(API_URL + 'Roles/List');
     }
 
     getUsuarioEditar(id: number){

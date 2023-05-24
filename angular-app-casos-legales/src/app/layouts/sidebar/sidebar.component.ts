@@ -1,10 +1,9 @@
 import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-
-import { MENU } from './menu';
-
 import { MenuItem } from './menu.model';
+import { pantalla } from '../../pages/models/acceso/pantalla';
+import { RolService } from '../../pages/services/acceso/rol/rol.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,20 +11,99 @@ import { MenuItem } from './menu.model';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-
-  menu: any;
+  menu: pantalla[] = [];
+  menuAcce: MenuItem[] = [];
+  menuGral: MenuItem[] = [];
+  menuCale: MenuItem[] = [];
+  menuTemp: any;
   toggle: any = true;
   menuItems: MenuItem[] = [];
   @ViewChild('sideMenu') sideMenu!: ElementRef;
   @Output() mobileMenuButtonClicked = new EventEmitter();
 
-  constructor(private router: Router, public translate: TranslateService) {
-    translate.setDefaultLang('en');
+  constructor(private router: Router, public translate: TranslateService, private rolService: RolService) {
+    translate.setDefaultLang('es');
   }
 
   ngOnInit(): void {
-    // Menu Items
-    this.menuItems = MENU;
+    this.rolService.getPantallasPorRolYAdmin(JSON.parse(localStorage.getItem("currentUser") || '').role_Id, JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin)
+    .subscribe((data:any) => {
+        if(data.code === 200){
+            this.menu = data.data;
+
+            this.menu.forEach(item => {
+                if(item.pant_Esquema === 'Acceso'){
+                    const menuAcceTemp = new MenuItem();
+        
+                    menuAcceTemp.id = item.pant_Id;
+                    menuAcceTemp.label = item.pant_Pantalla;
+                    menuAcceTemp.icon = item.pant_Icono;
+                    menuAcceTemp.link = item.pant_Href;
+        
+                    this.menuAcce.push(menuAcceTemp);
+                }
+        
+                if(item.pant_Esquema === 'General'){
+                    const menuGralTemp = new MenuItem();
+        
+                    menuGralTemp.id = item.pant_Id;
+                    menuGralTemp.label = item.pant_Pantalla;
+                    menuGralTemp.icon = item.pant_Icono;
+                    menuGralTemp.link = item.pant_Href;
+        
+                    this.menuGral.push(menuGralTemp);
+                }
+        
+                if(item.pant_Esquema === 'CasosLegales'){
+                    const menuCaleTemp = new MenuItem();
+        
+                    menuCaleTemp.id = item.pant_Id;
+                    menuCaleTemp.label = item.pant_Pantalla;
+                    menuCaleTemp.icon = item.pant_Icono;
+                    menuCaleTemp.link = item.pant_Href;
+        
+                    this.menuCale.push(menuCaleTemp);
+                }
+            });
+        
+            if(this.menuAcce.length > 0){
+                const itemMenu = new MenuItem();
+        
+                itemMenu.label = 'ACCESO';
+                itemMenu.isTitle = true;
+        
+                this.menuItems.push(itemMenu);
+                this.menuAcce.forEach(item => {
+                    this.menuItems.push(item);
+                })
+            }
+        
+            if(this.menuGral.length > 0){
+                const itemMenu = new MenuItem();
+        
+                itemMenu.label = 'GENERAL';
+                itemMenu.isTitle = true;
+        
+                this.menuItems.push(itemMenu);
+                this.menuGral.forEach(item => {
+                    this.menuItems.push(item);
+                })
+            }
+        
+            if(this.menuCale.length > 0){
+                const itemMenu = new MenuItem();
+        
+                itemMenu.label = 'CASOS LEGALES';
+                itemMenu.isTitle = true;
+        
+                this.menuItems.push(itemMenu);
+                this.menuCale.forEach(item => {
+                    this.menuItems.push(item);
+                })
+            }
+
+        }
+    })
   }
 
   /***

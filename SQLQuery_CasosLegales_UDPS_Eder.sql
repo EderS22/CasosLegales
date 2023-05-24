@@ -447,6 +447,7 @@ BEGIN
 		SELECT pant_Id,
 			   pant_Pantalla,
 			   pant_Href,
+			   pant_Icono,
 			   pant_Esquema
 		  FROM ACCE.tbPantallas 
 		 WHERE pant_Estado = 1
@@ -456,6 +457,7 @@ BEGIN
 		SELECT tb1.pant_Id,
 			   pant_Pantalla,
 			   pant_Href,
+			   pant_Icono,
 			   pant_Esquema
 		  FROM ACCE.tbRolesPorPantalla tb1
 	INNER JOIN ACCE.tbPantallas tb2

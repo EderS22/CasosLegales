@@ -36,6 +36,8 @@ import { ListadoComponent as ListadoTiposDeCaso } from './casoslegales/tiposdeca
 import { ListadoComponent as ListadoDepartamento } from './general/departamento/listado/listado.component';
 import { DataTablesModule } from 'angular-datatables';
 import { DetallesComponent as DetallesUsuarios } from './acceso/usuarios/detalles/detalles.component';
+import { ListadoComponent as ListadoRoles } from './acceso/roles/listado/listado.component';
+import { CdkDrag, CdkDropList, CdkDropListGroup } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -46,6 +48,7 @@ import { DetallesComponent as DetallesUsuarios } from './acceso/usuarios/detalle
     ListadoTiposDeCaso,
     ListadoDepartamento,
     DetallesUsuarios,
+    ListadoRoles,
   ],
   imports: [
     CommonModule,
@@ -67,7 +70,10 @@ import { DetallesComponent as DetallesUsuarios } from './acceso/usuarios/detalle
     AppsModule,
     EcommerceModule,
     DataTablesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CdkDropListGroup, 
+    CdkDropList, 
+    CdkDrag
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

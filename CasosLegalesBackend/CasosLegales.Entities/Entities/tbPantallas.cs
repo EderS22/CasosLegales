@@ -17,6 +17,7 @@ namespace CasosLegales.Entities.Entities
         public string pant_Pantalla { get; set; }
         public string pant_Href { get; set; }
         public string pant_Esquema { get; set; }
+        public string pant_Icono { get; set; }
         public bool? pant_Estado { get; set; }
         public int usua_IdCreacion { get; set; }
         public DateTime? pant_FechaCreacion { get; set; }

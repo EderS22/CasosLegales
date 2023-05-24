@@ -4,7 +4,6 @@ using CasosLegales.Entities.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-
 #nullable disable
 
 namespace CasosLegales.DataAccess.Context
@@ -53,7 +52,7 @@ namespace CasosLegales.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
+            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
             modelBuilder.Entity<VW_tbAbogadosJueces>(entity =>
             {
@@ -1002,6 +1001,10 @@ namespace CasosLegales.DataAccess.Context
                 entity.Property(e => e.pant_Href)
                     .IsRequired()
                     .HasMaxLength(150);
+
+                entity.Property(e => e.pant_Icono)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.pant_Pantalla)
                     .IsRequired()

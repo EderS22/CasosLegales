@@ -563,14 +563,100 @@ VALUES('Municipios', 'general/municipios/listado', 'General', 'ri-dashboard-line
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Estados civiles', 'general/estadosciviles/listado', 'General', 'mdi mdi-church', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
 VALUES('Cargos', 'general/cargos/listado', 'General', 'ri-filter-3-line', 1)
 GO
 
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Abogados y Jueces', 'casoslegales/abogadosjueces/listado', 'CasosLegales', 'ri-group-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Acusados por caso', 'casoslegales/acusadosporcaso/listado', 'CasosLegales', 'ri-group-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Casos', 'casoslegales/casos/listado', 'CasosLegales', 'ri-file-text-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Civiles', 'casoslegales/civiles/listado', 'CasosLegales', 'ri-group-2-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Empleados', 'casoslegales/empleados/listado', 'CasosLegales', 'ri-group-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Empresas', 'casoslegales/empresas/listado', 'CasosLegales', 'ri-building-4-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Evidencias por caso', 'casoslegales/evidenciasporcaso/listado', 'CasosLegales', 'ri-folder-5-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Testigos por caso', 'casoslegales/testigosporcaso/listado', 'CasosLegales', 'ri-eye-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Tipos de caso', 'casoslegales/tiposdecaso/listado', 'CasosLegales', 'ri-loader-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Tipos de evidencia', 'casoslegales/tiposdeevidencia/listado', 'CasosLegales', 'ri-loader-2-line', 1)
+GO
+
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Veredictos', 'casoslegales/veredictos/listado', 'CasosLegales', 'ri-scales-line', 1)
+GO
 
 --*******************************************************/TABLE Pantallas**********************************************************--
 
 --***************************************************TABLE Roles por Pantallas*****************************************************--
 
+INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
+VALUES (1, 1, 1)
+GO
+
+INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
+VALUES (1, 2, 1)
+GO
+
+INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
+VALUES (1, 3, 1)
+GO
+
+INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
+VALUES (1, 4, 1)
+GO
+
+INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
+VALUES (1, 5, 1)
+GO
+
+INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
+VALUES (2, 6, 1)
+GO
+
+INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
+VALUES (2, 7, 1)
+GO
+
+INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
+VALUES (2, 8, 1)
+GO
+
+INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
+VALUES (2, 9, 1)
+GO
+
+INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
+VALUES (2, 10, 1)
+GO
 
 --**************************************************/TABLE Roles por Pantallas*****************************************************--
 

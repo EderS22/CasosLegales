@@ -273,13 +273,13 @@ namespace CasosLegales.BusinessLogic.Services
         #endregion
 
         #region Pantallas
-        public ServiceResult ListadoPantallasPorIdRolyAdmin(tbUsuarios item)
+        public ServiceResult ListadoPantallasPorIdRolyAdmin(int role_Id, bool usua_EsAdmin)
         {
             var resultado = new ServiceResult();
 
             try
             {
-                var pantallas = _pantallasRepository.ListadoPantallasPorIdRolyAdmin(item);
+                var pantallas = _pantallasRepository.ListadoPantallasPorIdRolyAdmin(role_Id, usua_EsAdmin);
                 return resultado.Ok(pantallas);
             }
             catch (Exception ex)
