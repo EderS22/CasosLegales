@@ -14,7 +14,6 @@ import { DataTableDirective } from 'angular-datatables';
 })
 
 export class ListadoComponent {
-
   civi: civiles = new civiles();
 
   @ViewChild(DataTableDirective, { static: false })
@@ -32,6 +31,15 @@ export class ListadoComponent {
   ) { }
 
   ngOnInit(): void {
+
+    if(localStorage.getItem('CivilInsert') == '1'){
+      this.mensajeSuccess('Civil Ingresado Correctamente');
+      localStorage.setItem('CivilInsert','');
+    }
+    else if (localStorage.getItem('CivilInsert') == '2'){
+      this.mensajeSuccess('Civil Editado Correctamente');
+      localStorage.setItem('CivilInsert','');
+    }
 
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -81,10 +89,10 @@ export class ListadoComponent {
     this.router.navigate(["casoslegales/civil/crear"]);
   }
 
-  // IdEditarCivil(Id: any){
-  //   localStorage.setItem('IdCivil', Id);
-  //   this.router.navigate(["casoslegales/civil/editar"]);
-  // }
+  IdEditarCivil(Id: any){
+    localStorage.setItem('IdCivil', Id);
+    this.router.navigate(["casoslegales/civil/editar"]);
+  }
 
   optenerIdEliminar(e: civiles , contentDelete: any) {
     this.civi = e;

@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "ZgaMLnHluhX5LNQ3KhtG4sy8QSpP2ObxdLJU3KakkOEqVzsFHtwVjqBDK0MPndlRRuo23vLqFzjFlxcnZXaOfg==",
-=======
-  "dgSpecHash": "jBH/gIK+826wiYl/RrXWlEeghC8bbD+guxsoShBdC2XGPRJK2EeJzQqsNuB5iM3cSbAq6dZmPBr3pam93iORmg==",
->>>>>>> Cristian
   "success": true,
   "projectFilePath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
   "expectedPackageFiles": [

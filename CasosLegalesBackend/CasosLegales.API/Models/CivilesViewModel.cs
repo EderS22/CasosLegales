@@ -18,9 +18,6 @@ namespace CasosLegales.API.Models
         public int eciv_Id { get; set; }
         public string muni_Id { get; set; }
         public string civi_Direccion { get; set; }
-        public bool civi_EsDemandante { get; set; }
-        public bool civi_EsAcusado { get; set; }
-        public bool civi_EsTestigo { get; set; }
         public int civi_UsuCreacion { get; set; }
         public DateTime civi_FechaCreacion { get; set; }
         public int? civi_UsuModificacion { get; set; }

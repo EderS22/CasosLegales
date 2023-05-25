@@ -46,16 +46,16 @@ export class CrearComponent implements OnInit {
     private router: Router,
   ) {
     this.validationform = this.formBuilder.group({
-      civi_DNI: ['', [Validators.required]],
-      civi_Nombres: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      civi_Apellidos: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
+      civi_DNI: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
+      civi_Nombres: ['', [Validators.required, Validators.pattern('[a-z A-Z 0-9]+')]],
+      civi_Apellidos: ['', [Validators.required, Validators.pattern('[a-z A-Z 0-9]+')]],
       civi_Sexo: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
       civi_Telefono: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      civi_CorreoElectronico: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
+      civi_CorreoElectronico: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ.]+@[a-zA-Z0-9áéíóúÁÉÍÓÚ.]+')]],
       civi_FechaNacimiento: ['', [Validators.required]],
       eciv_Id: [null, [Validators.required]],
-      depa_Id: [null, [Validators.required]],
-      muni_Id: [null, [Validators.required]],
+      depa_Id: ['', [Validators.required]],
+      muni_Id: ['', [Validators.required]],
       civi_Direccion: ['', [Validators.required]],
       civi_UsuCreacion: [1],
     });
@@ -102,10 +102,15 @@ export class CrearComponent implements OnInit {
     return this.validationform.controls;
   }
 
+  regresar(){
+    this.router.navigate(["casoslegales/civil/listado"]);
+  }
+
   validSubmit() {
 
     if (!this.validationform.valid) {
       this.submit = true;
+
       if (this.validationform.get('depa_Id')?.value != '' && this.validationform.get('muni_Id')?.value == '') {
         this.submitMunicipio = true;
       }
@@ -128,18 +133,22 @@ export class CrearComponent implements OnInit {
       }
 
       this.validationform.get('civi_FechaNacimiento')?.setValue(fechaFormateada);
-      this.validationform.get('muni_Id')?.setValue(parseInt(this.validationform.get('muni_Id')?.value));
-
-      // Resto de tu código...
-
-
+      // this.validationform.get('muni_Id')?.setValue(parseInt(this.validationform.get('muni_Id')?.value));
       this.service.InsertarCivil(this.validationform.value)
         .subscribe((data: any) => {
+          console.log(data.data.codeStatus)
           if (data.data.codeStatus == 1) {
+            localStorage.setItem('CivilInsert', '1');
             this.router.navigate(["casoslegales/civil/listado"]);
           }
-          else if (data.data.codeStatus == 2) {
+          else if (data.data.codeStatus == 11) {
             this.mensajeWarning('Ya existe un Civil con ese DNI');
+          }
+          else if (data.data.codeStatus == 12) {
+            this.mensajeWarning('Ya existe un Civil con ese correo electronico');
+          }
+          else if (data.data.codeStatus == 13) {
+            this.mensajeWarning('Ya existe un Civil con ese numero de telefono');
           }
         })
     }

@@ -92,7 +92,7 @@ export class EditarComponent {
 
     this.service.BuscarEmpleado(localStorage.getItem('IdEmpleado'))
     .subscribe((data: any) => {
-     
+      console.log(data);
       this.validationform = this.formBuilder.group({
         empe_Id:        [data.empe_Id, [Validators.required]],
         empe_DNI:       [data.empe_DNI, [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ]+')]],

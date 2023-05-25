@@ -49,6 +49,7 @@ import { ListadoComponent as ListadoMunicipio } from './general/municipio/listad
 
 import { ListadoComponent as ListadoEmpleados} from './casoslegales/empleado/listado/listado.component';
 import { CrearComponent as InsertarEmpleados} from './casoslegales/empleado/crear/crear.component';
+import { EditarComponent as EditarEmpleados } from './casoslegales/empleado/editar/editar.component';
 
 
 import { ListadoComponent as ListadoCivil } from './casoslegales/civil/listado/listado.component';
@@ -73,6 +74,7 @@ import { EditarComponent as EditarCivil } from './casoslegales/civil/editar/edit
     ListadoComponent,
     ListadoEmpleados,
     InsertarEmpleados,
+    EditarEmpleados,
     ListadoTiposDeEvidencia,
     ListadoCivil,
     InsertarCivil,

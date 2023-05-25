@@ -56,4 +56,3 @@ C:\Users\LAB01\Documents\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\
 C:\Users\LAB01\Documents\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\obj\Debug\net5.0\CasosLegales.Entities.dll
 C:\Users\LAB01\Documents\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\obj\Debug\net5.0\ref\CasosLegales.Entities.dll
 C:\Users\LAB01\Documents\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\obj\Debug\net5.0\CasosLegales.Entities.pdb
-C:\Users\LAB01\Documents\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\obj\Debug\net5.0\CasosLegales.Entities.csproj.AssemblyReference.cache

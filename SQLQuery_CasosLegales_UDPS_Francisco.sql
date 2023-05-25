@@ -156,11 +156,11 @@ AS
 BEGIN
 	BEGIN TRY
 		
-		IF EXISTS(SELECT * FROM CALE.tbCiviles WHERE civi_Id = @civi_Id)
-		 BEGIN
-			SELECT 2 codeStatu
-		 END
-		ELSE
+		--IF EXISTS(SELECT * FROM CALE.tbCiviles WHERE civi_Id = @civi_Id)
+		-- BEGIN
+		--	SELECT 2 codeStatu
+		-- END
+		--ELSE
 		 BEGIN 
 			UPDATE	cale.tbCiviles
 			SET		civi_Estado = 0

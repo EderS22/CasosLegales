@@ -32,7 +32,6 @@ export class ListadoComponent {
 
   ngOnInit(): void {
 
-
     if(localStorage.getItem('EMpleadoInsert') == '1'){
       this.mensajeSuccess('Empleado Ingresado Correctamente');
       localStorage.setItem('EMpleadoInsert','');
@@ -108,7 +107,7 @@ export class ListadoComponent {
     this.service.EliminarEmpleados(this.empe)
       .subscribe((data: any) => {
         if (data.data.codeStatus == 1) {
-          this.mensajeSuccess('Departamento Eliminado Correctamente');
+          this.mensajeSuccess('Empleado Eliminado Correctamente');
           this.modalService.dismissAll();
           this.rerender();
         }

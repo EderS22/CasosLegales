@@ -103,14 +103,14 @@ export class CrearComponent implements OnInit {
   }
 
   regresar(){
-    this.router.navigate(["casoslegales/empleado/listado"]);
+    this.router.navigate(["casoslegales/civil/listado"]);
   }
 
   validSubmit() {
 
     if (!this.validationform.valid) {
       this.submit = true;
-
+      
       if (this.validationform.get('depa_Id')?.value != '' && this.validationform.get('muni_Id')?.value == '') {
         this.submitMunicipio = true;
       }
