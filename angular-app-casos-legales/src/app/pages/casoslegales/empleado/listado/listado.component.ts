@@ -14,7 +14,6 @@ import { DataTableDirective } from 'angular-datatables';
 })
 
 export class ListadoComponent {
-
   empe: empleado = new empleado();
 
   @ViewChild(DataTableDirective, { static: false })
@@ -81,7 +80,11 @@ export class ListadoComponent {
     this.router.navigate(["casoslegales/empleado/crear"]);
   }
 
-  
+  IdEditarEmpleado(Id: any){
+    localStorage.setItem('IdEmpleado', Id);
+    this.router.navigate(["casoslegales/empleado/editar"]);
+  }
+
   optenerIdEliminar(e: empleado , contentDelete: any) {
     this.empe = e;
     this.openModalDelet(contentDelete)

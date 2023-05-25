@@ -10,11 +10,9 @@ export class empleado{
     empe_FechaNacimiento!: string;
     eciv_Id!: number;
     eciv_Descripcion!: string;
-    muni_Id!: number;
-    muni_Codigo!: string;
+    muni_Id!: string;
     muni_Nombre!: string;
-    depa_Id!: number;
-    depa_Codigo!: string;
+    depa_Id!: string;
     depa_Nombre!: string;
     empe_Direccion!: string;
     empe_UsuCreacion!: number;

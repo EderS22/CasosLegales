@@ -24,6 +24,10 @@ export class EmpleadoService {
   }
 
   BuscarEmpleado(id:any){
-    return this.http.get<empleado[]>(API_URL + 'Empleados/Buscar?='+ id)
+    return this.http.get<empleado[]>(API_URL + 'Empleados/Buscar?id='+ id)
+  }
+
+  EditarEmpleado(empleado: any){
+    return this.http.post<empleado[]>(API_URL + 'Empleados/Editar', empleado)
   }
 }

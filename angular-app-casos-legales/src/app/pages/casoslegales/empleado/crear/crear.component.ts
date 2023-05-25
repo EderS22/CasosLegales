@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import { EstadoscivilesService } from 'src/app/pages/services/general/estadocivilservice/estadosciviles.service';
-import { estadocivil } from 'src/app/pages/models/general/estadocivil';
+import { estadosciviles } from 'src/app/pages/models/general/estadocivil';
 
 import { MunicipioService } from 'src/app/pages/services/general/municipioservice/municipio.service';
 import { municipio } from 'src/app/pages/models/general/municipios';
@@ -28,7 +28,7 @@ export class CrearComponent implements OnInit {
   submit!: boolean;
   submitMunicipio!: boolean;
 
-  EstadoCivilDLL!: estadocivil[]; //estdo civil ddl
+  EstadoCivilDLL!: estadosciviles[]; //estdo civil ddl
   DepartamentoDLL!: departamento[]; //departamento ddl
 
   MunicipioDDL!: municipio[];// municipio ddl
@@ -54,8 +54,8 @@ export class CrearComponent implements OnInit {
       empe_CorreoElectronico: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
       empe_FechaNacimiento: ['', [Validators.required]],
       eciv_Id: [null, [Validators.required]],
-      depa_Id: [null, [Validators.required]],
-      muni_Id: [null, [Validators.required]],
+      depa_Id: ['', [Validators.required]],
+      muni_Id: ['', [Validators.required]],
       empe_Direccion: ['', [Validators.required]],
       empe_UsuCreacion: [1],
     });
@@ -128,10 +128,6 @@ export class CrearComponent implements OnInit {
       }
 
       this.validationform.get('empe_FechaNacimiento')?.setValue(fechaFormateada);
-      this.validationform.get('muni_Id')?.setValue(parseInt(this.validationform.get('muni_Id')?.value));
-
-      // Resto de tu código...
-
 
       this.service.InsertarEmpleados(this.validationform.value)
         .subscribe((data: any) => {
