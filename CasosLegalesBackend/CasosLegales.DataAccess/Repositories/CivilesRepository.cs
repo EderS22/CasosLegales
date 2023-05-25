@@ -36,9 +36,6 @@ namespace CasosLegales.DataAccess.Repositories
             parametros.Add("@eciv_Id", item.eciv_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@muni_Id", item.muni_Id, DbType.String, ParameterDirection.Input);
             parametros.Add("@civi_Direccion", item.civi_Direccion, DbType.String, ParameterDirection.Input);
-            parametros.Add("@civi_EsDemandante", item.civi_EsDemandante, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@civi_EsAcusado", item.civi_EsAcusado, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@civi_EsTestigo", item.civi_EsTestigo, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@civi_UsuCreacion", item.civi_UsuCreacion, DbType.Int32, ParameterDirection.Input);
 
             var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.InsertarCiviles, parametros, commandType: System.Data.CommandType.StoredProcedure);
@@ -66,9 +63,6 @@ namespace CasosLegales.DataAccess.Repositories
             parametros.Add("@eciv_Id", item.eciv_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@muni_Id", item.muni_Id, DbType.String, ParameterDirection.Input);
             parametros.Add("@civi_Direccion", item.civi_Direccion, DbType.String, ParameterDirection.Input);
-            parametros.Add("@civi_EsDemandante", item.civi_EsDemandante, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@civi_EsAcusado", item.civi_EsAcusado, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@civi_EsTestigo", item.civi_EsTestigo, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@civi_UsuModificacion", item.civi_UsuModificacion, DbType.Int32, ParameterDirection.Input);
 
             var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.ActualizarCiviles, parametros, commandType: System.Data.CommandType.StoredProcedure);

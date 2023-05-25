@@ -4,8 +4,8 @@ import { empleado } from 'src/app/pages/models/casoslegales/empleados';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-import { EstadoscivilesService } from 'src/app/pages/services/general/estadocivilservice/estadosciviles.service';
-import { estadocivil } from 'src/app/pages/models/general/estadocivil';
+import { EstadocivilService } from 'src/app/pages/services/general/estadocivilservice/estadocivil.service';
+import { estadosciviles } from 'src/app/pages/models/general/estadocivil';
 
 import { MunicipioService } from 'src/app/pages/services/general/municipioservice/municipio.service';
 import { municipio } from 'src/app/pages/models/general/municipios';
@@ -28,7 +28,7 @@ export class CrearComponent implements OnInit {
   submit!: boolean;
   submitMunicipio!: boolean;
 
-  EstadoCivilDLL!: estadocivil[]; //estdo civil ddl
+  EstadoCivilDLL!: estadosciviles[]; //estdo civil ddl
   DepartamentoDLL!: departamento[]; //departamento ddl
 
   MunicipioDDL!: municipio[];// municipio ddl
@@ -39,7 +39,7 @@ export class CrearComponent implements OnInit {
 
   constructor(
     private service: EmpleadoService,
-    private EstadoCivilService: EstadoscivilesService,
+    private EstadoCivilService: EstadocivilService,
     private DepartamentoService: DepartamentoService,
     private MunicipioService: MunicipioService,
     private formBuilder: UntypedFormBuilder,
@@ -63,7 +63,7 @@ export class CrearComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.EstadoCivilService.getEstadoCivil() //cargar estado civil
+    this.EstadoCivilService.getEstadosCiviles() //cargar estado civil
       .subscribe((data: any) => {
         if (data.code === 200) {
           this.EstadoCivilDLL = data.data;

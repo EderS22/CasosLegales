@@ -10,6 +10,7 @@ SELECT	civi_Id,
 		civi_DNI,
 		[civi_Nombres],
 		[civi_Apellidos],
+		T1.civi_Nombres + ' ' + T1.civi_Apellidos AS civi_NombreCompleto,
 		[civi_Sexo],
 		[civi_Telefono],
 		[civi_CorreoElectronico],
@@ -17,9 +18,6 @@ SELECT	civi_Id,
 		T1.eciv_Id,
 		T1.muni_Id,
 		[civi_Direccion],
-		[civi_EsDemandante],
-		[civi_EsAcusado],
-		[civi_EsTestigo],
 		civi_UsuCreacion, 
 		T2.usua_Nombre AS user_Creacion,
 		civi_FechaCreacion, 
@@ -44,9 +42,6 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbCiviles_Insert
  @eciv_Id INT,
  @muni_Id CHAR(4),
  @civi_Direccion NVARCHAR(250),
- @civi_EsDemandante BIT,
- @civi_EsAcusado BIT,
- @civi_EsTestigo BIT,
  @civi_UsuCreacion INT)
 AS
 BEGIN
@@ -68,9 +63,6 @@ BEGIN
 											[eciv_Id], 
 											[muni_Id],
 											[civi_Direccion],
-											[civi_EsDemandante],
-											[civi_EsAcusado],
-											[civi_EsTestigo],
 											[civi_UsuCreacion],
 											[civi_UsuModificacion],
 											[civi_FechaModificacion])
@@ -83,10 +75,7 @@ BEGIN
 											@civi_FechaNacimiento, 
 											@eciv_Id, 
 											@muni_Id, 
-											@civi_Direccion, 
-											@civi_EsDemandante, 
-											@civi_EsAcusado, 
-											@civi_EsTestigo,
+											@civi_Direccion,
 											@civi_UsuCreacion,
 											NULL, 
 											NULL);
@@ -126,9 +115,6 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbCiviles_Update
  @eciv_Id INT,
  @muni_Id CHAR(4),
  @civi_Direccion NVARCHAR(250),
- @civi_EsDemandante BIT,
- @civi_EsAcusado BIT,
- @civi_EsTestigo BIT,
  @civi_UsuModificacion INT)
 AS
 BEGIN
@@ -150,9 +136,6 @@ BEGIN
 						eciv_Id = @eciv_Id,
 						@muni_Id = @muni_Id,
 						civi_Direccion = @civi_Direccion,
-						civi_EsDemandante = @civi_EsDemandante,
-						civi_EsAcusado = @civi_EsAcusado,
-						civi_EsTestigo = @civi_EsTestigo,
 						civi_UsuModificacion = @civi_UsuModificacion, 
 						civi_FechaModificacion = GETDATE()
 				WHERE	civi_Id = @civi_Id
