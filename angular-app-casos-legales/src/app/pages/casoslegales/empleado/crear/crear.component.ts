@@ -71,11 +71,11 @@ export class CrearComponent implements OnInit {
       })
 
     this.DepartamentoService.getDepartamentos() //cargar departamentos
-      .subscribe((data: any) => {
-        if (data.code === 200) {
-          this.DepartamentoDLL = data.data;
-        }
-      })
+    .subscribe((data: any) => {
+      if (data.code === 200) {
+        this.DepartamentoDLL = data.data;
+      }
+    })
 
     this.breadCrumbItems = [
       { label: 'Empleados' },
