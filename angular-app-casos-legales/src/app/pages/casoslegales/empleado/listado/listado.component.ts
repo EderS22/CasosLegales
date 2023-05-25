@@ -32,6 +32,16 @@ export class ListadoComponent {
 
   ngOnInit(): void {
 
+
+    if(localStorage.getItem('EMpleadoInsert') == '1'){
+      this.mensajeSuccess('Empleado Ingresado Correctamente');
+      localStorage.setItem('EMpleadoInsert','');
+    }
+    else if (localStorage.getItem('EMpleadoInsert') == '2'){
+      this.mensajeSuccess('Empleado Editado Correctamente');
+      localStorage.setItem('EMpleadoInsert','');
+    }
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       language: {

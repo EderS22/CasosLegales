@@ -4,7 +4,7 @@ import { empleado } from 'src/app/pages/models/casoslegales/empleados';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-import { EstadoscivilesService } from 'src/app/pages/services/general/estadocivilservice/estadosciviles.service';
+import { EstadocivilService } from 'src/app/pages/services/general/estadocivilservice/estadocivil.service'; 
 import { estadosciviles } from 'src/app/pages/models/general/estadocivil';
 
 import { MunicipioService } from 'src/app/pages/services/general/municipioservice/municipio.service';
@@ -39,7 +39,7 @@ export class EditarComponent {
 
   constructor(
     private service: EmpleadoService,
-    private EstadoCivilService: EstadoscivilesService,
+    private EstadoCivilService: EstadocivilService,
     private DepartamentoService: DepartamentoService,
     private MunicipioService: MunicipioService,
     private formBuilder: UntypedFormBuilder,
@@ -47,12 +47,12 @@ export class EditarComponent {
   ) 
   {
     this.validationform = this.formBuilder.group({
-      empe_DNI: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      empe_Nombres: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      empe_Apellidos: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      empe_Sexo: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      empe_Telefono: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      empe_CorreoElectronico: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
+      empe_DNI: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]@.áéíóúÁÉÍÓÚ]+')]],
+      empe_Nombres: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]@.áéíóúÁÉÍÓÚ]+')]],
+      empe_Apellidos: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]@.áéíóúÁÉÍÓÚ]+')]],
+      empe_Sexo: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]@.áéíóúÁÉÍÓÚ]+')]],
+      empe_Telefono: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]@.áéíóúÁÉÍÓÚ]+')]],
+      empe_CorreoElectronico: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]@.áéíóúÁÉÍÓÚ]+')]],
       empe_FechaNacimiento: ['', [Validators.required]],
       eciv_Id: [null, [Validators.required]],
       depa_Id: ['', [Validators.required]],
@@ -64,7 +64,14 @@ export class EditarComponent {
 
   ngOnInit(): void {
 
-    this.EstadoCivilService.getEstadoCivil() //cargar estado civil
+
+    if(localStorage.getItem('IdEmpleado') == '' || localStorage.getItem('IdEmpleado') == null)
+    {
+      this.router.navigate(["casoslegales/empleado/listado"]);
+    }
+ 
+
+    this.EstadoCivilService.getEstadosCiviles() //cargar estado civil
     .subscribe((data: any) => {
       if (data.code === 200) {
         this.EstadoCivilDLL = data.data;
@@ -137,6 +144,10 @@ export class EditarComponent {
     return this.validationform.controls;
   }
 
+  regresar(){
+    localStorage.setItem('IdEmpleado', '');
+    this.router.navigate(["casoslegales/empleado/listado"]);
+  }
 
   
   validSubmit() {
@@ -169,10 +180,18 @@ export class EditarComponent {
       this.service.EditarEmpleado(this.validationform.value)
         .subscribe((data: any) => {
           if (data.data.codeStatus == 1) {
+            localStorage.setItem('EMpleadoInsert', '2');
+            localStorage.setItem('IdEmpleado', '');
             this.router.navigate(["casoslegales/empleado/listado"]);
           }
-          else if (data.data.codeStatus == 2) {
+          else if (data.data.codeStatus == 11) {
             this.mensajeWarning('Ya existe un Empleado con ese DNI');
+          }
+          else if (data.data.codeStatus == 12) {
+            this.mensajeWarning('Ya existe un Empleado con ese correo electronico');
+          }
+          else if (data.data.codeStatus == 13) {
+            this.mensajeWarning('Ya existe un Empleado con ese numero de telefono');
           }
         })
     }

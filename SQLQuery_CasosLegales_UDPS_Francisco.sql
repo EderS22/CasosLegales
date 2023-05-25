@@ -448,7 +448,7 @@ ON T4.depa_Id = T6.depa_Id
 
 --**************  CREATE ******************--
 GO
-CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpleados_Insert
+CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpleados_Insert --'1','1','1','M','1','1','2020-12-12',1,'0311','1',1
 (@empe_DNI NVARCHAR(15),
  @empe_Nombres NVARCHAR(200),
  @empe_Apellidos NVARCHAR(200),
@@ -464,13 +464,26 @@ AS
 BEGIN
 	BEGIN TRY 
 
-		IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_DNI = @empe_DNI AND empe_Estado = 1)
+		IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE (empe_DNI = @empe_DNI  OR empe_CorreoElectronico = @empe_CorreoElectronico OR empe_Telefono = @empe_Telefono) AND empe_Estado = 1) 
 		 BEGIN 
-		 	SELECT 2 AS codeStatus
+				IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_DNI = @empe_DNI AND empe_Estado = 1)
+					 BEGIN
+						SELECT 11 AS codeStatus
+					 END
+				ELSE IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_CorreoElectronico = @empe_CorreoElectronico AND empe_Estado = 1)
+					 BEGIN
+						SELECT 12 AS codeStatus
+					 END
+				ELSE IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_Telefono = @empe_Telefono AND empe_Estado = 1)
+					 BEGIN
+						SELECT 13 AS codeStatus
+					 END
+				
 		 END
-		ELSE IF NOT EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_DNI = @empe_DNI)
-		 BEGIN
-		INSERT INTO [cale].[tbEmpleados]   ([empe_DNI],
+		ELSE IF NOT EXISTS (SELECT * FROM CALE.tbEmpleados WHERE (empe_DNI = @empe_DNI OR empe_Telefono = @empe_Telefono OR empe_CorreoElectronico = @empe_CorreoElectronico)AND empe_Estado = 1)		
+				BEGIN
+								INSERT INTO [cale].[tbEmpleados]   
+											([empe_DNI],
 											[empe_Nombres],
 											[empe_Apellidos],
 											[empe_Sexo],
@@ -497,8 +510,8 @@ BEGIN
 											NULL, 
 											NULL);
 
-			SELECT 1 AS codeStatus
-		 END
+									SELECT 1 AS codeStatus
+			END
         ELSE
 		 BEGIN
 			UPDATE CALE.tbEmpleados
@@ -506,8 +519,17 @@ BEGIN
 				empe_UsuCreacion = @empe_UsuCreacion,
 				empe_FechaCreacion = GETDATE(),
 				empe_UsuModificacion = NULL,
-				empe_FechaModificacion = NULL
-			WHERE empe_DNI = @empe_DNI;
+				empe_FechaModificacion = NULL,
+				empe_Nombres = @empe_Nombres,
+				empe_Apellidos = @empe_Apellidos,
+				empe_DNI = @empe_DNI,
+				empe_Telefono = @empe_Telefono,
+				empe_Sexo = @empe_Sexo,
+				eciv_Id = @eciv_Id,
+				muni_Id = @muni_Id,
+				empe_CorreoElectronico = @empe_CorreoElectronico,
+				empe_Direccion = @empe_Direccion
+			WHERE empe_DNI = @empe_DNI OR empe_Telefono = @empe_Telefono OR empe_CorreoElectronico = @empe_CorreoElectronico
 
 			SELECT 1 AS codeStatus
 		 END
@@ -536,9 +558,21 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpleados_Update
 AS
 BEGIN
 	BEGIN TRY
-		IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE (empe_DNI = @empe_DNI AND empe_Id != @empe_Id))
+
+		IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE (empe_DNI = @empe_DNI  OR empe_CorreoElectronico = @empe_CorreoElectronico OR empe_Telefono = @empe_Telefono)  AND empe_Id != @empe_Id AND empe_Estado = 1)
 			BEGIN
-				SELECT 2 codeStatus
+				IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_DNI = @empe_DNI AND empe_Id != @empe_Id AND empe_Estado = 1)
+					 BEGIN
+						SELECT 11 AS codeStatus
+					 END
+				ELSE IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_CorreoElectronico = @empe_CorreoElectronico AND  empe_Id != @empe_Id AND empe_Estado = 1)
+					 BEGIN
+						SELECT 12 AS codeStatus
+					 END
+				ELSE IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_Telefono = @empe_Telefono AND empe_Id != @empe_Id AND empe_Estado = 1)
+					 BEGIN
+						SELECT 13 AS codeStatus
+					 END
 			END
 		ELSE
 			BEGIN
