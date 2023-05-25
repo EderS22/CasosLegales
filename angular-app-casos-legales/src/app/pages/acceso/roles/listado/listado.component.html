@@ -11,7 +11,7 @@
         <div class="card- d-flex justify-content-between align-items-center">
             <h1 class="mb-2 mt-2 text-center flex-grow-1">Roles</h1>
             <img src="https://cdn.freelogodesign.org/files/c68797f5ce8d42409c858321e207f633/thumb/logo_200x200.png"
-            alt="Logo" class="logo-image" style="width: 80px; height: 80px; border-radius: 30px;">
+            alt="Logo" class="logo-image" style="width: 80px; height: 80px; border-radius: 40px;">
         </div>
     </div>
 </div>
@@ -26,7 +26,8 @@
                 <div class="row g-4 mb-3">
                     <div class="col-sm-auto">
                         <div class="d-flex gap-1">
-                            <button type="button" class="btn btn-primary add-btn" (click)="openModalRol(modalRol, 0)">
+                            <button type="button" class="btn btn-primary add-btn" 
+                                (click)="editarAgregarRol(0)">
                                 <i class="ri-add-line align-bottom me-1"></i>
                                 Agregar
                             </button>
@@ -52,7 +53,7 @@
                                     <div class="col-sm-auto">
                                         <div class="d-flex gap-1" style="justify-content: center;">
                                             <button type="button" class="btn btn-soft-primary"
-                                                (click)="openModalRol(modalRol, item)">
+                                                (click)="editarAgregarRol(item.role_Id)">
                                                 <i class="ri-edit-2-line"></i>
                                                 Editar
                                             </button>
@@ -77,67 +78,6 @@
         </div>
     </div>
 </div>
-
-<ng-template #modalRol role="document" let-modal>
-    <div class="modal-header bg-light p-3">
-        <h5 class="modal-title">{{isEdit ? 'Editar' : 'Agregar'}} rol</h5>
-        <button type="button" class="btn-close" #closeContent aria-label="Cerrar" id="close-modal"
-            (click)="modal.dismiss('Cross click')">
-        </button>
-    </div>
-    <div class="modal-body">
-        <form [formGroup]="rolForm">
-            <input type="text" formControlName="role_Id" hidden>
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <label for="role_Nombre" class="form-label">
-                        Nombre del rol
-                    </label>
-                    <input type="text" class="form-control" placeholder="Ingrese nombre para el rol"
-                        formControlName="role_Nombre"
-                        [ngClass]="{ 'is-invalid': submitted && form['role_Nombre'].errors }" />
-                    <div class="invalid-feedback">Por favor ingrese un nombre para el rol.</div>
-                </div>
-                <div class="col-sm-6">
-                    <label for="role_Descripcion" class="form-label">
-                        Descripción del rol
-                    </label>
-                    <input type="text" class="form-control" placeholder="Ingrese una descripción para el rol"
-                        formControlName="role_Descripcion"
-                        [ngClass]="{ 'is-invalid': submitted && form['role_Descripcion'].errors }" />
-                    <div class="invalid-feedback">Por favor ingrese una descripción para el rol.</div>
-                </div>
-            </div>
-            <br/>
-            <br/>
-            <div>
-                <h4 style="text-align: center;">Pantallas</h4>
-                <div class="text-danger" [ngStyle]="{'display': !pantallasValid ? '' : 'none'}">Debe asignarle al menos una pantalla al rol</div>
-            </div>
-            <br/>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 1fr; gap: 23px;">
-                <div *ngFor="let item of listadoPantallas">
-                   <label>{{item.pant_Pantalla}}</label>
-                   <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
-                        <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
-                   </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <div class="hstack gap-2 justify-content-end">
-            <button type="button" class="btn btn-light" data-bs-dismiss="modal" (click)="modal.close('Close click')">
-                Cerrar
-            </button>
-            <button type="submit" class="btn btn-success" id="add-btn" (click)="onSubmit()">
-                {{isEdit ? 'Editar' : 'Agregar'}} rol
-            </button>
-        </div>
-    </div>
-</ng-template>
-
 
 <ng-template #modalEliminar let-modal>
     <div class="modal-content">

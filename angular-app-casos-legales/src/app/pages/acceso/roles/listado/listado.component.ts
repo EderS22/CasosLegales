@@ -30,20 +30,13 @@ export class ListadoComponent implements OnInit {
     dtTrigger: Subject<any> = new Subject<any>();
     isEdit: boolean = false;
     rol_IdEliminar: number = 0;
-    pantallasValid: boolean = true;
-    submitted = false;
-    rolForm!: UntypedFormGroup;
+    listadoRoles: rol [] = [];
+
     breadCrumbItems!: Array<{}>;
-    listadoRoles: rol[] = [];
-    listadoPantallas: pantalla[] = [];
-    pantallasTemp: pantalla[] = [];
-    pantallasIdsSelects: number[] = [];
-    allCorrect: boolean = true;
-    
+
     dateNow: Date = new Date();
     
     ngOnInit(): void {
-
         if(!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin){
             const ropaAcceso = new ropa();
             ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
@@ -62,6 +55,9 @@ export class ListadoComponent implements OnInit {
             { label: 'Roles' },
             { label: 'Listado', active: true }
         ];
+
+        this.CargarRoles();
+        
         this.dtOptions = {
             pagingType: 'simple_numbers',
             language: {
@@ -74,15 +70,6 @@ export class ListadoComponent implements OnInit {
                 },
             ]
         };
-
-        this.CargarRoles();
-        this.CargarPantallasPorIdRol(0, true);
-
-        this.rolForm = this.formBuilder.group({
-            role_Id: [0],
-            role_Nombre: ['', [Validators.required]],
-            role_Descripcion: ['', [Validators.required]]
-        });
     }
 
     CargarRoles() {
@@ -96,208 +83,13 @@ export class ListadoComponent implements OnInit {
                 }
             })
     }
-
-    CargarPantallasPorIdRol(role_Id: number, usua_EsAdmin: boolean) {
-        this.rolService.getPantallasPorRolYAdmin(role_Id, usua_EsAdmin)
-            .subscribe((data: any) => {
-                if (data.code === 200) {
-                    this.listadoPantallas = data.data;
-
-                    this.listadoPantallas.forEach(element => {
-                        this.rolForm.addControl(`pant_${element.pant_Id}`, new FormControl(false))
-                    });
-                }
-            })
-    }
-
-    get form() {
-        return this.rolForm.controls;
-    }
-
+  
     rerender(): void {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
             // Destroy the table first
             dtInstance.destroy();
             this.CargarRoles();
         });
-    }
-
-    onSubmit() {
-        this.submitted = true;
-        this.pantallasIdsSelects = [];
-        this.allCorrect = true;
-
-        this.listadoPantallas.forEach(element => {
-            if (this.form[`pant_${element.pant_Id}`].value) {
-                this.pantallasIdsSelects.push(element.pant_Id);
-            }
-        })
-
-        if(this.pantallasIdsSelects.length > 0){
-            this.pantallasValid = true;
-
-            if (this.rolForm.valid) {
-                if (this.isEdit) {
-                    this.rolService.validarRolexiste(this.form['role_Nombre'].value)
-                        .subscribe((response: any) => {
-                            if (response.code === 200) {
-                                if (response.data.codeStatus > 0) {
-                                    if (response.data.codeStatus === this.form['role_Id'].value) {
-                                        const rolEditar = new rol();
-                                        rolEditar.role_Id = this.form['role_Id'].value;
-                                        rolEditar.role_Nombre = this.form['role_Nombre'].value;
-                                        rolEditar.role_Descripcion = this.form['role_Descripcion'].value;
-                                        rolEditar.usua_IdModificacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
-                                        
-                                        this.rolService.actualizarRol(rolEditar)
-                                            .subscribe((respuesta: any) => {
-                                                if (respuesta.code === 200) {
-                                                    const ropaEliminar = new ropa();
-    
-                                                    ropaEliminar.role_Id = this.form['role_Id'].value;
-                                                    ropaEliminar.usua_IdModificacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
-    
-                                                    this.rolService.eliminarPantallasdeRol(ropaEliminar)
-                                                        .subscribe((data: any) => {
-                                                            if (data.code === 200) {
-                                                                if (data.data.codeStatus === 1) {
-                                                                    this.pantallasIdsSelects.forEach(element => {
-                                                                        const ropaInsert = new ropa();
-    
-                                                                        ropaInsert.role_Id = this.form['role_Id'].value;
-                                                                        ropaInsert.pant_Id = element;
-                                                                        ropaInsert.usua_IdCreacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
-    
-                                                                        this.rolService.insertarRopa(ropaInsert).subscribe((data2: any) => {
-                                                                            if (data2.code === 200) {
-                                                                                if (data2.data.codeStatus !== 1) {
-                                                                                    this.allCorrect = false;
-                                                                                }
-                                                                            }
-                                                                        })
-                                                                    });
-    
-                                                                    if (this.allCorrect) {
-                                                                        this.modalService.dismissAll();
-                                                                        this.rerender();
-                                                                        this.mensajeSuccess('Rol editado con éxito');
-                                                                    } else {
-                                                                        this.mensajeError('Ocurrio un error al intentar editar el rol');
-                                                                    }
-                                                                }
-                                                            } else {
-                                                                this.mensajeError('Ocurrio un error al intentar editar el rol');
-                                                            }
-                                                        })
-                                                }
-                                            })
-                                    } else {
-                                        this.mensajeWarning('El nombre del rol ya existe');
-                                    }
-                                }else{
-                                    const rolEditar = new rol();
-                                    rolEditar.role_Id = this.form['role_Id'].value;
-                                    rolEditar.role_Nombre = this.form['role_Nombre'].value;
-                                    rolEditar.role_Descripcion = this.form['role_Descripcion'].value;
-
-                                    this.rolService.actualizarRol(rolEditar)
-                                        .subscribe((respuesta: any) => {
-                                            if (respuesta.code === 200) {
-                                                const ropaEliminar = new ropa();
-
-                                                ropaEliminar.role_Id = this.form['role_Id'].value;
-                                                ropaEliminar.usua_IdModificacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
-
-                                                this.rolService.eliminarPantallasdeRol(ropaEliminar)
-                                                    .subscribe((data: any) => {
-                                                        if (data.code === 200) {
-                                                            if (data.data.codeStatus === 1) {
-                                                                this.pantallasIdsSelects.forEach(element => {
-                                                                    const ropaInsert = new ropa();
-
-                                                                    ropaInsert.role_Id = this.form['role_Id'].value;
-                                                                    ropaInsert.pant_Id = element;
-                                                                    ropaInsert.usua_IdCreacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
-
-                                                                    this.rolService.insertarRopa(ropaInsert).subscribe((data2: any) => {
-                                                                        if (data2.code === 200) {
-                                                                            if (data2.data.codeStatus !== 1) {
-                                                                                this.allCorrect = false;
-                                                                            }
-                                                                        }
-                                                                    })
-                                                                });
-
-                                                                if (this.allCorrect) {
-                                                                    this.modalService.dismissAll();
-                                                                    this.rerender();
-                                                                    this.mensajeSuccess('Rol editado con éxito');
-                                                                } else {
-                                                                    this.mensajeError('Ocurrio un error al intentar editar el rol');
-                                                                }
-                                                            }
-                                                        } else {
-                                                            this.mensajeError('Ocurrio un error al intentar editar el rol');
-                                                        }
-                                                    })
-                                            }
-                                        })
-                                }
-                            }
-                        })
-                } else {
-                    this.rolService.validarRolexiste(this.form['role_Nombre'].value)
-                        .subscribe((response: any) => {
-                            if (response.code === 200) {
-                                if (response.data.codeStatus > 0) {
-                                    this.mensajeWarning('El nombre del rol ya existe');
-                                } else {
-                                    const rolInsert = new rol();
-    
-                                    rolInsert.role_Nombre = this.form['role_Nombre'].value;
-                                    rolInsert.role_Descripcion = this.form['role_Descripcion'].value;
-                                    rolInsert.usua_IdCreacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
-    
-                                    this.rolService.insertarNuevoRol(rolInsert)
-                                        .subscribe((data: any) => {
-                                            if (data.code === 200) {
-                                                if (data.data.codeStatus > 0) {
-                                                    this.pantallasIdsSelects.forEach(element => {
-                                                        const ropaInsert = new ropa();
-    
-                                                        ropaInsert.role_Id = data.data.codeStatus;
-                                                        ropaInsert.pant_Id = element;
-                                                        ropaInsert.usua_IdCreacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
-    
-                                                        this.rolService.insertarRopa(ropaInsert).subscribe((data2: any) => {
-                                                            if (data2.code === 200) {
-                                                                if (data2.data.codeStatus !== 1) {
-                                                                    this.allCorrect = false;
-                                                                }
-                                                            }
-                                                        })
-                                                    });
-    
-                                                    if (this.allCorrect) {
-                                                        this.modalService.dismissAll();
-                                                        this.rerender();
-                                                        this.mensajeSuccess('Rol añadido con éxito');
-                                                    } else {
-                                                        this.mensajeError('Ocurrio un error al intentar agregar el rol');
-                                                    }
-                                                }
-                                            } else {
-                                                this.mensajeError('Ocurrio un error al intentar editar el rol');
-                                            }
-                                        })
-                                }
-                            }
-                        })
-                }
-            }       
-        }else{
-            this.pantallasValid = false;
-        }
     }
 
     eliminarRol(id:number){
@@ -326,32 +118,9 @@ export class ListadoComponent implements OnInit {
         this.router.navigate(["acceso/roles/detalles"]);
     }
 
-    openModalRol(content: any, data: any) {
-        this.submitted = false;
-        this.rolForm.reset();
-        this.pantallasValid = true;
-
-        if (data.role_Id > 0) {
-            this.isEdit = true;
-            this.form['role_Id'].setValue(data.role_Id);
-            this.form['role_Nombre'].setValue(data.role_Nombre);
-            this.form['role_Descripcion'].setValue(data.role_Descripcion);
-
-            this.rolService.getPantallasPorRolYAdmin(data.role_Id, false)
-                .subscribe((datos: any) => {
-                    if (datos.code === 200) {
-                        this.pantallasTemp = datos.data;
-
-                        this.pantallasTemp.forEach(elemento => {
-                            this.rolForm.setControl(`pant_${elemento.pant_Id}`, new FormControl(true))
-                        });
-                    }
-                })
-        }else{
-            this.isEdit = false;
-        }
-
-        this.modalService.open(content, { centered: true, backdrop: 'static', size: 'lg', keyboard: false });
+    editarAgregarRol(id:number){
+        localStorage.setItem("role_IdEditar", id.toString());
+        this.router.navigate(["acceso/roles/agregareditar"]);
     }
 
     openEliminar(content: any, id: number) {

@@ -1,0 +1,112 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Roles" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="card ribbon-box border shadow-none overflow-hidden">
+    <div class="card-body text-muted">
+        <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
+            <span class="trending-ribbon-text">{{dateNow.toLocaleDateString()}}</span> <i
+                class="ri-flashlight-fill text-white align-bottom float-end ms-1"></i>
+        </div>
+        <div class="card- d-flex justify-content-between align-items-center">
+            <h1 class="mb-2 mt-2 text-center flex-grow-1">Roles</h1>
+            <img src="https://cdn.freelogodesign.org/files/c68797f5ce8d42409c858321e207f633/thumb/logo_200x200.png"
+            alt="Logo" class="logo-image" style="width: 80px; height: 80px; border-radius: 40px;">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">{{isEdit ? 'Editar' : 'Agregar'}} rol</h4>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="rolForm">
+                    <input type="text" formControlName="role_Id" hidden>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="role_Nombre" class="form-label">
+                                Nombre del rol
+                            </label>
+                            <input type="text" class="form-control" placeholder="Ingrese nombre para el rol"
+                                formControlName="role_Nombre"
+                                [ngClass]="{ 'is-invalid': submitted && form['role_Nombre'].errors }" />
+                            <div class="invalid-feedback">Por favor ingrese un nombre para el rol.</div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="role_Descripcion" class="form-label">
+                                Descripción del rol
+                            </label>
+                            <input type="text" class="form-control" placeholder="Ingrese una descripción para el rol"
+                                formControlName="role_Descripcion"
+                                [ngClass]="{ 'is-invalid': submitted && form['role_Descripcion'].errors }" />
+                            <div class="invalid-feedback">Por favor ingrese una descripción para el rol.</div>
+                        </div>
+                    </div>
+                    <br/>
+                    <hr/>
+                    <br/>
+                    <div>
+                        <h4 style="text-align: center;">Pantallas</h4>
+                        <div class="search-name">
+                            <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTerm$.next($any($event.target).value)">
+                        </div>
+                        <br/>
+                        <div class="text-danger" [ngStyle]="{'display': !pantallasValid ? '' : 'none'}">Debe asignarle al menos una pantalla al rol</div>
+                    </div>
+                    <br/>
+
+                    <mat-tab-group>
+                        <mat-tab label="Acceso">
+                            <br/>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 1fr; gap: 23px; overflow-y: scroll; height: 350px;">
+                                <ng-container *ngFor="let item of pantallasFiltered" >
+                                    <div *ngIf="item.pant_Esquema === 'Acceso'">
+                                        <label>{{item.pant_Pantalla}}</label>
+                                        <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
+                                            <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="General">
+                            <br/>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 1fr; gap: 23px; overflow-y: scroll; height: 350px;">
+                                <ng-container *ngFor="let item of pantallasFiltered" >
+                                    <div *ngIf="item.pant_Esquema === 'General'">
+                                        <label>{{item.pant_Pantalla}}</label>
+                                        <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
+                                            <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Casos Legales">
+                            <br/>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 1fr; gap: 23px; overflow-y: scroll; height: 350px;">
+                                <ng-container *ngFor="let item of pantallasFiltered" >
+                                    <div *ngIf="item.pant_Esquema === 'CasosLegales'">
+                                        <label>{{item.pant_Pantalla}}</label>
+                                        <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
+                                            <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <hr>
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-success col-6" id="add-btn" (click)="onSubmit()">
+                            {{isEdit ? 'Editar' : 'Agregar'}} rol
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

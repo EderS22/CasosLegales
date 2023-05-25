@@ -15,6 +15,7 @@ import { ListadoComponent as ListadoRoles } from './acceso/roles/listado/listado
 import { DetallesComponent as DetallesRoles } from './acceso/roles/detalles/detalles.component';
 import { ListadoComponent  as ListadoEmpleado} from './casoslegales/empleado/listado/listado.component';
 import { CrearComponent as CrearEmpleados } from './casoslegales/empleado/crear/crear.component';
+import { AgregareditarComponent as AgregarEditarRol } from './acceso/roles/agregareditar/agregareditar.component';
 
 const routes: Routes = [
     {
@@ -71,6 +72,10 @@ const routes: Routes = [
     { 
       path: "casoslegales/tiposdeevidencia/listado",
       component: ListadoTiposdeEvidencia
+    },
+    {
+      path: "acceso/roles/agregareditar",
+      component: AgregarEditarRol
     }
 ];
 
@@ -78,4 +83,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
+
 export class PagesRoutingModule { }

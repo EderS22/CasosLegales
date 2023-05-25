@@ -50,6 +50,9 @@ import { ListadoComponent as ListadoMunicipio } from './general/municipio/listad
 import { ListadoComponent as ListadoEmpleados} from './casoslegales/empleado/listado/listado.component';
 import { CrearComponent as InsertarEmpleados} from './casoslegales/empleado/crear/crear.component';
 import { EditarComponent } from './casoslegales/empleado/editar/editar.component';
+import { AgregareditarComponent } from './acceso/roles/agregareditar/agregareditar.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -70,6 +73,7 @@ import { EditarComponent } from './casoslegales/empleado/editar/editar.component
     InsertarEmpleados,
     ListadoTiposDeEvidencia,
     EditarComponent,
+    AgregareditarComponent,
   ],
   imports: [
     CommonModule,
@@ -96,7 +100,9 @@ import { EditarComponent } from './casoslegales/empleado/editar/editar.component
     CdkDropList, 
     CdkDrag,
     TablesModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    Ng2SearchPipeModule,
+    MatTabsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

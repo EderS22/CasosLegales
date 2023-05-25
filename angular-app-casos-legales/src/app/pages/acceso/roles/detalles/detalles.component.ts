@@ -10,6 +10,7 @@ import { RolService } from 'src/app/pages/services/acceso/rol/rol.service';
   styleUrls: ['./detalles.component.scss']
 })
 export class DetallesComponent implements OnInit{
+  
   constructor(
     private router:Router,
     private rolService:RolService
@@ -27,7 +28,6 @@ export class DetallesComponent implements OnInit{
     }
     
     this.rolModel.role_Id = parseInt(localStorage.getItem("role_IdDetalles") ?? '0');
-
 
     this.breadCrumbItems = [
       { label: 'Roles' },
