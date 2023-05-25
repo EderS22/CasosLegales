@@ -27,13 +27,13 @@ export class ListadoComponent {
   depaNombreInvalid = false;
 
   depaNombre!: string;
-
+  dateNow: Date = new Date();
 
   constructor(private service: DepartamentoService, private modalService: NgbModal) { }
   ngOnInit(): void {
 
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers',
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
       },

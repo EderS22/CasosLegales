@@ -30,6 +30,7 @@ export class ListadoComponent {
   submitted = false;
   mc!: UntypedFormGroup;
 
+  dateNow: Date = new Date();
   
   muniNombreInValid = false;
   muniCodigoInValid = false;
@@ -46,13 +47,13 @@ export class ListadoComponent {
     });
 
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers',
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
       },
       columnDefs: [
         {
-          targets: 4,
+          targets: 3,
           orderable: false,
         },
       ]

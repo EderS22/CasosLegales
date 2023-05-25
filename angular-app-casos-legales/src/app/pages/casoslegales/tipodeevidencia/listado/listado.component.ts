@@ -28,13 +28,14 @@ export class ListadoComponent {
   te!: UntypedFormGroup;
   tievNombreInvalid = false;
   tievDescripcionInvalid = false;
+  dateNow: Date = new Date();
 
   constructor(private service: TiposdeevidenciaService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
 
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers',
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
       },
@@ -48,7 +49,7 @@ export class ListadoComponent {
     this.LoadTiposdeevidencia();
 
     this.breadCrumbItems = [
-      { label: 'TiposdeEvidencia' },
+      { label: 'Tipos de Evidencia' },
       { label: 'Listado', active: true }
     ];
   }

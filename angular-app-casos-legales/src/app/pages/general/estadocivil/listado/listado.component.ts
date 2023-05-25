@@ -25,6 +25,8 @@ export class ListadoComponent {
   ec!: UntypedFormGroup;
   ecivDescripcionInValid = false;
 
+  dateNow: Date = new Date();
+  
   constructor(private service: EstadocivilService, private modalService: NgbModal, private formBuilder: UntypedFormBuilder) { }
   ngOnInit(): void {
 
@@ -33,7 +35,7 @@ export class ListadoComponent {
     });
 
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers',
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
       },

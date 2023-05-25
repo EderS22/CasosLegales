@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import { EstadoscivilesService } from 'src/app/pages/services/general/estadocivilservice/estadosciviles.service';
-import { estadocivil } from 'src/app/pages/models/general/estadocivil';
+import { estadosciviles } from 'src/app/pages/models/general/estadocivil';
 
 import { MunicipioService } from 'src/app/pages/services/general/municipioservice/municipio.service';
 import { municipio } from 'src/app/pages/models/general/municipios';
@@ -28,7 +28,7 @@ export class CrearComponent implements OnInit {
   submit!: boolean;
   submitMunicipio!: boolean;
 
-  EstadoCivilDLL!: estadocivil[]; //estdo civil ddl
+  EstadoCivilDLL!: estadosciviles[]; //estdo civil ddl
   DepartamentoDLL!: departamento[]; //departamento ddl
 
   MunicipioDDL!: municipio[];// municipio ddl
@@ -36,7 +36,9 @@ export class CrearComponent implements OnInit {
 
   breadCrumbItems!: Array<{}>;
   modelValueAsDate: Date = new Date(); // se usa para el calendario 
-
+  
+  dateNow: Date = new Date();
+  
   constructor(
     private service: EmpleadoService,
     private EstadoCivilService: EstadoscivilesService,

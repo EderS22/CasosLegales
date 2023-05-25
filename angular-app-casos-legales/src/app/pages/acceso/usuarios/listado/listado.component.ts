@@ -37,6 +37,8 @@ export class ListadoComponent implements AfterViewInit, OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
 
+  dateNow: Date = new Date();
+  
   constructor(
     private modalService: NgbModal, 
     private service: UsuariosService, 

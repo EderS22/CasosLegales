@@ -25,6 +25,8 @@ export class ListadoComponent {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
 
+  dateNow: Date = new Date();
+  
   constructor(
     private service: EmpleadoService,
     private modalService: NgbModal,
@@ -34,7 +36,7 @@ export class ListadoComponent {
   ngOnInit(): void {
 
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers',
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
       },
@@ -78,7 +80,7 @@ export class ListadoComponent {
   }
 
   InsertarUsuario() {
-    this.router.navigate(["casoslegales/empleado/crear"]);
+    this.router.navigate(["casoslegales/empleados/crear"]);
   }
 
   

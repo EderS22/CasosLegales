@@ -39,7 +39,9 @@ export class ListadoComponent implements OnInit {
     pantallasTemp: pantalla[] = [];
     pantallasIdsSelects: number[] = [];
     allCorrect: boolean = true;
-
+    
+    dateNow: Date = new Date();
+    
     ngOnInit(): void {
 
         if(!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin){

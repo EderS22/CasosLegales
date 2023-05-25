@@ -33,19 +33,19 @@ const routes: Routes = [
       component: ListadoTiposdeCaso
     }, 
     { 
-      path: "general/departamento/listado",
+      path: "general/departamentos/listado",
       component: ListadoDepartamento
     },
     { 
-      path: "general/cargo/listado",
+      path: "general/cargos/listado",
       component: ListadoCargo
     },
     { 
-      path: "general/estadocivil/listado",
+      path: "general/estadosciviles/listado",
       component: ListadoEstadoCivil
     },
     { 
-      path: "general/municipio/listado",
+      path: "general/municipios/listado",
       component: ListadoMunicipio
     },
     { 
@@ -61,11 +61,11 @@ const routes: Routes = [
       component: DetallesRoles
     },
     { 
-      path: "casoslegales/empleado/listado",
+      path: "casoslegales/empleados/listado",
       component: ListadoEmpleado
     },
     {
-      path: "casoslegales/empleado/crear",
+      path: "casoslegales/empleados/crear",
       component: CrearEmpleados
     },
     { 

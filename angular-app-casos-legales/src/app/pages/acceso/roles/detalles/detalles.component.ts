@@ -19,6 +19,8 @@ export class DetallesComponent implements OnInit{
   listadoPantallas: pantalla[] = [];
   rolModel: rol = new rol();
 
+  dateNow: Date = new Date();
+  
   ngOnInit(): void {
     if(parseInt(localStorage.getItem("role_IdDetalles") ?? '0', 0) === 0){
       this.router.navigate(["acceso/roles/listado"]);
