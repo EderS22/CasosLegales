@@ -34,7 +34,7 @@ namespace CasosLegales.API.Models
 
         public int? usua_IdModificacion { get; set; }
 
-        public string? usua_NombreModificacion { get; set; }
+        public string usua_NombreModificacion { get; set; }
 
         public DateTime? usua_FechaModificacion { get; set; }
     }

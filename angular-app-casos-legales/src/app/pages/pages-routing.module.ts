@@ -17,6 +17,7 @@ import { ListadoComponent  as ListadoEmpleado} from './casoslegales/empleado/lis
 import { CrearComponent as CrearEmpleados } from './casoslegales/empleado/crear/crear.component';
 import { ListadoComponent as ListadoCivil } from './casoslegales/civil/listado/listado.component';
 import { CrearComponent as CrearCivil } from './casoslegales/civil/crear/crear.component';
+import { EditarComponent as EditarEmpleado } from './casoslegales/empleado/editar/editar.component';
 
 const routes: Routes = [
     {
@@ -69,6 +70,10 @@ const routes: Routes = [
     {
       path: "casoslegales/empleado/crear",
       component: CrearEmpleados
+    },
+    {
+      path: "casoslegales/empleado/editar",
+      component: EditarEmpleado
     },
     { 
       path: "casoslegales/tiposdeevidencia/listado",

@@ -32,6 +32,7 @@ export class ListadoComponent {
   constructor(private service: DepartamentoService, private modalService: NgbModal) { }
   ngOnInit(): void {
 
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       language: {

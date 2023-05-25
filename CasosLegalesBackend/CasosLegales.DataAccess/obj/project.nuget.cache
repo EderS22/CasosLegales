@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "bSPAQRLO3PzJME7V9Lfti/cH4Ep2QDpshELcfcKd91l+VLkAsbQR28xUx/W1krGHAJS5NwGyAZ8hq9CRiw5n2A==",
+=======
+  "dgSpecHash": "AbX6fvYixpZ1gwHJPEhHgqTEI9qlFK+otit5J+IbbeuE3+uBiYv++mRA+oLFoBNgyfLKaV9xK+hxV/rF0OTVuQ==",
+>>>>>>> Cristian
   "success": true,
   "projectFilePath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj",
   "expectedPackageFiles": [

@@ -38,7 +38,6 @@ C:\Users\ALEXANDER\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegale
 C:\Users\ALEXANDER\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\bin\Debug\net5.0\CasosLegales.Entities.dll
 C:\Users\ALEXANDER\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\bin\Debug\net5.0\ref\CasosLegales.Entities.dll
 C:\Users\ALEXANDER\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\bin\Debug\net5.0\CasosLegales.Entities.pdb
-C:\Users\ALEXANDER\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\obj\Debug\net5.0\CasosLegales.Entities.csproj.AssemblyReference.cache
 C:\Users\ALEXANDER\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\obj\Debug\net5.0\CasosLegales.Entities.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\ALEXANDER\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\obj\Debug\net5.0\CasosLegales.Entities.AssemblyInfoInputs.cache
 C:\Users\ALEXANDER\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\obj\Debug\net5.0\CasosLegales.Entities.AssemblyInfo.cs
