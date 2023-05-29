@@ -6,8 +6,8 @@
 
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h1 class="mb-2 mt-2 text-center flex-grow-1">CIVILES</h1>
-                <img src="https://cdn.freelogodesign.org/files/c68797f5ce8d42409c858321e207f633/thumb/logo_200x200.png?v=0"
+                <h1 class="mb-2 mt-2 text-center flex-grow-1">Civiles</h1>
+                <img src="assets/images/layouts/logoLeyMaxima.png"
                     alt="Logo" class="logo-image custom-rounded" style="width: 80px; height: 80px;">
             </div>
             <div class="card-body">
@@ -150,8 +150,11 @@
                                 [ngClass]="{'is-invalid': submit && form['civi_Direccion'].errors}"></textarea>
                             <div class="invalid-feedback">Por favor, ingrese una direccion</div>
                         </div>
-                        <div class="col-3 mt-3">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        <div class="col-1 mt-3">
+                            <button type="submit" class="btn btn-success bg-gradient waves-effect waves-light">Guardar</button>
+                        </div>
+                        <div class="col-1 mt-3">
+                            <button type="button" class="btn btn-danger bg-gradient waves-effect waves-light" (click)="regresar()">Cancelar</button>
                         </div>
                     </div>
                 </form>

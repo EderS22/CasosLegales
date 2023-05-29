@@ -103,7 +103,7 @@ export class CrearComponent implements OnInit {
   }
 
   regresar(){
-    this.router.navigate(["casoslegales/civil/listado"]);
+    this.router.navigate(["casoslegales/empleado/listado"]);
   }
 
   validSubmit() {

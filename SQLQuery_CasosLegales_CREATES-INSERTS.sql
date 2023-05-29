@@ -550,11 +550,11 @@ VALUES('Roles', 'acceso/roles/listado', 'Acceso', 'ri-team-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Departamentos', 'general/departamentos/listado', 'General', 'ri-function-line', 1)
+VALUES('Departamentos', 'general/departamento/listado', 'General', 'ri-function-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Municipios', 'general/municipios/listado', 'General', 'ri-dashboard-line', 1)
+VALUES('Municipios', 'general/municipio/listado', 'General', 'ri-dashboard-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
