@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GlobalComponent } from 'src/app/global-component';
 import { rol } from '../../../models/acceso/rol';
-import { usuario } from 'src/app/pages/models/acceso/usuario';
 import { pantalla } from 'src/app/pages/models/acceso/pantalla';
 import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
 

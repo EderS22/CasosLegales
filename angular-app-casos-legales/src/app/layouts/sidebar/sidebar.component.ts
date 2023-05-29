@@ -101,7 +101,6 @@ export class SidebarComponent implements OnInit {
                     this.menuItems.push(item);
                 })
             }
-
         }
     })
   }

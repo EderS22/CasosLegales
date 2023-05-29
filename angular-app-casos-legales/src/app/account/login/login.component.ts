@@ -3,11 +3,10 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { ActivatedRoute, Router } from '@angular/router';
 
 // Login Auth
-import { environment } from '../../../environments/environment';
 import { AuthenticationService } from '../../core/services/auth.service';
 import { AuthfakeauthenticationService } from '../../core/services/authfake.service';
-import { first } from 'rxjs/operators';
 import { ToastService } from './toast-service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -65,42 +64,20 @@ export class LoginComponent implements OnInit {
    onSubmit() {
     this.submitted = true;
 
-    // Login Api
-    this.authenticationService.login(this.f['email'].value, this.f['password'].value).subscribe((data: any) => {
-        if (data.code === 200) {
-            if(data.data.usua_Id > 0){
-              localStorage.setItem('toast', 'true');
-              localStorage.setItem('currentUser', JSON.stringify(data.data));
-      
-              this.router.navigate(['/']);
-            } else{
-              this.toastService.show('Usuario y/o contraseña incorrectos', { classname: 'bg-warning text-center text-white', delay: 8000 });
+    if(this.loginForm.valid){
+        this.authenticationService.login(this.f['email'].value, this.f['password'].value).subscribe((data: any) => {
+            if (data.code === 200) {
+                if(data.data.usua_Id > 0){
+                  localStorage.setItem('currentUser', JSON.stringify(data.data));
+                  this.router.navigate(['/']);
+                } else{
+                    this.mensajeWarning("Usuario y/o contraseña incorrectos");
+                }
+            } else {
+                this.mensajeError("Error relacionado con el servidor");
             }
-          } else {
-            this.toastService.show('Error de conexión', { classname: 'bg-danger text-center text-white', delay: 8000 });
-          }
-    });
-
-    // stop here if form is invalid
-    // if (this.loginForm.invalid) {
-    //   return;
-    // } else {
-    //   if (environment.defaultauth === 'firebase') {
-    //     this.authenticationService.login(this.f['email'].value, this.f['password'].value).then((res: any) => {
-    //       this.router.navigate(['/']);
-    //     })
-    //       .catch(error => {
-    //         this.error = error ? error : '';
-    //       });
-    //   } else {
-    //     this.authFackservice.login(this.f['email'].value, this.f['password'].value).pipe(first()).subscribe(data => {
-    //           this.router.navigate(['/']);
-    //         },
-    //         error => {
-    //           this.error = error ? error : '';
-    //         });
-    //   }
-    // }
+        });    
+    }
   }
 
   /**
@@ -110,4 +87,23 @@ export class LoginComponent implements OnInit {
     this.fieldTextType = !this.fieldTextType;
   }
 
+  mensajeWarning(messageBody: string) {
+    Swal.fire({
+        position: 'center',
+        icon: 'warning',
+        title: messageBody,
+        showConfirmButton: false,
+        timer: 2000,
+    });
+}
+
+mensajeError(messageBody: string) {
+    Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: messageBody,
+        showConfirmButton: false,
+        timer: 2000,
+    });
+}
 }

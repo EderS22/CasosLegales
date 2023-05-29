@@ -10,7 +10,7 @@
         </div>
         <div class="card- d-flex justify-content-between align-items-center">
             <h1 class="mb-2 mt-2 text-center flex-grow-1">Usuarios</h1>
-            <img src="https://cdn.freelogodesign.org/files/c68797f5ce8d42409c858321e207f633/thumb/logo_200x200.png"
+            <img src="../../../../../assets/images/layouts/logoLeyMaxima.png"
             alt="Logo" class="logo-image" style="width: 80px; height: 80px; border-radius: 40px;">
         </div>
     </div>
@@ -114,7 +114,7 @@
 
             <div class="mb-3">
                 <label for="empe_Id" class="form-label">Empleado</label>
-                <select class="form-control" name="empe_Id" id="empe_Id" formControlName="empe_Id"
+                <select class="form-select" name="empe_Id" id="empe_Id" formControlName="empe_Id"
                     [ngClass]="{ 'is-invalid': submitted && form['empe_Id'].errors }"
                     >
                     <option [ngValue]="empe_IdEditar" selected hidden>{{isEdit ? usua_NombreEdit : 'Seleccione un empleado'}}</option>
@@ -148,9 +148,8 @@
                 </div>
                 <div class="col-sm-6">
                     <label for="role_Id" class="form-label">Rol</label>
-                    <select class="form-control" name="role_Id" id="role_Id" formControlName="role_Id"
+                    <select class="form-select" name="role_Id" id="role_Id" formControlName="role_Id"
                         [ngClass]="{ 'is-invalid': submitted && form['role_Id'].errors}">
-                        
                        <option value="" selected hidden>Seleccione un rol</option>
                        <option *ngFor="let item of listadoRoles" [ngValue]="item.role_Id">
                         {{item.role_Nombre}}

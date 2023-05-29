@@ -306,14 +306,14 @@ GO
 
 --********** TABLE TiposdeCaso ************--
 CREATE TABLE CALE.tbTiposdeCaso(
-tica_Id INT IDENTITY(1,1),
-tica_Nombre NVARCHAR(100),
-tica_Descripcion NVARCHAR(200),
-tica_UsuCreacion			INT				NOT NULL,
-tica_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbTiposdeCaso_tica_FechaCreacion DEFAULT(GETDATE()),
+tica_Id						INT IDENTITY(1,1),
+tica_Nombre					NVARCHAR(100),
+tica_Descripcion			NVARCHAR(200),
+tica_UsuCreacion			INT	NOT NULL,
+tica_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_CALE_tbTiposdeCaso_tica_FechaCreacion DEFAULT(GETDATE()),
 tica_UsuModificacion		INT,
 tica_FechaModificacion		DATETIME,
-tica_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbTiposdeCaso_tica_Estado DEFAULT(1),
+tica_Estado					BIT NOT NULL CONSTRAINT DF_CALE_tbTiposdeCaso_tica_Estado DEFAULT(1),
 
 CONSTRAINT PK_CALE_tbTiposdeCaso_tica_Id	PRIMARY KEY(tica_Id),
 CONSTRAINT FK_CALE_tbTiposdeCaso_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(tica_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
@@ -573,10 +573,6 @@ VALUES('Abogados y Jueces', 'casoslegales/abogadosjueces/listado', 'CasosLegales
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Acusados por caso', 'casoslegales/acusadosporcaso/listado', 'CasosLegales', 'ri-group-line', 1)
-GO
-
-INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
 VALUES('Casos', 'casoslegales/casos/listado', 'CasosLegales', 'ri-file-text-line', 1)
 GO
 
@@ -592,6 +588,11 @@ INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono
 VALUES('Empresas', 'casoslegales/empresas/listado', 'CasosLegales', 'ri-building-4-line', 1)
 GO
 
+/*
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Acusados por caso', 'casoslegales/acusadosporcaso/listado', 'CasosLegales', 'ri-group-line', 1)
+GO
+
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
 VALUES('Evidencias por caso', 'casoslegales/evidenciasporcaso/listado', 'CasosLegales', 'ri-folder-5-line', 1)
 GO
@@ -599,6 +600,7 @@ GO
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
 VALUES('Testigos por caso', 'casoslegales/testigosporcaso/listado', 'CasosLegales', 'ri-eye-line', 1)
 GO
+*/
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
 VALUES('Tipos de caso', 'casoslegales/tiposdecaso/listado', 'CasosLegales', 'ri-loader-line', 1)
@@ -645,15 +647,15 @@ VALUES (2, 7, 1)
 GO
 
 INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
-VALUES (2, 8, 1)
-GO
-
-INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
 VALUES (2, 9, 1)
 GO
 
 INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
 VALUES (2, 10, 1)
+GO
+
+INSERT INTO ACCE.tbRolesPorPantalla (role_Id, pant_Id, usua_IdCreacion)
+VALUES (2, 11, 1)
 GO
 
 --**************************************************/TABLE Roles por Pantallas*****************************************************--
@@ -1052,12 +1054,8 @@ GO
 --**********************************************************TABLE Cargos**********************************************************--
 
 INSERT INTO GRAL.tbCargos (carg_Descripcion, carg_UsuCreacion)
-VALUES ('Gerente', 1),
-		('Supervisor', 1),
-		('Analista', 1),
-		('Ejecutivo de Ventas', 1),
-		('Analista Financiero', 1),
-		('Coordinador de Proyectos', 1);
+VALUES  ('Abogado', 1),
+		('Juez', 1)
 GO	
 
 --*********************************************************/TABLE Cargos**********************************************************--
@@ -1066,13 +1064,20 @@ GO
 
 --***********************************************************TABLES CALE***********************************************************--
 
+--*******************************************************TABLE Tipos de caso*******************************************************--
+
+INSERT INTO CALE.tbTiposdeCaso (tica_Nombre, tica_Descripcion, tica_UsuCreacion)
+
+
+--******************************************************/TABLE Tipos de caso*******************************************************--
+
 INSERT INTO CALE.tbAbogadosJueces (abju_DNI, abju_Nombres, abju_Apellidos, abju_Sexo, abju_Telefono, abju_CorreoElectronico, abju_FechaNacimiento, eciv_Id, carg_Id, muni_Id, abju_Direccion, abju_UsuCreacion)
 VALUES ('123456789', 'Juan',	'Pérez',	'M', '123456789', 'juan.perez@gmail.com',		'1990-01-01', 1, 1,'0311',  'Calle Principal 123',	1),
 		('987654321', 'María',	'López',	'F', '987654321', 'maria.lopez@gmail.com',		'1995-05-10', 2, 2,'0311',  'Avenida Secundaria 456',1),
-		('555555555', 'Pedro',	'González', 'M', '555555555', 'pedro.gonzalez@gmail.com',	'1985-12-15', 3, 3,'0311',  'Plaza Central 789',		1),
-		('111111111', 'Ana',	'García',	'F', '111111111', 'ana.garcia@gmail.com',		'1988-06-20', 2, 1,'0311',  'Calle Secundaria 234',	1),
-		('222222222', 'Luis',	'Martínez', 'M', '222222222', 'luis.martinez@gmail.com',	'1992-09-08', 1, 2,'0311',  'Avenida Principal 567', 1),
-		('333333333', 'Laura', 'Rodríguez', 'F', '333333333', 'laura.rodriguez@gmail.com',	'1997-03-12', 3, 3,'0311',  'Plaza Secundaria 890',	1);
+		('555555555', 'Pedro',	'González', 'M', '555555555', 'pedro.gonzalez@gmail.com',	'1985-12-15', 3, 1,'0311',  'Plaza Central 789',		1),
+		('111111111', 'Ana',	'García',	'F', '111111111', 'ana.garcia@gmail.com',		'1988-06-20', 2, 2,'0311',  'Calle Secundaria 234',	1),
+		('222222222', 'Luis',	'Martínez', 'M', '222222222', 'luis.martinez@gmail.com',	'1992-09-08', 1, 1,'0311',  'Avenida Principal 567', 1),
+		('333333333', 'Laura', 'Rodríguez', 'F', '333333333', 'laura.rodriguez@gmail.com',	'1997-03-12', 3, 2,'0311',  'Plaza Secundaria 890',	1);
 GO																											 
 
 INSERT INTO CALE.tbCiviles (civi_DNI, civi_Nombres, civi_Apellidos, civi_Sexo, civi_Telefono, civi_CorreoElectronico, civi_FechaNacimiento, eciv_Id, muni_Id, civi_Direccion, civi_EsDemandante, civi_EsAcusado, civi_EsTestigo, civi_UsuCreacion)
@@ -1083,7 +1088,6 @@ VALUES ('123456789', 'Juan',	'Pérez',		'M', '123456789', 'juan.perez@example.co
 		('222222222', 'Luis',	'Martínez',		'M', '222222222', 'luis.martinez@example.com',	'1992-09-08', 1, '0201', 'Avenida Principal 567',	0, 1, 0, 1),
 		('333333333', 'Laura',	'Rodríguez',	'F', '333333333', 'laura.rodriguez@example.com','1997-03-12', 3, '0201', 'Plaza Secundaria 890',		0, 0, 1, 1);
 GO
-
 
 INSERT INTO CALE.tbEmpleados (empe_DNI, empe_Nombres, empe_Apellidos, empe_Sexo, empe_Telefono, empe_CorreoElectronico, empe_FechaNacimiento, eciv_Id, muni_Id, empe_Direccion, empe_UsuCreacion)
 VALUES ('111111111', 'Juan',	'Pérez',	'M', '111111111', 'juan.perez@example.com',			'1990-01-01', 1, '0502', 'Calle Principal 123',		1),

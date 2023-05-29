@@ -10,7 +10,7 @@
         </div>
         <div class="card- d-flex justify-content-between align-items-center">
             <h1 class="mb-2 mt-2 text-center flex-grow-1">Roles</h1>
-            <img src="https://cdn.freelogodesign.org/files/c68797f5ce8d42409c858321e207f633/thumb/logo_200x200.png"
+            <img src="../../../../../assets/images/layouts/logoLeyMaxima.png"
             alt="Logo" class="logo-image" style="width: 80px; height: 80px; border-radius: 40px;">
         </div>
     </div>
@@ -50,55 +50,71 @@
                     <br/>
                     <div>
                         <h4 style="text-align: center;">Pantallas</h4>
-                        <div class="search-name">
-                            <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTerm$.next($any($event.target).value)">
-                        </div>
                         <br/>
                         <div class="text-danger" [ngStyle]="{'display': !pantallasValid ? '' : 'none'}">Debe asignarle al menos una pantalla al rol</div>
                     </div>
                     <br/>
-
-                    <mat-tab-group>
-                        <mat-tab label="Acceso">
+                    <c-nav variant="pills">
+                        <a [active]="true" [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="0" cNavLink>Acceso</a>
+                        <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink>General</a>
+                        <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="2" cNavLink>Casos Legales</a>
+                      </c-nav>
+                      <c-tab-content #tabContent="cTabContent">
+                        <c-tab-pane class="p-3">
+                            <div class="search-name">
+                                <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermAcce$.next($any($event.target).value)">
+                            </div>
                             <br/>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 1fr; gap: 23px; overflow-y: scroll; height: 350px;">
-                                <ng-container *ngFor="let item of pantallasFiltered" >
-                                    <div *ngIf="item.pant_Esquema === 'Acceso'">
-                                        <label>{{item.pant_Pantalla}}</label>
-                                        <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
-                                            <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
+                            <div class="mx-n3">
+                                <ngx-simplebar style="max-height: 300px;" class="px-3">
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 80px; gap: 23px; height: 300px;">
+                                        <div *ngFor="let item of pantallasFilteredAcce" >
+                                            <label>{{item.pant_Pantalla}}</label>
+                                            <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
+                                                <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
+                                            </div>
                                         </div>
                                     </div>
-                                </ng-container>
+                                </ngx-simplebar>
                             </div>
-                        </mat-tab>
-                        <mat-tab label="General">
+                        </c-tab-pane>
+                        <c-tab-pane class="p-3">
+                            <div class="search-name">
+                                <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermGral$.next($any($event.target).value)">
+                            </div>
                             <br/>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 1fr; gap: 23px; overflow-y: scroll; height: 350px;">
-                                <ng-container *ngFor="let item of pantallasFiltered" >
-                                    <div *ngIf="item.pant_Esquema === 'General'">
-                                        <label>{{item.pant_Pantalla}}</label>
-                                        <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
-                                            <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
+                            <div class="mx-n3">
+                                <ngx-simplebar style="max-height: 300px;" class="px-3">
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 80px; gap: 23px; height: 300px;">
+                                        <div *ngFor="let item of pantallasFilteredGral" >
+                                            <label>{{item.pant_Pantalla}}</label>
+                                            <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
+                                                <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
+                                            </div>
                                         </div>
                                     </div>
-                                </ng-container>
+                                </ngx-simplebar>
                             </div>
-                        </mat-tab>
-                        <mat-tab label="Casos Legales">
+                        </c-tab-pane>
+                        <c-tab-pane class="p-3">
+                            <div class="search-name">
+                                <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermCale$.next($any($event.target).value)">
+                            </div>
                             <br/>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 1fr; gap: 23px; overflow-y: scroll; height: 350px;">
-                                <ng-container *ngFor="let item of pantallasFiltered" >
-                                    <div *ngIf="item.pant_Esquema === 'CasosLegales'">
-                                        <label>{{item.pant_Pantalla}}</label>
-                                        <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
-                                            <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
+                            <div class="mx-n3">
+                                <ngx-simplebar style="max-height: 300px;" class="px-3">
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 80px; gap: 23px; height: 300px;">
+                                        <div *ngFor="let item of pantallasFilteredCale" >
+                                            <label>{{item.pant_Pantalla}}</label>
+                                            <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
+                                                <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
+                                            </div>
                                         </div>
                                     </div>
-                                </ng-container>
+                                </ngx-simplebar>
                             </div>
-                        </mat-tab>
-                    </mat-tab-group>
+                        </c-tab-pane>
+                      </c-tab-content>
                     <hr>
                     <div style="text-align: center;">
                         <button type="submit" class="btn btn-success col-6" id="add-btn" (click)="onSubmit()">

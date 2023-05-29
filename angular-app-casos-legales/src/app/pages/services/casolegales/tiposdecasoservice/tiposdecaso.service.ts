@@ -16,7 +16,6 @@ export class TiposdecasoService {
 
   getTiposdecaso() {
     return this.http.get<tiposdecaso[]>(API_URL + 'TiposDeCaso/Listado');
-
   }
 
   InsertTipoDeCaso(tica: tiposdecaso) {

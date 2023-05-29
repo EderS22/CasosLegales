@@ -13,6 +13,10 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { SimplebarAngularModule } from 'simplebar-angular';
 import { NgxMaskModule } from 'ngx-mask';
+import { DataTablesModule } from 'angular-datatables';
+import {MatTabsModule} from '@angular/material/tabs';
+import { NavModule, TabsModule } from '@coreui/angular';
+import { TablesModule } from './tables/tables.module';
 
 // Swiper Slider
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
@@ -32,32 +36,29 @@ import { ToastsContainer } from './dashboards/dashboard/toasts-container.compone
 import { DashboardsModule } from "./dashboards/dashboards.module";
 import { AppsModule } from "./apps/apps.module";
 import { EcommerceModule } from "./ecommerce/ecommerce.module";
+// Paginas Acce, Gral y Cale
 import { ListadoComponent as ListadoUsuarios } from './acceso/usuarios/listado/listado.component';
 import { ListadoComponent as ListadoTiposDeCaso } from './casoslegales/tiposdecaso/listado/listado.component'; 
 import { ListadoComponent as ListadoTiposDeEvidencia } from './casoslegales/tipodeevidencia/listado/listado.component';
 import { ListadoComponent as ListadoDepartamento } from './general/departamento/listado/listado.component';
 import { ListadoComponent as ListadoCargo } from './general/cargo/listado/listado.component';
 import { ListadoComponent as ListadoEstadoCivil } from './general/estadocivil/listado/listado.component';
-import { DataTablesModule } from 'angular-datatables';
 import { DetallesComponent as DetallesUsuarios } from './acceso/usuarios/detalles/detalles.component';
 import { ListadoComponent as ListadoRoles } from './acceso/roles/listado/listado.component';
-import { CdkDrag, CdkDropList, CdkDropListGroup } from '@angular/cdk/drag-drop';
-import { DetallesComponent } from './acceso/roles/detalles/detalles.component';
-import { TablesModule } from './tables/tables.module';
-import { ListadoComponent } from './casoslegales/tipodeevidencia/listado/listado.component';
+import { DetallesComponent as DetallesRoles} from './acceso/roles/detalles/detalles.component';
+import { ListadoComponent as ListadoTiposdeevidencia} from './casoslegales/tipodeevidencia/listado/listado.component';
 import { ListadoComponent as ListadoMunicipio } from './general/municipio/listado/listado.component';
-
 import { ListadoComponent as ListadoEmpleados} from './casoslegales/empleado/listado/listado.component';
 import { CrearComponent as InsertarEmpleados} from './casoslegales/empleado/crear/crear.component';
-import { EditarComponent } from './casoslegales/empleado/editar/editar.component';
-import { AgregareditarComponent } from './acceso/roles/agregareditar/agregareditar.component';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import {MatTabsModule} from '@angular/material/tabs';
+import { EditarComponent as EditarEmpleado } from './casoslegales/empleado/editar/editar.component';
+import { AgregareditarComponent as AgregarEditarRol } from './acceso/roles/agregareditar/agregareditar.component';
+import { ListadoComponent as ListadoCasos } from './casoslegales/casos/listado/listado.component';
+import { AgregareditarComponent as AgregarEditarCasos } from './casoslegales/casos/agregareditar/agregareditar.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    ToastsContainer,
+    ToastsContainer,    
     ListadoUsuarios,
     ListadoTiposDeCaso,
     ListadoDepartamento,
@@ -65,15 +66,17 @@ import {MatTabsModule} from '@angular/material/tabs';
     ListadoEstadoCivil,
     DetallesUsuarios,
     ListadoRoles,
-    DetallesComponent,
+    DetallesRoles,
     ListadoTiposDeEvidencia,
     ListadoMunicipio,
-    ListadoComponent,
+    ListadoTiposdeevidencia,
     ListadoEmpleados,
     InsertarEmpleados,
     ListadoTiposDeEvidencia,
-    EditarComponent,
-    AgregareditarComponent,
+    EditarEmpleado,
+    AgregarEditarRol,
+    ListadoCasos,
+    AgregarEditarCasos
   ],
   imports: [
     CommonModule,
@@ -96,13 +99,11 @@ import {MatTabsModule} from '@angular/material/tabs';
     EcommerceModule,
     DataTablesModule,
     ReactiveFormsModule,
-    CdkDropListGroup, 
-    CdkDropList, 
-    CdkDrag,
     TablesModule,
     NgxMaskModule.forRoot(),
-    Ng2SearchPipeModule,
-    MatTabsModule
+    MatTabsModule,
+    NavModule,
+    TabsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

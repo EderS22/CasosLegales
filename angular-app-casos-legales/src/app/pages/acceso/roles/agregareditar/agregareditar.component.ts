@@ -25,22 +25,47 @@ export class AgregareditarComponent implements OnInit {
   dateNow: Date = new Date();
   isEdit: boolean = false;
   role_IdEditar: number = 0;
+  
   listadoPantallas: pantalla[] = [];
+  listadoPantallasAcce: pantalla[] = [];
+  listadoPantallasGral: pantalla[] = [];
+  listadoPantallasCale: pantalla[] = [];
+
   pantallasTemp: pantalla[] = [];
   pantallasIdsSelects: number[] = [];
   allCorrect: boolean = true;
   submitted = false;
   rolForm!: UntypedFormGroup;
   pantallasValid: boolean = true;
-  searchTerm$ = new Subject<string>();
-  pantallasFiltered: pantalla[] = [];
+
+  searchTermAcce$ = new Subject<string>();
+  searchTermGral$ = new Subject<string>();
+  searchTermCale$ = new Subject<string>();
+
+  pantallasFilteredAcce: pantalla[] = [];
+  pantallasFilteredGral: pantalla[] = [];
+  pantallasFilteredCale: pantalla[] = [];
 
   ngOnInit(): void {
+    if(!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin){
+        const ropaAcceso = new ropa();
+        ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+        ropaAcceso.pant_Pantalla = "Roles";
+        this.rolService.validarRolTienePantalla(ropaAcceso)
+        .subscribe((data:any) => {
+            if(data.code === 200){
+                if(data.data.codeStatus === 0){
+                    this.router.navigate([""]);
+                }
+            }
+        })
+    }
+
     this.role_IdEditar = parseInt(localStorage.getItem("role_IdEditar") ?? '0', 0);
 
     this.breadCrumbItems = [
       { label: 'Roles' },
-      { label: 'Listado', active: true }
+      { label: 'Agregar y editar', active: true }
     ];
 
     this.CargarPantallasPorIdRol(0, true);
@@ -73,12 +98,28 @@ export class AgregareditarComponent implements OnInit {
           }
         })
     }
-    this.filterList();
+    this.filterListAcce();
+    this.filterListGral();
+    this.filterListCale();
   }
 
-  filterList(): void {
-    this.searchTerm$.subscribe(term => {
-      this.pantallasFiltered = this.listadoPantallas
+  filterListAcce(): void {
+    this.searchTermAcce$.subscribe(term => {
+      this.pantallasFilteredAcce = this.listadoPantallasAcce
+      .filter(item => item.pant_Pantalla.toLowerCase().indexOf(term.toLowerCase()) >= 0);
+    });
+  }
+
+  filterListGral(): void {
+    this.searchTermGral$.subscribe(term => {
+      this.pantallasFilteredGral = this.listadoPantallasGral
+      .filter(item => item.pant_Pantalla.toLowerCase().indexOf(term.toLowerCase()) >= 0);
+    });
+  }
+
+  filterListCale(): void {
+    this.searchTermCale$.subscribe(term => {
+      this.pantallasFilteredCale = this.listadoPantallasCale
       .filter(item => item.pant_Pantalla.toLowerCase().indexOf(term.toLowerCase()) >= 0);
     });
   }
@@ -92,9 +133,23 @@ export class AgregareditarComponent implements OnInit {
 
           this.listadoPantallas.forEach(element => {
             this.rolForm.addControl(`pant_${element.pant_Id}`, new FormControl(false))
+
+            if(element.pant_Esquema === "Acceso"){
+                this.listadoPantallasAcce.push(element);
+            }
+
+            if(element.pant_Esquema === "General"){
+                this.listadoPantallasGral.push(element);
+            }
+
+            if(element.pant_Esquema === "CasosLegales"){
+                this.listadoPantallasCale.push(element);
+            }
           });
 
-          this.pantallasFiltered = this.listadoPantallas;
+          this.pantallasFilteredAcce = this.listadoPantallasAcce;
+          this.pantallasFilteredGral = this.listadoPantallasGral;
+          this.pantallasFilteredCale = this.listadoPantallasCale;
         }
       })
   }

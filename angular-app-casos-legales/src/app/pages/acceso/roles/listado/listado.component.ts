@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
-import { pantalla } from 'src/app/pages/models/acceso/pantalla';
 import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
 
 @Component({
@@ -16,10 +15,10 @@ import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
     styleUrls: ['./listado.component.scss'],
 })
 export class ListadoComponent implements OnInit {
+
     constructor(
         private modalService: NgbModal,
         private rolService: RolService,
-        private formBuilder: UntypedFormBuilder,
         private router: Router
     ) { }
 
@@ -56,8 +55,6 @@ export class ListadoComponent implements OnInit {
             { label: 'Listado', active: true }
         ];
 
-        this.CargarRoles();
-        
         this.dtOptions = {
             pagingType: 'simple_numbers',
             language: {
@@ -70,6 +67,8 @@ export class ListadoComponent implements OnInit {
                 },
             ]
         };
+
+        this.CargarRoles();
     }
 
     CargarRoles() {

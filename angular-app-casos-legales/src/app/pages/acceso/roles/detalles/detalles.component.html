@@ -10,7 +10,7 @@
         </div>
         <div class="card- d-flex justify-content-between align-items-center">
             <h1 class="mb-2 mt-2 text-center flex-grow-1">Roles</h1>
-            <img src="https://cdn.freelogodesign.org/files/c68797f5ce8d42409c858321e207f633/thumb/logo_200x200.png"
+            <img src="../../../../../assets/images/layouts/logoLeyMaxima.png"
             alt="Logo" class="logo-image" style="width: 80px; height: 80px; border-radius: 40px;">
         </div>
     </div>
@@ -51,24 +51,97 @@
                 <h4 class="card-title mb-0">Pantallas</h4>
             </div>
             <div class="card-body">
-                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr; gap: 25px;">
-                    <div class="card card-animate" *ngFor="let item of listadoPantallas">
-                        <div class="card-body">
-                            <div class="d-flex align-items-end justify-content-between mt-0">
-                                <div>
-                                    <h4 class="text-white">
-                                        {{item.pant_Pantalla}}
-                                    </h4>
-                                </div>
-                                <div class="avatar-sm flex-shrink-0">
-                                    <span class="avatar-title bg-soft-white rounded fs-3">
-                                        <i class="{{item.pant_Icono}} text-white"></i>
-                                    </span>
-                                </div>
-                            </div>
+                <c-nav variant="pills">
+                    <a [active]="true" [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="0" cNavLink>Acceso</a>
+                    <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink>General</a>
+                    <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="2" cNavLink>Casos Legales</a>
+                </c-nav>
+                <c-tab-content #tabContent="cTabContent">
+                    <c-tab-pane class="p-3">
+                        <div class="search-name">
+                            <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermAcce$.next($any($event.target).value)">
                         </div>
-                    </div>
-                </div>
+                        <br/>
+                        <div class="mx-n3">
+                            <ngx-simplebar style="max-height: 350px;" class="px-3">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 90px; gap: 23px; height: 350px;">
+                                    <div class="card card-animate" *ngFor="let item of pantallasFilteredAcce" style="height: 80px;">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-end justify-content-between mt-0">
+                                                <div>
+                                                    <h4 class="text-white">
+                                                        {{item.pant_Pantalla}}
+                                                    </h4>
+                                                </div>
+                                                <div class="avatar-sm flex-shrink-0">
+                                                    <span class="avatar-title bg-soft-white rounded fs-3">
+                                                        <i class="{{item.pant_Icono}} text-white"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ngx-simplebar>
+                        </div>
+                    </c-tab-pane>
+                    <c-tab-pane class="p-3">
+                        <div class="search-name">
+                            <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermGral$.next($any($event.target).value)">
+                        </div>
+                        <br/>
+                        <div class="mx-n3">
+                            <ngx-simplebar style="max-height: 350px;" class="px-3">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 90px; gap: 23px; height: 350px;">
+                                    <div class="card card-animate" *ngFor="let item of pantallasFilteredGral" style="height: 80px;">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-end justify-content-between mt-0">
+                                                <div>
+                                                    <h4 class="text-white">
+                                                        {{item.pant_Pantalla}}
+                                                    </h4>
+                                                </div>
+                                                <div class="avatar-sm flex-shrink-0">
+                                                    <span class="avatar-title bg-soft-white rounded fs-3">
+                                                        <i class="{{item.pant_Icono}} text-white"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ngx-simplebar>
+                        </div>
+                    </c-tab-pane>
+                    <c-tab-pane class="p-3">
+                        <div class="search-name">
+                            <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermCale$.next($any($event.target).value)">
+                        </div>
+                        <br/>
+                        <div class="mx-n3">
+                            <ngx-simplebar style="max-height: 350px;" class="px-3">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 90px; gap: 23px; height: 350px;">
+                                    <div class="card card-animate" *ngFor="let item of pantallasFilteredCale" style="height: 80px;">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-end justify-content-between mt-0">
+                                                <div>
+                                                    <h4 class="text-white">
+                                                        {{item.pant_Pantalla}}
+                                                    </h4>
+                                                </div>
+                                                <div class="avatar-sm flex-shrink-0">
+                                                    <span class="avatar-title bg-soft-white rounded fs-3">
+                                                        <i class="{{item.pant_Icono}} text-white"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ngx-simplebar>
+                        </div>
+                    </c-tab-pane>
+                </c-tab-content>
             </div>
         </div>
     </div>

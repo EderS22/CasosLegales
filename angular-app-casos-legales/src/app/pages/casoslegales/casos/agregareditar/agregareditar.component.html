@@ -1,0 +1,76 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Casos" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="card ribbon-box border shadow-none overflow-hidden">
+    <div class="card-body text-muted">
+        <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
+            <span class="trending-ribbon-text">{{dateNow.toLocaleDateString()}}</span> <i
+                class="ri-flashlight-fill text-white align-bottom float-end ms-1"></i>
+        </div>
+        <div class="card- d-flex justify-content-between align-items-center">
+            <h1 class="mb-2 mt-2 text-center flex-grow-1">Casos</h1>
+            <img src="../../../../../assets/images/layouts/logoLeyMaxima.png"
+            alt="Logo" class="logo-image" style="width: 80px; height: 80px; border-radius: 40px;">
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title mb-0">{{isEdit ? 'Editar' : 'Agregar'}} caso</h4>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="casoForm">
+            <input type="text" formControlName="caso_Id" hidden readonly>
+            <div class="row mb-3">  
+                <div class="col-sm-12">
+                    <label for="caso_Descripcion" class="form-label">
+                        Descripción del caso
+                    </label>
+                    <div class="mx-n3">
+                        <ngx-simplebar style="max-height: 100px;" class="px-3">
+                            <textarea class="form-control" placeholder="Ingrese una descripción"
+                                formControlName="caso_Descripcion" rows="3"
+                                [ngClass]="{ 'is-invalid': submitted && form['caso_Descripcion'].errors }">
+                            </textarea>
+                        </ngx-simplebar>
+                    </div>
+                    <div class="invalid-feedback">Por favor ingrese una descripción para el caso.</div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <label for="tica_Id" class="form-label">
+                        Tipo de caso
+                    </label>
+                    <select class="form-select" 
+                        formControlName="tica_Id"
+                        [ngClass]="{ 'is-invalid': submitted && form['tica_Id'].errors }"
+                    >
+                        <option value="" hidden selected>Seleccione un tipo de caso</option>
+                    </select>
+                    <div class="invalid-feedback">Por favor seleccione un tipo de caso.</div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="caso_Juez" class="form-label">
+                        Juez
+                    </label>
+                    <select class="form-select" 
+                        formControlName="caso_Juez"
+                        [ngClass]="{ 'is-invalid': submitted && form['caso_Juez'].errors }"
+                    >
+                        <option value="" hidden selected>Seleccione un juez</option>
+                    </select>
+                    <div class="invalid-feedback">Por favor seleccione un juez.</div>
+                </div>
+            </div>
+            <div class="row mb-3">
+               
+                <div class="col-sm-6">
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
