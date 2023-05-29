@@ -180,13 +180,16 @@
                             <div class="invalid-feedback">Por favor, ingrese una direccion</div>
                         </div>
 
-                        <div class="col-1 mt-3">
-                            <button type="submit" class="btn btn-success bg-gradient waves-effect waves-light">Guardar</button>
+                        <div class="col-3 mt-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-success bg-gradient waves-effect waves-light">Guardar</button>
+                                </div>
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-danger bg-gradient waves-effect waves-light" (click)="regresar()">Cancelar</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-1 mt-3">
-                            <button type="button" class="btn btn-danger bg-gradient waves-effect waves-light" (click)="regresar()">Cancelar</button>
-                        </div>
-
                     </div>
                 </form>
             </div><!-- end card -->

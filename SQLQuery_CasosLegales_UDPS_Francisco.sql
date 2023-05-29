@@ -264,14 +264,14 @@ BEGIN
 		 BEGIN 
 		 	SELECT 2 AS codeStatus
 		 END
-		 ELSE IF EXISTS (SELECT * FROM CALE.tbEmpresas WHERE emsa_Nombre = @emsa_Nombre AND emsa_Estado = 1)
-		 BEGIN
-			SELECT 3 AS codeStatus
-		 END
+		 ELSE IF EXISTS (SELECT * FROM CALE.tbEmpresas WHERE emsa_RTN = @emsa_RTN AND emsa_Estado = 1)
+			 BEGIN
+				SELECT 3 AS codeStatus
+			 END
 
 		ELSE IF NOT EXISTS (SELECT * FROM CALE.tbEmpresas WHERE (emsa_Nombre = @emsa_Nombre AND emsa_RTN = @emsa_RTN) AND emsa_Estado = 1)
 		 BEGIN
-		INSERT INTO [cale].[tbEmpresas] (	[emsa_Nombre],
+			INSERT INTO [cale].[tbEmpresas] (	[emsa_Nombre],
 											emsa_RTN,
 											[muni_Id], 
 											[emsa_Direccion],
@@ -339,8 +339,6 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpresas_Update
  @emsa_RepresentanteTelefono NVARCHAR(20),
  @emsa_RepresentanteSexo CHAR(1),
  @eciv_Id INT,
- @emsa_EsDemanadante BIT,
- @emsa_EsAcusado BIT,
  @emsa_UsuModificacion INT)
 AS
 BEGIN

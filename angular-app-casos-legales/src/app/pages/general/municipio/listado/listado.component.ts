@@ -41,7 +41,7 @@ export class ListadoComponent {
     this.MunicipioForm = this.formBuilder.group({
       muni_Id: ['0000', [Validators.required]],
       muni_IdCodigo: ['', [Validators.required]],
-      muni_Nombre: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
+      muni_Nombre: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
       depa_Id: ['', [Validators.required]],
       muni_UsuCreacion: [1],
       muni_UsuModificacion: [1]

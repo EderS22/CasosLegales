@@ -97,14 +97,12 @@
                         <div class="invalid-feedback">Por favor, selecione un departamento</div>
                     </div>
 
-                    <div class="col-5 mt-1">
+                    <div class="col-6 mt-1">
 
                         <label class="form-label">Codigo</label>
 
                         <div class="row">
-
                             <div class="col-7">
-
                                 <div class="input-group">
                                     <span class="input-group-text col-6" id="inputGroup-sizing-default">{{ depa_idddddd
                                         }}</span>
@@ -115,25 +113,19 @@
                                             [ngClass]="{'is-invalid': submit && form['muni_IdCodigo'].errors}">
                                     </div>
                                 </div>
-
-
                             </div>
-
-
                         </div>
                     </div>
 
                     <div class="col-1"></div>
-                    <div class="col-1"></div>
+                    
                     <div class="col-10 mt-3">
 
                         <label class="form-label">Nombre</label><br />
                         <input type="text" class="form-control" formControlName="muni_Nombre" required
                             [ngClass]="{'is-invalid': submit && form['muni_Nombre'].errors}">
                         <div class="invalid-feedback">Por favor, ingrese un nombre</div>
-
                     </div>
-
                 </div>
 
             </div>

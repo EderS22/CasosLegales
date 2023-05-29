@@ -15,11 +15,11 @@ import { departamento } from 'src/app/pages/models/general/departeamento';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-crear',
-  templateUrl: './crear.component.html',
-  styleUrls: ['./crear.component.scss']
+  selector: 'app-editar',
+  templateUrl: './editar.component.html',
+  styleUrls: ['./editar.component.scss']
 })
-export class CrearComponent {
+export class EditarComponent {
   
   emsa: empresa = new empresa();
   validationform!: UntypedFormGroup;
@@ -60,12 +60,19 @@ export class CrearComponent {
 
   ngOnInit(): void {
 
+
+    if(localStorage.getItem('IdEmpresa') == '' || localStorage.getItem('IdEmpresa') == null)
+    {
+      this.router.navigate(["casoslegales/empresa/listado"]);
+    }
+ 
+
     this.EstadoCivilService.getEstadosCiviles() //cargar estado civil
-      .subscribe((data: any) => {
-        if (data.code === 200) {
-          this.EstadoCivilDLL = data.data;
-        }
-      })
+    .subscribe((data: any) => {
+      if (data.code === 200) {
+        this.EstadoCivilDLL = data.data;
+      }
+    })
 
     this.DepartamentoService.getDepartamentos() //cargar departamentos
     .subscribe((data: any) => {
@@ -75,14 +82,38 @@ export class CrearComponent {
     })
 
     this.breadCrumbItems = [
-      { label: 'Empresas' },
-      { label: 'Crear', active: true }
+      { label: 'Empleados' },
+      { label: 'Editar', active: true }
     ];
-  }
 
-  flatpickrOptions: any = {
-    maxDate: new Date() // Deshabilitar fechas futuras
-  };
+    this.service.BuscarEmpresa(localStorage.getItem('IdEmpresa'))
+    .subscribe((data: any) => {
+     
+      this.MunicipioService.getMunicipioByDepto(data.depa_Id)
+      .subscribe((data: any) => {
+        if (data.code === 200) {
+          this.MunicipioDDL = data.data;
+          this.MunicipioDesactivado = false;
+        }
+      })
+
+      this.validationform = this.formBuilder.group({
+        emsa_Id: [data.emsa_Id, [Validators.required]],
+        emsa_Nombre: [data.emsa_Nombre, [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+        emsa_RTN: [data.emsa_RTN, [Validators.required]],
+        muni_Id: [data.muni_Id, [Validators.required]],
+        emsa_Direccion: [data.emsa_Direccion, [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+        emsa_RepresentanteNombre: [data.emsa_RepresentanteNombre, [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+        emsa_RepresentanteDNI: [data.emsa_RepresentanteDNI, [Validators.required]],
+        emsa_RepresentanteTelefono: [data.emsa_RepresentanteTelefono, [Validators.required]],
+        emsa_RepresentanteSexo: [data.emsa_RepresentanteSexo, [Validators.required]],
+        eciv_Id: [data.eciv_Id, [Validators.required]],
+        depa_Id: [data.depa_Id, [Validators.required]],
+        emsa_UsuModificacion: [1],
+      });
+
+    })
+  }
 
   CargarMunicipios(id: any) { //cargar municipios por departamento 
     console.log(id);
@@ -100,27 +131,27 @@ export class CrearComponent {
   }
 
   regresar(){
+    localStorage.setItem('IdEmpresa', '');
     this.router.navigate(["casoslegales/empresa/listado"]);
   }
 
   validSubmit() {
-
+    
     if (!this.validationform.valid) {
       this.submit = true;
 
       if (this.validationform.get('depa_Id')?.value != '' && this.validationform.get('muni_Id')?.value == '') {
         this.submitMunicipio = true;
       }
-
     }
     else {
-      
-
-      this.service.InsertarEmpresa(this.validationform.value)
+      console.log(this.validationform.value)
+      this.service.EditarEmpresa(this.validationform.value)
         .subscribe((data: any) => {
+          console.log(data)
           console.log(data.data.codeStatus)
           if (data.data.codeStatus == 1) {
-            localStorage.setItem('EmpresaInsert', '1');
+            localStorage.setItem('EmpresaInsert', '2');
             this.router.navigate(["casoslegales/empresa/listado"]);
           }
           else if (data.data.codeStatus == 2) {
@@ -143,3 +174,4 @@ export class CrearComponent {
     });
   }
 }
+

@@ -551,11 +551,11 @@ VALUES('Roles', 'acceso/roles/listado', 'Acceso', 'ri-team-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Departamentos', 'general/departamentos/listado', 'General', 'ri-function-line', 1)
+VALUES('Departamentos', 'general/departamento/listado', 'General', 'ri-function-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Municipios', 'general/municipios/listado', 'General', 'ri-dashboard-line', 1)
+VALUES('Municipios', 'general/municipio/listado', 'General', 'ri-dashboard-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
@@ -583,11 +583,11 @@ VALUES('Civiles', 'casoslegales/civiles/listado', 'CasosLegales', 'ri-group-2-li
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Empleados', 'casoslegales/empleados/listado', 'CasosLegales', 'ri-group-line', 1)
+VALUES('Empleados', 'casoslegales/empleado/listado', 'CasosLegales', 'ri-group-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Empresas', 'casoslegales/empresas/listado', 'CasosLegales', 'ri-building-4-line', 1)
+VALUES('Empresas', 'casoslegales/empresa/listado', 'CasosLegales', 'ri-building-4-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)

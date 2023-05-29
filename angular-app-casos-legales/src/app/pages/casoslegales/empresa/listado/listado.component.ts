@@ -92,8 +92,8 @@ export class ListadoComponent {
   }
 
   IdEditarEmpleado(Id: any){
-    localStorage.setItem('IdEmpleado', Id);
-    this.router.navigate(["casoslegales/empleado/editar"]);
+    localStorage.setItem('IdEmpresa', Id);
+    this.router.navigate(["casoslegales/empresa/editar"]);
   }
 
   optenerIdEliminar(e: empresa , contentDelete: any) {

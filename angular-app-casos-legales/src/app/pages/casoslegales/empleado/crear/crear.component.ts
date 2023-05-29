@@ -46,17 +46,17 @@ export class CrearComponent implements OnInit {
     private router: Router,
   ) {
     this.validationform = this.formBuilder.group({
-      empe_DNI: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      empe_Nombres: ['', [Validators.required, Validators.pattern('[a-z A-Z 0-9]+')]],
-      empe_Apellidos: ['', [Validators.required, Validators.pattern('[a-z A-Z 0-9]+')]],
-      empe_Sexo: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      empe_Telefono: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
+      empe_DNI: ['', [Validators.required]],
+      empe_Nombres: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+      empe_Apellidos: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+      empe_Sexo: ['', [Validators.required]],
+      empe_Telefono: ['', [Validators.required]],
       empe_CorreoElectronico: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ.]+@[a-zA-Z0-9áéíóúÁÉÍÓÚ.]+')]],
       empe_FechaNacimiento: ['', [Validators.required]],
       eciv_Id: [null, [Validators.required]],
       depa_Id: ['', [Validators.required]],
       muni_Id: ['', [Validators.required]],
-      empe_Direccion: ['', [Validators.required]],
+      empe_Direccion: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
       empe_UsuCreacion: [1],
     });
   }

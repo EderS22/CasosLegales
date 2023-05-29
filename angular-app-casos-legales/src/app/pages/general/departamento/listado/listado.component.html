@@ -93,11 +93,12 @@
             <div class="col-6">
                 <label>Nombre</label>
                 <input [(ngModel)]="depa.depa_Nombre" type="text" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && depaNombreInvalid }"  (blur)="trimDepaNombre()"/>
+                    [ngClass]="{ 'is-invalid': submitted && depaNombreInvalid }" (blur)="trimDepaNombre()" />
 
                 <div class="invalid-feedback" *ngIf="submitted && depaNombreInvalid">
                     Por favor ingrese un Nombre
                 </div>
+
             </div>
         </div>
 
@@ -129,7 +130,8 @@
             <div class="col-12">
                 <label>Nombre</label>
                 <input [(ngModel)]="depa.depa_Nombre" type="text" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && depaNombreInvalid }" (blur)="trimDepaNombre()"/>
+                    [ngClass]="{ 'is-invalid': submitted && depaNombreInvalid }" (blur)="trimDepaNombre()" />
+
                 <div class="invalid-feedback" *ngIf="submitted && depaNombreInvalid">
                     Por favor ingrese un Nombre
                 </div>

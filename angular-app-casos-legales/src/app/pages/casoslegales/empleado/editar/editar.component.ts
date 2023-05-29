@@ -48,16 +48,16 @@ export class EditarComponent {
   {
     this.validationform = this.formBuilder.group({
       empe_DNI: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]@.áéíóúÁÉÍÓÚ]+')]],
-      empe_Nombres: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]@.áéíóúÁÉÍÓÚ]+')]],
-      empe_Apellidos: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]@.áéíóúÁÉÍÓÚ]+')]],
-      empe_Sexo: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]@.áéíóúÁÉÍÓÚ]+')]],
-      empe_Telefono: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]@.áéíóúÁÉÍÓÚ]+')]],
+      empe_Nombres: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+      empe_Apellidos: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+      empe_Sexo: ['', [Validators.required]],
+      empe_Telefono: ['', [Validators.required]],
       empe_CorreoElectronico: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ]+@[a-zA-Z0-9áéíóúÁÉÍÓÚ]+')]],
       empe_FechaNacimiento: ['', [Validators.required]],
       eciv_Id: [null, [Validators.required]],
       depa_Id: ['', [Validators.required]],
       muni_Id: ['', [Validators.required]],
-      empe_Direccion: ['', [Validators.required]],
+      empe_Direccion: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
       empe_UsuModificacion: [1],
     });
   }

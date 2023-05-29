@@ -52,6 +52,7 @@ import { CrearComponent as InsertarEmpleados} from './casoslegales/empleado/crea
 import { EditarComponent as EditarEmpleados} from './casoslegales/empleado/editar/editar.component';
 import { ListadoComponent as ListadoEmpresas } from './casoslegales/empresa/listado/listado.component';
 import { CrearComponent as CrearEmpresa} from './casoslegales/empresa/crear/crear.component';
+import { EditarComponent  as EditarEmpresa} from './casoslegales/empresa/editar/editar.component';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { CrearComponent as CrearEmpresa} from './casoslegales/empresa/crear/crea
     ListadoTiposDeEvidencia,
     EditarEmpleados,
     ListadoEmpresas,
-    CrearEmpresa
+    CrearEmpresa,
+    EditarEmpresa
   ],
   imports: [
     CommonModule,

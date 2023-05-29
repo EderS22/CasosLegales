@@ -25,11 +25,11 @@ export class EmpresaService {
     return this.http.post<empresa[]>(API_URL + 'Empresas/Insertar', empresas)
   }
 
-  BuscarEmpleado(id:any){
+  BuscarEmpresa(id:any){
     return this.http.get<empresa[]>(API_URL + 'Empresas/Buscar?id='+ id)
   }
 
-  EditarEmpleado(empresas: any){
+  EditarEmpresa(empresas: any){
     return this.http.post<empresa[]>(API_URL + 'Empresas/Editar', empresas)
   }
 }
