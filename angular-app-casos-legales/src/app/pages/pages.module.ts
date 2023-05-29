@@ -56,6 +56,10 @@ import { ListadoComponent as ListadoCivil } from './casoslegales/civil/listado/l
 import { CrearComponent as InsertarCivil } from './casoslegales/civil/crear/crear.component';
 import { EditarComponent as EditarCivil } from './casoslegales/civil/editar/editar.component';
 
+import { ListadoComponent as ListadoAbogadosJueces } from './casoslegales/abogadosjueces/listado/listado.component';
+import { CrearComponent as InsertasAbogadosJueces } from './casoslegales/abogadosjueces/crear/crear.component';
+import { EditarComponent as EditarAbogadosJueces } from './casoslegales/abogadosjueces/editar/editar.component';
+
 
 @NgModule({
   declarations: [
@@ -79,6 +83,9 @@ import { EditarComponent as EditarCivil } from './casoslegales/civil/editar/edit
     ListadoCivil,
     InsertarCivil,
     EditarCivil,
+    ListadoAbogadosJueces,
+    InsertasAbogadosJueces,
+    EditarAbogadosJueces
   ],
   imports: [
     CommonModule,

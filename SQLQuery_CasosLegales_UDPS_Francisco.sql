@@ -17,6 +17,9 @@ SELECT	civi_Id,
 		[civi_FechaNacimiento],
 		T1.eciv_Id,
 		T1.muni_Id,
+		T4.muni_Nombre,
+		T5.depa_Id,
+		T5.depa_Nombre,
 		[civi_Direccion],
 		civi_UsuCreacion, 
 		T2.usua_Nombre AS user_Creacion,
@@ -27,7 +30,9 @@ SELECT	civi_Id,
 		civi_Estado
 FROM cale.tbCiviles AS T1 INNER JOIN acce.tbUsuarios AS T2
 ON T1.civi_UsuCreacion = T2.usua_Id LEFT JOIN acce.tbUsuarios AS T3
-ON T1.civi_UsuModificacion = T3.usua_Id;
+ON T1.civi_UsuModificacion = T3.usua_Id INNER JOIN GRAL.tbMunicipios AS T4
+ON T1.muni_Id = T4.muni_Id INNER JOIN GRAL.tbDepartamentos AS T5
+ON T4.depa_Id = T5.depa_Id;
 
 --**************  CREATE ******************--
 GO

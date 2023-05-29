@@ -726,7 +726,7 @@ GO
 CREATE OR ALTER PROCEDURE CALE.UDP_tbAbogadosJueces_Index
 AS
 BEGIN
-	SELECT * FROM CALE.tbAbogadosJueces
+	SELECT * FROM CALE.VW_tbAbogadosJueces
 	WHERE abju_Estado = 1;
 END
 
@@ -737,7 +737,7 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbAbogadosJueces_Find
 (@abju_Id INT)
 AS 
 BEGIN
-	SELECT * FROM CALE.tbAbogadosJueces
+	SELECT * FROM CALE.VW_tbAbogadosJueces
 	WHERE abju_Id = @abju_Id;
 END	
 

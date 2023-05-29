@@ -19,6 +19,9 @@ import { ListadoComponent as ListadoCivil } from './casoslegales/civil/listado/l
 import { CrearComponent as CrearCivil } from './casoslegales/civil/crear/crear.component';
 import { EditarComponent as EditarCivil } from './casoslegales/civil/editar/editar.component';
 import { EditarComponent as EditarEmpleado } from './casoslegales/empleado/editar/editar.component';
+import { ListadoComponent as ListadoAbogadosJueces } from './casoslegales/abogadosjueces/listado/listado.component';
+import { CrearComponent as InsertarAbogadosJueces } from './casoslegales/abogadosjueces/crear/crear.component';
+import { EditarComponent as EditarAbogadosJueces } from './casoslegales/abogadosjueces/editar/editar.component';
 
 const routes: Routes = [
     {
@@ -91,6 +94,17 @@ const routes: Routes = [
     {
       path: "casoslegales/civil/editar",
       component: EditarCivil
+    },
+    {
+      path: "casoslegales/abogadosjueces/listado",
+      component: ListadoAbogadosJueces
+    },
+    {
+      path: "casoslegales/abogadosjueces/crear",
+      component: InsertarAbogadosJueces
+    },{
+      path: "casoslegales/abogadosjueces/editar",
+      component: EditarAbogadosJueces
     },
 ];
 

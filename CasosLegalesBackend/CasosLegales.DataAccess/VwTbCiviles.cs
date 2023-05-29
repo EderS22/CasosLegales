@@ -19,6 +19,9 @@ namespace CasosLegales.DataAccess
         public DateTime CiviFechaNacimiento { get; set; }
         public int EcivId { get; set; }
         public string MuniId { get; set; }
+        public string MuniNombre { get; set; }
+        public string DepaId { get; set; }
+        public string DepaNombre { get; set; }
         public string CiviDireccion { get; set; }
         public int CiviUsuCreacion { get; set; }
         public string UserCreacion { get; set; }

@@ -558,11 +558,11 @@ VALUES('Municipios', 'general/municipios/listado', 'General', 'ri-dashboard-line
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Estados civiles', 'general/estadosciviles/listado', 'General', 'mdi mdi-church', 1)
+VALUES('Estados civiles', 'general/estadocivil/listado', 'General', 'mdi mdi-church', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Cargos', 'general/cargos/listado', 'General', 'ri-filter-3-line', 1)
+VALUES('Cargos', 'general/cargo/listado', 'General', 'ri-filter-3-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
@@ -578,15 +578,15 @@ VALUES('Casos', 'casoslegales/casos/listado', 'CasosLegales', 'ri-file-text-line
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Civiles', 'casoslegales/civiles/listado', 'CasosLegales', 'ri-group-2-line', 1)
+VALUES('Civiles', 'casoslegales/civil/listado', 'CasosLegales', 'ri-group-2-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Empleados', 'casoslegales/empleados/listado', 'CasosLegales', 'ri-group-line', 1)
+VALUES('Empleados', 'casoslegales/empleado/listado', 'CasosLegales', 'ri-group-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Empresas', 'casoslegales/empresas/listado', 'CasosLegales', 'ri-building-4-line', 1)
+VALUES('Empresas', 'casoslegales/empresa/listado', 'CasosLegales', 'ri-building-4-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
@@ -1049,12 +1049,8 @@ GO
 --**********************************************************TABLE Cargos**********************************************************--
 
 INSERT INTO GRAL.tbCargos (carg_Descripcion, carg_UsuCreacion)
-VALUES ('Gerente', 1),
-		('Supervisor', 1),
-		('Analista', 1),
-		('Ejecutivo de Ventas', 1),
-		('Analista Financiero', 1),
-		('Coordinador de Proyectos', 1);
+VALUES ('Abogado', 1),
+		('Juez', 1);
 GO	
 
 --*********************************************************/TABLE Cargos**********************************************************--
@@ -1066,10 +1062,10 @@ GO
 INSERT INTO CALE.tbAbogadosJueces (abju_DNI, abju_Nombres, abju_Apellidos, abju_Sexo, abju_Telefono, abju_CorreoElectronico, abju_FechaNacimiento, eciv_Id, carg_Id, muni_Id, abju_Direccion, abju_UsuCreacion)
 VALUES ('123456789', 'Juan',	'Pérez',	'M', '123456789', 'juan.perez@gmail.com',		'1990-01-01', 1, 1,'0311',  'Calle Principal 123',	1),
 		('987654321', 'María',	'López',	'F', '987654321', 'maria.lopez@gmail.com',		'1995-05-10', 2, 2,'0311',  'Avenida Secundaria 456',1),
-		('555555555', 'Pedro',	'González', 'M', '555555555', 'pedro.gonzalez@gmail.com',	'1985-12-15', 3, 3,'0311',  'Plaza Central 789',		1),
+		('555555555', 'Pedro',	'González', 'M', '555555555', 'pedro.gonzalez@gmail.com',	'1985-12-15', 3, 1,'0311',  'Plaza Central 789',		1),
 		('111111111', 'Ana',	'García',	'F', '111111111', 'ana.garcia@gmail.com',		'1988-06-20', 2, 1,'0311',  'Calle Secundaria 234',	1),
 		('222222222', 'Luis',	'Martínez', 'M', '222222222', 'luis.martinez@gmail.com',	'1992-09-08', 1, 2,'0311',  'Avenida Principal 567', 1),
-		('333333333', 'Laura', 'Rodríguez', 'F', '333333333', 'laura.rodriguez@gmail.com',	'1997-03-12', 3, 3,'0311',  'Plaza Secundaria 890',	1);
+		('333333333', 'Laura', 'Rodríguez', 'F', '333333333', 'laura.rodriguez@gmail.com',	'1997-03-12', 3, 2,'0311',  'Plaza Secundaria 890',	1);
 GO																											 
 
 INSERT INTO CALE.tbCiviles (civi_DNI, civi_Nombres, civi_Apellidos, civi_Sexo, civi_Telefono, civi_CorreoElectronico, civi_FechaNacimiento, eciv_Id, muni_Id, civi_Direccion, civi_UsuCreacion)

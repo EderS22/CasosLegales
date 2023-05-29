@@ -81,13 +81,13 @@
                 <div class="mb-3 col-6">
                     <label for="customername-field" class="form-label">Nombre</label>
                     <input [(ngModel)]="tde.tiev_Nombre" [ngClass]="{ 'is-invalid': submitted && tievNombreInvalid }"  
-                    type="text" id="customername-field" class="form-control" placeholder="Ingrese Nombre" required/>
+                    type="text" id="customername-field" class="form-control" placeholder="Ingrese Nombre" (blur)="trimTievNombre()"  required/>
                     <div class="invalid-feedback" *ngIf="submitted && tievNombreInvalid">El Nombre es requerido.</div>
                 </div>
                 <div class="mb-3 col-6">
                     <label for="customername-field" class="form-label">Descripcion</label>
                     <input [(ngModel)]="tde.tiev_Descripcion" [ngClass]="{ 'is-invalid': submitted && tievDescripcionInvalid }"  
-                    type="text" id="customername-field" class="form-control" placeholder="Ingrese Descripcion" required/>
+                    type="text" id="customername-field" class="form-control" placeholder="Ingrese Descripcion" (blur)="trimTievDescripcion()" required/>
                     <div class="invalid-feedback" *ngIf="submitted && tievDescripcionInvalid">La Descripcion es requerida.</div>
                 </div>
             </div>

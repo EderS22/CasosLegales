@@ -1525,6 +1525,18 @@ namespace CasosLegales.DataAccess
 
                 entity.Property(e => e.CiviUsuModificacion).HasColumnName("civi_UsuModificacion");
 
+                entity.Property(e => e.DepaId)
+                    .IsRequired()
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .HasColumnName("depa_Id")
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.DepaNombre)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .HasColumnName("depa_Nombre");
+
                 entity.Property(e => e.EcivId).HasColumnName("eciv_Id");
 
                 entity.Property(e => e.MuniId)
@@ -1533,6 +1545,11 @@ namespace CasosLegales.DataAccess
                     .IsUnicode(false)
                     .HasColumnName("muni_Id")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.MuniNombre)
+                    .IsRequired()
+                    .HasMaxLength(80)
+                    .HasColumnName("muni_Nombre");
 
                 entity.Property(e => e.UserCreacion)
                     .IsRequired()

@@ -91,6 +91,12 @@ export class ListadoComponent {
       }
     })
   }
+  trimTievNombre() {
+    this.tde.tiev_Nombre = this.tde.tiev_Nombre.trim();
+  }
+  trimTievDescripcion() {
+    this.tde.tiev_Descripcion = this.tde.tiev_Descripcion.trim();
+  }
 
   GuardarTipoDeEvidencia() {
     this.submitted = true;
