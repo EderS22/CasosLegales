@@ -93,6 +93,10 @@ export class ListadoComponent {
     });
   }
 
+
+  trimTicaDescripcion() {
+    this.estado.eciv_Descripcion = this.estado.eciv_Descripcion.trim();
+  }
   GuardarEstadoCivil() {
     this.submitted = true;
     this.ecivDescripcionInValid = this.estado.eciv_Descripcion.trim().length === 0;

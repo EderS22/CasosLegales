@@ -82,7 +82,7 @@
                 <div class="col-sm-12">
                     <label>Descripcion</label>
                     <input [(ngModel)]="carg.carg_Descripcion" type="text" class="form-control " 
-                    [ngClass]="{ 'is-invalid': submitted && cargDescripcionInValid }"  />
+                    [ngClass]="{ 'is-invalid': submitted && cargDescripcionInValid }" (blur)="trimTicaDescripcion()"/>
                     <div class="invalid-feedback" *ngIf="submitted && cargDescripcionInValid">Por favor ingrese un cargo</div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                 <div class="col-sm-12">
                     <label>Nombre</label>
                     <input [(ngModel)]="carg.carg_Descripcion" type="text" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && cargDescripcionInValid }"  />
+                    [ngClass]="{ 'is-invalid': submitted && cargDescripcionInValid }" (blur)="trimTicaDescripcion()" />
                     <div class="invalid-feedback" *ngIf="submitted && cargDescripcionInValid">Por favor ingrese un cargo</div>
                 </div>
             </div>

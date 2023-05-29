@@ -82,7 +82,7 @@
                 <div class="col-sm-12">
                     <label>Descripcion</label>
                     <input [(ngModel)]="estado.eciv_Descripcion" type="text" class="form-control " 
-                    [ngClass]="{ 'is-invalid': submitted && ecivDescripcionInValid }"  />
+                    [ngClass]="{ 'is-invalid': submitted && ecivDescripcionInValid }" (blur)="trimTicaDescripcion()" />
                     <div class="invalid-feedback" *ngIf="submitted && ecivDescripcionInValid">Por favor ingrese un estado civil</div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                 <div class="col-sm-12">
                     <label>Nombre</label>
                     <input [(ngModel)]="estado.eciv_Descripcion" type="text" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && ecivDescripcionInValid }"  />
+                    [ngClass]="{ 'is-invalid': submitted && ecivDescripcionInValid }" (blur)="trimTicaDescripcion()" />
                     <div class="invalid-feedback" *ngIf="submitted && ecivDescripcionInValid">Por favor ingrese un estado civil</div>
                 </div>
             </div>
