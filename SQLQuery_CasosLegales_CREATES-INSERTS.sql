@@ -277,16 +277,14 @@ GO
 CREATE TABLE CALE.tbEmpresas(
 emsa_Id							INT IDENTITY(1,1),
 emsa_Nombre						NVARCHAR(200),
-emsa_RNT						NVARCHAR(20),
-muni_Id						CHAR(4)			NOT NULL,
+emsa_RTN						NVARCHAR(20),
+muni_Id							CHAR(4)			NOT NULL,
 emsa_Direccion					NVARCHAR(250),
 emsa_RepresentanteNombre		NVARCHAR(200),
 emsa_RepresentanteDNI			NVARCHAR(20),
 emsa_RepresentanteTelefono		NVARCHAR(20),
 emsa_RepresentanteSexo			CHAR(1),
 eciv_Id							INT,
-emsa_EsDemandante				BIT				NOT NULL CONSTRAINT DF_CALE_tbEmpresas_emsa_EsDemandante DEFAULT(0),
-emsa_EsAcusado					BIT				NOT NULL CONSTRAINT DF_CALE_tbEmpresas_emsa_EsAcusado DEFAULT(0),
 
 emsa_UsuCreacion				INT				NOT NULL,
 emsa_FechaCreacion				DATETIME		NOT NULL CONSTRAINT DF_CALE_tbEmpleados_emsa_FechaCreacion DEFAULT(GETDATE()),

@@ -29,8 +29,8 @@ export class ListadoComponent {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   MunicipioForm!: UntypedFormGroup;
-  muniIdValue: string = '0000';
-  depa_idddddd!:string;
+
+  depa_idddddd!: string;
 
   constructor(
     private service: MunicipioService,
@@ -39,8 +39,7 @@ export class ListadoComponent {
     private DepartamentoService: DepartamentoService
   ) {
     this.MunicipioForm = this.formBuilder.group({
-      muni_Id: ['', [Validators.required]],
-      muni_IdDepa: ['', [Validators.required]],
+      muni_Id: ['0000', [Validators.required]],
       muni_IdCodigo: ['', [Validators.required]],
       muni_Nombre: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
       depa_Id: ['', [Validators.required]],
@@ -73,6 +72,7 @@ export class ListadoComponent {
         }
       })
 
+
     this.breadCrumbItems = [
       { label: 'Municipios' },
       { label: 'Listado', active: true }
@@ -93,6 +93,12 @@ export class ListadoComponent {
   }
 
   openModal(content: any) {
+    this.submit = false;
+    this.MunicipioForm.get('muni_Id')?.setValue('0000');
+    this.MunicipioForm.get('depa_Id')?.setValue('');
+    this.MunicipioForm.get('muni_IdCodigo')?.setValue('');
+    this.MunicipioForm.get('muni_Nombre')?.setValue('');
+    this.depa_idddddd = '';
     this.modalService.open(content, { size: 'md', centered: true, backdrop: 'static' });
   }
 
@@ -112,25 +118,47 @@ export class ListadoComponent {
 
   AsignarIdDepartamento(id: any) {
     this.depa_idddddd = id;
-    this.MunicipioForm.get('muni_IdDepa')?.setValue(id);
   }
-
-
-
-
-
-
-
-
-
-
 
   GuardarMunicipio() {
 
+    if (!this.MunicipioForm.valid) {
+      this.submit = true;
+
+    }
+    else {
+      const depaId = this.MunicipioForm.get('depa_Id')?.value;
+      const muniIdCodigo = this.MunicipioForm.get('muni_IdCodigo')?.value;
+      const concatenation = depaId.toString() + muniIdCodigo.toString();
+      this.MunicipioForm.get('muni_Id')?.setValue(concatenation);
+
+      this.service.InsertMunicipio(this.MunicipioForm.value)
+      .subscribe((data: any)=>{
+        if (data.data.codeStatus == 1) {
+          this.mensajeSuccess('Municipio Ingresado Correctamente');
+          this.modalService.dismissAll();
+          this.rerender();
+        }
+        else if (data.data.codeStatus == 2) {
+          this.mensajeWarning('Ya existe un Municipio con ese codigo');
+        }
+        else if (data.data.codeStatus == 3) {
+          this.mensajeWarning('Ya existe un Municipio con ese nombre en ese Departamento');
+        }
+        
+      })
+
+    }
+
   }
 
-  EditarMunicipio(m: municipio, contentEdit: any): void {
 
+
+  EditarMunicipio(m: municipio, contentEdit: any): void {
+    this.openModalEdit(contentEdit)
+    this.MunicipioForm.get('muni_Id')?.setValue(m.muni_Id);
+    this.MunicipioForm.get('depa_Id')?.setValue(m.depa_Id);
+    this.MunicipioForm.get('muni_Nombre')?.setValue(m.muni_Nombre);
   }
 
   openModalEdit(contentEdit: any) {
@@ -138,10 +166,36 @@ export class ListadoComponent {
   }
 
   GaurdarDatosEditados() {
+    this.MunicipioForm.get('muni_IdCodigo')?.setValue('00');
 
+    if (!this.MunicipioForm.valid) {
+      this.submit = true;
+
+    }
+    else {
+
+      this.service.EditarMunicipio(this.MunicipioForm.value)
+      .subscribe((data: any)=>{
+        if (data.data.codeStatus == 1) {
+          this.mensajeSuccess('Municipio Editado Correctamente');
+          this.modalService.dismissAll();
+          this.rerender();
+        }
+        else if (data.data.codeStatus == 3) {
+          this.mensajeWarning('Ya existe un Municipio con ese nombre en ese Departamento');
+        }
+        
+      })
+
+    }
   }
 
   optenerIdEliminar(m: municipio, contentDelete: any) {
+    this.MunicipioForm.get('muni_Id')?.setValue(m.muni_Id);
+    this.MunicipioForm.get('depa_Id')?.setValue('00');
+    this.MunicipioForm.get('muni_Nombre')?.setValue('00');
+    this.MunicipioForm.get('muni_IdCodigo')?.setValue('00');
+
     this.openModalDelet(contentDelete)
   }
 
@@ -150,7 +204,21 @@ export class ListadoComponent {
   }
 
   MandarDatosEliminar() {
+    if (!this.MunicipioForm.valid) {
+      this.submit = true;
 
+    }
+    else {
+
+      this.service.EliminarMunicipio(this.MunicipioForm.value)
+      .subscribe((data: any)=>{
+        if (data.data.codeStatus == 1) {
+          this.mensajeSuccess('Municipio Eliminado Correctamente');
+          this.modalService.dismissAll();
+          this.rerender();
+        }
+      })
+    }
   }
 
 

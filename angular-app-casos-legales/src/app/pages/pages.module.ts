@@ -50,6 +50,9 @@ import { ListadoComponent as ListadoMunicipio } from './general/municipio/listad
 import { ListadoComponent as ListadoEmpleados} from './casoslegales/empleado/listado/listado.component';
 import { CrearComponent as InsertarEmpleados} from './casoslegales/empleado/crear/crear.component';
 import { EditarComponent as EditarEmpleados} from './casoslegales/empleado/editar/editar.component';
+import { ListadoComponent as ListadoEmpresas } from './casoslegales/empresa/listado/listado.component';
+import { CrearComponent as CrearEmpresa} from './casoslegales/empresa/crear/crear.component';
+
 
 @NgModule({
   declarations: [
@@ -70,6 +73,8 @@ import { EditarComponent as EditarEmpleados} from './casoslegales/empleado/edita
     InsertarEmpleados,
     ListadoTiposDeEvidencia,
     EditarEmpleados,
+    ListadoEmpresas,
+    CrearEmpresa
   ],
   imports: [
     CommonModule,

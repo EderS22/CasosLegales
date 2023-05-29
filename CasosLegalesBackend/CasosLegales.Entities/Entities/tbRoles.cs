@@ -29,7 +29,6 @@ namespace CasosLegales.Entities.Entities
 
         [NotMapped]
         public string usua_NombreModificacion { get; set; }
-
         public virtual tbUsuarios usua_IdCreacionNavigation { get; set; }
         public virtual tbUsuarios usua_IdModificacionNavigation { get; set; }
         public virtual ICollection<tbRolesPorPantalla> tbRolesPorPantalla { get; set; }

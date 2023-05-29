@@ -57,3 +57,4 @@ C:\Users\ALEXANDER\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegale
 C:\Users\ALEXANDER\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\obj\Debug\net5.0\CasosLegales.Entities.dll
 C:\Users\ALEXANDER\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\obj\Debug\net5.0\ref\CasosLegales.Entities.dll
 C:\Users\ALEXANDER\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\obj\Debug\net5.0\CasosLegales.Entities.pdb
+C:\Users\ALEXANDER\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.Entities\obj\Debug\net5.0\CasosLegales.Entities.csproj.AssemblyReference.cache

@@ -17,6 +17,9 @@ import { ListadoComponent  as ListadoEmpleado} from './casoslegales/empleado/lis
 import { CrearComponent as CrearEmpleados } from './casoslegales/empleado/crear/crear.component';
 import { EditarComponent as EditarEmpleado } from './casoslegales/empleado/editar/editar.component';
 
+import { ListadoComponent as ListadoEmpresas } from './casoslegales/empresa/listado/listado.component';
+import { CrearComponent as CrearEmpresa } from './casoslegales/empresa/crear/crear.component';
+
 const routes: Routes = [
     {
         path: "",
@@ -76,7 +79,16 @@ const routes: Routes = [
     { 
       path: "casoslegales/tiposdeevidencia/listado",
       component: ListadoTiposdeEvidencia
+    },
+    { 
+      path: "casoslegales/empresa/listado",
+      component: ListadoEmpresas
+    },
+    { 
+      path: "casoslegales/empresa/crear",
+      component: CrearEmpresa
     }
+
 ];
 
 @NgModule({
