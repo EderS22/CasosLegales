@@ -209,12 +209,12 @@ BEGIN
 	SELECT * FROM cale.VW_tbCiviles
 	WHERE civi_Id = @civi_Id;
 END
-
+GO
 --********************************************************--
 --********************** TABLA EMPRESAS *********************--
 
 --**************  VISTA ******************--
-GO
+
 CREATE OR ALTER VIEW CALE.VW_tbEmpresas
 AS
 SELECT	T1.[emsa_Id],
@@ -235,13 +235,16 @@ SELECT	T1.[emsa_Id],
 		T1.[emsa_UsuModificacion], 
 		T1.[emsa_FechaModificacion], 
 		T1.[emsa_Estado]
-FROM cale.tbEmpresas AS T1 INNER JOIN acce.tbUsuarios AS T2
-ON T1.emsa_UsuCreacion = T2.usua_Id LEFT JOIN acce.tbUsuarios AS T3
-ON T1.emsa_UsuModificacion = T3.usua_Id INNER JOIN GRAL.tbMunicipios AS T4
-ON T1.muni_Id = T4.muni_Nombre;
+		FROM cale.tbEmpresas AS T1 
+  INNER JOIN acce.tbUsuarios AS T2
+		  ON T1.emsa_UsuCreacion = T2.usua_Id 
+   LEFT JOIN acce.tbUsuarios AS T3
+		  ON T1.emsa_UsuModificacion = T3.usua_Id 
+  INNER JOIN GRAL.tbMunicipios AS T4
+		  ON T1.muni_Id = T4.muni_Id
+GO
 
 --**************  CREATE ******************--
-GO
 CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpresas_Insert
 (@emsa_Nombre NVARCHAR(200),
  @emsa_RTN NVARCHAR(20),

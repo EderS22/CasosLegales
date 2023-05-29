@@ -340,37 +340,37 @@ CONSTRAINT FK_CALE_tbTiposdeEvidencia_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY
 );
 GO
 
+--***********************************************************TABLES tbCasos***********************************************************--
 
---********** TABLE CASOS ************--
 CREATE TABLE CALE.tbCasos(
-caso_Id						INT IDENTITY(1,1),
-caso_descripcion			NVARCHAR(200),
-tica_Id						INT,
-caso_Juez					INT,
-caso_TipoDemandante			CHAR(1),
-caso_Demandante				INT,
-caso_AbogadoDemandante		INT,
-caso_AbogadoDemandado		INT,
-caso_Abierto				BIT				NOT NULL CONSTRAINT DF_CALE_tbCasos_caso_Abierto DEFAULT(0),
-
-caso_UsuCreacion			INT				NOT NULL,
-caso_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbCasos_caso_FechaCreacion DEFAULT(GETDATE()),
-caso_UsuModificacion		INT,
-caso_FechaModificacion		DATETIME,
-caso_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbCasos_caso_Estado DEFAULT(1),
-
-CONSTRAINT PK_CALE_tbCasos_caso_Id	PRIMARY KEY(caso_Id),
-CONSTRAINT FK_CALE_tbCasos_caso_TipoDemandante CHECK(caso_TipoDemandante IN ('C','E')),
-CONSTRAINT FK_CALE_tbCasos_CALE_tbTiposdeCaso_tica_Id					FOREIGN KEY(tica_Id)				REFERENCES CALE.tbTiposdeCaso(tica_Id),
-CONSTRAINT FK_CALE_tbCasos_CALE_tbAbogadosJueces_caso_Juez				FOREIGN KEY(caso_Juez)				REFERENCES CALE.tbAbogadosJueces(abju_Id),	
-CONSTRAINT FK_CALE_tbCasos_CALE_tbAbogadosJueces_caso_AbogadoDemandante	FOREIGN KEY(caso_AbogadoDemandante)	REFERENCES CALE.tbAbogadosJueces(abju_Id),			
-CONSTRAINT FK_CALE_tbCasos_CALE_tbAbogadosJueces_caso_AbogadoDemandado	FOREIGN KEY(caso_AbogadoDemandado)	REFERENCES CALE.tbAbogadosJueces(abju_Id),			
-
-CONSTRAINT FK_CALE_tbCasos_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(caso_UsuCreacion)		REFERENCES ACCE.tbUsuarios(usua_Id),
-CONSTRAINT FK_CALE_tbCasos_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(caso_UsuModificacion)	REFERENCES ACCE.tbUsuarios(usua_Id),
+	caso_Id						INT IDENTITY(1,1),
+	caso_Descripcion			NVARCHAR(200),
+	tica_Id						INT NOT NULL,
+	abju_IdJuez					INT NOT NULL,
+	caso_TipoDemandante			CHAR(1) NOT NULL,
+	caso_IdDemandante			INT NOT NULL,
+	caso_TipoDemandado			CHAR(1) NOT NULL,
+	caso_IdDemandado			INT NOT NULL,
+	abju_IdAbogadoDemandante	INT NOT NULL,
+	abju_IdAbogadoDemandado		INT NOT NULL,
+	caso_Abierto				BIT	NOT NULL DEFAULT 0,
+	caso_Fecha					DATE DEFAULT GETDATE(),
+	
+	caso_Estado					BIT DEFAULT 1,
+	usua_IdCreacion				INT	NOT NULL,
+	caso_FechaCreacion			DATETIME DEFAULT GETDATE(),
+	usua_IdModificacion			INT DEFAULT NULL,
+	caso_FechaModificacion		DATETIME DEFAULT NULL,
+	CONSTRAINT PK_CALE_tbCasos_caso_Id PRIMARY KEY (caso_Id),
+	CONSTRAINT FK_CALE_tbCasos_caso_TipoDemandante CHECK (caso_TipoDemandante IN ('C','E')),
+	CONSTRAINT FK_CALE_tbCasos_tica_Id_CALE_tbTiposdeCaso_tica_Id FOREIGN KEY(tica_Id) REFERENCES CALE.tbTiposdeCaso(tica_Id),
+	CONSTRAINT FK_CALE_tbCasos_abju_IdJuez_CALE_tbAbogadosJueces_caso_Juez FOREIGN KEY (abju_IdJuez) REFERENCES CALE.tbAbogadosJueces(abju_Id),	
+	CONSTRAINT FK_CALE_tbCasos_abju_IdAbogadoDemandante_CALE_tbAbogadosJueces_abju_Id FOREIGN KEY (abju_IdAbogadoDemandante) REFERENCES CALE.tbAbogadosJueces(abju_Id),			
+	CONSTRAINT FK_CALE_tbCasos_abju_IdAbogadoDemandado_CALE_tbAbogadosJueces_abju_IdAbogadoDemandado FOREIGN KEY (abju_IdAbogadoDemandado) REFERENCES CALE.tbAbogadosJueces(abju_Id)			
 );
 GO
 
+--**********************************************************/TABLES tbCasos***********************************************************--
 
 --********** TABLE ACUSADOSPORCASO ************--
 CREATE TABLE CALE.tbAcusadoPorCaso(
@@ -1067,7 +1067,20 @@ GO
 --*******************************************************TABLE Tipos de caso*******************************************************--
 
 INSERT INTO CALE.tbTiposdeCaso (tica_Nombre, tica_Descripcion, tica_UsuCreacion)
+VALUES ('Robo', 'Este tipo de caso abarca todos los relacionados con robos', 1)
+GO
 
+INSERT INTO CALE.tbTiposdeCaso (tica_Nombre, tica_Descripcion, tica_UsuCreacion)
+VALUES ('Homicidio', 'Este tipo de caso abarca todos los relacionados con homicidios', 1)
+GO
+
+INSERT INTO CALE.tbTiposdeCaso (tica_Nombre, tica_Descripcion, tica_UsuCreacion)
+VALUES ('Accidente', 'Este tipo de caso abarca todos los relacionados con accidentes de transito', 1)
+GO
+
+INSERT INTO CALE.tbTiposdeCaso (tica_Nombre, tica_Descripcion, tica_UsuCreacion)
+VALUES ('Intento de asesinato', 'Este tipo de caso abarca todos los relacionados con intentos de asesinato', 1)
+GO
 
 --******************************************************/TABLE Tipos de caso*******************************************************--
 
@@ -1102,6 +1115,21 @@ VALUES ('111111111', 'Juan',	'Pérez',	'M', '111111111', 'juan.perez@example.com
 		('101010101', 'Susana', 'López',	'F', '101010101', 'susana.lopez@example.com',		'1996-08-05', 2, '0502', 'Calle Secundaria 234',		1);
 GO
 
+INSERT INTO CALE.tbEmpresas (emsa_Nombre, emsa_RNT, muni_Id, emsa_Direccion, emsa_RepresentanteNombre, emsa_RepresentanteDNI, emsa_RepresentanteTelefono, emsa_RepresentanteSexo, eciv_Id, emsa_UsuCreacion) 
+VALUES('LEYDE S.A de C.V', '19472516348721', '0103', 'Ave. circunvalacion, entre 16 y 15 calle NO', 'Luis Carrasco', '0601197506321', '+504 9152-6874', 'M', 2, 1)
+GO
+
+INSERT INTO CALE.tbEmpresas (emsa_Nombre, emsa_RNT, muni_Id, emsa_Direccion, emsa_RepresentanteNombre, emsa_RepresentanteDNI, emsa_RepresentanteTelefono, emsa_RepresentanteSexo, eciv_Id, emsa_UsuCreacion) 
+VALUES('Industrias CHAMER S.A', '19415689348721', '0501', 'Ave. los proceres, entre 20 y 21 calle SE', 'Maria Benavides', '0916198006325', '+504 8154-7452', 'F', 3, 1)
+GO
+
+INSERT INTO CALE.tbEmpresas (emsa_Nombre, emsa_RNT, muni_Id, emsa_Direccion, emsa_RepresentanteNombre, emsa_RepresentanteDNI, emsa_RepresentanteTelefono, emsa_RepresentanteSexo, eciv_Id, emsa_UsuCreacion) 
+VALUES('Cerveceria Hondureña', '16121844634578', '0810', 'Barrio El Centro, frente al parque central', 'Fernando Gutierres', '0405197906521', '+504 3317-8452', 'M', 1, 1)
+GO
+
+INSERT INTO CALE.tbEmpresas (emsa_Nombre, emsa_RNT, muni_Id, emsa_Direccion, emsa_RepresentanteNombre, emsa_RepresentanteDNI, emsa_RepresentanteTelefono, emsa_RepresentanteSexo, eciv_Id, emsa_UsuCreacion) 
+VALUES('SULA S.A de C.V', '1894562314875', '0906', 'El palenque 5 calle entre 18 y 19 Ave. SO', 'Sofia Lopez', '1802199916354', '+504 9192-3435', 'F', 4, 1)
+GO
 
 --***********************************************************TABLES CALE***********************************************************--
 
@@ -1144,6 +1172,16 @@ ALTER TABLE ACCE.tbRolesPorPantalla ADD CONSTRAINT FK_ACCE_tbRolesPorPantalla_us
 GO
 
 --**********************************************************/TABLES ACCE***********************************************************--
+
+--***********************************************************TABLES CALE***********************************************************--
+
+ALTER TABLE CALE.tbCasos ADD CONSTRAINT FK_CALE_tbCasos_usua_IdCreacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdCreacion) REFERENCES ACCE.tbUsuarios (usua_Id)
+GO
+
+ALTER TABLE CALE.tbCasos ADD CONSTRAINT FK_CALE_tbCasos_usua_IdModificacion_ACCE_tbUsuarios_usua_Id FOREIGN KEY (usua_IdModificacion) REFERENCES ACCE.tbUsuarios (usua_Id)
+GO
+
+--**********************************************************/TABLES CALE***********************************************************--
 
 
 --*********************************************************/ALTERS TABLES**********************************************************--

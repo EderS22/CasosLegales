@@ -29,7 +29,6 @@ namespace CasosLegales.DataAccess.Repositories
             parametros.Add("@abju_Id", id, DbType.Int32, ParameterDirection.Input);
 
             return db.QueryFirst<VW_tbAbogadosJueces>(ScriptsDataBase.CargarAbogadosJueces, parametros, commandType: System.Data.CommandType.StoredProcedure);
-
         }
 
         public RequestStatus Insert(tbAbogadosJueces item)
@@ -79,6 +78,21 @@ namespace CasosLegales.DataAccess.Repositories
 
             var result = db.QueryFirst<RequestStatus>(ScriptsDataBase.ActualizarAbogadosJueces, parametros, commandType: System.Data.CommandType.StoredProcedure);
             return result;
+        }
+
+        public IEnumerable<tbAbogadosJueces> DdlAbogados()
+        {
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            
+            return db.Query<tbAbogadosJueces>(ScriptsDataBase.DdlAbogados, null, commandType: System.Data.CommandType.StoredProcedure);
+        }
+
+
+        public IEnumerable<tbAbogadosJueces> DdlJueces()
+        {
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+
+            return db.Query<tbAbogadosJueces>(ScriptsDataBase.DdlJueces, null, commandType: System.Data.CommandType.StoredProcedure);
         }
     }
 }

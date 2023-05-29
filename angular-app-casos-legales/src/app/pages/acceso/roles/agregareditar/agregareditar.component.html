@@ -46,7 +46,6 @@
                         </div>
                     </div>
                     <br/>
-                    <hr/>
                     <br/>
                     <div>
                         <h4 style="text-align: center;">Pantallas</h4>
@@ -54,68 +53,89 @@
                         <div class="text-danger" [ngStyle]="{'display': !pantallasValid ? '' : 'none'}">Debe asignarle al menos una pantalla al rol</div>
                     </div>
                     <br/>
-                    <c-nav variant="pills">
-                        <a [active]="true" [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="0" cNavLink>Acceso</a>
-                        <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink>General</a>
-                        <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="2" cNavLink>Casos Legales</a>
-                      </c-nav>
-                      <c-tab-content #tabContent="cTabContent">
-                        <c-tab-pane class="p-3">
-                            <div class="search-name">
-                                <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermAcce$.next($any($event.target).value)">
-                            </div>
-                            <br/>
-                            <div class="mx-n3">
-                                <ngx-simplebar style="max-height: 300px;" class="px-3">
-                                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 80px; gap: 23px; height: 300px;">
-                                        <div *ngFor="let item of pantallasFilteredAcce" >
-                                            <label>{{item.pant_Pantalla}}</label>
-                                            <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
-                                                <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
-                                            </div>
-                                        </div>
+                    <div class="card">
+                        <div class="card-header">
+                          <ul ngbNav #customNav="ngbNav" [activeId]="1"  class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
+                            <li [ngbNavItem]="1" class="nav-item">
+                                <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab">
+                                  <i class="fas fa-home"></i>
+                                  Acceso
+                                </a>
+                                <ng-template ngbNavContent>
+                                    <div class="search-name">
+                                        <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermAcce$.next($any($event.target).value)">
                                     </div>
-                                </ngx-simplebar>
-                            </div>
-                        </c-tab-pane>
-                        <c-tab-pane class="p-3">
-                            <div class="search-name">
-                                <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermGral$.next($any($event.target).value)">
-                            </div>
-                            <br/>
-                            <div class="mx-n3">
-                                <ngx-simplebar style="max-height: 300px;" class="px-3">
-                                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 80px; gap: 23px; height: 300px;">
-                                        <div *ngFor="let item of pantallasFilteredGral" >
-                                            <label>{{item.pant_Pantalla}}</label>
-                                            <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
-                                                <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
+                                    <br/>
+                                    <div class="mx-n3">
+                                        <ngx-simplebar style="max-height: 300px;" class="px-3">
+                                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 80px; gap: 23px; height: 300px;">
+                                                <div *ngFor="let item of pantallasFilteredAcce" >
+                                                    <label>{{item.pant_Pantalla}}</label>
+                                                    <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
+                                                        <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </ngx-simplebar>
                                     </div>
-                                </ngx-simplebar>
-                            </div>
-                        </c-tab-pane>
-                        <c-tab-pane class="p-3">
-                            <div class="search-name">
-                                <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermCale$.next($any($event.target).value)">
-                            </div>
-                            <br/>
-                            <div class="mx-n3">
-                                <ngx-simplebar style="max-height: 300px;" class="px-3">
-                                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 80px; gap: 23px; height: 300px;">
-                                        <div *ngFor="let item of pantallasFilteredCale" >
-                                            <label>{{item.pant_Pantalla}}</label>
-                                            <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
-                                                <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
+                                </ng-template>
+                            </li>
+                            <li [ngbNavItem]="2" class="nav-item">
+                                <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab">
+                                  <i class="fas fa-home"></i>
+                                  General
+                                </a>
+                                <ng-template ngbNavContent>
+                                    <div class="search-name">
+                                        <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermGral$.next($any($event.target).value)">
+                                    </div>
+                                    <br/>
+                                    <div class="mx-n3">
+                                        <ngx-simplebar style="max-height: 300px;" class="px-3">
+                                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 80px; gap: 23px; height: 300px;">
+                                                <div *ngFor="let item of pantallasFilteredGral" >
+                                                    <label>{{item.pant_Pantalla}}</label>
+                                                    <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
+                                                        <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </ngx-simplebar>
                                     </div>
-                                </ngx-simplebar>
+                                </ng-template>
+                            </li>
+                            <li [ngbNavItem]="3" class="nav-item">
+                                <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab">
+                                  <i class="fas fa-home"></i>
+                                  Casos legales
+                                </a>
+                                <ng-template ngbNavContent>
+                                    <div class="search-name">
+                                        <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermCale$.next($any($event.target).value)">
+                                    </div>
+                                    <br/>
+                                    <div class="mx-n3">
+                                        <ngx-simplebar style="max-height: 300px;" class="px-3">
+                                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-template-rows: 80px; gap: 23px; height: 300px;">
+                                                <div *ngFor="let item of pantallasFilteredCale" >
+                                                    <label>{{item.pant_Pantalla}}</label>
+                                                    <div class="form-control" style="display: flex; justify-content: center; height: 38px;">
+                                                        <input type="checkbox" class="form-check-input" formControlName="pant_{{item.pant_Id}}" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ngx-simplebar>
+                                    </div>
+                                </ng-template>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="tab-content">
+                              <div [ngbNavOutlet]="customNav"></div>
                             </div>
-                        </c-tab-pane>
-                      </c-tab-content>
-                    <hr>
+                        </div>
+                    </div>
                     <div style="text-align: center;">
                         <button type="submit" class="btn btn-success col-6" id="add-btn" (click)="onSubmit()">
                             {{isEdit ? 'Editar' : 'Agregar'}} rol

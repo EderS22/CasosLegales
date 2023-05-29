@@ -92,53 +92,9 @@
       {
          "Name": "[GRAL].[tbMunicipios]",
          "ObjectType": 0
-      },
-      {
-         "Name": "[CALE].[VW_tbAbogadosJueces]",
-         "ObjectType": 3
-      },
-      {
-         "Name": "[CALE].[VW_tbCiviles]",
-         "ObjectType": 3
-      },
-      {
-         "Name": "[CALE].[VW_tbEmpleados]",
-         "ObjectType": 3
-      },
-      {
-         "Name": "[CALE].[VW_tbEmpresas]",
-         "ObjectType": 3
-      },
-      {
-         "Name": "[CALE].[VW_tbTiposdeCaso]",
-         "ObjectType": 3
-      },
-      {
-         "Name": "[CALE].[VW_tbTiposdeEvidencia]",
-         "ObjectType": 3
-      },
-      {
-         "Name": "[GRAL].[VW_tbCargos]",
-         "ObjectType": 3
-      },
-      {
-         "Name": "[GRAL].[VW_tbDepartamentos]",
-         "ObjectType": 3
-      },
-      {
-         "Name": "[GRAL].[VW_tbEstadosCiviles]",
-         "ObjectType": 3
-      },
-      {
-         "Name": "[GRAL].[VW_tbMunicipios]",
-         "ObjectType": 3
       }
    ],
-<<<<<<< HEAD
-   "UiHint": "EJSM\\SQLEXPRESS.DB_CasosLegales",
-=======
-   "UiHint": "DESKTOP-BPGLHI0\\SQLEXPRESSLOCAL.DB_CasosLegales",
->>>>>>> Cristian
+   "UiHint": "DESKTOP-5RUMQNH\\SQLEXPRESS.DB_CasosLegales",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

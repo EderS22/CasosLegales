@@ -9,7 +9,7 @@ const API_URL = GlobalComponent.API_URL;
 })
 export class CasosService {
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    
+  
 }

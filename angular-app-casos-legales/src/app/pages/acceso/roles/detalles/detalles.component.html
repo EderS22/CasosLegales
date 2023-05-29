@@ -48,16 +48,13 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title mb-0">Pantallas</h4>
-            </div>
-            <div class="card-body">
-                <c-nav variant="pills">
-                    <a [active]="true" [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="0" cNavLink>Acceso</a>
-                    <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink>General</a>
-                    <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="2" cNavLink>Casos Legales</a>
-                </c-nav>
-                <c-tab-content #tabContent="cTabContent">
-                    <c-tab-pane class="p-3">
+              <ul ngbNav #customNav="ngbNav" [activeId]="1"  class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
+                <li [ngbNavItem]="1" class="nav-item">
+                    <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab">
+                      <i class="fas fa-home"></i>
+                      Acceso
+                    </a>
+                    <ng-template ngbNavContent>
                         <div class="search-name">
                             <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermAcce$.next($any($event.target).value)">
                         </div>
@@ -84,8 +81,14 @@
                                 </div>
                             </ngx-simplebar>
                         </div>
-                    </c-tab-pane>
-                    <c-tab-pane class="p-3">
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="2" class="nav-item">
+                    <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab">
+                      <i class="fas fa-home"></i>
+                      General
+                    </a>
+                    <ng-template ngbNavContent>
                         <div class="search-name">
                             <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermGral$.next($any($event.target).value)">
                         </div>
@@ -112,8 +115,14 @@
                                 </div>
                             </ngx-simplebar>
                         </div>
-                    </c-tab-pane>
-                    <c-tab-pane class="p-3">
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="3" class="nav-item">
+                    <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab">
+                      <i class="fas fa-home"></i>
+                      Casos legales
+                    </a>
+                    <ng-template ngbNavContent>
                         <div class="search-name">
                             <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermCale$.next($any($event.target).value)">
                         </div>
@@ -140,8 +149,14 @@
                                 </div>
                             </ngx-simplebar>
                         </div>
-                    </c-tab-pane>
-                </c-tab-content>
+                    </ng-template>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body p-4">
+                <div class="tab-content">
+                  <div [ngbNavOutlet]="customNav"></div>
+                </div>
             </div>
         </div>
     </div>

@@ -17,25 +17,30 @@ namespace CasosLegales.Entities.Entities
         }
 
         public int caso_Id { get; set; }
-        public string caso_descripcion { get; set; }
-        public int? tica_Id { get; set; }
-        public int? caso_Juez { get; set; }
+        public string caso_Descripcion { get; set; }
+        public int tica_Id { get; set; }
+        public int abju_IdJuez { get; set; }
         public string caso_TipoDemandante { get; set; }
-        public int? caso_Demandante { get; set; }
-        public int? caso_AbogadoDemandante { get; set; }
-        public int? caso_AbogadoDemandado { get; set; }
+        public int caso_IdDemandante { get; set; }
+        public string caso_TipoDemandado { get; set; }
+        public int caso_IdDemandado { get; set; }
+        public int abju_IdAbogadoDemandante { get; set; }
+        public int abju_IdAbogadoDemandado { get; set; }
         public bool caso_Abierto { get; set; }
-        public int caso_UsuCreacion { get; set; }
-        public DateTime caso_FechaCreacion { get; set; }
-        public int? caso_UsuModificacion { get; set; }
-        public DateTime? caso_FechaModificacion { get; set; }
-        public bool? caso_Estado { get; set; }
+        public DateTime caso_Fecha { get; set; }
 
-        public virtual tbAbogadosJueces caso_AbogadoDemandadoNavigation { get; set; }
-        public virtual tbAbogadosJueces caso_AbogadoDemandanteNavigation { get; set; }
-        public virtual tbAbogadosJueces caso_JuezNavigation { get; set; }
-        public virtual tbUsuarios caso_UsuCreacionNavigation { get; set; }
-        public virtual tbUsuarios caso_UsuModificacionNavigation { get; set; }
+        public bool caso_Estado { get; set; }
+        public int usua_IdCreacion { get; set; }
+        public DateTime caso_FechaCreacion { get; set; }
+        public int? usua_IdModificacion { get; set; }
+        public DateTime? caso_FechaModificacion { get; set; }
+
+
+        public virtual tbAbogadosJueces abju_IdAbogadoDemandadoNavigation { get; set; }
+        public virtual tbAbogadosJueces abju_IdAbogadoDemandanteNavigation { get; set; }
+        public virtual tbAbogadosJueces abju_IdJuezNavigation { get; set; }
+        public virtual tbUsuarios usua_IdCreacionNavigation { get; set; }
+        public virtual tbUsuarios usua_IdModificacionNavigation { get; set; }
         public virtual tbTiposdeCaso tica { get; set; }
         public virtual ICollection<tbAcusadoPorCaso> tbAcusadoPorCaso { get; set; }
         public virtual ICollection<tbEvidenciasPorCaso> tbEvidenciasPorCaso { get; set; }

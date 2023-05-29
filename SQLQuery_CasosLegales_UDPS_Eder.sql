@@ -428,6 +428,29 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE ACCE.UDP_tbRolesPorPantalla_EliminarPantallasdeRol
+	@role_Id				INT,
+	@usua_IdModificacion	INT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+			UPDATE ACCE.tbRolesPorPantalla
+			   SET ropa_Estado = 0,
+				   usua_IdModificacion = @usua_IdModificacion,
+				   ropa_FechaModificacion = GETDATE()
+			 WHERE role_Id = @role_Id
+		
+		COMMIT
+		SELECT 1
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+		SELECT 0
+	END CATCH
+END
+GO
+
 CREATE OR ALTER PROCEDURE ACCE.UDP_tbRoles_EliminarRol
 	@role_Id				INT,
 	@usua_IdModificacion	INT
@@ -600,30 +623,45 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE ACCE.UDP_tbRolesPorPantalla_EliminarPantallasdeRol
-	@role_Id				INT,
-	@usua_IdModificacion	INT
-AS
-BEGIN
-	BEGIN TRY
-		BEGIN TRAN
-			UPDATE ACCE.tbRolesPorPantalla
-			   SET ropa_Estado = 0,
-				   usua_IdModificacion = @usua_IdModificacion,
-				   ropa_FechaModificacion = GETDATE()
-			 WHERE role_Id = @role_Id
-		
-		COMMIT
-		SELECT 1
-	END TRY
-	BEGIN CATCH
-		ROLLBACK
-		SELECT 0
-	END CATCH
-END
-GO
-
 
 --**************************************************/TABLE Roles por Pantallas*****************************************************--
 
 --**********************************************************/TABLES ACCE***********************************************************--
+
+--***********************************************************TABLES CALE***********************************************************--
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbAbogadosJueces_DdlAbogados
+AS
+BEGIN
+	SELECT abju_Id,
+		   abju_DNI,
+		   abju_Nombres,
+		   abju_Apellidos
+	  FROM CALE.tbAbogadosJueces
+	  WHERE abju_Estado = 1
+	    AND carg_Id = (SELECT carg_Id
+						 FROM GRAL.tbCargos 
+						WHERE carg_Descripcion = 'Abogado' 
+						  AND carg_Estado = 1)
+END
+GO
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbAbogadosJueces_DdlJueces
+AS
+BEGIN
+	SELECT abju_Id,
+		   abju_DNI,
+		   abju_Nombres,
+		   abju_Apellidos
+	  FROM CALE.tbAbogadosJueces
+	  WHERE abju_Estado = 1
+	    AND carg_Id = (SELECT carg_Id
+						 FROM GRAL.tbCargos 
+						WHERE carg_Descripcion = 'Juez' 
+						  AND carg_Estado = 1)
+END
+GO
+
+--**********************************************************/TABLES CALE***********************************************************--
+
+

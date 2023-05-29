@@ -61,5 +61,23 @@ namespace CasosLegales.API.Controllers
             var list = _casosLegalesService.BuscarJuecesAbogados(id);
             return Ok(list);
         }
+
+        [HttpGet("DdlAbogados")]
+        public IActionResult DdlAbogados()
+        {
+            var list = _casosLegalesService.DdlAbogados();
+            list.Data = _mapper.Map<IEnumerable<AbogadoJuezViewModel>>(list.Data);
+
+            return Ok(list);
+        }
+
+        [HttpGet("DdlJueces")]
+        public IActionResult DdlJueces()
+        {
+            var list = _casosLegalesService.DdlJueces();
+            list.Data = _mapper.Map<IEnumerable<AbogadoJuezViewModel>>(list.Data);
+
+            return Ok(list);
+        }
     }
 }

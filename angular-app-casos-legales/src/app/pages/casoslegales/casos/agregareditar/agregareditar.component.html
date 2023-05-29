@@ -49,26 +49,106 @@
                         [ngClass]="{ 'is-invalid': submitted && form['tica_Id'].errors }"
                     >
                         <option value="" hidden selected>Seleccione un tipo de caso</option>
+                        <option *ngFor="let item of listadoTiposDeCaso" [value]="item.tica_Id">
+                            {{item.tica_Nombre}}
+                        </option>
                     </select>
                     <div class="invalid-feedback">Por favor seleccione un tipo de caso.</div>
                 </div>
                 <div class="col-sm-6">
                     <label for="caso_Juez" class="form-label">
                         Juez
-                    </label>
-                    <select class="form-select" 
-                        formControlName="caso_Juez"
-                        [ngClass]="{ 'is-invalid': submitted && form['caso_Juez'].errors }"
-                    >
-                        <option value="" hidden selected>Seleccione un juez</option>
-                    </select>
+                    </label> 
+                    <ng-select
+                        formControlName="abju_Id"
+                        [ngClass]="{ 'is-invalid': submitted && form['abju_Id'].errors }"
+                        placeholder="Seleccione un juez"
+                        [markFirst]="true"
+                        [virtualScroll]="true"
+                        style="background-color: #05192f;"
+                        >
+                        <ng-option *ngFor="let item of listadoJueces" [value]="item.abju_Id">
+                            {{item.abju_DNI}} - {{item.abju_Nombres}} {{item.abju_Apellidos}}
+                        </ng-option>
+                    </ng-select>
+                  
                     <div class="invalid-feedback">Por favor seleccione un juez.</div>
                 </div>
             </div>
             <div class="row mb-3">
-               
                 <div class="col-sm-6">
-
+                    <label for="caso_TipoDemandante" class="form-label">
+                        Tipo demandante
+                    </label>
+                    <select class="form-select" 
+                        formControlName="caso_TipoDemandante"
+                        [ngClass]="{ 'is-invalid': submitted && form['caso_TipoDemandante'].errors }"
+                        (change)="tipoDemandanteChange($any($event.target).value)"
+                    >
+                        <option value="" hidden selected>Seleccione un tipo de demandante</option>
+                        <option value="E">Empresa</option>
+                        <option value="C">Civil</option>
+                    </select>
+                <div class="invalid-feedback">Por favor seleccione un tipo de demandante.</div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="caso_IdDemandante" class="form-label">
+                        Demandante
+                    </label>
+                    <select class="form-select" 
+                        formControlName="caso_IdDemandante"
+                        [ngClass]="{ 'is-invalid': submitted && form['caso_IdDemandante'].errors }"
+                    >
+                        <option value="" hidden selected>{{form['caso_TipoDemandante'].value === '' ? 'Seleccione un tipo de demandante' : 'Seleccione el demandante'}}</option>
+                       <ng-container *ngIf="form['caso_TipoDemandante'].value === 'E'">
+                        <option *ngFor="let item of listadoEmpresas" value="item.emsa_Id">
+                            {{item.emsa_Nombre}}
+                        </option>
+                       </ng-container>
+                       <ng-container *ngIf="form['caso_TipoDemandante'].value === 'C'">
+                        <option *ngFor="let item of listadoCiviles" value="item.civi_Id">
+                            {{item.civi_DNI}} - {{item.civi_Nombres}} {{item.civi_Apellidos}}
+                        </option>
+                       </ng-container>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <label for="caso_TipoDemandado" class="form-label">
+                        Tipo demandado
+                    </label>
+                    <select class="form-select" 
+                        formControlName="caso_TipoDemandado"
+                        [ngClass]="{ 'is-invalid': submitted && form['caso_TipoDemandado'].errors }"
+                        (change)="tipoDemandanteChange($any($event.target).value)"
+                    >
+                        <option value="" hidden selected>Seleccione un tipo de demandado</option>
+                        <option value="E">Empresa</option>
+                        <option value="C">Civil</option>
+                    </select>
+                <div class="invalid-feedback">Por favor seleccione un tipo de demandado.</div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="caso_IdDemandado" class="form-label">
+                        Demandado
+                    </label>
+                    <select class="form-select" 
+                        formControlName="caso_IdDemandado"
+                        [ngClass]="{ 'is-invalid': submitted && form['caso_IdDemandado'].errors }"
+                    >
+                        <option value="" hidden selected>{{form['caso_TipoDemandado'].value === '' ? 'Seleccione un tipo de demandado' : 'Seleccione al demandado'}}</option>
+                       <ng-container *ngIf="form['caso_TipoDemandado'].value === 'E'">
+                        <option *ngFor="let item of listadoEmpresas" value="item.emsa_Id">
+                            {{item.emsa_Nombre}}
+                        </option>
+                       </ng-container>
+                       <ng-container *ngIf="form['caso_TipoDemandado'].value === 'C'">
+                        <option *ngFor="let item of listadoCiviles" value="item.civi_Id">
+                           {{item.civi_DNI}} - {{item.civi_Nombres}} {{item.civi_Apellidos}}
+                        </option>
+                       </ng-container>
+                    </select>
                 </div>
             </div>
         </form>

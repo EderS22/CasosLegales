@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
-  NgbToastModule, NgbProgressbarModule
+  NgbToastModule, NgbProgressbarModule, NgbNavModule
 } from '@ng-bootstrap/ng-bootstrap';
 
 import { FlatpickrModule } from 'angularx-flatpickr';
@@ -15,7 +15,7 @@ import { SimplebarAngularModule } from 'simplebar-angular';
 import { NgxMaskModule } from 'ngx-mask';
 import { DataTablesModule } from 'angular-datatables';
 import {MatTabsModule} from '@angular/material/tabs';
-import { NavModule, TabsModule } from '@coreui/angular';
+import { DropdownModule, NavModule, TabsModule } from '@coreui/angular';
 import { TablesModule } from './tables/tables.module';
 
 // Swiper Slider
@@ -54,6 +54,8 @@ import { EditarComponent as EditarEmpleado } from './casoslegales/empleado/edita
 import { AgregareditarComponent as AgregarEditarRol } from './acceso/roles/agregareditar/agregareditar.component';
 import { ListadoComponent as ListadoCasos } from './casoslegales/casos/listado/listado.component';
 import { AgregareditarComponent as AgregarEditarCasos } from './casoslegales/casos/agregareditar/agregareditar.component';
+import { NgSelectConfig, NgSelectModule } from '@ng-select/ng-select';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 @NgModule({
   declarations: [
@@ -76,7 +78,7 @@ import { AgregareditarComponent as AgregarEditarCasos } from './casoslegales/cas
     EditarEmpleado,
     AgregarEditarRol,
     ListadoCasos,
-    AgregarEditarCasos
+    AgregarEditarCasos,
   ],
   imports: [
     CommonModule,
@@ -104,11 +106,17 @@ import { AgregareditarComponent as AgregarEditarCasos } from './casoslegales/cas
     MatTabsModule,
     NavModule,
     TabsModule,
+    NgbNavModule,
+    NgSelectModule,
+    DropdownModule,
+    AutocompleteLibModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PagesModule { 
-  constructor() {
+  constructor(private config: NgSelectConfig ) {
+    this.config.notFoundText = 'No encontrado';
+    this.config.appendTo = 'body';
     defineElement(lottie.loadAnimation);
   }
 }

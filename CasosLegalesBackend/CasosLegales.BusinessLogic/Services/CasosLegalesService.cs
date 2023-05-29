@@ -492,7 +492,6 @@ namespace CasosLegales.BusinessLogic.Services
         #endregion
 
         #region Jueces Abogados
-
         public ServiceResult ListadoJuecesAbogados()
         {
             var result = new ServiceResult();
@@ -580,6 +579,37 @@ namespace CasosLegales.BusinessLogic.Services
             }
         }
 
+        public ServiceResult DdlAbogados()
+        {
+            var resultado = new ServiceResult();
+
+            try
+            {
+                var list = _abogadosJuecesRepository.DdlAbogados();
+
+                return resultado.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return resultado.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult DdlJueces()
+        {
+            var resultado = new ServiceResult();
+
+            try
+            {
+                var list = _abogadosJuecesRepository.DdlJueces();
+
+                return resultado.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return resultado.Error(ex.Message);
+            }
+        }
         #endregion
 
     }

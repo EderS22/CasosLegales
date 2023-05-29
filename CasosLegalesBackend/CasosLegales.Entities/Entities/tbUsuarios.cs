@@ -19,8 +19,8 @@ namespace CasosLegales.Entities.Entities
             tbAcusadoPorCasoacus_UsuModificacionNavigation = new HashSet<tbAcusadoPorCaso>();
             tbCargoscarg_UsuCreacionNavigation = new HashSet<tbCargos>();
             tbCargoscarg_UsuModificacionNavigation = new HashSet<tbCargos>();
-            tbCasoscaso_UsuCreacionNavigation = new HashSet<tbCasos>();
-            tbCasoscaso_UsuModificacionNavigation = new HashSet<tbCasos>();
+            tbCasosusua_IdCreacionNavigation = new HashSet<tbCasos>();
+            tbCasosusua_IdModificacionNavigation = new HashSet<tbCasos>();
             tbCivilescivi_UsuCreacionNavigation = new HashSet<tbCiviles>();
             tbCivilescivi_UsuModificacionNavigation = new HashSet<tbCiviles>();
             tbDepartamentosdepa_UsuCreacionNavigation = new HashSet<tbDepartamentos>();
@@ -83,8 +83,8 @@ namespace CasosLegales.Entities.Entities
         public virtual ICollection<tbAcusadoPorCaso> tbAcusadoPorCasoacus_UsuModificacionNavigation { get; set; }
         public virtual ICollection<tbCargos> tbCargoscarg_UsuCreacionNavigation { get; set; }
         public virtual ICollection<tbCargos> tbCargoscarg_UsuModificacionNavigation { get; set; }
-        public virtual ICollection<tbCasos> tbCasoscaso_UsuCreacionNavigation { get; set; }
-        public virtual ICollection<tbCasos> tbCasoscaso_UsuModificacionNavigation { get; set; }
+        public virtual ICollection<tbCasos> tbCasosusua_IdCreacionNavigation { get; set; }
+        public virtual ICollection<tbCasos> tbCasosusua_IdModificacionNavigation { get; set; }
         public virtual ICollection<tbCiviles> tbCivilescivi_UsuCreacionNavigation { get; set; }
         public virtual ICollection<tbCiviles> tbCivilescivi_UsuModificacionNavigation { get; set; }
         public virtual ICollection<tbDepartamentos> tbDepartamentosdepa_UsuCreacionNavigation { get; set; }

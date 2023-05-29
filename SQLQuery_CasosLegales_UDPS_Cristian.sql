@@ -863,20 +863,20 @@ END
 
 GO
 CREATE OR ALTER PROCEDURE CALE.UDP_tbAbogadosJueces_Delete
-(@abju_Id INT)
+	@abju_Id INT
 AS
 BEGIN 
 	BEGIN TRY
 
-		IF EXISTS (SELECT * FROM CALE.tbCasos WHERE caso_Juez = @abju_Id AND caso_Estado = 1)
+		IF EXISTS (SELECT * FROM CALE.tbCasos WHERE abju_IdJuez = @abju_Id AND caso_Estado = 1)
 		BEGIN
 			SELECT 2 codeStatus
 		END
-		ELSE IF EXISTS (SELECT * FROM CALE.tbCasos WHERE caso_AbogadoDemandante = @abju_Id AND caso_Estado = 1)
+		ELSE IF EXISTS (SELECT * FROM CALE.tbCasos WHERE abju_IdAbogadoDemandante = @abju_Id AND caso_Estado = 1)
 		 BEGIN
 			SELECT 2 codeStatus
 		 END
-		 ELSE IF EXISTS (SELECT * FROM CALE.tbCasos WHERE caso_AbogadoDemandado = @abju_Id AND caso_Estado = 1)
+		 ELSE IF EXISTS (SELECT * FROM CALE.tbCasos WHERE abju_IdAbogadoDemandado = @abju_Id AND caso_Estado = 1)
 		 BEGIN
 			SELECT 2 codeStatus
 		 END
