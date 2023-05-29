@@ -412,15 +412,15 @@ SELECT	T1.[empe_Id],
 		T1.[empe_DNI],
 		T1.[empe_Nombres],
 		T1.[empe_Apellidos],
-		T1.empe_Nombres + ' ' + T1.empe_Apellidos AS empe_NombreCompleto,
+		T1.[empe_Nombres] + ' ' + T1.empe_Apellidos AS empe_NombreCompleto,
 		T1.[empe_Sexo], 
 		T1.[empe_Telefono], 
 		T1.[empe_CorreoElectronico], 
 		T1.[empe_FechaNacimiento],
 		T1.[eciv_Id],
-		t5.eciv_Descripcion,
+		T5.eciv_Descripcion,
 		T1.[muni_Id],
-		t4.muni_Nombre,
+		T4.muni_Nombre,
 		T4.depa_Id,
 		T6.depa_Nombre,
 		T1.[empe_Direccion], 
@@ -734,6 +734,11 @@ CREATE OR ALTER PROCEDURE cale.UDP_tbTiposdeCaso_Delete
 AS
 BEGIN
 	BEGIN TRY
+	IF EXISTS (SELECT * FROM CALE.tbCasos WHERE tica_Id = @tica_Id) 
+			BEGIN
+				SELECT 2 codeStatus
+			END
+		ELSE
 		 BEGIN 
 			UPDATE	CALE.tbTiposdeCaso
 			SET		tica_Estado = 0
