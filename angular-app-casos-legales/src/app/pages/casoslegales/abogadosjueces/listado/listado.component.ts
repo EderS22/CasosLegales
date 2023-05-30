@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
+import { DataTablesModule } from 'angular-datatables';
 
 @Component({
   selector: 'app-listado',
@@ -23,6 +24,7 @@ export class ListadoComponent {
   ListadoAbogados!: abogadosjueces[];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+  dateNow: Date = new Date();
 
   constructor(
     private service: AbogadosjuecesService,
@@ -43,6 +45,7 @@ export class ListadoComponent {
 
     this.dtOptions = {
       pagingType: 'full_numbers',
+      
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
       },

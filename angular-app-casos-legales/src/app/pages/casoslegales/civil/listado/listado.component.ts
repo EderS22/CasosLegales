@@ -23,6 +23,7 @@ export class ListadoComponent {
   ListadoCiviles!: civiles[];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+  dateNow: Date = new Date();
 
   constructor(
     private service: CivilService,
