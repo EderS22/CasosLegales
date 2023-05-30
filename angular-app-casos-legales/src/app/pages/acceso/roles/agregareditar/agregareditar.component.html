@@ -50,6 +50,9 @@
                     <div>
                         <h4 style="text-align: center;">Pantallas</h4>
                         <br/>
+                        <div class="search-name">
+                            <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="busquedaGeneral($any($event.target).value)">
+                        </div>
                         <div class="text-danger" [ngStyle]="{'display': !pantallasValid ? '' : 'none'}">Debe asignarle al menos una pantalla al rol</div>
                     </div>
                     <br/>

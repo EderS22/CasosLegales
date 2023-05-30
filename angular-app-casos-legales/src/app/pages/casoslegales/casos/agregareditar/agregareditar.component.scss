@@ -1,4 +1,7 @@
-
-.form-control{
+.form-control, ng-select, .scroll-host{
     background-color: #05192f;
+}
+
+.is-invalid > div.ng-select-container {
+    border-color: rgb(226 101 80);
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
@@ -16,7 +16,8 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-agregareditar',
   templateUrl: './agregareditar.component.html',
-  styleUrls: ['./agregareditar.component.scss']
+  styleUrls: ['./agregareditar.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AgregareditarComponent implements OnInit {
 
@@ -39,8 +40,18 @@ export class AgregareditarComponent implements OnInit {
     listadoTiposDeCaso: tiposdecaso[] = [];
     listadoAbogados: abogadosjueces[] = [];
     listadoJueces: abogadosjueces[] = [];
+
+    listadoAbogadosDemandantes: abogadosjueces[] = [];
+    listadoAbogadosDemandados: abogadosjueces[] = [];
+
     listadoEmpresas: empresa[] = [];
     listadoCiviles: civiles[] = [];
+    
+    listadoEmpresasDemandante: empresa[] = [];
+    listadoEmpresasDemandado: empresa[] = [];
+
+    listadoCivilesDemandante: civiles[] = [];
+    listadoCivilesDemandado: civiles[] = [];
 
     ngOnInit(): void {
         if (!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin) {
@@ -73,14 +84,14 @@ export class AgregareditarComponent implements OnInit {
         this.casoForm = this.formBuilder.group({
             caso_Id: [0],
             caso_Descripcion: ['', Validators.required],
-            tica_Id: ['', Validators.required],
-            caso_Juez: ['', Validators.required],
-            caso_TipoDemandante: ['', Validators.required],
-            caso_IdDemandante: ['', Validators.required],
-            caso_TipoDemandado: ['', Validators.required],
-            caso_IdDemandado: ['', Validators.required],
-            abju_IdAbogadoDemandante: ['', Validators.required],
-            abju_IdAbogadoDemandado: ['', Validators.required]
+            tica_Id: [null, Validators.required],
+            abju_IdJuez: [null, Validators.required],
+            caso_TipoDemandante: [null, Validators.required],
+            caso_IdDemandante: [null, Validators.required],
+            caso_TipoDemandado: [null, Validators.required],
+            caso_IdDemandado: [null, Validators.required],
+            abju_IdAbogadoDemandante: [null, Validators.required],
+            abju_IdAbogadoDemandado: [null, Validators.required]
         });
 
         this.tiposCasoService.getTiposdecaso()
@@ -94,6 +105,9 @@ export class AgregareditarComponent implements OnInit {
         .subscribe((data:any) => {
             if(data.code === 200){
                 this.listadoAbogados = data.data;
+
+                this.listadoAbogadosDemandados = data.data;
+                this.listadoAbogadosDemandantes = data.data;
             }
         })
         
@@ -108,6 +122,9 @@ export class AgregareditarComponent implements OnInit {
         .subscribe((data:any) => {
             if(data.code === 200){
                 this.listadoCiviles = data.data;
+
+                this.listadoCivilesDemandante = data.data;
+                this.listadoCivilesDemandado = data.data;
             }
         })
 
@@ -115,6 +132,9 @@ export class AgregareditarComponent implements OnInit {
         .subscribe((data:any) => {
             if(data.code === 200){
                 this.listadoEmpresas = data.data;
+
+                this.listadoEmpresasDemandante = data.data;
+                this.listadoEmpresasDemandado = data.data;
             }
         })
     }
@@ -124,12 +144,53 @@ export class AgregareditarComponent implements OnInit {
     }
 
     onSubmit(){
-       
+       this.submitted = true;
     }
 
-    tipoDemandanteChange(value:string){
-        if(value === "E"){
+    tipoDemandanteChange(){
+       this.form['caso_IdDemandante'].setValue(null);
+    }
 
+    tipoDemandadoChange(){
+        this.form['caso_IdDemandado'].setValue(null);
+    }
+
+    demandanteChange(value:number){
+        this.listadoEmpresasDemandado = this.listadoEmpresas;
+        this.listadoCivilesDemandado = this.listadoCiviles;
+        if(value > 0 && this.form['caso_TipoDemandante'].value === "E")
+        {
+            this.listadoEmpresasDemandado = this.listadoEmpresasDemandado.filter(item => item.emsa_Id !== value);
+        }
+        else if (value > 0 && this.form['caso_TipoDemandante'].value === "C")
+        {
+            this.listadoCivilesDemandado = this.listadoCivilesDemandado.filter(item => item.civi_Id !== value);
+        }
+    }
+
+    demandadoChange(value:number){
+        this.listadoEmpresasDemandante = this.listadoEmpresas;
+        this.listadoCivilesDemandante = this.listadoCiviles;
+        if(value > 0 && this.form['caso_TipoDemandado'].value === "E"){
+            this.listadoEmpresasDemandante = this.listadoEmpresasDemandante.filter(item => item.emsa_Id !== value);  
+        } 
+        else if (value > 0 && this.form['caso_TipoDemandado'].value === "C")
+        {
+            this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(item => item.civi_Id !== value);
+        }
+    }
+
+    abogadoDemandanteChange(value:number){
+        this.listadoAbogadosDemandados = this.listadoAbogados;
+        if(value > 0){
+            this.listadoAbogadosDemandados = this.listadoAbogadosDemandados.filter(item => item.abju_Id !== value);
+        }
+    }
+
+    abogadoDemandadoChange(value:number){
+        this.listadoAbogadosDemandantes = this.listadoAbogados;
+        if(value > 0){
+            this.listadoAbogadosDemandantes = this.listadoAbogadosDemandantes.filter(item => item.abju_Id !== value);
         }
     }
 

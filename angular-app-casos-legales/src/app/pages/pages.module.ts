@@ -115,8 +115,9 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 })
 export class PagesModule { 
   constructor(private config: NgSelectConfig ) {
-    this.config.notFoundText = 'No encontrado';
+    this.config.notFoundText = 'Sin resultados';
     this.config.appendTo = 'body';
+    this.config.disableVirtualScroll = false;
     defineElement(lottie.loadAnimation);
   }
 }

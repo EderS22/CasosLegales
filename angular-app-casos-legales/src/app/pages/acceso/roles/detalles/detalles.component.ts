@@ -58,6 +58,12 @@ export class DetallesComponent implements OnInit{
     localStorage.removeItem("role_IdDetalles");
   }
 
+  busquedaGeneral(value:string) {
+    this.searchTermAcce$.next(value);
+    this.searchTermGral$.next(value);
+    this.searchTermCale$.next(value);
+  }
+
   filterListAcce(): void {
     this.searchTermAcce$.subscribe(term => {
       this.pantallasFilteredAcce = this.listadoPantallasAcce

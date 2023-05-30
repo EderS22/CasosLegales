@@ -103,6 +103,12 @@ export class AgregareditarComponent implements OnInit {
     this.filterListCale();
   }
 
+  busquedaGeneral(value:string) {
+    this.searchTermAcce$.next(value);
+    this.searchTermGral$.next(value);
+    this.searchTermCale$.next(value);
+  }
+
   filterListAcce(): void {
     this.searchTermAcce$.subscribe(term => {
       this.pantallasFilteredAcce = this.listadoPantallasAcce
@@ -123,7 +129,6 @@ export class AgregareditarComponent implements OnInit {
       .filter(item => item.pant_Pantalla.toLowerCase().indexOf(term.toLowerCase()) >= 0);
     });
   }
-
 
   CargarPantallasPorIdRol(role_Id: number, usua_EsAdmin: boolean) {
     this.rolService.getPantallasPorRolYAdmin(role_Id, usua_EsAdmin)
