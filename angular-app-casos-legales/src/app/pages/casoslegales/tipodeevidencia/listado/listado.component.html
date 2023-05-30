@@ -20,10 +20,6 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Agregar, editar y eliminar tipos de evidencia</h4>
-            </div>
-
             <div class="card-body">
                 <div id="customerList">
                     <div class="row g-4 mb-3">
@@ -96,13 +92,13 @@
                 <div class="mb-3 col-6">
                     <label for="customername-field" class="form-label">Nombre</label>
                     <input [(ngModel)]="tde.tiev_Nombre" [ngClass]="{ 'is-invalid': submitted && tievNombreInvalid }"  
-                    type="text" id="customername-field" class="form-control" placeholder="Ingrese Nombre" required/>
+                    type="text" id="customername-field" class="form-control" placeholder="Ingrese Nombre" (blur)="trimTievNombre()" required/>
                     <div class="invalid-feedback" *ngIf="submitted && tievNombreInvalid">El Nombre es requerido.</div>
                 </div>
                 <div class="mb-3 col-6">
                     <label for="customername-field" class="form-label">Descripcion</label>
                     <input [(ngModel)]="tde.tiev_Descripcion" [ngClass]="{ 'is-invalid': submitted && tievDescripcionInvalid }"  
-                    type="text" id="customername-field" class="form-control" placeholder="Ingrese Descripcion" required/>
+                    type="text" id="customername-field" class="form-control" placeholder="Ingrese Descripcion" (blur)="trimTievDescripcion()" required/>
                     <div class="invalid-feedback" *ngIf="submitted && tievDescripcionInvalid">La Descripcion es requerida.</div>
                 </div>
             </div>
@@ -127,13 +123,13 @@
                 <div class="col-6">
                     <label>Nombre</label>
                     <input [(ngModel)]="tde.tiev_Nombre" type="text" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && tievNombreInvalid }" />
+                    [ngClass]="{ 'is-invalid': submitted && tievNombreInvalid }" (blur)="trimTievNombre()"/>
                     <div class="invalid-feedback">Por favor ingrese un nombre</div>
                 </div>
                 <div class="col-6">
                     <label>Descripcion</label>
                     <input [(ngModel)]="tde.tiev_Descripcion" type="text" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && tievDescripcionInvalid }" />
+                    [ngClass]="{ 'is-invalid': submitted && tievDescripcionInvalid }" (blur)="trimTievDescripcion()"  />
                     <div class="invalid-feedback">Por favor ingrese una descripcion</div>
                 </div>
             </div>

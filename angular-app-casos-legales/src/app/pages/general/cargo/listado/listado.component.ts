@@ -94,6 +94,9 @@ export class ListadoComponent {
     });
   }
 
+  trimTicaDescripcion() {
+    this.carg.carg_Descripcion = this.carg.carg_Descripcion.trim();
+  }
   GuardarCargo() {
     this.submitted = true;
     this.cargDescripcionInValid = this.carg.carg_Descripcion.trim().length === 0;

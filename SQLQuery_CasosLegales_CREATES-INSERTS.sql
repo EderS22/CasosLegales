@@ -226,9 +226,6 @@ civi_FechaNacimiento		DATE			NOT NULL,
 eciv_Id					    INT				NOT NULL,
 muni_Id						CHAR(4)			NOT NULL,
 civi_Direccion				NVARCHAR(250)	NOT NULL,
-civi_EsDemandante			BIT				NOT NULL CONSTRAINT DF_CALE_tbCiviles_civi_EsDemandante DEFAULT(0),
-civi_EsAcusado				BIT				NOT NULL CONSTRAINT DF_CALE_tbCiviles_civi_EsAcusado DEFAULT(0),
-civi_EsTestigo				BIT				NOT NULL CONSTRAINT DF_CALE_tbCiviles_civi_EsTestigo DEFAULT(0),
 civi_UsuCreacion			INT				NOT NULL,
 civi_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbCiviles_civi_FechaCreacion DEFAULT(GETDATE()),
 civi_UsuModificacion		INT,
@@ -551,19 +548,19 @@ VALUES('Roles', 'acceso/roles/listado', 'Acceso', 'ri-team-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Departamentos', 'general/departamentos/listado', 'General', 'ri-function-line', 1)
+VALUES('Departamentos', 'general/departamento/listado', 'General', 'ri-function-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Municipios', 'general/municipios/listado', 'General', 'ri-dashboard-line', 1)
+VALUES('Municipios', 'general/municipio/listado', 'General', 'ri-dashboard-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Estados civiles', 'general/estadosciviles/listado', 'General', 'mdi mdi-church', 1)
+VALUES('Estados civiles', 'general/estadocivil/listado', 'General', 'mdi mdi-church', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Cargos', 'general/cargos/listado', 'General', 'ri-filter-3-line', 1)
+VALUES('Cargos', 'general/cargo/listado', 'General', 'ri-filter-3-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
@@ -575,15 +572,15 @@ VALUES('Casos', 'casoslegales/casos/listado', 'CasosLegales', 'ri-file-text-line
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Civiles', 'casoslegales/civiles/listado', 'CasosLegales', 'ri-group-2-line', 1)
+VALUES('Civiles', 'casoslegales/civil/listado', 'CasosLegales', 'ri-group-2-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Empleados', 'casoslegales/empleados/listado', 'CasosLegales', 'ri-group-line', 1)
+VALUES('Empleados', 'casoslegales/empleado/listado', 'CasosLegales', 'ri-group-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Empresas', 'casoslegales/empresas/listado', 'CasosLegales', 'ri-building-4-line', 1)
+VALUES('Empresas', 'casoslegales/empresa/listado', 'CasosLegales', 'ri-building-4-line', 1)
 GO
 
 /*
@@ -1095,13 +1092,13 @@ VALUES ('123456789', 'Juan',	'Pérez',	'M', '123456789', 'juan.perez@gmail.com',
 		('333333333', 'Laura', 'Rodríguez', 'F', '333333333', 'laura.rodriguez@gmail.com',	'1997-03-12', 3, 2,'0311',  'Plaza Secundaria 890',	1);
 GO																											 
 
-INSERT INTO CALE.tbCiviles (civi_DNI, civi_Nombres, civi_Apellidos, civi_Sexo, civi_Telefono, civi_CorreoElectronico, civi_FechaNacimiento, eciv_Id, muni_Id, civi_Direccion, civi_EsDemandante, civi_EsAcusado, civi_EsTestigo, civi_UsuCreacion)
-VALUES ('123456789', 'Juan',	'Pérez',		'M', '123456789', 'juan.perez@example.com',		'1990-01-01', 1, '0201', 'Calle Principal 123',		1, 0, 0, 1),
-		('987654321', 'María',	'López',		'F', '987654321', 'maria.lopez@example.com',	'1995-05-10', 2, '0201', 'Avenida Secundaria 456',	0, 1, 0, 1),
-		('555555555', 'Pedro',	'González',		'M', '555555555', 'pedro.gonzalez@example.com', '1985-12-15', 3, '0201', 'Plaza Central 789',		1, 0, 0, 1),
-		('111111111', 'Ana',	'García',		'F', '111111111', 'ana.garcia@example.com',		'1988-06-20', 2, '0201', 'Calle Secundaria 234',		1, 0, 1, 1),
-		('222222222', 'Luis',	'Martínez',		'M', '222222222', 'luis.martinez@example.com',	'1992-09-08', 1, '0201', 'Avenida Principal 567',	0, 1, 0, 1),
-		('333333333', 'Laura',	'Rodríguez',	'F', '333333333', 'laura.rodriguez@example.com','1997-03-12', 3, '0201', 'Plaza Secundaria 890',		0, 0, 1, 1);
+INSERT INTO CALE.tbCiviles (civi_DNI, civi_Nombres, civi_Apellidos, civi_Sexo, civi_Telefono, civi_CorreoElectronico, civi_FechaNacimiento, eciv_Id, muni_Id, civi_Direccion, civi_UsuCreacion)
+VALUES ('123456789', 'Juan',	'Pérez',		'M', '123456789', 'juan.perez@example.com',		'1990-01-01', 1, '0201', 'Calle Principal 123',		 1),
+		('987654321', 'María',	'López',		'F', '987654321', 'maria.lopez@example.com',	'1995-05-10', 2, '0201', 'Avenida Secundaria 456',	1),
+		('555555555', 'Pedro',	'González',		'M', '555555555', 'pedro.gonzalez@example.com', '1985-12-15', 3, '0201', 'Plaza Central 789',		1),
+		('111111111', 'Ana',	'García',		'F', '111111111', 'ana.garcia@example.com',		'1988-06-20', 2, '0201', 'Calle Secundaria 234',	1),
+		('222222222', 'Luis',	'Martínez',		'M', '222222222', 'luis.martinez@example.com',	'1992-09-08', 1, '0201', 'Avenida Principal 567',	1),
+		('333333333', 'Laura',	'Rodríguez',	'F', '333333333', 'laura.rodriguez@example.com','1997-03-12', 3, '0201', 'Plaza Secundaria 890',	1);
 GO
 
 INSERT INTO CALE.tbEmpleados (empe_DNI, empe_Nombres, empe_Apellidos, empe_Sexo, empe_Telefono, empe_CorreoElectronico, empe_FechaNacimiento, eciv_Id, muni_Id, empe_Direccion, empe_UsuCreacion)

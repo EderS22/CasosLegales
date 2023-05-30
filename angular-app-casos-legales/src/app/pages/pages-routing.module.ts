@@ -18,6 +18,13 @@ import { CrearComponent as CrearEmpleados } from './casoslegales/empleado/crear/
 import { AgregareditarComponent as AgregarEditarRol } from './acceso/roles/agregareditar/agregareditar.component';
 import { ListadoComponent as ListadoCasos } from './casoslegales/casos/listado/listado.component';
 import { AgregareditarComponent as AgregarEditarCasos } from './casoslegales/casos/agregareditar/agregareditar.component';
+import { ListadoComponent as ListadoCivil } from './casoslegales/civil/listado/listado.component';
+import { CrearComponent as CrearCivil } from './casoslegales/civil/crear/crear.component';
+import { EditarComponent as EditarCivil } from './casoslegales/civil/editar/editar.component';
+import { EditarComponent as EditarEmpleado } from './casoslegales/empleado/editar/editar.component';
+import { ListadoComponent as ListadoAbogadosJueces } from './casoslegales/abogadosjueces/listado/listado.component';
+import { CrearComponent as InsertarAbogadosJueces } from './casoslegales/abogadosjueces/crear/crear.component';
+import { EditarComponent as EditarAbogadosJueces } from './casoslegales/abogadosjueces/editar/editar.component';
 
 const routes: Routes = [
     {
@@ -71,6 +78,10 @@ const routes: Routes = [
         path: "casoslegales/empleados/crear",
         component: CrearEmpleados
     },
+    {
+      path: "casoslegales/empleado/editar",
+      component: EditarEmpleado
+    },
     { 
         path: "casoslegales/tiposdeevidencia/listado",
         component: ListadoTiposdeEvidencia
@@ -86,7 +97,34 @@ const routes: Routes = [
     {
         path: "casoslegales/casos/agregareditar",
         component: AgregarEditarCasos
-    }
+    },
+    { 
+      path: "casoslegales/tiposdeevidencia/listado",
+      component: ListadoTiposdeEvidencia
+    },
+    { 
+      path: "casoslegales/civil/listado",
+      component: ListadoCivil
+    },
+    {
+      path: "casoslegales/civil/crear",
+      component: CrearCivil
+    },
+    {
+      path: "casoslegales/civil/editar",
+      component: EditarCivil
+    },
+    {
+      path: "casoslegales/abogadosjueces/listado",
+      component: ListadoAbogadosJueces
+    },
+    {
+      path: "casoslegales/abogadosjueces/crear",
+      component: InsertarAbogadosJueces
+    },{
+      path: "casoslegales/abogadosjueces/editar",
+      component: EditarAbogadosJueces
+    },
 ];
 
 @NgModule({

@@ -7,11 +7,11 @@
    "IncludeConnectionString": false,
    "ModelNamespace": null,
    "OutputContextPath": null,
-   "OutputPath": "Context",
+   "OutputPath": null,
    "ProjectRootNamespace": "CasosLegales.DataAccess",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
-   "SelectedToBeGenerated": 1,
+   "SelectedToBeGenerated": 0,
    "Tables": [
       {
          "Name": "[ACCE].[tbPantallas]",
@@ -94,9 +94,13 @@
          "ObjectType": 0
       }
    ],
+<<<<<<< HEAD
    "UiHint": "DESKTOP-5RUMQNH\\SQLEXPRESS.DB_CasosLegales",
+=======
+   "UiHint": "DESKTOP-6FS11M8\\MSSQLSERVER1.DB_CasosLegales",
+>>>>>>> Francisco
    "UseBoolPropertiesWithoutDefaultSql": false,
-   "UseDatabaseNames": true,
+   "UseDatabaseNames": false,
    "UseDbContextSplitting": false,
    "UseFluentApiOnly": true,
    "UseHandleBars": false,

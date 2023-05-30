@@ -30,6 +30,4 @@ export class CivilService {
   EditarCivil(civil: any){
     return this.http.post<civiles[]>(API_URL + 'Civiles/Editar', civil)
   }
-
-  
 }

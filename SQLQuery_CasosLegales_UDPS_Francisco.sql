@@ -10,16 +10,17 @@ SELECT	civi_Id,
 		civi_DNI,
 		[civi_Nombres],
 		[civi_Apellidos],
+		T1.civi_Nombres + ' ' + T1.civi_Apellidos AS civi_NombreCompleto,
 		[civi_Sexo],
 		[civi_Telefono],
 		[civi_CorreoElectronico],
 		[civi_FechaNacimiento],
 		T1.eciv_Id,
 		T1.muni_Id,
+		T4.muni_Nombre,
+		T5.depa_Id,
+		T5.depa_Nombre,
 		[civi_Direccion],
-		[civi_EsDemandante],
-		[civi_EsAcusado],
-		[civi_EsTestigo],
 		civi_UsuCreacion, 
 		T2.usua_Nombre AS user_Creacion,
 		civi_FechaCreacion, 
@@ -29,7 +30,9 @@ SELECT	civi_Id,
 		civi_Estado
 FROM cale.tbCiviles AS T1 INNER JOIN acce.tbUsuarios AS T2
 ON T1.civi_UsuCreacion = T2.usua_Id LEFT JOIN acce.tbUsuarios AS T3
-ON T1.civi_UsuModificacion = T3.usua_Id;
+ON T1.civi_UsuModificacion = T3.usua_Id INNER JOIN GRAL.tbMunicipios AS T4
+ON T1.muni_Id = T4.muni_Id INNER JOIN GRAL.tbDepartamentos AS T5
+ON T4.depa_Id = T5.depa_Id;
 
 --**************  CREATE ******************--
 GO
@@ -44,9 +47,6 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbCiviles_Insert
  @eciv_Id INT,
  @muni_Id CHAR(4),
  @civi_Direccion NVARCHAR(250),
- @civi_EsDemandante BIT,
- @civi_EsAcusado BIT,
- @civi_EsTestigo BIT,
  @civi_UsuCreacion INT)
 AS
 BEGIN
@@ -68,9 +68,6 @@ BEGIN
 											[eciv_Id], 
 											[muni_Id],
 											[civi_Direccion],
-											[civi_EsDemandante],
-											[civi_EsAcusado],
-											[civi_EsTestigo],
 											[civi_UsuCreacion],
 											[civi_UsuModificacion],
 											[civi_FechaModificacion])
@@ -83,10 +80,7 @@ BEGIN
 											@civi_FechaNacimiento, 
 											@eciv_Id, 
 											@muni_Id, 
-											@civi_Direccion, 
-											@civi_EsDemandante, 
-											@civi_EsAcusado, 
-											@civi_EsTestigo,
+											@civi_Direccion,
 											@civi_UsuCreacion,
 											NULL, 
 											NULL);
@@ -126,9 +120,6 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbCiviles_Update
  @eciv_Id INT,
  @muni_Id CHAR(4),
  @civi_Direccion NVARCHAR(250),
- @civi_EsDemandante BIT,
- @civi_EsAcusado BIT,
- @civi_EsTestigo BIT,
  @civi_UsuModificacion INT)
 AS
 BEGIN
@@ -150,9 +141,6 @@ BEGIN
 						eciv_Id = @eciv_Id,
 						@muni_Id = @muni_Id,
 						civi_Direccion = @civi_Direccion,
-						civi_EsDemandante = @civi_EsDemandante,
-						civi_EsAcusado = @civi_EsAcusado,
-						civi_EsTestigo = @civi_EsTestigo,
 						civi_UsuModificacion = @civi_UsuModificacion, 
 						civi_FechaModificacion = GETDATE()
 				WHERE	civi_Id = @civi_Id
@@ -173,11 +161,15 @@ AS
 BEGIN
 	BEGIN TRY
 		
-		IF EXISTS(SELECT * FROM CALE.tbCiviles WHERE civi_Id = @civi_Id)
+		IF EXISTS(SELECT * FROM CALE.tbAcusadoPorCaso WHERE acus_TipoAcusado = 'C' AND acus_Acusado = @civi_Id)
 		 BEGIN
-			SELECT 2 codeStatu
+			SELECT 2 codeStatus
 		 END
-		ELSE
+		ELSE IF EXISTS(SELECT * FROM CALE.tbCasos WHERE caso_TipoDemandante = 'C' AND caso_Demandante = @civi_Id)
+		 BEGIN
+			SELECT 2 codeStatus
+		 END
+		 ELSE
 		 BEGIN 
 			UPDATE	cale.tbCiviles
 			SET		civi_Estado = 0
@@ -423,15 +415,15 @@ SELECT	T1.[empe_Id],
 		T1.[empe_DNI],
 		T1.[empe_Nombres],
 		T1.[empe_Apellidos],
-		T1.empe_Nombres + ' ' + T1.empe_Apellidos AS empe_NombreCompleto,
+		T1.[empe_Nombres] + ' ' + T1.empe_Apellidos AS empe_NombreCompleto,
 		T1.[empe_Sexo], 
 		T1.[empe_Telefono], 
 		T1.[empe_CorreoElectronico], 
 		T1.[empe_FechaNacimiento],
 		T1.[eciv_Id],
-		t5.eciv_Descripcion,
+		T5.eciv_Descripcion,
 		T1.[muni_Id],
-		t4.muni_Nombre,
+		T4.muni_Nombre,
 		T4.depa_Id,
 		T6.depa_Nombre,
 		T1.[empe_Direccion], 
@@ -451,7 +443,7 @@ ON T4.depa_Id = T6.depa_Id
 
 --**************  CREATE ******************--
 GO
-CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpleados_Insert
+CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpleados_Insert --'1','1','1','M','1','1','2020-12-12',1,'0311','1',1
 (@empe_DNI NVARCHAR(15),
  @empe_Nombres NVARCHAR(200),
  @empe_Apellidos NVARCHAR(200),
@@ -467,13 +459,26 @@ AS
 BEGIN
 	BEGIN TRY 
 
-		IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_DNI = @empe_DNI AND empe_Estado = 1)
+		IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE (empe_DNI = @empe_DNI  OR empe_CorreoElectronico = @empe_CorreoElectronico OR empe_Telefono = @empe_Telefono) AND empe_Estado = 1) 
 		 BEGIN 
-		 	SELECT 2 AS codeStatus
+				IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_DNI = @empe_DNI AND empe_Estado = 1)
+					 BEGIN
+						SELECT 11 AS codeStatus
+					 END
+				ELSE IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_CorreoElectronico = @empe_CorreoElectronico AND empe_Estado = 1)
+					 BEGIN
+						SELECT 12 AS codeStatus
+					 END
+				ELSE IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_Telefono = @empe_Telefono AND empe_Estado = 1)
+					 BEGIN
+						SELECT 13 AS codeStatus
+					 END
+				
 		 END
-		ELSE IF NOT EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_DNI = @empe_DNI)
-		 BEGIN
-		INSERT INTO [cale].[tbEmpleados]   ([empe_DNI],
+		ELSE IF NOT EXISTS (SELECT * FROM CALE.tbEmpleados WHERE (empe_DNI = @empe_DNI OR empe_Telefono = @empe_Telefono OR empe_CorreoElectronico = @empe_CorreoElectronico)AND empe_Estado = 1)		
+				BEGIN
+								INSERT INTO [cale].[tbEmpleados]   
+											([empe_DNI],
 											[empe_Nombres],
 											[empe_Apellidos],
 											[empe_Sexo],
@@ -500,8 +505,8 @@ BEGIN
 											NULL, 
 											NULL);
 
-			SELECT 1 AS codeStatus
-		 END
+									SELECT 1 AS codeStatus
+			END
         ELSE
 		 BEGIN
 			UPDATE CALE.tbEmpleados
@@ -509,8 +514,17 @@ BEGIN
 				empe_UsuCreacion = @empe_UsuCreacion,
 				empe_FechaCreacion = GETDATE(),
 				empe_UsuModificacion = NULL,
-				empe_FechaModificacion = NULL
-			WHERE empe_DNI = @empe_DNI;
+				empe_FechaModificacion = NULL,
+				empe_Nombres = @empe_Nombres,
+				empe_Apellidos = @empe_Apellidos,
+				empe_DNI = @empe_DNI,
+				empe_Telefono = @empe_Telefono,
+				empe_Sexo = @empe_Sexo,
+				eciv_Id = @eciv_Id,
+				muni_Id = @muni_Id,
+				empe_CorreoElectronico = @empe_CorreoElectronico,
+				empe_Direccion = @empe_Direccion
+			WHERE empe_DNI = @empe_DNI OR empe_Telefono = @empe_Telefono OR empe_CorreoElectronico = @empe_CorreoElectronico
 
 			SELECT 1 AS codeStatus
 		 END
@@ -539,9 +553,21 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpleados_Update
 AS
 BEGIN
 	BEGIN TRY
-		IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE (empe_DNI = @empe_DNI AND empe_Id != @empe_Id))
+
+		IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE (empe_DNI = @empe_DNI  OR empe_CorreoElectronico = @empe_CorreoElectronico OR empe_Telefono = @empe_Telefono)  AND empe_Id != @empe_Id AND empe_Estado = 1)
 			BEGIN
-				SELECT 2 codeStatus
+				IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_DNI = @empe_DNI AND empe_Id != @empe_Id AND empe_Estado = 1)
+					 BEGIN
+						SELECT 11 AS codeStatus
+					 END
+				ELSE IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_CorreoElectronico = @empe_CorreoElectronico AND  empe_Id != @empe_Id AND empe_Estado = 1)
+					 BEGIN
+						SELECT 12 AS codeStatus
+					 END
+				ELSE IF EXISTS (SELECT * FROM CALE.tbEmpleados WHERE empe_Telefono = @empe_Telefono AND empe_Id != @empe_Id AND empe_Estado = 1)
+					 BEGIN
+						SELECT 13 AS codeStatus
+					 END
 			END
 		ELSE
 			BEGIN
@@ -711,6 +737,11 @@ CREATE OR ALTER PROCEDURE cale.UDP_tbTiposdeCaso_Delete
 AS
 BEGIN
 	BEGIN TRY
+	IF EXISTS (SELECT * FROM CALE.tbCasos WHERE tica_Id = @tica_Id) 
+			BEGIN
+				SELECT 2 codeStatus
+			END
+		ELSE
 		 BEGIN 
 			UPDATE	CALE.tbTiposdeCaso
 			SET		tica_Estado = 0

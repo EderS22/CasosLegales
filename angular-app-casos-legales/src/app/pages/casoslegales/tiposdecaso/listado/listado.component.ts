@@ -94,6 +94,13 @@ export class ListadoComponent {
     })
   }
 
+  trimTicaNombre() {
+    this.tdp.tica_Nombre = this.tdp.tica_Nombre.trim();
+  }
+  trimTicaDescripcion() {
+    this.tdp.tica_Descripcion = this.tdp.tica_Descripcion.trim();
+  }
+
   GuardarTipoDeCaso() {
     this.submitted = true;
     this.ticaNombreInvalid = this.tdp.tica_Nombre.trim().length === 0;

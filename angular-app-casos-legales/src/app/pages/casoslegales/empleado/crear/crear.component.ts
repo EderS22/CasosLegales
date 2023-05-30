@@ -4,7 +4,7 @@ import { empleado } from 'src/app/pages/models/casoslegales/empleados';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-import { EstadoscivilesService } from 'src/app/pages/services/general/estadocivilservice/estadosciviles.service';
+import { EstadocivilService } from 'src/app/pages/services/general/estadocivilservice/estadocivil.service'; 
 import { estadosciviles } from 'src/app/pages/models/general/estadocivil';
 
 import { MunicipioService } from 'src/app/pages/services/general/municipioservice/municipio.service';
@@ -41,7 +41,7 @@ export class CrearComponent implements OnInit {
   
   constructor(
     private service: EmpleadoService,
-    private EstadoCivilService: EstadoscivilesService,
+    private EstadoCivilService: EstadocivilService,
     private DepartamentoService: DepartamentoService,
     private MunicipioService: MunicipioService,
     private formBuilder: UntypedFormBuilder,
@@ -49,15 +49,15 @@ export class CrearComponent implements OnInit {
   ) {
     this.validationform = this.formBuilder.group({
       empe_DNI: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      empe_Nombres: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      empe_Apellidos: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
+      empe_Nombres: ['', [Validators.required, Validators.pattern('[a-z A-Z 0-9]+')]],
+      empe_Apellidos: ['', [Validators.required, Validators.pattern('[a-z A-Z 0-9]+')]],
       empe_Sexo: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
       empe_Telefono: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      empe_CorreoElectronico: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
+      empe_CorreoElectronico: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ.]+@[a-zA-Z0-9áéíóúÁÉÍÓÚ.]+')]],
       empe_FechaNacimiento: ['', [Validators.required]],
       eciv_Id: [null, [Validators.required]],
-      depa_Id: [null, [Validators.required]],
-      muni_Id: [null, [Validators.required]],
+      depa_Id: ['', [Validators.required]],
+      muni_Id: ['', [Validators.required]],
       empe_Direccion: ['', [Validators.required]],
       empe_UsuCreacion: [1],
     });
@@ -65,7 +65,7 @@ export class CrearComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.EstadoCivilService.getEstadoCivil() //cargar estado civil
+    this.EstadoCivilService.getEstadosCiviles() //cargar estado civil
       .subscribe((data: any) => {
         if (data.code === 200) {
           this.EstadoCivilDLL = data.data;
@@ -104,11 +104,16 @@ export class CrearComponent implements OnInit {
     return this.validationform.controls;
   }
 
+  regresar(){
+    this.router.navigate(["casoslegales/empleado/listado"]);
+  }
+
   validSubmit() {
 
     if (!this.validationform.valid) {
       this.submit = true;
-      if (this.validationform.get('depa_Id')?.value != null && this.validationform.get('muni_Id')?.value == null) {
+      
+      if (this.validationform.get('depa_Id')?.value != '' && this.validationform.get('muni_Id')?.value == '') {
         this.submitMunicipio = true;
       }
 
@@ -130,18 +135,22 @@ export class CrearComponent implements OnInit {
       }
 
       this.validationform.get('empe_FechaNacimiento')?.setValue(fechaFormateada);
-      this.validationform.get('muni_Id')?.setValue(parseInt(this.validationform.get('muni_Id')?.value));
-
-      // Resto de tu código...
-
 
       this.service.InsertarEmpleados(this.validationform.value)
         .subscribe((data: any) => {
+          console.log(data.data.codeStatus)
           if (data.data.codeStatus == 1) {
+            localStorage.setItem('EMpleadoInsert', '1');
             this.router.navigate(["casoslegales/empleado/listado"]);
           }
-          else if (data.data.codeStatus == 2) {
+          else if (data.data.codeStatus == 11) {
             this.mensajeWarning('Ya existe un Empleado con ese DNI');
+          }
+          else if (data.data.codeStatus == 12) {
+            this.mensajeWarning('Ya existe un Empleado con ese correo electronico');
+          }
+          else if (data.data.codeStatus == 13) {
+            this.mensajeWarning('Ya existe un Empleado con ese numero de telefono');
           }
         })
     }

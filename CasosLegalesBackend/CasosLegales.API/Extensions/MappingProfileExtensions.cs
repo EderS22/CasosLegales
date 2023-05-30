@@ -28,6 +28,7 @@ namespace CasosLegales.API.Extensions
             CreateMap<TipoDeCasoViewModel, tbTiposdeCaso>().ReverseMap();
             CreateMap<TipoDeEvidenciaViewModel, tbTiposdeEvidencia>().ReverseMap();
             CreateMap<AbogadoJuezViewModel, tbAbogadosJueces>().ReverseMap();
+            CreateMap<CivilesViewModel, tbCiviles>().ReverseMap();
             #endregion
         }
     }

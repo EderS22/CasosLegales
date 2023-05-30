@@ -38,4 +38,5 @@ export class AbogadosjuecesService {
   DdlJueces(){
     return this.http.get<abogadosjueces[]>(API_URL + "AbogadosJueces/DdlJueces");
   }
+  
 }

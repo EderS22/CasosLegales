@@ -19,10 +19,6 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Agregar, editar y eliminar</h4>
-            </div>
-
             <div class="card-body">
                 <div id="customerList">
                     <div class="row g-4 mb-3">
@@ -96,7 +92,7 @@
                 <div class="col-sm-12">
                     <label>Descripcion</label>
                     <input [(ngModel)]="carg.carg_Descripcion" type="text" class="form-control " 
-                    [ngClass]="{ 'is-invalid': submitted && cargDescripcionInValid }"  />
+                    [ngClass]="{ 'is-invalid': submitted && cargDescripcionInValid }" (blur)="trimTicaDescripcion()"/>
                     <div class="invalid-feedback" *ngIf="submitted && cargDescripcionInValid">Por favor ingrese un cargo</div>
                 </div>
             </div>
@@ -126,7 +122,7 @@
                 <div class="col-sm-12">
                     <label>Nombre</label>
                     <input [(ngModel)]="carg.carg_Descripcion" type="text" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && cargDescripcionInValid }"  />
+                    [ngClass]="{ 'is-invalid': submitted && cargDescripcionInValid }" (blur)="trimTicaDescripcion()" />
                     <div class="invalid-feedback" *ngIf="submitted && cargDescripcionInValid">Por favor ingrese un cargo</div>
                 </div>
             </div>
