@@ -6,12 +6,11 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
-import { DataTablesModule } from 'angular-datatables';
 
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
-  styleUrls: ['./listado.component.scss']
+  styleUrls: ['./listado.component.scss'],
 })
 
 export class ListadoComponent {
@@ -60,7 +59,7 @@ export class ListadoComponent {
     this.loadAbogados();
 
     this.breadCrumbItems = [
-      { label: 'AbogadosJueces' },
+      { label: 'Abogados y Jueces' },
       { label: 'Listado', active: true }
     ];
   }

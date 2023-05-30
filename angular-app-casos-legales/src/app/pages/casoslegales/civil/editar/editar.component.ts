@@ -37,6 +37,8 @@ export class EditarComponent {
   breadCrumbItems!: Array<{}>;
   modelValueAsDate: Date = new Date(); // se usa para el calendario 
 
+  dateNow: Date = new Date();
+  
   constructor(
     private service: CivilService,
     private EstadoCivilService: EstadocivilService,

@@ -41,6 +41,8 @@ export class CrearComponent implements OnInit {
   breadCrumbItems!: Array<{}>;
   modelValueAsDate: Date = new Date(); // se usa para el calendario 
 
+  dateNow: Date = new Date();
+  
   constructor(
     private service: AbogadosjuecesService,
     private CargosService: CargoService,

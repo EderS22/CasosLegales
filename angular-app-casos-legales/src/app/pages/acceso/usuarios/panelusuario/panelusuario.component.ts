@@ -17,8 +17,6 @@ export class PanelusuarioComponent implements OnInit {
     private UsuarioService: UsuariosService,
   ) { }
 
-
-
   ngOnInit(): void {
 
     const currentUserString = localStorage.getItem('currentUser');

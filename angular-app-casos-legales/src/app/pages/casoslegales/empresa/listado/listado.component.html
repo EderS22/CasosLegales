@@ -1,11 +1,11 @@
 <!-- Start Breadcrumbs -->
-<app-breadcrumbs title="Empleados" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<app-breadcrumbs title="Empresas" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
 <!-- End Breadcrumbs -->
 
 <div class="card ribbon-box border shadow-none overflow-hidden">
     <div class="card-body text-muted">
         <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
-            <span class="trending-ribbon-text">Listado</span> <i
+            <span class="trending-ribbon-text">{{dateNow.toLocaleDateString()}}</span> <i
                 class="ri-flashlight-fill text-white align-bottom float-end ms-1"></i>
         </div>
         

@@ -490,7 +490,37 @@ INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsA
 VALUES (1, 1, 'Eder', @Pass, 1,'https://i.ibb.co/VSzRRSM/avatar.png', 1);
 GO
 
+DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
+SET @Clave = 'algo';
+SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
 
+INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin,usua_img, usua_IdCreacion)
+VALUES (2, 2, 'Francisco', @Pass, 1, 'https://i.ibb.co/VSzRRSM/avatar.png', 1);
+GO
+
+DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
+SET @Clave = 'nose';
+SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
+
+INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin,usua_img, usua_IdCreacion)
+VALUES (2, 3, 'Cristian', @Pass, 1, 'https://i.ibb.co/VSzRRSM/avatar.png', 1);
+
+GO
+DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
+SET @Clave = 'ESDRINHA';
+SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
+
+INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin,usua_img, usua_IdCreacion)
+VALUES (1, 4, 'ESDRINHA', @Pass, 1, 'https://i.ibb.co/VSzRRSM/avatar.png', 1);
+GO
+
+DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
+SET @Clave = '2022';
+SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
+
+INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin,usua_img, usua_IdCreacion)
+VALUES (1, 5, 'Sofia', @Pass, 0, 'https://i.ibb.co/VSzRRSM/avatar.png', 1);
+GO
 
 --*********************************************************/TABLE Usuarios*********************************************************--
 
@@ -1083,19 +1113,19 @@ VALUES ('111111111', 'Juan',	'Pérez',	'M', '111111111', 'juan.perez@example.com
 		('101010101', 'Susana', 'López',	'F', '101010101', 'susana.lopez@example.com',		'1996-08-05', 2, '0502', 'Calle Secundaria 234',		1);
 GO
 
-INSERT INTO CALE.tbEmpresas (emsa_Nombre, emsa_RNT, muni_Id, emsa_Direccion, emsa_RepresentanteNombre, emsa_RepresentanteDNI, emsa_RepresentanteTelefono, emsa_RepresentanteSexo, eciv_Id, emsa_UsuCreacion) 
+INSERT INTO CALE.tbEmpresas (emsa_Nombre, emsa_RTN, muni_Id, emsa_Direccion, emsa_RepresentanteNombre, emsa_RepresentanteDNI, emsa_RepresentanteTelefono, emsa_RepresentanteSexo, eciv_Id, emsa_UsuCreacion) 
 VALUES('LEYDE S.A de C.V', '19472516348721', '0103', 'Ave. circunvalacion, entre 16 y 15 calle NO', 'Luis Carrasco', '0601197506321', '+504 9152-6874', 'M', 2, 1)
 GO
 
-INSERT INTO CALE.tbEmpresas (emsa_Nombre, emsa_RNT, muni_Id, emsa_Direccion, emsa_RepresentanteNombre, emsa_RepresentanteDNI, emsa_RepresentanteTelefono, emsa_RepresentanteSexo, eciv_Id, emsa_UsuCreacion) 
+INSERT INTO CALE.tbEmpresas (emsa_Nombre, emsa_RTN, muni_Id, emsa_Direccion, emsa_RepresentanteNombre, emsa_RepresentanteDNI, emsa_RepresentanteTelefono, emsa_RepresentanteSexo, eciv_Id, emsa_UsuCreacion) 
 VALUES('Industrias CHAMER S.A', '19415689348721', '0501', 'Ave. los proceres, entre 20 y 21 calle SE', 'Maria Benavides', '0916198006325', '+504 8154-7452', 'F', 3, 1)
 GO
 
-INSERT INTO CALE.tbEmpresas (emsa_Nombre, emsa_RNT, muni_Id, emsa_Direccion, emsa_RepresentanteNombre, emsa_RepresentanteDNI, emsa_RepresentanteTelefono, emsa_RepresentanteSexo, eciv_Id, emsa_UsuCreacion) 
+INSERT INTO CALE.tbEmpresas (emsa_Nombre, emsa_RTN, muni_Id, emsa_Direccion, emsa_RepresentanteNombre, emsa_RepresentanteDNI, emsa_RepresentanteTelefono, emsa_RepresentanteSexo, eciv_Id, emsa_UsuCreacion) 
 VALUES('Cerveceria Hondureña', '16121844634578', '0810', 'Barrio El Centro, frente al parque central', 'Fernando Gutierres', '0405197906521', '+504 3317-8452', 'M', 1, 1)
 GO
 
-INSERT INTO CALE.tbEmpresas (emsa_Nombre, emsa_RNT, muni_Id, emsa_Direccion, emsa_RepresentanteNombre, emsa_RepresentanteDNI, emsa_RepresentanteTelefono, emsa_RepresentanteSexo, eciv_Id, emsa_UsuCreacion) 
+INSERT INTO CALE.tbEmpresas (emsa_Nombre, emsa_RTN, muni_Id, emsa_Direccion, emsa_RepresentanteNombre, emsa_RepresentanteDNI, emsa_RepresentanteTelefono, emsa_RepresentanteSexo, eciv_Id, emsa_UsuCreacion) 
 VALUES('SULA S.A de C.V', '1894562314875', '0906', 'El palenque 5 calle entre 18 y 19 Ave. SO', 'Sofia Lopez', '1802199916354', '+504 9192-3435', 'F', 4, 1)
 GO
 

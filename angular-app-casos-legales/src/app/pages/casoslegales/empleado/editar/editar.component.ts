@@ -52,7 +52,8 @@ export class EditarComponent {
       empe_Apellidos: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
       empe_Sexo: ['', [Validators.required]],
       empe_Telefono: ['', [Validators.required]],
-      empe_CorreoElectronico: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ]+@[a-zA-Z0-9áéíóúÁÉÍÓÚ]+')]],
+      //empe_CorreoElectronico: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ]+@[a-zA-Z0-9áéíóúÁÉÍÓÚ]+')]],
+      empe_CorreoElectronico: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')]],
       empe_FechaNacimiento: ['', [Validators.required]],
       eciv_Id: [null, [Validators.required]],
       depa_Id: ['', [Validators.required]],
@@ -67,7 +68,7 @@ export class EditarComponent {
 
     if(localStorage.getItem('IdEmpleado') == '' || localStorage.getItem('IdEmpleado') == null)
     {
-      this.router.navigate(["casoslegales/empleado/listado"]);
+      this.router.navigate(["casoslegales/empleados/listado"]);
     }
  
 
@@ -100,7 +101,8 @@ export class EditarComponent {
         empe_Apellidos: [data.empe_Apellidos, [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ]+')]],
         empe_Sexo:      [data.empe_Sexo, [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ]+')]],
         empe_Telefono:  [data.empe_Telefono, [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ]+')]],
-        empe_CorreoElectronico: [data.empe_CorreoElectronico, [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ]+@[a-zA-Z0-9áéíóúÁÉÍÓÚ]+')]],
+        //empe_CorreoElectronico: [data.empe_CorreoElectronico, [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ]+@[a-zA-Z0-9áéíóúÁÉÍÓÚ]+')]],
+        empe_CorreoElectronico: [data.empe_CorreoElectronico, [Validators.required, Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')]],
         empe_FechaNacimiento:   [data.empe_FechaNacimiento, [Validators.required]],
         eciv_Id: [data.eciv_Id, [Validators.required]],
         depa_Id: [data.depa_Id, [Validators.required]],
@@ -116,9 +118,6 @@ export class EditarComponent {
           this.MunicipioDesactivado = false;
         }
       })
-
-
-      
     })
 
   }
@@ -146,7 +145,7 @@ export class EditarComponent {
 
   regresar(){
     localStorage.setItem('IdEmpleado', '');
-    this.router.navigate(["casoslegales/empleado/listado"]);
+    this.router.navigate(["casoslegales/empleados/listado"]);
   }
 
   
@@ -182,7 +181,7 @@ export class EditarComponent {
           if (data.data.codeStatus == 1) {
             localStorage.setItem('EMpleadoInsert', '2');
             localStorage.setItem('IdEmpleado', '');
-            this.router.navigate(["casoslegales/empleado/listado"]);
+            this.router.navigate(["casoslegales/empleados/listado"]);
           }
           else if (data.data.codeStatus == 11) {
             this.mensajeWarning('Ya existe un Empleado con ese DNI');

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DepartamentoService } from 'src/app/pages/services/general/departamentoservice/departamento.service';
 import { departamento } from 'src/app/pages/models/general/departeamento';
@@ -10,7 +10,8 @@ import { FormControl, ValidatorFn, Validators } from '@angular/forms';
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
-  styleUrls: ['./listado.component.scss']
+  styleUrls: ['./listado.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class ListadoComponent {

@@ -53,7 +53,8 @@ export class CrearComponent implements OnInit {
       empe_Apellidos: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
       empe_Sexo: ['', [Validators.required]],
       empe_Telefono: ['', [Validators.required]],
-      empe_CorreoElectronico: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ.]+@[a-zA-Z0-9áéíóúÁÉÍÓÚ.]+')]],
+      //empe_CorreoElectronico: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ.]+@[a-zA-Z0-9áéíóúÁÉÍÓÚ.]+')]],
+      empe_CorreoElectronico: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')]],
       empe_FechaNacimiento: ['', [Validators.required]],
       eciv_Id: [null, [Validators.required]],
       depa_Id: ['', [Validators.required]],
@@ -105,7 +106,7 @@ export class CrearComponent implements OnInit {
   }
 
   regresar(){
-    this.router.navigate(["casoslegales/empleado/listado"]);
+    this.router.navigate(["casoslegales/empleados/listado"]);
   }
 
   validSubmit() {
@@ -141,7 +142,7 @@ export class CrearComponent implements OnInit {
           console.log(data.data.codeStatus)
           if (data.data.codeStatus == 1) {
             localStorage.setItem('EMpleadoInsert', '1');
-            this.router.navigate(["casoslegales/empleado/listado"]);
+            this.router.navigate(["casoslegales/empleados/listado"]);
           }
           else if (data.data.codeStatus == 11) {
             this.mensajeWarning('Ya existe un Empleado con ese DNI');

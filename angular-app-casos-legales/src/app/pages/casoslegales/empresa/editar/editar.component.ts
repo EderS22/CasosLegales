@@ -35,6 +35,8 @@ export class EditarComponent {
   breadCrumbItems!: Array<{}>;
   modelValueAsDate: Date = new Date(); // se usa para el calendario 
 
+  dateNow: Date = new Date();
+
   constructor(
     private service: EmpresaService,
     private EstadoCivilService: EstadocivilService,
@@ -44,10 +46,10 @@ export class EditarComponent {
     private router: Router,
   ) {
     this.validationform = this.formBuilder.group({
-      emsa_Nombre: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+      emsa_Nombre: ['', [Validators.required]],
       emsa_RTN: ['', [Validators.required]],
       muni_Id: ['', [Validators.required]],
-      emsa_Direccion: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+      emsa_Direccion: ['', [Validators.required]],
       emsa_RepresentanteNombre: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
       emsa_RepresentanteDNI: ['', [Validators.required]],
       emsa_RepresentanteTelefono: ['', [Validators.required]],
@@ -82,7 +84,7 @@ export class EditarComponent {
     })
 
     this.breadCrumbItems = [
-      { label: 'Empleados' },
+      { label: 'Empresas' },
       { label: 'Editar', active: true }
     ];
 
@@ -99,10 +101,10 @@ export class EditarComponent {
 
       this.validationform = this.formBuilder.group({
         emsa_Id: [data.emsa_Id, [Validators.required]],
-        emsa_Nombre: [data.emsa_Nombre, [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+        emsa_Nombre: [data.emsa_Nombre, [Validators.required]],
         emsa_RTN: [data.emsa_RTN, [Validators.required]],
         muni_Id: [data.muni_Id, [Validators.required]],
-        emsa_Direccion: [data.emsa_Direccion, [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+        emsa_Direccion: [data.emsa_Direccion, [Validators.required]],
         emsa_RepresentanteNombre: [data.emsa_RepresentanteNombre, [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
         emsa_RepresentanteDNI: [data.emsa_RepresentanteDNI, [Validators.required]],
         emsa_RepresentanteTelefono: [data.emsa_RepresentanteTelefono, [Validators.required]],

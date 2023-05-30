@@ -35,6 +35,8 @@ export class CrearComponent {
   breadCrumbItems!: Array<{}>;
   modelValueAsDate: Date = new Date(); // se usa para el calendario 
 
+  dateNow: Date = new Date();
+  
   constructor(
     private service: EmpresaService,
     private EstadoCivilService: EstadocivilService,
@@ -44,10 +46,10 @@ export class CrearComponent {
     private router: Router,
   ) {
     this.validationform = this.formBuilder.group({
-      emsa_Nombre: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+      emsa_Nombre: ['', [Validators.required]],
       emsa_RTN: ['', [Validators.required]],
       muni_Id: ['', [Validators.required]],
-      emsa_Direccion: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+      emsa_Direccion: ['', [Validators.required]],
       emsa_RepresentanteNombre: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
       emsa_RepresentanteDNI: ['', [Validators.required]],
       emsa_RepresentanteTelefono: ['', [Validators.required]],

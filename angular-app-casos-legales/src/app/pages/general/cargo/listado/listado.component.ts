@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CargoService } from 'src/app/pages/services/general/cargosservice/cargo.service';
 import { cargos } from 'src/app/pages/models/general/cargo';
@@ -10,7 +10,8 @@ import { DataTableDirective } from 'angular-datatables';
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
-  styleUrls: ['./listado.component.scss']
+  styleUrls: ['./listado.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ListadoComponent {
   @ViewChild(DataTableDirective, { static: false })

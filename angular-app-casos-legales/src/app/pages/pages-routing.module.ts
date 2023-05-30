@@ -26,7 +26,6 @@ import { EditarComponent as EditarEmpleado } from './casoslegales/empleado/edita
 import { ListadoComponent as ListadoAbogadosJueces } from './casoslegales/abogadosjueces/listado/listado.component';
 import { CrearComponent as InsertarAbogadosJueces } from './casoslegales/abogadosjueces/crear/crear.component';
 import { EditarComponent as EditarAbogadosJueces } from './casoslegales/abogadosjueces/editar/editar.component';
-
 import { ListadoComponent as ListadoEmpresas } from './casoslegales/empresa/listado/listado.component';
 import { CrearComponent as CrearEmpresa } from './casoslegales/empresa/crear/crear.component';
 import { EditarComponent as EditarEmpresa } from './casoslegales/empresa/editar/editar.component';

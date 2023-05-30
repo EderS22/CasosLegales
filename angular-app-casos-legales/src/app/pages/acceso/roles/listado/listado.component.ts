@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { rol } from '../../../models/acceso/rol';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RolService } from 'src/app/pages/services/acceso/rol/rol.service';
-import { FormControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';

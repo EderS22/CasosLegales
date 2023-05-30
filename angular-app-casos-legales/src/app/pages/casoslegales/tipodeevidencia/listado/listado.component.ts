@@ -3,9 +3,8 @@ import { Subject } from 'rxjs';
 import { TiposdeevidenciaService } from 'src/app/pages/services/casolegales/tiposdeevidenciaservice/tiposdeevidencia.service'; 
 import { tiposdeevidencia } from 'src/app/pages/models/casoslegales/tiposdeevidencia'; 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators } from '@angular/forms';
+import { UntypedFormGroup} from '@angular/forms';
 import Swal from 'sweetalert2';
-import { data } from 'jquery';
 import { DataTableDirective } from 'angular-datatables';
 
 @Component({

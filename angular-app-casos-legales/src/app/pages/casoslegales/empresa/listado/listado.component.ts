@@ -6,13 +6,12 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
+
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
   styleUrls: ['./listado.component.scss']
 })
-
-
 
 export class ListadoComponent {
   emsa: empresa = new empresa();
@@ -24,6 +23,7 @@ export class ListadoComponent {
   ListadoEmpresas!: empresa[];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
+  dateNow: Date = new Date();
 
   constructor(
     private service: EmpresaService,
@@ -44,7 +44,7 @@ export class ListadoComponent {
     }
 
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers',
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
       },

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { TiposdecasoService } from '../../../services/casolegales/tiposdecasoservice/tiposdecaso.service';
 import { tiposdecaso } from '../../../models/casoslegales/tiposdecaso';

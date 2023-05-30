@@ -165,7 +165,7 @@ BEGIN
 		 BEGIN
 			SELECT 2 codeStatus
 		 END
-		ELSE IF EXISTS(SELECT * FROM CALE.tbCasos WHERE caso_TipoDemandante = 'C' AND caso_Demandante = @civi_Id)
+		ELSE IF EXISTS(SELECT * FROM CALE.tbCasos WHERE caso_TipoDemandante = 'C' AND caso_IdDemandante = @civi_Id)
 		 BEGIN
 			SELECT 2 codeStatus
 		 END
@@ -235,6 +235,10 @@ SELECT	T1.[emsa_Id],
 		  ON T1.emsa_UsuModificacion = T3.usua_Id 
   INNER JOIN GRAL.tbMunicipios AS T4
 		  ON T1.muni_Id = T4.muni_Id
+  INNER JOIN GRAL.tbDepartamentos AS T5
+	      ON T4.depa_Id = T5.depa_Id
+  INNER JOIN GRAL.tbEstadosCiviles AS T6
+		  ON T1.eciv_Id = T6.eciv_Id
 GO
 
 --**************  CREATE ******************--
