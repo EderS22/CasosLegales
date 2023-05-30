@@ -117,15 +117,20 @@
                             </div>
                         </div>
                         <div class="col-6 mt-3">
-                            <label class="form-label">Estado Civil</label>
-                            <select class="form-control" required formControlName="eciv_Id"
-                                [ngClass]="{'is-invalid': submit && form['eciv_Id'].errors}">
-                                <option value="" selected hidden>Seleccione un Estado Civil</option>
-                                <option *ngFor="let item of EstadoCivilDLL" [ngValue]="item.eciv_Id">
+                            <label for="eciv_Id" class="form-label">
+                                Estado Civil
+                            </label>
+                            <ng-select
+                                formControlName="eciv_Id"
+                                [ngClass]="{'is-invalid': submit && form['eciv_Id'].errors}"
+                                placeholder="Seleccione un Estado Civil">
+                                <ng-option *ngFor="let item of  EstadoCivilDLL" [value]="item.eciv_Id">
                                     {{item.eciv_Descripcion}}
-                                </option>
-                            </select>
-                            <div class="invalid-feedback">Por favor, selecione un estado civil</div>
+                                </ng-option>
+                            </ng-select>
+                            <div class="invalid-feedback">Por favor, selecione un estado civil.</div>
+
+
                         </div>
                         <div class="col-6 mt-3">
                             <label class="form-label">Departamento</label>
