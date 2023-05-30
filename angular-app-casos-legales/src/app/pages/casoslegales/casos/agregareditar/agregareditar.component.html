@@ -114,13 +114,13 @@
             <div class="row mb-3">
                 <div class="col-sm-6">
                     <label for="caso_TipoDemandado" class="form-label">
-                        Tipo demandado
+                        Tipo demandados
                     </label>
                     <ng-select
                         formControlName="caso_TipoDemandado"
                         [ngClass]="{ 'is-invalid': submitted && form['caso_TipoDemandado'].errors }"
                         (change)="tipoDemandadoChange()"
-                        placeholder="Seleccione un tipo de demandante"
+                        placeholder="Seleccione un tipo de demandado"
                     >
                         <ng-option value="E">Empresa</ng-option>
                         <ng-option value="C">Civil</ng-option>
@@ -129,9 +129,12 @@
                 </div>
                 <div class="col-sm-6">
                     <label for="caso_IdDemandado" class="form-label">
-                        Demandado
+                        Demandados
                     </label>
                     <ng-select
+                        [multiple]="true"
+                        [closeOnSelect]="false"
+                        [hideSelected]="true"
                         formControlName="caso_IdDemandado"
                         [ngClass]="{ 'is-invalid': submitted && form['caso_IdDemandado'].errors }"
                         [placeholder]="form['caso_TipoDemandado'].value === null ? 'Seleccione un tipo de demandado' : 'Seleccione al demandado'"

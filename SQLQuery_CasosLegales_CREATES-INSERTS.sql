@@ -349,8 +349,6 @@ CREATE TABLE CALE.tbCasos(
 	abju_IdJuez					INT NOT NULL,
 	caso_TipoDemandante			CHAR(1) NOT NULL,
 	caso_IdDemandante			INT NOT NULL,
-	caso_TipoDemandado			CHAR(1) NOT NULL,
-	caso_IdDemandado			INT NOT NULL,
 	abju_IdAbogadoDemandante	INT NOT NULL,
 	abju_IdAbogadoDemandado		INT NOT NULL,
 	caso_Abierto				BIT	NOT NULL DEFAULT 0,
@@ -1080,6 +1078,10 @@ GO
 
 INSERT INTO CALE.tbTiposdeCaso (tica_Nombre, tica_Descripcion, tica_UsuCreacion)
 VALUES ('Intento de asesinato', 'Este tipo de caso abarca todos los relacionados con intentos de asesinato', 1)
+GO
+
+INSERT INTO CALE.tbTiposdeCaso (tica_Nombre, tica_Descripcion, tica_UsuCreacion)
+VALUES ('Violacion', 'Este tipo de caso abarca todos los relacionados con violaciones sexuales', 1)
 GO
 
 --******************************************************/TABLE Tipos de caso*******************************************************--

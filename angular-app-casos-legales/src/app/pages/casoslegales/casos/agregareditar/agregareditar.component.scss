@@ -1,5 +1,10 @@
 .form-control, ng-select, .scroll-host{
     background-color: #05192f;
+    caret-color: white;
+}
+
+ng-select > .ng-select-multiple > .ng-select-container > .ng-value-container > .ng-input > input{
+    color: white;
 }
 
 .is-invalid > div.ng-select-container {
