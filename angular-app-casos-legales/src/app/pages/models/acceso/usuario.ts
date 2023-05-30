@@ -3,6 +3,7 @@ export class usuario{
     usua_Nombre!: string;
     usua_Clave!: string;
     usua_EsAdmin!: boolean;
+    usua_img!: string;
     role_Id!: number;
     role_Nombre!: string;
     empe_Id!: number;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EmpleadoService } from 'src/app/pages/services/casolegales/empleadoservice/empleado.service';
-import { empleado } from 'src/app/pages/models/casoslegales/empleados';
+import { EmpresaService } from 'src/app/pages/services/casolegales/empresaservice/empresa.service';
+import { empresa } from 'src/app/pages/models/casoslegales/empresa';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -14,16 +14,14 @@ import { DepartamentoService } from 'src/app/pages/services/general/departamento
 import { departamento } from 'src/app/pages/models/general/departeamento';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
-
 @Component({
   selector: 'app-crear',
   templateUrl: './crear.component.html',
   styleUrls: ['./crear.component.scss']
 })
-
-export class CrearComponent implements OnInit {
-
-  empe: empleado = new empleado();
+export class CrearComponent {
+  
+  emsa: empresa = new empresa();
   validationform!: UntypedFormGroup;
   submit!: boolean;
   submitMunicipio!: boolean;
@@ -36,11 +34,9 @@ export class CrearComponent implements OnInit {
 
   breadCrumbItems!: Array<{}>;
   modelValueAsDate: Date = new Date(); // se usa para el calendario 
-  
-  dateNow: Date = new Date();
-  
+
   constructor(
-    private service: EmpleadoService,
+    private service: EmpresaService,
     private EstadoCivilService: EstadocivilService,
     private DepartamentoService: DepartamentoService,
     private MunicipioService: MunicipioService,
@@ -48,18 +44,17 @@ export class CrearComponent implements OnInit {
     private router: Router,
   ) {
     this.validationform = this.formBuilder.group({
-      empe_DNI: ['', [Validators.required]],
-      empe_Nombres: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
-      empe_Apellidos: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
-      empe_Sexo: ['', [Validators.required]],
-      empe_Telefono: ['', [Validators.required]],
-      empe_CorreoElectronico: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ.]+@[a-zA-Z0-9áéíóúÁÉÍÓÚ.]+')]],
-      empe_FechaNacimiento: ['', [Validators.required]],
+      emsa_Nombre: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+      emsa_RTN: ['', [Validators.required]],
+      muni_Id: ['', [Validators.required]],
+      emsa_Direccion: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+      emsa_RepresentanteNombre: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
+      emsa_RepresentanteDNI: ['', [Validators.required]],
+      emsa_RepresentanteTelefono: ['', [Validators.required]],
+      emsa_RepresentanteSexo: ['', [Validators.required]],
       eciv_Id: [null, [Validators.required]],
       depa_Id: ['', [Validators.required]],
-      muni_Id: ['', [Validators.required]],
-      empe_Direccion: ['', [Validators.required, Validators.pattern('^(?!\\s)[a-zA-Z0-9ÑñáéíóúÁÉÍÓÚ ]+(?<!\\s)$')]],
-      empe_UsuCreacion: [1],
+      emsa_UsuCreacion: [1],
     });
   }
 
@@ -80,7 +75,7 @@ export class CrearComponent implements OnInit {
     })
 
     this.breadCrumbItems = [
-      { label: 'Empleados' },
+      { label: 'Empresas' },
       { label: 'Crear', active: true }
     ];
   }
@@ -105,52 +100,34 @@ export class CrearComponent implements OnInit {
   }
 
   regresar(){
-    this.router.navigate(["casoslegales/empleado/listado"]);
+    this.router.navigate(["casoslegales/empresa/listado"]);
   }
 
   validSubmit() {
 
     if (!this.validationform.valid) {
       this.submit = true;
-      
+
       if (this.validationform.get('depa_Id')?.value != '' && this.validationform.get('muni_Id')?.value == '') {
         this.submitMunicipio = true;
       }
 
     }
     else {
-      var fechaControl = this.validationform.get('empe_FechaNacimiento');
-      var fechaFormateada = '';
+      
 
-      if (fechaControl?.value) {
-        var fecha = new Date(fechaControl.value);
-
-        if (!isNaN(fecha.getTime())) {
-          var dia = fecha.getDate();
-          var mes = fecha.getMonth() + 1;
-          var anio = fecha.getFullYear();
-
-          fechaFormateada = anio + '-' + (mes < 10 ? '0' : '') + mes + '-' + (dia < 10 ? '0' : '') + dia;
-        }
-      }
-
-      this.validationform.get('empe_FechaNacimiento')?.setValue(fechaFormateada);
-
-      this.service.InsertarEmpleados(this.validationform.value)
+      this.service.InsertarEmpresa(this.validationform.value)
         .subscribe((data: any) => {
           console.log(data.data.codeStatus)
           if (data.data.codeStatus == 1) {
-            localStorage.setItem('EMpleadoInsert', '1');
-            this.router.navigate(["casoslegales/empleado/listado"]);
+            localStorage.setItem('EmpresaInsert', '1');
+            this.router.navigate(["casoslegales/empresa/listado"]);
           }
-          else if (data.data.codeStatus == 11) {
-            this.mensajeWarning('Ya existe un Empleado con ese DNI');
+          else if (data.data.codeStatus == 2) {
+            this.mensajeWarning('Ya existe una empresa con ese nombre');
           }
-          else if (data.data.codeStatus == 12) {
-            this.mensajeWarning('Ya existe un Empleado con ese correo electronico');
-          }
-          else if (data.data.codeStatus == 13) {
-            this.mensajeWarning('Ya existe un Empleado con ese numero de telefono');
+          else if (data.data.codeStatus == 3) {
+            this.mensajeWarning('Ya existe un empresa con ese RTN');
           }
         })
     }

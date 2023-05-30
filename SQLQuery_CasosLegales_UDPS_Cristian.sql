@@ -237,15 +237,15 @@ ON T1.muni_UsuModificacion = t4.usua_Id
 
 --********************  CREATE *************************--
 GO
-CREATE OR ALTER PROCEDURE GRAL.UDP_tbMunicipios_Insert 
+CREATE OR ALTER PROCEDURE GRAL.UDP_tbMunicipios_Insert --'0107','Arizona73','01',1
 (@muni_Id char(4),
  @muni_Nombre NVARCHAR(100),
  @depa_Id CHAR(2),
  @muni_UsuCreacion INT)
 AS
 BEGIN
-	BEGIN TRY
-		IF EXISTS (SELECT * FROM gral.tbMunicipios WHERE @muni_Id = @muni_Id AND muni_Estado = 1)
+	--BEGIN TRY
+		IF EXISTS (SELECT * FROM gral.tbMunicipios WHERE muni_Id = @muni_Id AND muni_Estado = 1)
 			BEGIN
 				SELECT 2 codeStatus
 			END
@@ -253,7 +253,7 @@ BEGIN
 			BEGIN
 
 
-				IF EXISTS (SELECT * FROM gral.tbMunicipios WHERE (muni_Nombre = @muni_Nombre AND depa_Id = @depa_Id) AND muni_Estado = 1)
+				IF EXISTS ( SELECT *  FROM gral.tbMunicipios WHERE muni_Nombre = @muni_Nombre  AND depa_Id = @depa_Id AND muni_Estado = 1)
 					BEGIN
 						SELECT 3 codeStatus
 					END
@@ -266,6 +266,14 @@ BEGIN
 					END	
 			END
 		ELSE 
+
+			IF EXISTS ( SELECT *  FROM gral.tbMunicipios WHERE muni_Nombre = @muni_Nombre  AND depa_Id = @depa_Id AND muni_Estado = 1)
+					BEGIN
+						SELECT 3 codeStatus
+					END
+			ELSE 
+			BEGIN
+
 			BEGIN
 				UPDATE gral.tbMunicipios
 				SET muni_Nombre = @muni_Nombre, 
@@ -279,11 +287,12 @@ BEGIN
 				
 
 				SELECT 1 codeStatus
+				END
 			END
-	END TRY
-	BEGIN CATCH
-				SELECT 0 codeStatus
-	END CATCH
+	--END TRY
+	--BEGIN CATCH
+	--			SELECT 0 codeStatus
+	--END CATCH
 END
 
 
@@ -292,7 +301,7 @@ GO
 CREATE OR ALTER PROCEDURE GRAL.UDP_tbMunicipios_Update 
 (@muni_Id CHAR(4),
  @muni_Nombre NVARCHAR(100),
- @depa_Id INT,
+ @depa_Id CHAR(2),
  @muni_UsuModificacion INT)
 AS
 BEGIN

@@ -7,7 +7,7 @@
 
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h1 class="mb-2 mt-2 text-center flex-grow-1">Empleados</h1>
+                <h1 class="mb-2 mt-2 text-center flex-grow-1">Empresas</h1>
                 <img src="https://cdn.freelogodesign.org/files/c68797f5ce8d42409c858321e207f633/thumb/logo_200x200.png?v=0"
                     alt="Logo" class="logo-image custom-rounded" style="width: 80px; height: 80px;">
             </div>
@@ -20,23 +20,32 @@
 
                         <div class="col-6 mt-3">
                             <label class="form-label">Nombre</label><br />
-                            <input type="text" class="form-control" formControlName="empe_Nombres" required
-                                [ngClass]="{'is-invalid': submit && form['empe_Nombres'].errors}">
+                            <input type="text" class="form-control" formControlName="emsa_Nombre" required
+                                [ngClass]="{'is-invalid': submit && form['emsa_Nombre'].errors}">
                             <div class="invalid-feedback">Por favor, ingrese un nombre</div>
                         </div>
 
                         <div class="col-6 mt-3">
-                            <label class="form-label">Apellido</label><br />
-                            <input type="text" class="form-control" formControlName="empe_Apellidos" required
-                                [ngClass]="{'is-invalid': submit && form['empe_Apellidos'].errors}">
-                            <div class="invalid-feedback">Por favor, ingrese un apellido</div>
+                            <label class="form-label">RTN</label><br />
+                            <input type="text" class="form-control" formControlName="emsa_RTN"  
+                                placeholder="0000-0000-000000" mask="0000-0000-000000" required
+                                [ngClass]="{'is-invalid': submit && form['emsa_RTN'].errors}">
+                            <div class="invalid-feedback">Por favor, ingrese un RTN</div>
                         </div>
 
                         <div class="col-6 mt-3">
-                            <label class="form-label">DNI</label>
+                            <label class="form-label">Nombre del Representante</label><br />
+                            <input type="text" class="form-control" formControlName="emsa_RepresentanteNombre" required
+                                [ngClass]="{'is-invalid': submit && form['emsa_RepresentanteNombre'].errors}">
+                            <div class="invalid-feedback">Por favor, ingrese un nombre</div>
+                        </div>
+
+                        
+                        <div class="col-6 mt-3">
+                            <label class="form-label">DNI del Representante</label>
                             <input type="text" class="form-control" placeholder="0000-0000-00000" mask="0000-0000-00000"
-                                formControlName="empe_DNI" required
-                                [ngClass]="{'is-invalid': submit && form['empe_DNI'].errors}">
+                                formControlName="emsa_RepresentanteDNI" required
+                                [ngClass]="{'is-invalid': submit && form['emsa_RepresentanteDNI'].errors}">
                             <div class="invalid-feedback">Por favor, complete el DNI</div>
                         </div>
 
@@ -46,9 +55,9 @@
                                 <div class="col-6 mt-2">
                                     <div class="row">
                                         <div class="col-1">
-                                            <input class="form-check-input" type="radio" name="empe_Sexo"
-                                                formControlName="empe_Sexo" required value="M"
-                                                [ngClass]="{'is-invalid': submit && form['empe_Sexo'].errors}">
+                                            <input class="form-check-input" type="radio" name="emsa_RepresentanteSexo"
+                                                formControlName="emsa_RepresentanteSexo" required value="M"
+                                                [ngClass]="{'is-invalid': submit && form['emsa_RepresentanteSexo'].errors}">
                                         </div>
                                         <div class="col-10">
                                             <label class="form-check-label">
@@ -60,9 +69,9 @@
                                 <div class="col-6 mt-2">
                                     <div class="row">
                                         <div class="col-1">
-                                            <input class="form-check-input" type="radio" name="empe_Sexo"
-                                                formControlName="empe_Sexo" required value="F"
-                                                [ngClass]="{'is-invalid': submit && form['empe_Sexo'].errors}">
+                                            <input class="form-check-input" type="radio" name="emsa_RepresentanteSexo"
+                                                formControlName="emsa_RepresentanteSexo" required value="F"
+                                                [ngClass]="{'is-invalid': submit && form['emsa_RepresentanteSexo'].errors}">
                                         </div>
                                         <div class="col-10">
                                             <label class="form-check-label">
@@ -72,9 +81,9 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <input hidden class="form-check-input" type="radio" name="empe_Sexo"
-                                        formControlName="empe_Sexo" required value="Femenino"
-                                        [ngClass]="{'is-invalid': submit && form['empe_Sexo'].errors}">
+                                    <input hidden class="form-check-input" type="radio" name="emsa_RepresentanteSexo"
+                                        formControlName="emsa_RepresentanteSexo" required value="Femenino"
+                                        [ngClass]="{'is-invalid': submit && form['emsa_RepresentanteSexo'].errors}">
                                     <div class="invalid-feedback">Por favor, seleccione un sexo</div>
                                 </div>
                             </div>
@@ -83,51 +92,12 @@
                         <div class="col-6 mt-3">
                             <label class="form-label">Telefono</label>
                             <input type="text" class="form-control" placeholder="+504 0000-0000" mask="+000 0000-0000"
-                                formControlName="empe_Telefono" required
-                                [ngClass]="{'is-invalid': submit && form['empe_Telefono'].errors}">
+                                formControlName="emsa_RepresentanteTelefono" required
+                                [ngClass]="{'is-invalid': submit && form['emsa_RepresentanteTelefono'].errors}">
                             <div class="invalid-feedback">Por favor, complete el numero de telefono</div>
                         </div>
 
-                        <div class="col-6 mt-3">
-
-                            <label class="form-label">Correo Electronico</label>
-                            <div class="input-group">
-                                <input type="email" class="form-control" placeholder="ejemplo@gmail.com"
-                                    formControlName="empe_CorreoElectronico" required
-                                    [ngClass]="{'is-invalid': submit && form['empe_CorreoElectronico'].errors}">
-
-                                <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <i class="ri-calendar-2-fill"></i>
-                                    </span>
-                                </div>
-                                <div class="invalid-feedback">Por favor, ingrese un correo electronico</div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-6 mt-3">
-
-                            <label class="form-label">Fecha de Nacimiento</label>
-                            <div class="input-group">
-                                <input class="form-control flatpickr-input" type="text" mwlFlatpickr
-                                    [convertModelValue]="true" [options]="flatpickrOptions"
-                                    formControlName="empe_FechaNacimiento" required
-                                    [ngClass]="{'is-invalid': submit && form['empe_FechaNacimiento'].errors}">
-
-
-                                <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <i class="ri-calendar-2-fill"></i>
-                                    </span>
-                                </div>
-
-                                <div class="invalid-feedback">Por favor, selecione una fecha</div>
-
-                            </div>
-
-                        </div>
-
+    
                         <div class="col-6 mt-3">
                             <label class="form-label">Estado Civil</label>
                             <select class="form-control" required formControlName="eciv_Id"
@@ -174,16 +144,16 @@
                         </div>
 
                         <div class="col-12 mt-3">
-                            <label class="form-label">Direccion Exacta</label>
-                            <textarea class="form-control" rows="3" required formControlName="empe_Direccion"
-                                [ngClass]="{'is-invalid': submit && form['empe_Direccion'].errors}"></textarea>
+                            <label class="form-label">Direccion Exacta de la Empresa</label>
+                            <textarea class="form-control" rows="3" required formControlName="emsa_Direccion"
+                                [ngClass]="{'is-invalid': submit && form['emsa_Direccion'].errors}"></textarea>
                             <div class="invalid-feedback">Por favor, ingrese una direccion</div>
                         </div>
 
-                        <div class="col-3 mt-3">
+                        <div class="col-3 mt-3" >
                             <div class="row">
                                 <div class="col-6">
-                                    <button type="submit" class="btn btn-success bg-gradient waves-effect waves-light">Guardar</button>
+                                    <button type="submit" class="btn btn-success bg-gradient waves-effect waves-light mr-1">Guardar</button>
                                 </div>
                                 <div class="col-6">
                                     <button type="button" class="btn btn-danger bg-gradient waves-effect waves-light" (click)="regresar()">Cancelar</button>

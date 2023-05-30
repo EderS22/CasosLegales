@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 // Component pages
 import { DashboardComponent } from "./dashboards/dashboard/dashboard.component";
 import { ListadoComponent as ListadoUsuarios} from './acceso/usuarios/listado/listado.component';
+import { PanelusuarioComponent } from './acceso/usuarios/panelusuario/panelusuario.component';
 import { ListadoComponent as ListadoTiposdeCaso} from './casoslegales/tiposdecaso/listado/listado.component';
 import { ListadoComponent as ListadoTiposdeEvidencia} from './casoslegales/tipodeevidencia/listado/listado.component';
 import { ListadoComponent as ListadoDepartamento} from './general/departamento/listado/listado.component';
@@ -25,6 +26,10 @@ import { EditarComponent as EditarEmpleado } from './casoslegales/empleado/edita
 import { ListadoComponent as ListadoAbogadosJueces } from './casoslegales/abogadosjueces/listado/listado.component';
 import { CrearComponent as InsertarAbogadosJueces } from './casoslegales/abogadosjueces/crear/crear.component';
 import { EditarComponent as EditarAbogadosJueces } from './casoslegales/abogadosjueces/editar/editar.component';
+
+import { ListadoComponent as ListadoEmpresas } from './casoslegales/empresa/listado/listado.component';
+import { CrearComponent as CrearEmpresa } from './casoslegales/empresa/crear/crear.component';
+import { EditarComponent as EditarEmpresa } from './casoslegales/empresa/editar/editar.component';
 
 const routes: Routes = [
     {
@@ -61,6 +66,10 @@ const routes: Routes = [
     { 
         path: "acceso/usuarios/detalles",
         component: DetallesUsaurios
+    },
+    { 
+      path: "acceso/usuarios/panelusuario",
+      component: PanelusuarioComponent
     },
     {
         path: "acceso/roles/listado",
@@ -125,6 +134,19 @@ const routes: Routes = [
       path: "casoslegales/abogadosjueces/editar",
       component: EditarAbogadosJueces
     },
+    { 
+      path: "casoslegales/empresa/listado",
+      component: ListadoEmpresas
+    },
+    { 
+      path: "casoslegales/empresa/crear",
+      component: CrearEmpresa
+    },
+    {
+      path: "casoslegales/empresa/editar",
+      component: EditarEmpresa
+    }
+
 ];
 
 @NgModule({

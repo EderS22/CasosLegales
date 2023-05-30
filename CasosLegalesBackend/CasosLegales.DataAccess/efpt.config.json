@@ -95,10 +95,14 @@
       }
    ],
 <<<<<<< HEAD
+<<<<<<< HEAD
    "UiHint": "DESKTOP-5RUMQNH\\SQLEXPRESS.DB_CasosLegales",
 =======
    "UiHint": "DESKTOP-6FS11M8\\MSSQLSERVER1.DB_CasosLegales",
 >>>>>>> Francisco
+=======
+   "UiHint": "DESKTOP-BPGLHI0\\SQLEXPRESSLOCAL.DB_CasosLegales",
+>>>>>>> Cristian
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
    "UseDbContextSplitting": false,

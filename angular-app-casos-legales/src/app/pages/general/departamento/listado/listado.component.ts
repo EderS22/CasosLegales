@@ -5,6 +5,7 @@ import { departamento } from 'src/app/pages/models/general/departeamento';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
+import { FormControl, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-listado',
@@ -63,6 +64,7 @@ export class ListadoComponent {
     })
   }
 
+
   rerender(): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       // Destroy the table first
@@ -85,12 +87,9 @@ export class ListadoComponent {
     this.modalService.open(content, { size: 'md', centered: true, backdrop: 'static' });
   }
 
-
-
   trimDepaNombre() {
-    this.depaNombre = this.depaNombre.trim();
+    this.depa.depa_Nombre = this.depa.depa_Nombre.trim();
   }
-
 
   GuardarDepartamento() {
 

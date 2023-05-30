@@ -38,6 +38,7 @@ import { AppsModule } from "./apps/apps.module";
 import { EcommerceModule } from "./ecommerce/ecommerce.module";
 // Paginas Acce, Gral y Cale
 import { ListadoComponent as ListadoUsuarios } from './acceso/usuarios/listado/listado.component';
+import { PanelusuarioComponent } from './acceso/usuarios/panelusuario/panelusuario.component';
 import { ListadoComponent as ListadoTiposDeCaso } from './casoslegales/tiposdecaso/listado/listado.component'; 
 import { ListadoComponent as ListadoTiposDeEvidencia } from './casoslegales/tipodeevidencia/listado/listado.component';
 import { ListadoComponent as ListadoDepartamento } from './general/departamento/listado/listado.component';
@@ -56,13 +57,16 @@ import { ListadoComponent as ListadoCasos } from './casoslegales/casos/listado/l
 import { AgregareditarComponent as AgregarEditarCasos } from './casoslegales/casos/agregareditar/agregareditar.component';
 import { NgSelectConfig, NgSelectModule } from '@ng-select/ng-select';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
-import { EditarComponent as EditarEmpleados } from './casoslegales/empleado/editar/editar.component';
 import { ListadoComponent as ListadoCivil } from './casoslegales/civil/listado/listado.component';
 import { CrearComponent as InsertarCivil } from './casoslegales/civil/crear/crear.component';
 import { EditarComponent as EditarCivil } from './casoslegales/civil/editar/editar.component';
 import { ListadoComponent as ListadoAbogadosJueces } from './casoslegales/abogadosjueces/listado/listado.component';
 import { CrearComponent as InsertasAbogadosJueces } from './casoslegales/abogadosjueces/crear/crear.component';
 import { EditarComponent as EditarAbogadosJueces } from './casoslegales/abogadosjueces/editar/editar.component';
+import { EditarComponent as EditarEmpleados} from './casoslegales/empleado/editar/editar.component';
+import { ListadoComponent as ListadoEmpresas } from './casoslegales/empresa/listado/listado.component';
+import { CrearComponent as CrearEmpresa} from './casoslegales/empresa/crear/crear.component';
+import { EditarComponent  as EditarEmpresa} from './casoslegales/empresa/editar/editar.component';
 
 
 @NgModule({
@@ -93,7 +97,12 @@ import { EditarComponent as EditarAbogadosJueces } from './casoslegales/abogados
     EditarCivil,
     ListadoAbogadosJueces,
     InsertasAbogadosJueces,
-    EditarAbogadosJueces
+    EditarAbogadosJueces,
+    EditarEmpleados,
+    ListadoEmpresas,
+    CrearEmpresa,
+    EditarEmpresa,
+    PanelusuarioComponent
   ],
   imports: [
     CommonModule,

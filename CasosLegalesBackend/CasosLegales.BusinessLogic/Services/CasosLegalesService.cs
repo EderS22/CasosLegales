@@ -179,9 +179,9 @@ namespace CasosLegales.BusinessLogic.Services
                     return result.Error(map);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                return result.Error(e.Message);
             }
         }
 

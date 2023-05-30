@@ -21,15 +21,16 @@ export class MunicipioService {
   getMunicipioByDepto(id: any) {
     return this.http.put<municipio[]>(API_URL + 'Municipios/MunicipioDDL?id='+id, null);
   }
-  InsertMunicipio(muni: municipio) {
+  
+  InsertMunicipio(muni: any) {
     return this.http.post(API_URL + 'Municipios/Insertar', muni)
   }
 
-  EditarMunicipio(muni: municipio) {
+  EditarMunicipio(muni: any) {
     return this.http.post(API_URL + 'Municipios/Editar', muni)
   }
 
-  EliminarMunicipio(muni: municipio) {
+  EliminarMunicipio(muni: any) {
     return this.http.post(API_URL + 'Municipios/Eliminar', muni)
   }
 }

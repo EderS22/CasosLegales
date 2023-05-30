@@ -1,31 +1,33 @@
 <!-- Start Breadcrumbs -->
-<app-breadcrumbs title="Departamentos" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<app-breadcrumbs title="Empleados" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
 <!-- End Breadcrumbs -->
 
 <div class="card ribbon-box border shadow-none overflow-hidden">
     <div class="card-body text-muted">
         <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
-            <span class="trending-ribbon-text">{{dateNow.toLocaleDateString()}}</span> <i
+            <span class="trending-ribbon-text">Listado</span> <i
                 class="ri-flashlight-fill text-white align-bottom float-end ms-1"></i>
         </div>
+        
         <div class="card- d-flex justify-content-between align-items-center">
-            <h1 class="mb-2 mt-2 text-center flex-grow-1">Departamentos</h1>
-            <img src="../../../../../assets/images/layouts/logoLeyMaxima.png"
-            alt="Logo" class="logo-image" style="width: 80px; height: 80px; border-radius: 40px;">
+            <h1 class="mb-2 mt-2 text-center flex-grow-1">Empresas</h1>
+            <img src="assets/images/layouts/logoLeyMaxima.png"
+                alt="Logo" class="logo-image custom-rounded" style="width: 80px; height: 80px;">
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-lg-12">
+
         <div class="card">
+
             <div class="card-body">
                 <div id="customerList">
                     <div class="row g-4 mb-3">
                         <div class="col-sm-auto">
                             <div class="d-flex gap-1">
-                                <button type="button" class="btn btn-primary add-btn" data-bs-toggle="modal"
-                                    data-bs-target="#showModal" (click)="openModal(content)">
+                                <button type="button" class="btn btn-primary add-btn" (click)="InsertarUsuario()">
                                     <i class="ri-add-line align-bottom me-1"></i>
                                     Agregar
                                 </button>
@@ -39,19 +41,22 @@
                                 <tr class="bg-light">
                                     <th>Id</th>
                                     <th>Nombre</th>
-                                    <th style="text-align: center;">Acciones</th>
+                                    <th>RTN</th>
+                                    <th>Representante</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of depto">
-                                    <td>{{item.depa_Id}}</td>
-                                    <td>{{item.depa_Nombre}}</td>
+                                <tr *ngFor="let item of ListadoEmpresas">
+                                    <td>{{item.emsa_Id}}</td>
+                                    <td>{{item.emsa_Nombre}}</td>
+                                    <td>{{item.emsa_RTN}}</td>
+                                    <td>{{item.emsa_RepresentanteNombre}}</td>
 
                                     <td>
                                         <div class="col-sm-auto">
-                                            <div class="d-flex gap-1" style="justify-content: center;">
-                                                <button type="button" class="btn btn-soft-primary"
-                                                    (click)="EditarDepartamento(item,contentEdit)">
+                                            <div class="d-flex gap-1">
+                                                <button type="button" class="btn btn-soft-primary" (click)="IdEditarEmpleado(item.emsa_Id)">
                                                     <i class="ri-edit-2-line"></i>
                                                     Editar
                                                 </button>
@@ -79,87 +84,6 @@
     <!-- end col -->
 </div>
 <!-- end row -->
-
-<ng-template #content role="document" let-modal>
-    <div class="modal-header bg-light p-3">
-        <h5 class="modal-title" id="exampleModalLabel">Agregar Departamento</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
-            (click)="modal.dismiss('Cross click')"></button>
-    </div>
-
-    <div class="modal-body mb-3">
-
-        <div class="row">
-
-            <div class="col-6">
-                <label>Codigo</label>
-                <input [(ngModel)]="depa.depa_Id" type="text" class="form-control" placeholder="00" mask="00"
-                    [ngClass]="{ 'is-invalid': submitted && depaIdInvalid }" />
-                <div class="invalid-feedback" *ngIf="submitted && depaIdInvalid">
-                    Por favor, ingrese el codigo
-                </div>
-            </div>
-
-            <div class="col-6">
-                <label>Nombre</label>
-                <input [(ngModel)]="depa.depa_Nombre" type="text" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && depaNombreInvalid }" (blur)="trimDepaNombre()" />
-
-                <div class="invalid-feedback" *ngIf="submitted && depaNombreInvalid">
-                    Por favor ingrese un Nombre
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-    <div class="modal-footer">
-        <div class="hstack gap-2 justify-content-end">
-            <button type="button" class="btn btn-light" data-bs-dismiss="modal"
-                (click)="modal.close('Close click')">Cancelar</button>
-            <button type="submit" (click)="GuardarDepartamento()" class="btn btn-success" id="add-btn">Agregar
-                Departamento</button>
-        </div>
-    </div>
-
-</ng-template>
-
-
-
-<ng-template #contentEdit role="document" let-modal>
-    <div class="modal-header bg-light p-3">
-        <h5 class="modal-title" id="exampleModalLabel">Editar Departamento</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
-            (click)="modal.dismiss('Cross click')"></button>
-    </div>
-
-    <div class="modal-body mb-3">
-
-        <div class="row">
-
-            <div class="col-12">
-                <label>Nombre</label>
-                <input [(ngModel)]="depa.depa_Nombre" type="text" class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && depaNombreInvalid }" (blur)="trimDepaNombre()" />
-
-                <div class="invalid-feedback" *ngIf="submitted && depaNombreInvalid">
-                    Por favor ingrese un Nombre
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="modal-footer">
-        <div class="hstack gap-2 justify-content-end">
-            <button type="button" class="btn btn-light" data-bs-dismiss="modal"
-                (click)="modal.close('Close click')">Cancelar</button>
-            <button type="submit" (click)="GaurdarDatosEditados()" class="btn btn-success" id="add-btn">Guardar
-                Departamento</button>
-        </div>
-    </div>
-
-</ng-template>
-
 
 <ng-template #modalEliminar let-modal>
     <div class="modal-content">
