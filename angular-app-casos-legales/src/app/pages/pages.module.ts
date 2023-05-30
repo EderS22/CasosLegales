@@ -33,6 +33,7 @@ import { DashboardsModule } from "./dashboards/dashboards.module";
 import { AppsModule } from "./apps/apps.module";
 import { EcommerceModule } from "./ecommerce/ecommerce.module";
 import { ListadoComponent as ListadoUsuarios } from './acceso/usuarios/listado/listado.component';
+import { PanelusuarioComponent } from './acceso/usuarios/panelusuario/panelusuario.component';
 import { ListadoComponent as ListadoTiposDeCaso } from './casoslegales/tiposdecaso/listado/listado.component'; 
 import { ListadoComponent as ListadoTiposDeEvidencia } from './casoslegales/tipodeevidencia/listado/listado.component';
 import { ListadoComponent as ListadoDepartamento } from './general/departamento/listado/listado.component';
@@ -76,7 +77,8 @@ import { EditarComponent  as EditarEmpresa} from './casoslegales/empresa/editar/
     EditarEmpleados,
     ListadoEmpresas,
     CrearEmpresa,
-    EditarEmpresa
+    EditarEmpresa,
+    PanelusuarioComponent
   ],
   imports: [
     CommonModule,

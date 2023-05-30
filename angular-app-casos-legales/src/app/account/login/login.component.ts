@@ -70,8 +70,7 @@ export class LoginComponent implements OnInit {
         if (data.code === 200) {
             if(data.data.usua_Id > 0){
               localStorage.setItem('toast', 'true');
-              localStorage.setItem('currentUser', JSON.stringify(data.data));
-      
+              localStorage.setItem('currentUser', JSON.stringify(data.data)); 
               this.router.navigate(['/']);
             } else{
               this.toastService.show('Usuario y/o contraseña incorrectos', { classname: 'bg-warning text-center text-white', delay: 8000 });

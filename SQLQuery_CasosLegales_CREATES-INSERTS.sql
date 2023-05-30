@@ -31,6 +31,7 @@ CREATE TABLE ACCE.tbUsuarios(
 	role_Id					INT,
 	empe_Id					INT NOT NULL,
 	usua_EsAdmin			BIT DEFAULT 0,
+	usua_img				NVARCHAR(MAX),
 
 	usua_Estado				BIT DEFAULT 1,
 	usua_IdCreacion			INT NOT NULL,
@@ -490,41 +491,11 @@ DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
 SET @Clave = '2023';
 SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
 
-INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin, usua_IdCreacion)
-VALUES (1, 1, 'Eder', @Pass, 1, 1);
+INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin,usua_img, usua_IdCreacion)
+VALUES (1, 1, 'Eder', @Pass, 1,'https://i.ibb.co/VSzRRSM/avatar.png', 1);
 GO
 
-DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
-SET @Clave = 'algo';
-SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
 
-INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin, usua_IdCreacion)
-VALUES (2, 2, 'Francisco', @Pass, 1, 1);
-GO
-
-DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
-SET @Clave = 'nose';
-SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
-
-INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin, usua_IdCreacion)
-VALUES (2, 3, 'Cristian', @Pass, 1, 1);
-
-GO
-DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
-SET @Clave = 'ESDRINHA';
-SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
-
-INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin, usua_IdCreacion)
-VALUES (1, 4, 'ESDRINHA', @Pass, 1, 1);
-GO
-
-DECLARE @Pass AS NVARCHAR(MAX), @Clave AS NVARCHAR(250);
-SET @Clave = '2022';
-SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Clave),2)
-
-INSERT INTO ACCE.tbUsuarios (role_Id, empe_Id, usua_Nombre, usua_Clave, usua_EsAdmin, usua_IdCreacion)
-VALUES (1, 5, 'Sofia', @Pass, 0, 1);
-GO
 
 --*********************************************************/TABLE Usuarios*********************************************************--
 

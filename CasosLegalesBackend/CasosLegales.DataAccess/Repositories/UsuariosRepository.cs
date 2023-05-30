@@ -51,6 +51,7 @@ namespace CasosLegales.DataAccess.Repositories
             parameters.Add("@role_Id", item.role_Id, DbType.Int32, direction: ParameterDirection.Input);
             parameters.Add("@empe_Id", item.empe_Id, DbType.Int32, direction: ParameterDirection.Input);
             parameters.Add("@usua_EsAdmin", item.usua_EsAdmin, DbType.Boolean, direction: ParameterDirection.Input);
+            parameters.Add("@usua_img", item.usua_img, DbType.String, direction: ParameterDirection.Input);
             parameters.Add("@usua_IdCreacion", item.usua_IdCreacion, DbType.Int32, direction: ParameterDirection.Input);
 
             var resultado = db.QueryFirst<int>(ScriptsDataBase.InsertarUsuario, parameters, commandType: CommandType.StoredProcedure);
@@ -76,6 +77,7 @@ namespace CasosLegales.DataAccess.Repositories
             parametros.Add("@usua_Id", item.usua_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@usua_Nombre", item.usua_Nombre, DbType.String, ParameterDirection.Input);
             parametros.Add("@usua_EsAdmin", item.usua_EsAdmin, DbType.Boolean, direction: ParameterDirection.Input);
+            parametros.Add("@usua_img", item.usua_img, DbType.String, direction: ParameterDirection.Input);
             parametros.Add("@role_Id", item.role_Id, DbType.Int32, direction: ParameterDirection.Input);
             parametros.Add("@empe_Id", item.empe_Id, DbType.Int32, direction: ParameterDirection.Input);
             parametros.Add("@usua_IdModificacion", item.usua_IdModificacion, DbType.Int32, direction: ParameterDirection.Input);
