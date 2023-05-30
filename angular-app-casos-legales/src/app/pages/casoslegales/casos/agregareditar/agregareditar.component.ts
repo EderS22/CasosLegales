@@ -149,10 +149,14 @@ export class AgregareditarComponent implements OnInit {
 
     tipoDemandanteChange(){
        this.form['caso_IdDemandante'].setValue(null);
+       this.listadoEmpresasDemandado = this.listadoEmpresas;
+       this.listadoCivilesDemandado = this.listadoCiviles;
     }
 
     tipoDemandadoChange(){
         this.form['caso_IdDemandado'].setValue(null);
+        this.listadoEmpresasDemandante = this.listadoEmpresas;
+        this.listadoCivilesDemandante = this.listadoCiviles;
     }
 
     demandanteChange(value:number){
@@ -168,15 +172,19 @@ export class AgregareditarComponent implements OnInit {
         }
     }
 
-    demandadoChange(value:number){
+    demandadoChange(value:number[]){
         this.listadoEmpresasDemandante = this.listadoEmpresas;
         this.listadoCivilesDemandante = this.listadoCiviles;
-        if(value > 0 && this.form['caso_TipoDemandado'].value === "E"){
-            this.listadoEmpresasDemandante = this.listadoEmpresasDemandante.filter(item => item.emsa_Id !== value);  
+        if(value.length > 0 && this.form['caso_TipoDemandado'].value === "E"){
+            value.forEach(element => {
+                this.listadoEmpresasDemandante = this.listadoEmpresasDemandante.filter(item => item.emsa_Id !== element);  
+            })
         } 
-        else if (value > 0 && this.form['caso_TipoDemandado'].value === "C")
+        else if (value.length > 0 && this.form['caso_TipoDemandado'].value === "C")
         {
-            this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(item => item.civi_Id !== value);
+            value.forEach(element => {
+                this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(item => item.civi_Id !== element);
+            })
         }
     }
 
