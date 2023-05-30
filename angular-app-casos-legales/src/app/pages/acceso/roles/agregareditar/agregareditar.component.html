@@ -140,9 +140,18 @@
                         </div>
                     </div>
                     <div style="text-align: center;">
-                        <button type="submit" class="btn btn-success col-6" id="add-btn" (click)="onSubmit()">
-                            {{isEdit ? 'Editar' : 'Agregar'}} rol
-                        </button>
+                      
+                    </div>
+
+                    <div class="row mt-4" style="text-align: center;">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-soft-primary col-8" (click)="onSubmit()">
+                                {{isEdit ? 'Editar' : 'Agregar'}} rol
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-soft-secondary col-8" (click)="regresar()">Cancelar</button>
+                        </div>
                     </div>
                 </form>
             </div>

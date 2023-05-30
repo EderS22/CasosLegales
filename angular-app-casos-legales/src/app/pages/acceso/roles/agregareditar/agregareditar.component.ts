@@ -49,7 +49,7 @@ export class AgregareditarComponent implements OnInit {
   ngOnInit(): void {
     if(!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin){
         const ropaAcceso = new ropa();
-        ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+        ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').role_Id;
         ropaAcceso.pant_Pantalla = "Roles";
         this.rolService.validarRolTienePantalla(ropaAcceso)
         .subscribe((data:any) => {
@@ -342,6 +342,10 @@ export class AgregareditarComponent implements OnInit {
     } else {
       this.pantallasValid = false;
     }
+  }
+
+  regresar(){
+    this.router.navigate(["acceso/roles/listado"]);
   }
 
   mensajeSuccess(messageBody: string) {

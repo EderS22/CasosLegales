@@ -37,7 +37,7 @@ export class ListadoComponent implements OnInit {
     ngOnInit(): void {
         if(!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin){
             const ropaAcceso = new ropa();
-            ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+            ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').role_Id;
             ropaAcceso.pant_Pantalla = "Roles";
             this.rolService.validarRolTienePantalla(ropaAcceso)
             .subscribe((data:any) => {
