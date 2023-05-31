@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CivilService } from 'src/app/pages/services/casolegales/civilesservice/civil.service';
 import { civiles } from 'src/app/pages/models/casoslegales/civil';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -23,6 +23,7 @@ export class ListadoComponent {
   ListadoCiviles!: civiles[];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
+  dateNow: Date = new Date();
 
   constructor(
     private service: CivilService,
@@ -42,7 +43,7 @@ export class ListadoComponent {
     }
 
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers',
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
       },

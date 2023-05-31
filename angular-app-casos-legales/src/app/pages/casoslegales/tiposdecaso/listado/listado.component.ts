@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { TiposdecasoService } from '../../../services/casolegales/tiposdecasoservice/tiposdecaso.service';
 import { tiposdecaso } from '../../../models/casoslegales/tiposdecaso';
@@ -29,13 +29,14 @@ export class ListadoComponent {
   tp!: UntypedFormGroup;
   ticaNombreInvalid = false;
   ticaDescripcionInvalid = false;
+  dateNow: Date = new Date();
 
   constructor(private service: TiposdecasoService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
 
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers',
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
       },
@@ -49,7 +50,7 @@ export class ListadoComponent {
     this.LoadTiposdecaso();
 
     this.breadCrumbItems = [
-      { label: 'TiposdeCaso' },
+      { label: 'Tipos de Caso' },
       { label: 'Listado', active: true }
     ];
   }
@@ -91,6 +92,13 @@ export class ListadoComponent {
         this.dtTrigger.next(null);
       }
     })
+  }
+
+  trimTicaNombre() {
+    this.tdp.tica_Nombre = this.tdp.tica_Nombre.trim();
+  }
+  trimTicaDescripcion() {
+    this.tdp.tica_Descripcion = this.tdp.tica_Descripcion.trim();
   }
 
   GuardarTipoDeCaso() {

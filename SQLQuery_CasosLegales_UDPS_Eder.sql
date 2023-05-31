@@ -19,7 +19,8 @@ BEGIN
 		   tb1.empe_Id,
 		   empe_Nombres,
 		   empe_Apellidos,		   
-		   usua_EsAdmin
+		   usua_EsAdmin,
+		   usua_img
 	  FROM ACCE.tbUsuarios tb1
  LEFT JOIN ACCE.tbRoles tb2
 		ON tb1.role_Id = tb2.role_Id
@@ -41,6 +42,7 @@ BEGIN
 		   empe_Nombres,
 		   empe_Apellidos,
 		   tb1.usua_EsAdmin,
+		   tb1.usua_img,
 		   tb1.usua_IdCreacion,
 		   tb4.usua_Nombre usua_NombreCreacion,
 		   tb1.usua_FechaCreacion,
@@ -96,7 +98,8 @@ BEGIN
 					   tb1.empe_Id,
 					   empe_Nombres,
 					   empe_Apellidos,		   
-					   usua_EsAdmin
+					   usua_EsAdmin,
+					   usua_img
 				  FROM ACCE.tbUsuarios tb1
 			INNER JOIN CALE.tbEmpleados tb2
 					ON tb1.empe_Id = tb2.empe_Id
@@ -191,6 +194,7 @@ CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_InsertarNuevoUsuario
 	 @role_Id			INT,
 	 @empe_Id			INT,
 	 @usua_EsAdmin      INT,
+	 @usua_img			NVARCHAR(MAX),
 	 @usua_IdCreacion   INT
 AS
 BEGIN
@@ -203,13 +207,13 @@ BEGIN
 			
 			 IF @role_Id = 0
 			 BEGIN 
-				 INSERT INTO ACCE.tbUsuarios(usua_Nombre,usua_Clave,empe_Id,usua_EsAdmin,usua_Estado,usua_IdCreacion)
-				 VALUES (@usua_Nombre, @Pass, @empe_Id, @usua_EsAdmin, 1, @usua_IdCreacion)
+				 INSERT INTO ACCE.tbUsuarios(usua_Nombre,usua_Clave,empe_Id,usua_EsAdmin,usua_img,usua_Estado,usua_IdCreacion)
+				 VALUES (@usua_Nombre, @Pass, @empe_Id, @usua_EsAdmin,@usua_img, 1, @usua_IdCreacion)
 			 END
 			 ELSE
 			 BEGIN
-				 INSERT INTO ACCE.tbUsuarios(usua_Nombre,usua_Clave,role_Id,empe_Id,usua_EsAdmin,usua_Estado,usua_IdCreacion)
-				 VALUES (@usua_Nombre, @Pass, @role_Id, @empe_Id, @usua_EsAdmin, 1, @usua_IdCreacion)
+				 INSERT INTO ACCE.tbUsuarios(usua_Nombre,usua_Clave,role_Id,empe_Id,usua_EsAdmin,usua_img,usua_Estado,usua_IdCreacion)
+				 VALUES (@usua_Nombre, @Pass, @role_Id, @empe_Id, @usua_EsAdmin,@usua_img, 1, @usua_IdCreacion)
 			 END
 			 
 		COMMIT
@@ -240,6 +244,7 @@ CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_EditarUsuarios
 	@usua_Id				INT,
 	@usua_Nombre			NVARCHAR(250),
 	@usua_EsAdmin			BIT,
+	@usua_img				NVARCHAR(MAX),
 	@role_Id				INT,
 	@empe_Id				INT,
 	@usua_IdModificacion	INT
@@ -254,6 +259,7 @@ BEGIN
 				UPDATE ACCE.tbUsuarios
 				   SET usua_Nombre = @usua_Nombre,
 					   usua_EsAdmin = @usua_EsAdmin,
+					   usua_img = @usua_img,
 					   empe_Id = @empe_Id,
 					   usua_IdModificacion = @usua_IdModificacion,
 					   usua_FechaModificacion = GETDATE()
@@ -264,6 +270,7 @@ BEGIN
 				UPDATE ACCE.tbUsuarios
 				   SET usua_Nombre = @usua_Nombre,
 					   usua_EsAdmin = @usua_EsAdmin,
+					   usua_img = @usua_img,
 					   role_Id = @role_Id,
 					   empe_Id = @empe_Id,
 					   usua_IdModificacion = @usua_IdModificacion,
@@ -423,6 +430,29 @@ BEGIN
 		SELECT 1
 	END TRY
 	BEGIN CATCH
+		SELECT 0
+	END CATCH
+END
+GO
+
+CREATE OR ALTER PROCEDURE ACCE.UDP_tbRolesPorPantalla_EliminarPantallasdeRol
+	@role_Id				INT,
+	@usua_IdModificacion	INT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+			UPDATE ACCE.tbRolesPorPantalla
+			   SET ropa_Estado = 0,
+				   usua_IdModificacion = @usua_IdModificacion,
+				   ropa_FechaModificacion = GETDATE()
+			 WHERE role_Id = @role_Id
+		
+		COMMIT
+		SELECT 1
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
 		SELECT 0
 	END CATCH
 END
@@ -600,30 +630,45 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE ACCE.UDP_tbRolesPorPantalla_EliminarPantallasdeRol
-	@role_Id				INT,
-	@usua_IdModificacion	INT
-AS
-BEGIN
-	BEGIN TRY
-		BEGIN TRAN
-			UPDATE ACCE.tbRolesPorPantalla
-			   SET ropa_Estado = 0,
-				   usua_IdModificacion = @usua_IdModificacion,
-				   ropa_FechaModificacion = GETDATE()
-			 WHERE role_Id = @role_Id
-		
-		COMMIT
-		SELECT 1
-	END TRY
-	BEGIN CATCH
-		ROLLBACK
-		SELECT 0
-	END CATCH
-END
-GO
-
 
 --**************************************************/TABLE Roles por Pantallas*****************************************************--
 
 --**********************************************************/TABLES ACCE***********************************************************--
+
+--***********************************************************TABLES CALE***********************************************************--
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbAbogadosJueces_DdlAbogados
+AS
+BEGIN
+	SELECT abju_Id,
+		   abju_DNI,
+		   abju_Nombres,
+		   abju_Apellidos
+	  FROM CALE.tbAbogadosJueces
+	  WHERE abju_Estado = 1
+	    AND carg_Id = (SELECT carg_Id
+						 FROM GRAL.tbCargos 
+						WHERE carg_Descripcion = 'Abogado' 
+						  AND carg_Estado = 1)
+END
+GO
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbAbogadosJueces_DdlJueces
+AS
+BEGIN
+	SELECT abju_Id,
+		   abju_DNI,
+		   abju_Nombres,
+		   abju_Apellidos
+	  FROM CALE.tbAbogadosJueces
+	  WHERE abju_Estado = 1
+	    AND carg_Id = (SELECT carg_Id
+						 FROM GRAL.tbCargos 
+						WHERE carg_Descripcion = 'Juez' 
+						  AND carg_Estado = 1)
+END
+GO
+
+--**********************************************************/TABLES CALE***********************************************************--
+
+

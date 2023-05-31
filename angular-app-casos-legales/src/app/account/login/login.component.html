@@ -7,7 +7,7 @@
                   <div class="text-center mt-sm-5 mb-4 text-white-50">
                       <div>
                           <a routerLink="" class="d-inline-block auth-logo">
-                              <img src="assets/images/logo-light.png" alt="" height="20">
+                              <img src="../../../assets/images/layouts/logoLeyMaxima.png" alt="" height="120" style="border-radius: 50px;">
                           </a>
                       </div>
                   </div>
@@ -38,9 +38,6 @@
                                   </div>
 
                                   <div class="mb-3">
-                                      <div class="float-end">
-                                          <a routerLink="/pass-reset/basic" class="text-muted">Olvidó su contraseña?</a>
-                                      </div>
                                       <label class="form-label" for="password-input">Contraseña</label>
                                       <div class="position-relative auth-pass-inputgroup mb-3">
                                           <input [type]="fieldTextType ? 'text' : 'password'" class="form-control pe-5" placeholder="Enter password" id="password-input" formControlName="password"
@@ -51,11 +48,6 @@
                                             <span *ngIf="f['password'].errors['required']">La contraseña es obligatoria</span>
                                           </div>
                                       </div>
-                                  </div>
-
-                                  <div class="form-check">
-                                      <input class="form-check-input" type="checkbox" value="" id="auth-remember-check">
-                                      <label class="form-check-label" for="auth-remember-check">Recuerdame</label>
                                   </div>
 
                                   <div class="mt-4">

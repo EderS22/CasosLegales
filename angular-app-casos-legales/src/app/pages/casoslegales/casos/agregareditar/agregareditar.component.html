@@ -1,0 +1,199 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Casos" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="card ribbon-box border shadow-none overflow-hidden">
+    <div class="card-body text-muted">
+        <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
+            <span class="trending-ribbon-text">{{dateNow.toLocaleDateString()}}</span> <i
+                class="ri-flashlight-fill text-white align-bottom float-end ms-1"></i>
+        </div>
+        <div class="card- d-flex justify-content-between align-items-center">
+            <h1 class="mb-2 mt-2 text-center flex-grow-1">Casos</h1>
+            <img src="../../../../../assets/images/layouts/logoLeyMaxima.png"
+            alt="Logo" class="logo-image" style="width: 80px; height: 80px; border-radius: 40px;">
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title mb-0">{{isEdit ? 'Editar' : 'Agregar'}} caso</h4>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="casoForm">
+            <input type="text" formControlName="caso_Id" hidden readonly>
+            <div class="row mb-3">  
+                <div class="col-sm-12">
+                    <label for="caso_Descripcion" class="form-label">
+                        Descripción del caso
+                    </label>
+                    <div class="mx-n3">
+                        <ngx-simplebar style="max-height: 100px;" class="px-3">
+                            <textarea class="form-control" placeholder="Ingrese una descripción"
+                                formControlName="caso_Descripcion" rows="3"
+                                [ngClass]="{ 'is-invalid': submitted && form['caso_Descripcion'].errors }">
+                            </textarea>
+                        </ngx-simplebar>
+                    </div>
+                    <div class="invalid-feedback">Por favor ingrese una descripción para el caso.</div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <label for="tica_Id" class="form-label">
+                        Tipo de caso
+                    </label>
+                    <ng-select
+                        formControlName="tica_Id"
+                        [ngClass]="{ 'is-invalid': submitted && form['tica_Id'].errors }"
+                        placeholder="Seleccione un tipo de caso"
+                        >
+                        <ng-option *ngFor="let item of listadoTiposDeCaso" [value]="item.tica_Id">
+                            {{item.tica_Nombre}}
+                        </ng-option>
+                    </ng-select>
+                    <div class="invalid-feedback">Por favor seleccione un tipo de caso.</div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="caso_Juez" class="form-label">
+                        Juez
+                    </label> 
+                    <ng-select
+                        formControlName="abju_IdJuez"
+                        [ngClass]="{ 'is-invalid': submitted && form['abju_IdJuez'].errors }"
+                        placeholder="Seleccione un juez"
+                        >
+                        <ng-option *ngFor="let item of listadoJueces" [value]="item.abju_Id">
+                            {{item.abju_DNI}} - {{item.abju_Nombres}} {{item.abju_Apellidos}}
+                        </ng-option>
+                    </ng-select>
+                    <div class="invalid-feedback">Por favor seleccione un juez.</div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <label for="caso_TipoDemandante" class="form-label">
+                        Tipo demandante
+                    </label>
+                    <ng-select
+                        formControlName="caso_TipoDemandante"
+                        [ngClass]="{ 'is-invalid': submitted && form['caso_TipoDemandante'].errors }"
+                        (change)="tipoDemandanteChange()"
+                        placeholder="Seleccione un tipo de demandante"
+                    >
+                        <ng-option value="E">Empresa</ng-option>
+                        <ng-option value="C">Civil</ng-option>
+                    </ng-select>
+                    <div class="invalid-feedback">Por favor seleccione un tipo de demandante.</div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="caso_IdDemandante" class="form-label">
+                        Demandante
+                    </label>
+                    <ng-select
+                        formControlName="caso_IdDemandante"
+                        [ngClass]="{ 'is-invalid': submitted && form['caso_IdDemandante'].errors }"
+                        [placeholder]="form['caso_TipoDemandante'].value === null ? 'Seleccione un tipo de demandante' : 'Seleccione el demandante'"
+                        (change)=" demandanteChange($event)"
+                        >
+                        <ng-container *ngIf="form['caso_TipoDemandante'].value === 'E'">
+                            <ng-option *ngFor="let item of listadoEmpresasDemandante" [value]="item.emsa_Id">
+                                {{item.emsa_Nombre}}
+                            </ng-option>
+                        </ng-container>
+                        <ng-container *ngIf="form['caso_TipoDemandante'].value === 'C'">
+                            <ng-option *ngFor="let item of listadoCivilesDemandante" [value]="item.civi_Id">
+                                {{item.civi_DNI}} - {{item.civi_Nombres}} {{item.civi_Apellidos}}
+                            </ng-option>
+                        </ng-container>
+                    </ng-select>
+                    <div class="invalid-feedback">Por favor seleccione el demandante.</div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <label for="caso_TipoDemandado" class="form-label">
+                        Tipo demandados
+                    </label>
+                    <ng-select
+                        formControlName="caso_TipoDemandado"
+                        [ngClass]="{ 'is-invalid': submitted && form['caso_TipoDemandado'].errors }"
+                        (change)="tipoDemandadoChange()"
+                        placeholder="Seleccione un tipo de demandado"
+                    >
+                        <ng-option value="E">Empresa</ng-option>
+                        <ng-option value="C">Civil</ng-option>
+                    </ng-select>
+                    <div class="invalid-feedback">Por favor seleccione un tipo de demandado.</div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="caso_IdDemandado" class="form-label">
+                        Demandados
+                    </label>
+                    <ng-select
+                        [multiple]="true"
+                        [closeOnSelect]="false"
+                        [hideSelected]="true"
+                        formControlName="caso_IdDemandado"
+                        [ngClass]="{ 'is-invalid': submitted && form['caso_IdDemandado'].errors }"
+                        [placeholder]="form['caso_TipoDemandado'].value === null ? 'Seleccione un tipo de demandado' : 'Seleccione al demandado'"
+                        (change)="demandadoChange($event)"
+                        >
+                        <ng-container *ngIf="form['caso_TipoDemandado'].value === 'E'">
+                            <ng-option *ngFor="let item of listadoEmpresasDemandado" [value]="item.emsa_Id">
+                                {{item.emsa_Nombre}}
+                            </ng-option>
+                        </ng-container>
+                        <ng-container *ngIf="form['caso_TipoDemandado'].value === 'C'">
+                            <ng-option *ngFor="let item of listadoCivilesDemandado" [value]="item.civi_Id">
+                                {{item.civi_DNI}} - {{item.civi_Nombres}} {{item.civi_Apellidos}}
+                            </ng-option>
+                        </ng-container>
+                    </ng-select>
+                    <div class="invalid-feedback">Por favor seleccione el demandante.</div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-6">
+                    <label for="abju_IdAbogadoDemandante" class="form-label">
+                        Abogado demandante
+                    </label>
+                    <ng-select
+                        formControlName="abju_IdAbogadoDemandante"
+                        [ngClass]="{ 'is-invalid': submitted && form['abju_IdAbogadoDemandante'].errors }"
+                        (change)="abogadoDemandanteChange($event)"
+                        placeholder="Seleccione el abogado demandante"
+                    >
+                        <ng-option *ngFor="let item of listadoAbogadosDemandantes" [value]="item.abju_Id">
+                            {{item.abju_DNI}} - {{item.abju_Nombres}} {{ item.abju_Apellidos }}
+                        </ng-option>
+                    </ng-select>
+                    <div class="invalid-feedback">Por favor seleccione un abogado demandante.</div>
+                </div>
+                <div class="col-sm-6">
+                    <label for="abju_IdAbogadoDemandado" class="form-label">
+                        Abogado demandado
+                    </label>
+                    <ng-select
+                        formControlName="abju_IdAbogadoDemandado"
+                        [ngClass]="{ 'is-invalid': submitted && form['abju_IdAbogadoDemandado'].errors }"
+                        (change)="abogadoDemandadoChange($event)"
+                        placeholder="Seleccione el abogado demandado"
+                    >
+                        <ng-option *ngFor="let item of listadoAbogadosDemandados" [value]="item.abju_Id">
+                            {{item.abju_DNI}} - {{item.abju_Nombres}} {{ item.abju_Apellidos }}
+                        </ng-option>
+                    </ng-select>
+                    <div class="invalid-feedback">Por favor seleccione un abogado demandado.</div>
+                </div>
+            </div>
+            <br/>
+            <div style="text-align: center;">
+                <button type="submit" class="btn btn-success col-6" id="add-btn" (click)="onSubmit()">
+                    {{isEdit ? 'Editar' : 'Agregar'}} caso
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -179,14 +179,14 @@
                                 [ngClass]="{'is-invalid': submit && form['empe_Direccion'].errors}"></textarea>
                             <div class="invalid-feedback">Por favor, ingrese una direccion</div>
                         </div>
-
-                        <div class="col-1 mt-3">
-                            <button type="submit" class="btn btn-success bg-gradient waves-effect waves-light">Guardar</button>
+                    </div>
+                    <div class="row mt-4" style="text-align: center;">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-soft-primary col-8">Guardar</button>
                         </div>
-                        <div class="col-1 mt-3">
-                            <button type="button" class="btn btn-danger bg-gradient waves-effect waves-light" (click)="regresar()">Cancelar</button>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-soft-secondary col-8" (click)="regresar()">Cancelar</button>
                         </div>
-
                     </div>
                 </form>
             </div><!-- end card -->

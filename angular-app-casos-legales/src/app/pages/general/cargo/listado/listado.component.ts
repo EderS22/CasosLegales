@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CargoService } from 'src/app/pages/services/general/cargosservice/cargo.service';
 import { cargos } from 'src/app/pages/models/general/cargo';
@@ -10,7 +10,8 @@ import { DataTableDirective } from 'angular-datatables';
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
-  styleUrls: ['./listado.component.scss']
+  styleUrls: ['./listado.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ListadoComponent {
   @ViewChild(DataTableDirective, { static: false })
@@ -24,6 +25,8 @@ export class ListadoComponent {
   submitted = false;
   cg!: UntypedFormGroup;
   cargDescripcionInValid = false;
+  
+  dateNow: Date = new Date();
 
   constructor(private service: CargoService, private modalService: NgbModal, private formBuilder: UntypedFormBuilder) { }
   ngOnInit(): void {
@@ -33,7 +36,7 @@ export class ListadoComponent {
     });
 
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers',
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
       },
@@ -92,6 +95,9 @@ export class ListadoComponent {
     });
   }
 
+  trimTicaDescripcion() {
+    this.carg.carg_Descripcion = this.carg.carg_Descripcion.trim();
+  }
   GuardarCargo() {
     this.submitted = true;
     this.cargDescripcionInValid = this.carg.carg_Descripcion.trim().length === 0;

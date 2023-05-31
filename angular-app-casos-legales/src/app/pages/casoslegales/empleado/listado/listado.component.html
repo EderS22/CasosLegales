@@ -5,14 +5,13 @@
 <div class="card ribbon-box border shadow-none overflow-hidden">
     <div class="card-body text-muted">
         <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
-            <span class="trending-ribbon-text">Listado</span> <i
+            <span class="trending-ribbon-text">{{dateNow.toLocaleDateString()}}</span> <i
                 class="ri-flashlight-fill text-white align-bottom float-end ms-1"></i>
         </div>
-        
         <div class="card- d-flex justify-content-between align-items-center">
             <h1 class="mb-2 mt-2 text-center flex-grow-1">Empleados</h1>
-            <img src="assets/images/layouts/logoLeyMaxima.png"
-                alt="Logo" class="logo-image custom-rounded" style="width: 80px; height: 80px;">
+            <img src="../../../../../assets/images/layouts/logoLeyMaxima.png"
+            alt="Logo" class="logo-image" style="width: 80px; height: 80px; border-radius: 40px;">
         </div>
     </div>
 </div>
@@ -43,7 +42,7 @@
                                     <th>Nombre</th>
                                     <th>Sexo</th>
                                     <th>Telefono</th>
-                                    <th>Acciones</th>
+                                    <th style="text-align: center;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,10 +51,9 @@
                                     <td>{{item.empe_NombreCompleto}}</td>
                                     <td>{{item.empe_Sexo}}</td>
                                     <td>{{item.empe_Telefono}}</td>
-
                                     <td>
                                         <div class="col-sm-auto">
-                                            <div class="d-flex gap-1">
+                                            <div class="d-flex gap-1" style="justify-content: center;">
                                                 <button type="button" class="btn btn-soft-primary" (click)="IdEditarEmpleado(item.empe_Id)">
                                                     <i class="ri-edit-2-line"></i>
                                                     Editar

@@ -17,6 +17,9 @@ SELECT	civi_Id,
 		[civi_FechaNacimiento],
 		T1.eciv_Id,
 		T1.muni_Id,
+		T4.muni_Nombre,
+		T5.depa_Id,
+		T5.depa_Nombre,
 		[civi_Direccion],
 		civi_UsuCreacion, 
 		T2.usua_Nombre AS user_Creacion,
@@ -27,7 +30,9 @@ SELECT	civi_Id,
 		civi_Estado
 FROM cale.tbCiviles AS T1 INNER JOIN acce.tbUsuarios AS T2
 ON T1.civi_UsuCreacion = T2.usua_Id LEFT JOIN acce.tbUsuarios AS T3
-ON T1.civi_UsuModificacion = T3.usua_Id;
+ON T1.civi_UsuModificacion = T3.usua_Id INNER JOIN GRAL.tbMunicipios AS T4
+ON T1.muni_Id = T4.muni_Id INNER JOIN GRAL.tbDepartamentos AS T5
+ON T4.depa_Id = T5.depa_Id;
 
 --**************  CREATE ******************--
 GO
@@ -156,11 +161,15 @@ AS
 BEGIN
 	BEGIN TRY
 		
-		--IF EXISTS(SELECT * FROM CALE.tbCiviles WHERE civi_Id = @civi_Id)
-		-- BEGIN
-		--	SELECT 2 codeStatu
-		-- END
-		--ELSE
+		IF EXISTS(SELECT * FROM CALE.tbAcusadoPorCaso WHERE acus_TipoAcusado = 'C' AND acus_Acusado = @civi_Id)
+		 BEGIN
+			SELECT 2 codeStatus
+		 END
+		ELSE IF EXISTS(SELECT * FROM CALE.tbCasos WHERE caso_TipoDemandante = 'C' AND caso_IdDemandante = @civi_Id)
+		 BEGIN
+			SELECT 2 codeStatus
+		 END
+		 ELSE
 		 BEGIN 
 			UPDATE	cale.tbCiviles
 			SET		civi_Estado = 0
@@ -192,39 +201,47 @@ BEGIN
 	SELECT * FROM cale.VW_tbCiviles
 	WHERE civi_Id = @civi_Id;
 END
-
+GO
 --********************************************************--
 --********************** TABLA EMPRESAS *********************--
 
 --**************  VISTA ******************--
-GO
+
 CREATE OR ALTER VIEW CALE.VW_tbEmpresas
 AS
 SELECT	T1.[emsa_Id],
 		T1.[emsa_Nombre], 
-		T1.[emsa_RNT], 
+		T1.emsa_RTN, 
 		T1.[muni_Id],
 		T4.muni_Nombre,
+		T4.depa_Id,
+		T5.depa_Nombre,
 		T1.[emsa_Direccion],
 		T1.[emsa_RepresentanteNombre],
 		T1.[emsa_RepresentanteDNI],
 		T1.[emsa_RepresentanteTelefono], 
 		T1.[emsa_RepresentanteSexo], 
 		T1.[eciv_Id], 
-		T1.[emsa_EsDemandante], 
-		T1.[emsa_EsAcusado], 
+		T6.eciv_Descripcion,
 		T1.[emsa_UsuCreacion], 
 		T1.[emsa_FechaCreacion], 
 		T1.[emsa_UsuModificacion], 
 		T1.[emsa_FechaModificacion], 
 		T1.[emsa_Estado]
-FROM cale.tbEmpresas AS T1 INNER JOIN acce.tbUsuarios AS T2
-ON T1.emsa_UsuCreacion = T2.usua_Id LEFT JOIN acce.tbUsuarios AS T3
-ON T1.emsa_UsuModificacion = T3.usua_Id INNER JOIN GRAL.tbMunicipios AS T4
-ON T1.muni_Id = T4.muni_Nombre;
+		FROM cale.tbEmpresas AS T1 
+  INNER JOIN acce.tbUsuarios AS T2
+		  ON T1.emsa_UsuCreacion = T2.usua_Id 
+   LEFT JOIN acce.tbUsuarios AS T3
+		  ON T1.emsa_UsuModificacion = T3.usua_Id 
+  INNER JOIN GRAL.tbMunicipios AS T4
+		  ON T1.muni_Id = T4.muni_Id
+  INNER JOIN GRAL.tbDepartamentos AS T5
+	      ON T4.depa_Id = T5.depa_Id
+  INNER JOIN GRAL.tbEstadosCiviles AS T6
+		  ON T1.eciv_Id = T6.eciv_Id
+GO
 
 --**************  CREATE ******************--
-GO
 CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpresas_Insert
 (@emsa_Nombre NVARCHAR(200),
  @emsa_RTN NVARCHAR(20),
@@ -235,8 +252,6 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpresas_Insert
  @emsa_RepresentanteTelefono NVARCHAR(20),
  @emsa_RepresentanteSexo CHAR(1),
  @eciv_Id INT,
- @emsa_Demanadante BIT,
- @emsa_EsAcusado BIT,
  @emsa_UsuCreacion INT)
 AS
 BEGIN
@@ -246,10 +261,15 @@ BEGIN
 		 BEGIN 
 		 	SELECT 2 AS codeStatus
 		 END
-		ELSE IF NOT EXISTS (SELECT * FROM CALE.tbEmpresas WHERE emsa_Nombre = @emsa_Nombre)
+		 ELSE IF EXISTS (SELECT * FROM CALE.tbEmpresas WHERE emsa_RTN = @emsa_RTN AND emsa_Estado = 1)
+			 BEGIN
+				SELECT 3 AS codeStatus
+			 END
+
+		ELSE IF NOT EXISTS (SELECT * FROM CALE.tbEmpresas WHERE (emsa_Nombre = @emsa_Nombre AND emsa_RTN = @emsa_RTN) AND emsa_Estado = 1)
 		 BEGIN
-		INSERT INTO [cale].[tbEmpresas] (	[emsa_Nombre],
-											[emsa_RNT],
+			INSERT INTO [cale].[tbEmpresas] (	[emsa_Nombre],
+											emsa_RTN,
 											[muni_Id], 
 											[emsa_Direccion],
 											[emsa_RepresentanteNombre],
@@ -257,8 +277,6 @@ BEGIN
 											[emsa_RepresentanteTelefono], 
 											[emsa_RepresentanteSexo],
 											[eciv_Id], 
-											[emsa_EsDemandante], 
-											[emsa_EsAcusado],
 											[emsa_UsuCreacion],  
 											[emsa_UsuModificacion],
 											[emsa_FechaModificacion])
@@ -271,8 +289,6 @@ BEGIN
 											@emsa_RepresentanteTelefono, 
 											@emsa_RepresentanteSexo, 
 											@eciv_Id, 
-											@emsa_Demanadante, 
-											@emsa_EsAcusado,
 											@emsa_UsuCreacion,
 											NULL, 
 											NULL);
@@ -286,8 +302,17 @@ BEGIN
 				emsa_UsuCreacion = @emsa_UsuCreacion,
 				emsa_FechaCreacion = GETDATE(),
 				emsa_UsuModificacion = NULL,
-				emsa_FechaModificacion = NULL
-			WHERE emsa_Nombre= @emsa_Nombre;
+				emsa_FechaModificacion = NULL,
+				emsa_Nombre = @emsa_Nombre,
+				emsa_RTN = @emsa_RTN,
+				muni_Id = @muni_Id,
+				emsa_Direccion = @emsa_Direccion,
+				emsa_RepresentanteNombre= @emsa_RepresentanteNombre,
+				emsa_RepresentanteDNI=@emsa_RepresentanteDNI,
+				emsa_RepresentanteTelefono=@emsa_RepresentanteTelefono,
+				emsa_RepresentanteSexo =@emsa_RepresentanteSexo,
+				eciv_Id=@eciv_Id
+			WHERE emsa_Nombre= @emsa_Nombre OR emsa_RTN = @emsa_RTN;
 
 			SELECT 1 AS codeStatus
 		 END
@@ -311,21 +336,23 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpresas_Update
  @emsa_RepresentanteTelefono NVARCHAR(20),
  @emsa_RepresentanteSexo CHAR(1),
  @eciv_Id INT,
- @emsa_EsDemanadante BIT,
- @emsa_EsAcusado BIT,
  @emsa_UsuModificacion INT)
 AS
 BEGIN
 	BEGIN TRY
-		IF EXISTS (SELECT * FROM CALE.tbEmpresas WHERE (emsa_Nombre = @emsa_Nombre AND emsa_Id != @emsa_Id))
+		IF EXISTS (SELECT * FROM CALE.tbEmpresas WHERE (emsa_Nombre = @emsa_Nombre AND emsa_Id != @emsa_Id) AND emsa_Estado= 1)
 			BEGIN
 				SELECT 2 codeStatus
 			END
+		IF EXISTS (SELECT * FROM CALE.tbEmpresas WHERE (emsa_RTN = @emsa_RTN AND emsa_Id != @emsa_Id) AND emsa_Estado= 1)
+		 BEGIN
+			SELECT 3 codeStatus
+		 END
 		ELSE
 			BEGIN
 						UPDATE	cale.tbEmpresas
 				SET		emsa_Nombre = @emsa_Nombre,
-						emsa_RNT = @emsa_RTN,
+						emsa_RTN = @emsa_RTN,
 						@muni_Id = @muni_Id,
 						emsa_Direccion = @emsa_Direccion,
 						emsa_RepresentanteNombre = @emsa_RepresentanteNombre,
@@ -333,8 +360,6 @@ BEGIN
 						emsa_RepresentanteTelefono = @emsa_RepresentanteTelefono,
 						emsa_RepresentanteSexo = @emsa_RepresentanteSexo,
 						eciv_Id = @eciv_Id,
-						emsa_EsDemandante = @emsa_EsDemanadante,
-						emsa_EsAcusado = @emsa_EsAcusado,
 						emsa_UsuModificacion = @emsa_UsuModificacion, 
 						emsa_FechaModificacion = GETDATE()
 				WHERE	emsa_Id = @emsa_Id
@@ -354,19 +379,12 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpresas_Delete
 AS
 BEGIN
 	BEGIN TRY
-		
-		IF EXISTS(SELECT * FROM CALE.tbEmpresas WHERE emsa_Id = @emsa_Id)
-		 BEGIN
-			SELECT 2 codeStatu
-		 END
-		ELSE
-		 BEGIN 
-			UPDATE	cale.tbEmpresas
+			UPDATE	CALE.tbEmpresas
 			SET		emsa_Estado = 0
 			WHERE	emsa_Id = @emsa_Id
 
 			SELECT 1 codeStatus
-		 END
+		
 	END TRY
 	BEGIN CATCH
 		SELECT 0 codeStatus
@@ -403,15 +421,15 @@ SELECT	T1.[empe_Id],
 		T1.[empe_DNI],
 		T1.[empe_Nombres],
 		T1.[empe_Apellidos],
-		T1.empe_Nombres + ' ' + T1.empe_Apellidos AS empe_NombreCompleto,
+		T1.[empe_Nombres] + ' ' + T1.empe_Apellidos AS empe_NombreCompleto,
 		T1.[empe_Sexo], 
 		T1.[empe_Telefono], 
 		T1.[empe_CorreoElectronico], 
 		T1.[empe_FechaNacimiento],
 		T1.[eciv_Id],
-		t5.eciv_Descripcion,
+		T5.eciv_Descripcion,
 		T1.[muni_Id],
-		t4.muni_Nombre,
+		T4.muni_Nombre,
 		T4.depa_Id,
 		T6.depa_Nombre,
 		T1.[empe_Direccion], 
@@ -725,6 +743,11 @@ CREATE OR ALTER PROCEDURE cale.UDP_tbTiposdeCaso_Delete
 AS
 BEGIN
 	BEGIN TRY
+	IF EXISTS (SELECT * FROM CALE.tbCasos WHERE tica_Id = @tica_Id) 
+			BEGIN
+				SELECT 2 codeStatus
+			END
+		ELSE
 		 BEGIN 
 			UPDATE	CALE.tbTiposdeCaso
 			SET		tica_Estado = 0

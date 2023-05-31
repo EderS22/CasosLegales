@@ -10,9 +10,9 @@ namespace CasosLegales.Entities.Entities
     {
         public tbAbogadosJueces()
         {
-            tbCasoscaso_AbogadoDemandadoNavigation = new HashSet<tbCasos>();
-            tbCasoscaso_AbogadoDemandanteNavigation = new HashSet<tbCasos>();
-            tbCasoscaso_JuezNavigation = new HashSet<tbCasos>();
+            tbCasosabju_IdAbogadoDemandadoNavigation = new HashSet<tbCasos>();
+            tbCasosabju_IdAbogadoDemandanteNavigation = new HashSet<tbCasos>();
+            tbCasosabju_IdJuezNavigation = new HashSet<tbCasos>();
         }
 
         public int abju_Id { get; set; }
@@ -38,8 +38,8 @@ namespace CasosLegales.Entities.Entities
         public virtual tbCargos carg { get; set; }
         public virtual tbEstadosCiviles eciv { get; set; }
         public virtual tbMunicipios muni { get; set; }
-        public virtual ICollection<tbCasos> tbCasoscaso_AbogadoDemandadoNavigation { get; set; }
-        public virtual ICollection<tbCasos> tbCasoscaso_AbogadoDemandanteNavigation { get; set; }
-        public virtual ICollection<tbCasos> tbCasoscaso_JuezNavigation { get; set; }
+        public virtual ICollection<tbCasos> tbCasosabju_IdAbogadoDemandadoNavigation { get; set; }
+        public virtual ICollection<tbCasos> tbCasosabju_IdAbogadoDemandanteNavigation { get; set; }
+        public virtual ICollection<tbCasos> tbCasosabju_IdJuezNavigation { get; set; }
     }
 }

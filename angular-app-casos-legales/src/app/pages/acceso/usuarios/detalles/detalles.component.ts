@@ -18,7 +18,8 @@ export class DetallesComponent implements OnInit {
 
   usuario: usuario = new usuario();
   breadCrumbItems!: Array<{}>;
-  
+  dateNow: Date = new Date();
+
   ngOnInit(): void {
     if(parseInt(localStorage.getItem("usua_IdDetalles") ?? '0', 0) === 0){
       this.router.navigate(["acceso/usuarios/listado"]);

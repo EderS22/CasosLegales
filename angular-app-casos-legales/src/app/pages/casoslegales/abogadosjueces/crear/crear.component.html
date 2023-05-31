@@ -1,0 +1,186 @@
+
+<app-breadcrumbs title="Abogados y Jueces" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+
+<div class="card ribbon-box border shadow-none overflow-hidden">
+    <div class="card-body text-muted">
+        <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
+            <span class="trending-ribbon-text">{{dateNow.toLocaleDateString()}}</span> <i
+                class="ri-flashlight-fill text-white align-bottom float-end ms-1"></i>
+        </div>
+        <div class="card- d-flex justify-content-between align-items-center">
+            <h1 class="mb-2 mt-2 text-center flex-grow-1">Abogados y Jueces</h1>
+            <img src="../../../../../assets/images/layouts/logoLeyMaxima.png"
+            alt="Logo" class="logo-image" style="width: 80px; height: 80px; border-radius: 40px;">
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form class="row g-3 needs-validation" novalidate (ngSubmit)="validSubmit()"
+                    [formGroup]="validationform">
+                    <div class="row">
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Nombre</label><br />
+                            <input type="text" class="form-control" formControlName="abju_Nombres" required
+                                [ngClass]="{'is-invalid': submit && form['abju_Nombres'].errors}">
+                            <div class="invalid-feedback">Por favor, ingrese un nombre</div>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Apellido</label><br />
+                            <input type="text" class="form-control" formControlName="abju_Apellidos" required
+                                [ngClass]="{'is-invalid': submit && form['abju_Apellidos'].errors}">
+                            <div class="invalid-feedback">Por favor, ingrese un apellido</div>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">DNI</label>
+                            <input type="text" class="form-control" placeholder="0000-0000-00000" mask="0000-0000-00000"
+                                formControlName="abju_DNI" required
+                                [ngClass]="{'is-invalid': submit && form['abju_DNI'].errors}">
+                            <div class="invalid-feedback">Por favor, complete el DNI</div>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Sexo</label><br />
+                            <div class="row">
+                                <div class="col-6 mt-2">
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <input class="form-check-input" type="radio" name="abju_Sexo"
+                                                formControlName="abju_Sexo" required value="M"
+                                                [ngClass]="{'is-invalid': submit && form['abju_Sexo'].errors}">
+                                        </div>
+                                        <div class="col-10">
+                                            <label class="form-check-label">
+                                                Masculino
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mt-2">
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <input class="form-check-input" type="radio" name="abju_Sexo"
+                                                formControlName="abju_Sexo" required value="F"
+                                                [ngClass]="{'is-invalid': submit && form['abju_Sexo'].errors}">
+                                        </div>
+                                        <div class="col-10">
+                                            <label class="form-check-label">
+                                                Femenino
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <input hidden class="form-check-input" type="radio" name="abju_Sexo"
+                                        formControlName="abju_Sexo" required value="Femenino"
+                                        [ngClass]="{'is-invalid': submit && form['abju_Sexo'].errors}">
+                                    <div class="invalid-feedback">Por favor, seleccione un sexo</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Telefono</label>
+                            <input type="text" class="form-control" placeholder="+504 0000-0000" mask="+000 0000-0000"
+                                formControlName="abju_Telefono" required
+                                [ngClass]="{'is-invalid': submit && form['abju_Telefono'].errors}">
+                            <div class="invalid-feedback">Por favor, complete el numero de telefono</div>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Correo Electronico</label>
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="ejemplo@gmail.com"
+                                    formControlName="abju_CorreoElectronico" required
+                                    [ngClass]="{'is-invalid': submit && form['abju_CorreoElectronico'].errors}">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="ri-calendar-2-fill"></i>
+                                    </span>
+                                </div>
+                                <div class="invalid-feedback">Por favor, ingrese un correo electronico</div>
+                            </div>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Fecha de Nacimiento</label>
+                            <div class="input-group">
+                                <input class="form-control flatpickr-input" type="text" mwlFlatpickr
+                                    [convertModelValue]="true" [options]="flatpickrOptions"
+                                    formControlName="abju_FechaNacimiento" required
+                                    [ngClass]="{'is-invalid': submit && form['abju_FechaNacimiento'].errors}">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">
+                                        <i class="ri-calendar-2-fill"></i>
+                                    </span>
+                                </div>
+                                <div class="invalid-feedback">Por favor, selecione una fecha</div>
+                            </div>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Estado Civil</label>
+                            <select class="form-control" required formControlName="eciv_Id"
+                                [ngClass]="{'is-invalid': submit && form['eciv_Id'].errors}">
+                                <option value="" selected hidden>Seleccione un Estado Civil</option>
+                                <option *ngFor="let item of EstadoCivilDLL" [ngValue]="item.eciv_Id">
+                                    {{item.eciv_Descripcion}}
+                                </option>
+                            </select>
+                            <div class="invalid-feedback">Por favor, selecione un estado civil</div>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Departamento</label>
+                            <select class="form-control" #selectDepartamento
+                                (change)="CargarMunicipios(selectDepartamento.value)" required formControlName="depa_Id"
+                                [ngClass]="{'is-invalid': submit && form['depa_Id'].errors}">
+
+                                <option value="" selected hidden>Seleccione un Departamento</option>
+                                <option *ngFor="let item of DepartamentoDLL" [value]="item.depa_Id">
+                                    {{item.depa_Nombre}}
+                                </option>
+                            </select>
+                            <div class="invalid-feedback">Por favor, selecione un departamento</div>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Municipios</label>
+                            <select class="form-control" [disabled]="MunicipioDesactivado" required
+                                formControlName="muni_Id"
+                                [ngClass]="{'is-invalid': submitMunicipio && form['muni_Id'].errors}">
+                                <option value="" selected hidden>Seleccione un municipio</option>
+                                <option *ngFor="let item of MunicipioDDL" [value]="item.muni_Id">
+                                    {{item.muni_Nombre}}
+                                </option>
+                            </select>
+                            <div class="invalid-feedback">Por favor, selecione un Municipio</div>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Direccion Exacta</label>
+                            <textarea class="form-control" rows="3" required formControlName="abju_Direccion"
+                                [ngClass]="{'is-invalid': submit && form['abju_Direccion'].errors}"></textarea>
+                            <div class="invalid-feedback">Por favor, ingrese una direccion</div>
+                        </div>
+                        <div class="col-6 mt-3">
+                            <label class="form-label">Cargos</label>
+                            <select class="form-control" required
+                                formControlName="carg_Id"
+                                [ngClass]="{'is-invalid': submit && form['carg_Id'].errors}">
+                                <option value="" selected hidden>Seleccione un Cargo</option>
+                                <option *ngFor="let item of CargosDll" [value]="item.carg_Id">
+                                    {{item.carg_Descripcion}}
+                                </option>
+                            </select>
+                            <div class="invalid-feedback">Por favor, selecione un Cargo</div>
+                        </div>
+                    </div>
+                    <div class="row mt-4" style="text-align: center;">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-soft-primary col-8">Guardar</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-soft-secondary col-8" (click)="regresar()">Cancelar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

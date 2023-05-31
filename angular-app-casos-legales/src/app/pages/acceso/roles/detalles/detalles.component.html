@@ -2,6 +2,20 @@
 <app-breadcrumbs title="Roles" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
 <!-- End Breadcrumbs -->
 
+<div class="card ribbon-box border shadow-none overflow-hidden">
+    <div class="card-body text-muted">
+        <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
+            <span class="trending-ribbon-text">{{dateNow.toLocaleDateString()}}</span> <i
+                class="ri-flashlight-fill text-white align-bottom float-end ms-1"></i>
+        </div>
+        <div class="card- d-flex justify-content-between align-items-center">
+            <h1 class="mb-2 mt-2 text-center flex-grow-1">Roles</h1>
+            <img src="../../../../../assets/images/layouts/logoLeyMaxima.png"
+            alt="Logo" class="logo-image" style="width: 80px; height: 80px; border-radius: 40px;">
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -32,28 +46,124 @@
 
 <div class="row">
     <div class="col-lg-12">
+        <div>
+            <h4 style="text-align: center;">Pantallas</h4>
+            <br/>
+            <div class="search-name">
+                <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="busquedaGeneral($any($event.target).value)">
+            </div>
+        </div>
+        <br/>
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title mb-0">Pantallas</h4>
-            </div>
-            <div class="card-body">
-                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr; gap: 25px;">
-                    <div class="card card-animate" *ngFor="let item of listadoPantallas">
-                        <div class="card-body">
-                            <div class="d-flex align-items-end justify-content-between mt-0">
-                                <div>
-                                    <h4 class="text-white">
-                                        {{item.pant_Pantalla}}
-                                    </h4>
-                                </div>
-                                <div class="avatar-sm flex-shrink-0">
-                                    <span class="avatar-title bg-soft-white rounded fs-3">
-                                        <i class="{{item.pant_Icono}} text-white"></i>
-                                    </span>
-                                </div>
-                            </div>
+              <ul ngbNav #customNav="ngbNav" [activeId]="1"  class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
+                <li [ngbNavItem]="1" class="nav-item">
+                    <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab">
+                      <i class="fas fa-home"></i>
+                      Acceso
+                    </a>
+                    <ng-template ngbNavContent>
+                        <div class="search-name">
+                            <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermAcce$.next($any($event.target).value)">
                         </div>
-                    </div>
+                        <br/>
+                        <div class="mx-n3">
+                            <ngx-simplebar style="max-height: 350px;" class="px-3">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 90px; gap: 23px; height: 350px;">
+                                    <div class="card card-animate" *ngFor="let item of pantallasFilteredAcce" style="height: 80px;">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-end justify-content-between mt-0">
+                                                <div>
+                                                    <h4 class="text-white">
+                                                        {{item.pant_Pantalla}}
+                                                    </h4>
+                                                </div>
+                                                <div class="avatar-sm flex-shrink-0">
+                                                    <span class="avatar-title bg-soft-white rounded fs-3">
+                                                        <i class="{{item.pant_Icono}} text-white"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ngx-simplebar>
+                        </div>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="2" class="nav-item">
+                    <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab">
+                      <i class="fas fa-home"></i>
+                      General
+                    </a>
+                    <ng-template ngbNavContent>
+                        <div class="search-name">
+                            <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermGral$.next($any($event.target).value)">
+                        </div>
+                        <br/>
+                        <div class="mx-n3">
+                            <ngx-simplebar style="max-height: 350px;" class="px-3">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 90px; gap: 23px; height: 350px;">
+                                    <div class="card card-animate" *ngFor="let item of pantallasFilteredGral" style="height: 80px;">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-end justify-content-between mt-0">
+                                                <div>
+                                                    <h4 class="text-white">
+                                                        {{item.pant_Pantalla}}
+                                                    </h4>
+                                                </div>
+                                                <div class="avatar-sm flex-shrink-0">
+                                                    <span class="avatar-title bg-soft-white rounded fs-3">
+                                                        <i class="{{item.pant_Icono}} text-white"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ngx-simplebar>
+                        </div>
+                    </ng-template>
+                </li>
+                <li [ngbNavItem]="3" class="nav-item">
+                    <a ngbNavLink class="nav-link" data-bs-toggle="tab" role="tab">
+                      <i class="fas fa-home"></i>
+                      Casos legales
+                    </a>
+                    <ng-template ngbNavContent>
+                        <div class="search-name">
+                            <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTermCale$.next($any($event.target).value)">
+                        </div>
+                        <br/>
+                        <div class="mx-n3">
+                            <ngx-simplebar style="max-height: 350px;" class="px-3">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 90px; gap: 23px; height: 350px;">
+                                    <div class="card card-animate" *ngFor="let item of pantallasFilteredCale" style="height: 80px;">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-end justify-content-between mt-0">
+                                                <div>
+                                                    <h4 class="text-white">
+                                                        {{item.pant_Pantalla}}
+                                                    </h4>
+                                                </div>
+                                                <div class="avatar-sm flex-shrink-0">
+                                                    <span class="avatar-title bg-soft-white rounded fs-3">
+                                                        <i class="{{item.pant_Icono}} text-white"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ngx-simplebar>
+                        </div>
+                    </ng-template>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body p-4">
+                <div class="tab-content">
+                  <div [ngbNavOutlet]="customNav"></div>
                 </div>
             </div>
         </div>

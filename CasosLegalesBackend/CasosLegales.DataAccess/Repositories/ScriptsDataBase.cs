@@ -116,6 +116,9 @@
         public static string ActualizarAbogadosJueces   = "CALE.UDP_tbAbogadosJueces_Update";
         public static string EliminarAbogadosJueces     = "CALE.UDP_tbAbogadosJueces_Delete";
         public static string CargarAbogadosJueces       = "cale.UDP_tbAbogadosJueces_Find";
+
+        public static string DdlAbogados = "CALE.UDP_tbAbogadosJueces_DdlAbogados";
+        public static string DdlJueces = "CALE.UDP_tbAbogadosJueces_DdlJueces";
         #endregion
 
 

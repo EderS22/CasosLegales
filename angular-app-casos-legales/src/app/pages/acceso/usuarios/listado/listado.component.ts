@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
@@ -19,24 +19,27 @@ import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
   styleUrls: ['./listado.component.scss']
 })
 
-export class ListadoComponent implements AfterViewInit, OnInit {
+export class ListadoComponent implements OnInit {
   @ViewChild(DataTableDirective, {static: false})
   dtElement!:DataTableDirective;
-
-  breadCrumbItems!: Array<{}>;
+ 
   usuarios!: usuario[];
   empleadosNoTienenUsuario!: empleado[];
   listadoRoles!: rol[];
-  usuarioForm!: UntypedFormGroup;
-  submitted = false;
+ 
   fieldTextType!: boolean;
   isEdit = false;
   usua_NombreEdit = '';
   usua_IdEditar = 0;
   empe_IdEditar = '';
+
+  breadCrumbItems!: Array<{}>;
+  usuarioForm!: UntypedFormGroup;
+  submitted = false;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
-
+  dateNow: Date = new Date();
+  
   constructor(
     private modalService: NgbModal, 
     private service: UsuariosService, 
@@ -48,7 +51,7 @@ export class ListadoComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     if(!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin){
       const ropaAcceso = new ropa();
-      ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+      ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').role_Id;
       ropaAcceso.pant_Pantalla = "Usuarios";
       this.rolService.validarRolTienePantalla(ropaAcceso)
       .subscribe((data:any) => {
@@ -75,9 +78,7 @@ export class ListadoComponent implements AfterViewInit, OnInit {
       role_Id: [''],
       empe_Id: ['', [Validators.required]],
     });
-  }
 
-  ngAfterViewInit(): void {
     this.dtOptions = {
         pagingType: 'simple_numbers',
         language: {
@@ -93,8 +94,8 @@ export class ListadoComponent implements AfterViewInit, OnInit {
             orderable: false,
           },
         ]
-      };
-      this.LoadUsuarios();
+    };
+    this.LoadUsuarios();
   }
 
   rerender(): void {

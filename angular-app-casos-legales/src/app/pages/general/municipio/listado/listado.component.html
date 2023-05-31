@@ -1,14 +1,23 @@
-
 <app-breadcrumbs title="Municipios" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+
+<div class="card ribbon-box border shadow-none overflow-hidden">
+    <div class="card-body text-muted">
+        <div class="ribbon ribbon-info ribbon-shape trending-ribbon">
+            <span class="trending-ribbon-text">{{dateNow.toLocaleDateString()}}</span> <i
+                class="ri-flashlight-fill text-white align-bottom float-end ms-1"></i>
+        </div>
+        <div class="card- d-flex justify-content-between align-items-center">
+            <h1 class="mb-2 mt-2 text-center flex-grow-1">Municipios</h1>
+            <img src="../../../../../assets/images/layouts/logoLeyMaxima.png"
+            alt="Logo" class="logo-image" style="width: 80px; height: 80px; border-radius: 40px;">
+        </div>
+    </div>
+</div>
 
 
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-header">
-                <h1 class="mb-2 mt-2 text-center flex-grow-1">MUNICIPIOS</h1>
-            </div>
-
             <div class="card-body">
                 <div id="customerList">
                     <div class="row g-4 mb-3">
@@ -29,7 +38,6 @@
                                 <tr class="bg-light">
                                     <th>Id</th>
                                     <th>Nombre</th>
-                                    <th>Codigo</th>
                                     <th>Departamento</th>
                                     <th style="text-align: center;">Acciones</th>
                                 </tr>
@@ -38,17 +46,18 @@
                                 <tr *ngFor="let item of munic">
                                     <td>{{item.muni_Id}}</td>
                                     <td>{{item.muni_Nombre}}</td>
-                                    <td>{{item.muni_Codigo}}</td>
                                     <td>{{item.depa_Nombre}}</td>
 
                                     <td>
                                         <div class="col-sm-auto">
-                                            <div class="d-flex gap-1">
+                                            <div class="d-flex gap-1" style="justify-content: center;">
                                                 <button type="button" class="btn btn-soft-primary" (click)="EditarMunicipio(item,contentEdit)" >
                                                     <i class="ri-edit-2-line"></i>
                                                     Editar
                                                 </button>
-                                                <button class="btn btn-soft-danger" (click)="optenerIdEliminar(item, modalEliminar)">
+                                                <button class="btn btn-soft-danger"
+                                                    (click)="optenerIdEliminar(item,modalEliminar)">
+
                                                     <i class="ri-delete-bin-line"></i>
                                                     Eliminar
                                                 </button>
@@ -68,88 +77,118 @@
         </div>
     </div>
 </div>
+
+
 <div id="flipModal" class="modal fade flip show">
     <ng-template #content role="document" let-modal>
+
         <div class="modal-header bg-light p-3">
             <h5 class="modal-title" id="exampleModalLabel">Agregar Municipio</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
                 (click)="modal.dismiss('Cross click')"></button>
         </div>
+        <form class="row g-3 needs-validation" novalidate (ngSubmit)="GuardarMunicipio()" [formGroup]="MunicipioForm">
             <div class="modal-body mb-3">
                 <div class="row">
-                    <div class="col-6">
-                        <label>Nombre</label>
-                        <input [(ngModel)]="muni.muni_Nombre" type="text" class="form-control " 
-                            [ngClass]="{ 'is-invalid': submitted && form['muni_Nombre'].errors }" />
-                        <div class="invalid-feedback">Por favor ingrese un Nombre</div>
-                    </div>
-                    <div class="col-6">
-                        <label>Codigo</label>
-                        <input [(ngModel)]="muni.muni_Codigo" type="text" class="form-control " 
-                            [ngClass]="{ 'is-invalid': submitted && form['muni_Codigo'].errors }" />
-                        <div class="invalid-feedback" >Por favor ingrese un Codigo</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
+                    <div class="col-1"></div>
+                    <div class="col-5 mt-1">
                         <label class="form-label">Departamento</label>
-                        <select class="form-control" #selectDepartamento>
+                        <select class="form-control" #selectDepartamento
+                            (change)="AsignarIdDepartamento(selectDepartamento.value)" required
+                            formControlName="depa_Id" [ngClass]="{'is-invalid': submit && form['depa_Id'].errors}">
+
                             <option value="" selected hidden>Seleccione un Departamento</option>
                             <option *ngFor="let item of DepartamentoDLL" [value]="item.depa_Id">
                                 {{item.depa_Nombre}}
                             </option>
                         </select>
-                        <div class="invalid-feedback">Por favor ingrese un Departamento</div>
+                        <div class="invalid-feedback">Por favor, selecione un departamento</div>
+                    </div>
+
+                    <div class="col-6 mt-1">
+
+                        <label class="form-label">Codigo</label>
+
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="input-group">
+                                    <span class="input-group-text col-6" id="inputGroup-sizing-default">{{ depa_idddddd
+                                        }}</span>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" aria-label="Sizing example input"
+                                            placeholder="00" mask="00" aria-describedby="inputGroup-sizing-default"
+                                            formControlName="muni_IdCodigo" required
+                                            [ngClass]="{'is-invalid': submit && form['muni_IdCodigo'].errors}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-1"></div>
+                    
+                    <div class="col-10 mt-3">
+
+                        <label class="form-label">Nombre</label><br />
+                        <input type="text" class="form-control" formControlName="muni_Nombre" required
+                            [ngClass]="{'is-invalid': submit && form['muni_Nombre'].errors}">
+                        <div class="invalid-feedback">Por favor, ingrese un nombre</div>
                     </div>
                 </div>
+
             </div>
             <div class="modal-footer">
                 <div class="hstack gap-2 justify-content-end">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal"
                         (click)="modal.close('Close click')">Cerrar</button>
-                    <button type="submit" (click)="GuardarMunicipio()" class="btn btn-success" id="add-btn">Agregar
-                        Municipio</button>
+                    <button type="submit" class="btn btn-success" id="add-btn">Agregar Municipio</button>
                 </div>
             </div>
+        </form>
+
     </ng-template>
 </div>
 
 
-<ng-template #contentEdit role="document" let-modal>
-    <div class="modal-header bg-light p-3">
-        <h5 class="modal-title" id="exampleModalLabel">Editar Municipio</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
-            (click)="modal.dismiss('Cross click')"></button>
-    </div>
-        <div class="modal-body mb-3">
-            <div class="row">
-                <div class="col-6">
-                    <label>Nombre</label>
-                    <input [(ngModel)]="muni.muni_Nombre" type="text" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && form['muni_Nombre'].errors }" />
-                    <div class="invalid-feedback">Por favor ingrese un Nombre</div>
+<div id="flipModal" class="modal fade flip show">
+    <ng-template #contentEdit role="document" let-modal>
+
+        <div class="modal-header bg-light p-3">
+            <h5 class="modal-title" id="exampleModalLabel">Editar Municipio</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
+                (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <form class="row g-3 needs-validation" novalidate (ngSubmit)="GaurdarDatosEditados()"
+            [formGroup]="MunicipioForm">
+            <div class="modal-body mb-3">
+
+                <div class="row">
+                    <div class="col-1"></div>
+
+                    <div class="col-10 mt-3">
+
+                        <label class="form-label">Nombre</label><br />
+                        <input type="text" class="form-control" formControlName="muni_Nombre" required
+                            [ngClass]="{'is-invalid': submit && form['muni_Nombre'].errors}">
+                        <div class="invalid-feedback">Por favor, ingrese un nombre</div>
+
+                    </div>
+
                 </div>
-                <div class="col-6">
-                    <label class="form-label">Departamento</label>
-                    <select class="form-control" #selectDepartamento>
-                        <option value="" selected hidden>Seleccione un Departamento</option>
-                        <option *ngFor="let item of DepartamentoDLL" [value]="item.depa_Id" [ngClass]="{ 'is-invalid': submitted && form['depa_Id'].errors }">
-                            {{item.depa_Nombre}}
-                        </option>
-                    </select>
-                    <div class="invalid-feedback" *ngIf="submitted && depaIdInValid">Por favor ingrese un Departamento</div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="hstack gap-2 justify-content-end">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                        (click)="modal.close('Close click')">Cerrar</button>
+                    <button type="submit" class="btn btn-success" id="add-btn">Guardar Municipio</button>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <div class="hstack gap-2 justify-content-end">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal"
-                    (click)="modal.close('Close click')">Cerrar</button>
-                <button type="submit" (click)="GaurdarDatosEditados()" class="btn btn-success" id="add-btn">Guardar Municipio</button>
-            </div>
-        </div>
-    
-</ng-template>
+        </form>
+
+    </ng-template>
+</div>
+
 
 
 <ng-template #modalEliminar let-modal>
@@ -166,7 +205,7 @@
                 <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
                     <h4>¿Está seguro que desea eliminar el registro?</h4>
                     <p class="text-muted mx-4 mb-0">
-                        Al eliminar el registro se eliminará de forma permanente 
+                        Al eliminar el registro se eliminará de forma permanente
                         de nuestra base de datos.
                     </p>
                 </div>
@@ -177,8 +216,7 @@
                     <i class="ri-close-line me-1 align-middle"></i>
                     Cerrar
                 </button>
-                <button type="button" class="btn w-sm btn-danger " id="delete-product" 
-                    (click)="MandarDatosEliminar()">
+                <button type="button" class="btn w-sm btn-danger " id="delete-product" (click)="MandarDatosEliminar()">
                     Sí, eliminarlo.
                 </button>
             </div>

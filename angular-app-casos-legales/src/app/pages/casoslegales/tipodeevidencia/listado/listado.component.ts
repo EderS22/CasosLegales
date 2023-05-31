@@ -3,9 +3,8 @@ import { Subject } from 'rxjs';
 import { TiposdeevidenciaService } from 'src/app/pages/services/casolegales/tiposdeevidenciaservice/tiposdeevidencia.service'; 
 import { tiposdeevidencia } from 'src/app/pages/models/casoslegales/tiposdeevidencia'; 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators } from '@angular/forms';
+import { UntypedFormGroup} from '@angular/forms';
 import Swal from 'sweetalert2';
-import { data } from 'jquery';
 import { DataTableDirective } from 'angular-datatables';
 
 @Component({
@@ -28,13 +27,14 @@ export class ListadoComponent {
   te!: UntypedFormGroup;
   tievNombreInvalid = false;
   tievDescripcionInvalid = false;
+  dateNow: Date = new Date();
 
   constructor(private service: TiposdeevidenciaService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
 
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers',
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
       },
@@ -48,7 +48,7 @@ export class ListadoComponent {
     this.LoadTiposdeevidencia();
 
     this.breadCrumbItems = [
-      { label: 'TiposdeEvidencia' },
+      { label: 'Tipos de Evidencia' },
       { label: 'Listado', active: true }
     ];
   }
@@ -90,6 +90,12 @@ export class ListadoComponent {
         this.dtTrigger.next(null);
       }
     })
+  }
+  trimTievNombre() {
+    this.tde.tiev_Nombre = this.tde.tiev_Nombre.trim();
+  }
+  trimTievDescripcion() {
+    this.tde.tiev_Descripcion = this.tde.tiev_Descripcion.trim();
   }
 
   GuardarTipoDeEvidencia() {

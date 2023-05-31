@@ -37,6 +37,8 @@ export class EditarComponent {
   breadCrumbItems!: Array<{}>;
   modelValueAsDate: Date = new Date(); // se usa para el calendario 
 
+  dateNow: Date = new Date();
+  
   constructor(
     private service: CivilService,
     private EstadoCivilService: EstadocivilService,
@@ -93,6 +95,13 @@ export class EditarComponent {
     this.service.BuscarCivil(localStorage.getItem('IdCivil'))
     .subscribe((data: any) => {
      console.log(data);
+     this.MunicipioService.getMunicipioByDepto(data.depa_Id)
+      .subscribe((data: any) => {
+        if (data.code === 200) {
+          this.MunicipioDDL = data.data;
+          this.MunicipioDesactivado = false;
+        }
+      })
       this.validationform = this.formBuilder.group({
         civi_Id:        [data.civi_Id, [Validators.required]],
         civi_DNI:       [data.civi_DNI, [Validators.required, Validators.pattern('[a-zA-Z0-9áéíóúÁÉÍÓÚ]+')]],
@@ -109,13 +118,7 @@ export class EditarComponent {
         civi_UsuModificacion: [1],
       });
 
-      this.MunicipioService.getMunicipioByDepto(data.depa_Id)
-      .subscribe((data: any) => {
-        if (data.code === 200) {
-          this.MunicipioDDL = data.data;
-          this.MunicipioDesactivado = false;
-        }
-      })
+      
     })
   }
 

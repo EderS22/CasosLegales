@@ -1,15 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DepartamentoService } from 'src/app/pages/services/general/departamentoservice/departamento.service';
 import { departamento } from 'src/app/pages/models/general/departeamento';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
+import { FormControl, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
-  styleUrls: ['./listado.component.scss']
+  styleUrls: ['./listado.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class ListadoComponent {
@@ -27,14 +29,14 @@ export class ListadoComponent {
   depaNombreInvalid = false;
 
   depaNombre!: string;
-
+  dateNow: Date = new Date();
 
   constructor(private service: DepartamentoService, private modalService: NgbModal) { }
   ngOnInit(): void {
 
 
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers',
       language: {
         url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
       },
@@ -63,6 +65,7 @@ export class ListadoComponent {
     })
   }
 
+
   rerender(): void {
     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
       // Destroy the table first
@@ -85,12 +88,9 @@ export class ListadoComponent {
     this.modalService.open(content, { size: 'md', centered: true, backdrop: 'static' });
   }
 
-
-
   trimDepaNombre() {
-    this.depaNombre = this.depaNombre.trim();
+    this.depa.depa_Nombre = this.depa.depa_Nombre.trim();
   }
-
 
   GuardarDepartamento() {
 
