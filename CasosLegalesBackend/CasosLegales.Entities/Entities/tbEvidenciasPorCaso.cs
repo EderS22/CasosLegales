@@ -9,14 +9,14 @@ namespace CasosLegales.Entities.Entities
     public partial class tbEvidenciasPorCaso
     {
         public int evca_Id { get; set; }
-        public int? tiev_Id { get; set; }
-        public int? caso_Id { get; set; }
+        public int tiev_Id { get; set; }
+        public int caso_Id { get; set; }
         public string evca_Descripcion { get; set; }
         public int evca_UsuCreacion { get; set; }
         public DateTime evca_FechaCreacion { get; set; }
         public int? evca_UsuModificacion { get; set; }
         public DateTime? evca_FechaModificacion { get; set; }
-        public bool? evca_Estado { get; set; }
+        public bool evca_Estado { get; set; }
 
         public virtual tbCasos caso { get; set; }
         public virtual tbUsuarios evca_UsuCreacionNavigation { get; set; }

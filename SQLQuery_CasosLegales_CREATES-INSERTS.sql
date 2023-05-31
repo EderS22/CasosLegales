@@ -107,17 +107,17 @@ GO
 --*******************************************************TABLE Departamentos*******************************************************--
 
 CREATE TABLE GRAL.tbDepartamentos(
-depa_Id                     CHAR(2) NOT NULL,
-depa_Nombre 				NVARCHAR(100) NOT NULL,
-depa_UsuCreacion			INT NOT NULL,
-depa_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_GRAL_tbDepartamentos_depa_FechaCreacion DEFAULT(GETDATE()),
-depa_UsuModificacion		INT,
-depa_FechaModificacion		DATETIME,
-depa_Estado					BIT NOT NULL CONSTRAINT DF_GRAL_tbDepartamentos_depa_Estado DEFAULT(1)
-
-CONSTRAINT PK_GRAL_tbDepartamentos_depa_Id 									PRIMARY KEY(depa_Id),
-CONSTRAINT FK_GRAL_tbDepartamentos_ACCE_tbUsuarios_depa_UsuCreacion_usua_Id  		FOREIGN KEY(depa_UsuCreacion) 		REFERENCES acce.tbUsuarios(usua_Id),
-CONSTRAINT FK_GRAL_tbDepartamentos_ACCE_tbUsuarios_depa_UsuModificacion_usua_Id  	FOREIGN KEY(depa_UsuModificacion) 	REFERENCES acce.tbUsuarios(usua_Id)
+	depa_Id                     CHAR(2) NOT NULL,
+	depa_Nombre 				NVARCHAR(100) NOT NULL,
+	depa_UsuCreacion			INT NOT NULL,
+	depa_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_GRAL_tbDepartamentos_depa_FechaCreacion DEFAULT(GETDATE()),
+	depa_UsuModificacion		INT,
+	depa_FechaModificacion		DATETIME,
+	depa_Estado					BIT NOT NULL CONSTRAINT DF_GRAL_tbDepartamentos_depa_Estado DEFAULT(1)
+	
+	CONSTRAINT PK_GRAL_tbDepartamentos_depa_Id 									PRIMARY KEY(depa_Id),
+	CONSTRAINT FK_GRAL_tbDepartamentos_ACCE_tbUsuarios_depa_UsuCreacion_usua_Id  		FOREIGN KEY(depa_UsuCreacion) 		REFERENCES acce.tbUsuarios(usua_Id),
+	CONSTRAINT FK_GRAL_tbDepartamentos_ACCE_tbUsuarios_depa_UsuModificacion_usua_Id  	FOREIGN KEY(depa_UsuModificacion) 	REFERENCES acce.tbUsuarios(usua_Id)
 );
 GO
 
@@ -126,19 +126,19 @@ GO
 --********************************************************TABLE Municipios*********************************************************--
 	
 CREATE TABLE GRAL.tbMunicipios(
-muni_Id                 CHAR(4)	NOT NULL,
-muni_Nombre				NVARCHAR(80) NOT NULL,
-depa_Id					CHAR(2)	NOT NULL,
-muni_UsuCreacion		INT	NOT NULL,
-muni_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_GRAL_tbMunicipios_muni_FechaCreacion DEFAULT(GETDATE()),
-muni_UsuModificacion	INT,
-muni_FechaModificacion	DATETIME,
-muni_Estado				BIT	NOT NULL CONSTRAINT DF_GRAL_tbMunicipios_muni_Estado DEFAULT(1)
-
-CONSTRAINT PK_GRAL_tbMunicipios_muni_Id 										PRIMARY KEY(muni_Id),
-CONSTRAINT FK_GRAL_tbMunicipios_GRAL_tbDepartamentos_depa_Id 					FOREIGN KEY(depa_Id) 						REFERENCES gral.tbDepartamentos(depa_Id),
-CONSTRAINT FK_GRAL_tbMunicipios_ACCE_tbUsuarios_muni_UsuCreacion_usua_Id  		FOREIGN KEY(muni_UsuCreacion) 				REFERENCES acce.tbUsuarios(usua_Id),
-CONSTRAINT FK_GRAL_tbMunicipios_ACCE_tbUsuarios_muni_UsuModificacion_usua_Id  	FOREIGN KEY(muni_UsuModificacion) 			REFERENCES acce.tbUsuarios(usua_Id)
+	muni_Id                 CHAR(4)	NOT NULL,
+	muni_Nombre				NVARCHAR(80) NOT NULL,
+	depa_Id					CHAR(2)	NOT NULL,
+	muni_UsuCreacion		INT	NOT NULL,
+	muni_FechaCreacion		DATETIME NOT NULL CONSTRAINT DF_GRAL_tbMunicipios_muni_FechaCreacion DEFAULT(GETDATE()),
+	muni_UsuModificacion	INT,
+	muni_FechaModificacion	DATETIME,
+	muni_Estado				BIT	NOT NULL CONSTRAINT DF_GRAL_tbMunicipios_muni_Estado DEFAULT(1)
+	
+	CONSTRAINT PK_GRAL_tbMunicipios_muni_Id 										PRIMARY KEY(muni_Id),
+	CONSTRAINT FK_GRAL_tbMunicipios_GRAL_tbDepartamentos_depa_Id 					FOREIGN KEY(depa_Id) 						REFERENCES gral.tbDepartamentos(depa_Id),
+	CONSTRAINT FK_GRAL_tbMunicipios_ACCE_tbUsuarios_muni_UsuCreacion_usua_Id  		FOREIGN KEY(muni_UsuCreacion) 				REFERENCES acce.tbUsuarios(usua_Id),
+	CONSTRAINT FK_GRAL_tbMunicipios_ACCE_tbUsuarios_muni_UsuModificacion_usua_Id  	FOREIGN KEY(muni_UsuModificacion) 			REFERENCES acce.tbUsuarios(usua_Id)
 );
 GO
 
@@ -164,17 +164,17 @@ GO
 --***********************************************************TABLE Cargos**********************************************************--
 
 CREATE TABLE GRAL.tbCargos(
-carg_Id INT IDENTITY(1,1),
-carg_Descripcion			NVARCHAR(100) NOT NULL,
-carg_UsuCreacion			INT NOT NULL,
-carg_FechaCreacion			DATETIME CONSTRAINT DF_GRAL_tbCargos_carg_FechaCreacion DEFAULT(GETDATE()),
-carg_UsuModificacion		INT ,
-carg_FechaModificacion		DATETIME,
-carg_Estado					BIT CONSTRAINT DF_GRAL_tbCargos_carg_Estado DEFAULT(1)
-
-CONSTRAINT PK_GRAL_tbcargos_carg_Id                                  PRIMARY KEY(carg_Id),
-CONSTRAINT FK_GRAL_tbCargos_acce_tbUsuarios_carg_UsuCreacion         FOREIGN KEY(carg_UsuCreacion) REFERENCES acce.tbUsuarios(usua_Id),
-CONSTRAINT FK_GRAL_tbCargos_acce_tbUsuarios_carg_UsuModificacion     FOREIGN KEY(carg_UsuModificacion) REFERENCES acce.tbUsuarios(usua_Id)
+	carg_Id INT IDENTITY(1,1),
+	carg_Descripcion			NVARCHAR(100) NOT NULL,
+	carg_UsuCreacion			INT NOT NULL,
+	carg_FechaCreacion			DATETIME CONSTRAINT DF_GRAL_tbCargos_carg_FechaCreacion DEFAULT(GETDATE()),
+	carg_UsuModificacion		INT ,
+	carg_FechaModificacion		DATETIME,
+	carg_Estado					BIT CONSTRAINT DF_GRAL_tbCargos_carg_Estado DEFAULT(1)
+	
+	CONSTRAINT PK_GRAL_tbcargos_carg_Id                                  PRIMARY KEY(carg_Id),
+	CONSTRAINT FK_GRAL_tbCargos_acce_tbUsuarios_carg_UsuCreacion         FOREIGN KEY(carg_UsuCreacion) REFERENCES acce.tbUsuarios(usua_Id),
+	CONSTRAINT FK_GRAL_tbCargos_acce_tbUsuarios_carg_UsuModificacion     FOREIGN KEY(carg_UsuModificacion) REFERENCES acce.tbUsuarios(usua_Id)
 );
 GO
 
@@ -186,153 +186,153 @@ GO
 
 --********** TABLE  ABOGADOSJUECES ************--
 CREATE TABLE CALE.tbAbogadosJueces(
-abju_Id						INT IDENTITY(1,1),
-abju_DNI					NVARCHAR(15)	NOT NULL,
-abju_Nombres				NVARCHAR(200)	NOT NULL,
-abju_Apellidos				NVARCHAR(200)	NOT NULL,
-abju_Sexo					CHAR(1)			NOT NULL,
-abju_Telefono				NVARCHAR(20)	NOT NULL,
-abju_CorreoElectronico		NVARCHAR(150)	NOT NULL,
-abju_FechaNacimiento		DATE			NOT NULL,
-eciv_Id					    INT				NOT NULL,
-carg_Id						INT				NOT NULL,
-muni_Id						CHAR(4)			NOT NULL,
-abju_Direccion				NVARCHAR(250)	NOT NULL,
-abju_UsuCreacion			INT				NOT NULL,
-abju_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbAbogadosJueces_abog_FechaCreacion DEFAULT(GETDATE()),
-abju_UsuModificacion		INT,
-abju_FechaModificacion		DATETIME,
-abju_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbAbogadosJueces_abog_Estado DEFAULT(1)
-	
-CONSTRAINT PK_CALE_tbAbogadosJueces_abog_Id										PRIMARY KEY(abju_Id),
-CONSTRAINT CK_CALE_tbAbogadosJueces_abog_Sexo									CHECK(abju_Sexo IN ('F', 'M')),
-CONSTRAINT FK_CALE_tbAbogadosJueces_GRAL_tbEstadosCiviles_eciv_Id        		FOREIGN KEY(eciv_Id)					    REFERENCES GRAL.tbEstadosCiviles(eciv_Id),	
-CONSTRAINT FK_CALE_tbAbogadosJueces_GRAL_tbCargos_carg_Id       				FOREIGN KEY(carg_Id)					    REFERENCES GRAL.tbCargos(carg_Id),			
-CONSTRAINT FK_CALE_tbAbogadosJueces_GRAL_tbMunicipios_muni_Id					FOREIGN KEY(muni_Id)						REFERENCES GRAL.tbMunicipios(muni_Id),
-CONSTRAINT FK_CALE_tbAbogadosJueces_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(abju_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
-CONSTRAINT FK_CALE_tbAbogadosJueces_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(abju_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id)
+	abju_Id						INT IDENTITY(1,1),
+	abju_DNI					NVARCHAR(15)	NOT NULL,
+	abju_Nombres				NVARCHAR(200)	NOT NULL,
+	abju_Apellidos				NVARCHAR(200)	NOT NULL,
+	abju_Sexo					CHAR(1)			NOT NULL,
+	abju_Telefono				NVARCHAR(20)	NOT NULL,
+	abju_CorreoElectronico		NVARCHAR(150)	NOT NULL,
+	abju_FechaNacimiento		DATE			NOT NULL,
+	eciv_Id					    INT				NOT NULL,
+	carg_Id						INT				NOT NULL,
+	muni_Id						CHAR(4)			NOT NULL,
+	abju_Direccion				NVARCHAR(250)	NOT NULL,
+	abju_UsuCreacion			INT				NOT NULL,
+	abju_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbAbogadosJueces_abog_FechaCreacion DEFAULT(GETDATE()),
+	abju_UsuModificacion		INT,
+	abju_FechaModificacion		DATETIME,
+	abju_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbAbogadosJueces_abog_Estado DEFAULT(1)
+		
+	CONSTRAINT PK_CALE_tbAbogadosJueces_abog_Id										PRIMARY KEY(abju_Id),
+	CONSTRAINT CK_CALE_tbAbogadosJueces_abog_Sexo									CHECK(abju_Sexo IN ('F', 'M')),
+	CONSTRAINT FK_CALE_tbAbogadosJueces_GRAL_tbEstadosCiviles_eciv_Id        		FOREIGN KEY(eciv_Id)					    REFERENCES GRAL.tbEstadosCiviles(eciv_Id),	
+	CONSTRAINT FK_CALE_tbAbogadosJueces_GRAL_tbCargos_carg_Id       				FOREIGN KEY(carg_Id)					    REFERENCES GRAL.tbCargos(carg_Id),			
+	CONSTRAINT FK_CALE_tbAbogadosJueces_GRAL_tbMunicipios_muni_Id					FOREIGN KEY(muni_Id)						REFERENCES GRAL.tbMunicipios(muni_Id),
+	CONSTRAINT FK_CALE_tbAbogadosJueces_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(abju_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
+	CONSTRAINT FK_CALE_tbAbogadosJueces_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(abju_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id)
 );	
 GO
 
 --********** TABLE CIVILES ************--
 CREATE TABLE CALE.tbCiviles(
-civi_Id						INT IDENTITY(1,1),
-civi_DNI					NVARCHAR(15)	NOT NULL,
-civi_Nombres				NVARCHAR(200)	NOT NULL,
-civi_Apellidos				NVARCHAR(200)	NOT NULL,
-civi_Sexo					CHAR(1)			NOT NULL,
-civi_Telefono				NVARCHAR(20)	NOT NULL,
-civi_CorreoElectronico		NVARCHAR(150)	NOT NULL,
-civi_FechaNacimiento		DATE			NOT NULL,
-eciv_Id					    INT				NOT NULL,
-muni_Id						CHAR(4)			NOT NULL,
-civi_Direccion				NVARCHAR(250)	NOT NULL,
-civi_UsuCreacion			INT				NOT NULL,
-civi_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbCiviles_civi_FechaCreacion DEFAULT(GETDATE()),
-civi_UsuModificacion		INT,
-civi_FechaModificacion		DATETIME,
-civi_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbCiviles_civi_Estado DEFAULT(1)
-	
-CONSTRAINT PK_CALE_tbCiviles_civi_Id									PRIMARY KEY	(civi_Id),
-CONSTRAINT CK_CALE_tbCiviles_civi_Sexo									CHECK		(civi_Sexo IN ('F', 'M')),
-CONSTRAINT FK_CALE_tbCiviles_GRAL_tbEstadosCiviles_eciv_Id        		FOREIGN KEY(eciv_Id)					    REFERENCES GRAL.tbEstadosCiviles(eciv_Id),			
-CONSTRAINT FK_CALE_tbCiviles_GRAL_tbMunicipios_muni_Id					FOREIGN KEY(muni_Id)						REFERENCES GRAL.tbMunicipios(muni_Id),
-CONSTRAINT FK_CALE_tbCiviles_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(civi_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
-CONSTRAINT FK_CALE_tbCiviles_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(civi_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id)
+	civi_Id						INT IDENTITY(1,1),
+	civi_DNI					NVARCHAR(15)	NOT NULL,
+	civi_Nombres				NVARCHAR(200)	NOT NULL,
+	civi_Apellidos				NVARCHAR(200)	NOT NULL,
+	civi_Sexo					CHAR(1)			NOT NULL,
+	civi_Telefono				NVARCHAR(20)	NOT NULL,
+	civi_CorreoElectronico		NVARCHAR(150)	NOT NULL,
+	civi_FechaNacimiento		DATE			NOT NULL,
+	eciv_Id					    INT				NOT NULL,
+	muni_Id						CHAR(4)			NOT NULL,
+	civi_Direccion				NVARCHAR(250)	NOT NULL,
+	civi_UsuCreacion			INT				NOT NULL,
+	civi_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbCiviles_civi_FechaCreacion DEFAULT(GETDATE()),
+	civi_UsuModificacion		INT,
+	civi_FechaModificacion		DATETIME,
+	civi_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbCiviles_civi_Estado DEFAULT(1)
+		
+	CONSTRAINT PK_CALE_tbCiviles_civi_Id									PRIMARY KEY	(civi_Id),
+	CONSTRAINT CK_CALE_tbCiviles_civi_Sexo									CHECK		(civi_Sexo IN ('F', 'M')),
+	CONSTRAINT FK_CALE_tbCiviles_GRAL_tbEstadosCiviles_eciv_Id        		FOREIGN KEY(eciv_Id)					    REFERENCES GRAL.tbEstadosCiviles(eciv_Id),			
+	CONSTRAINT FK_CALE_tbCiviles_GRAL_tbMunicipios_muni_Id					FOREIGN KEY(muni_Id)						REFERENCES GRAL.tbMunicipios(muni_Id),
+	CONSTRAINT FK_CALE_tbCiviles_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(civi_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
+	CONSTRAINT FK_CALE_tbCiviles_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(civi_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id)
 );	
 GO
 
 
 --********** TABLE EMPLEADOS ************--
 CREATE TABLE CALE.tbEmpleados(
-empe_Id						INT IDENTITY(1,1),
-empe_DNI					NVARCHAR(15)	NOT NULL,
-empe_Nombres				NVARCHAR(200)	NOT NULL,
-empe_Apellidos				NVARCHAR(200)	NOT NULL,
-empe_Sexo					CHAR(1)			NOT NULL,
-empe_Telefono				NVARCHAR(20)	NOT NULL,
-empe_CorreoElectronico		NVARCHAR(150)	NOT NULL,
-empe_FechaNacimiento		DATE			NOT NULL,
-eciv_Id					    INT				NOT NULL,
-muni_Id						CHAR(4)			NOT NULL,
-empe_Direccion				NVARCHAR(250)	NOT NULL,
-empe_UsuCreacion			INT				NOT NULL,
-empe_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbEmpleados_empe_FechaCreacion DEFAULT(GETDATE()),
-empe_UsuModificacion		INT,
-empe_FechaModificacion		DATETIME,
-empe_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbEmpleados_empe_Estado DEFAULT(1)
-	
-CONSTRAINT PK_CALE_tbEmpleados_empe_Id										PRIMARY KEY	(empe_Id),
-CONSTRAINT CK_CALE_tbEmpleados_empe_Sexo									CHECK		(empe_Sexo IN ('F', 'M')),
-CONSTRAINT FK_CALE_tbEmpleados_GRAL_tbEstadosCiviles_eciv_Id        		FOREIGN KEY(eciv_Id)					    REFERENCES GRAL.tbEstadosCiviles(eciv_Id),			
-CONSTRAINT FK_CALE_tbEmpleados_GRAL_tbMunicipios_muni_Id					FOREIGN KEY(muni_Id)						REFERENCES GRAL.tbMunicipios(muni_Id),
-CONSTRAINT FK_CALE_tbEmpleados_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(empe_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
-CONSTRAINT FK_CALE_tbEmpleados_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(empe_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id)
+	empe_Id						INT IDENTITY(1,1),
+	empe_DNI					NVARCHAR(15)	NOT NULL,
+	empe_Nombres				NVARCHAR(200)	NOT NULL,
+	empe_Apellidos				NVARCHAR(200)	NOT NULL,
+	empe_Sexo					CHAR(1)			NOT NULL,
+	empe_Telefono				NVARCHAR(20)	NOT NULL,
+	empe_CorreoElectronico		NVARCHAR(150)	NOT NULL,
+	empe_FechaNacimiento		DATE			NOT NULL,
+	eciv_Id					    INT				NOT NULL,
+	muni_Id						CHAR(4)			NOT NULL,
+	empe_Direccion				NVARCHAR(250)	NOT NULL,
+	empe_UsuCreacion			INT				NOT NULL,
+	empe_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbEmpleados_empe_FechaCreacion DEFAULT(GETDATE()),
+	empe_UsuModificacion		INT,
+	empe_FechaModificacion		DATETIME,
+	empe_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbEmpleados_empe_Estado DEFAULT(1)
+		
+	CONSTRAINT PK_CALE_tbEmpleados_empe_Id										PRIMARY KEY	(empe_Id),
+	CONSTRAINT CK_CALE_tbEmpleados_empe_Sexo									CHECK		(empe_Sexo IN ('F', 'M')),
+	CONSTRAINT FK_CALE_tbEmpleados_GRAL_tbEstadosCiviles_eciv_Id        		FOREIGN KEY(eciv_Id)					    REFERENCES GRAL.tbEstadosCiviles(eciv_Id),			
+	CONSTRAINT FK_CALE_tbEmpleados_GRAL_tbMunicipios_muni_Id					FOREIGN KEY(muni_Id)						REFERENCES GRAL.tbMunicipios(muni_Id),
+	CONSTRAINT FK_CALE_tbEmpleados_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(empe_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
+	CONSTRAINT FK_CALE_tbEmpleados_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(empe_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id)
 );
 GO
 
 --********** TABLE EMPRESASA ************--
 CREATE TABLE CALE.tbEmpresas(
-emsa_Id							INT IDENTITY(1,1),
-emsa_Nombre						NVARCHAR(200),
-emsa_RTN						NVARCHAR(20),
-muni_Id							CHAR(4)			NOT NULL,
-emsa_Direccion					NVARCHAR(250),
-emsa_RepresentanteNombre		NVARCHAR(200),
-emsa_RepresentanteDNI			NVARCHAR(20),
-emsa_RepresentanteTelefono		NVARCHAR(20),
-emsa_RepresentanteSexo			CHAR(1),
-eciv_Id							INT,
-
-emsa_UsuCreacion				INT				NOT NULL,
-emsa_FechaCreacion				DATETIME		NOT NULL CONSTRAINT DF_CALE_tbEmpleados_emsa_FechaCreacion DEFAULT(GETDATE()),
-emsa_UsuModificacion			INT,
-emsa_FechaModificacion			DATETIME,
-emsa_Estado						BIT				NOT NULL CONSTRAINT DF_CALE_tbEmpleados_emsa_Estado DEFAULT(1)
-
-CONSTRAINT PK_CALE_tbEmpresas_emsa_Id										PRIMARY KEY(emsa_Id),
-CONSTRAINT CK_CALE_tbEmpresas_emsa_Sexo										CHECK	   (emsa_RepresentanteSexo IN ('F', 'M')),
-CONSTRAINT FK_CALE_tbEmpresas_GRAL_tbEstadosCiviles_eciv_Id        			FOREIGN KEY(eciv_Id)					    REFERENCES GRAL.tbEstadosCiviles(eciv_Id),			
-CONSTRAINT FK_CALE_tbEmpresas_GRAL_tbMunicipios_muni_Id						FOREIGN KEY(muni_Id)						REFERENCES GRAL.tbMunicipios(muni_Id),
-CONSTRAINT FK_CALE_tbEmpresas_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(emsa_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
-CONSTRAINT FK_CALE_tbEmpresas_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(emsa_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id)
+	emsa_Id							INT IDENTITY(1,1),
+	emsa_Nombre						NVARCHAR(200),
+	emsa_RTN						NVARCHAR(20),
+	muni_Id							CHAR(4)			NOT NULL,
+	emsa_Direccion					NVARCHAR(250),
+	emsa_RepresentanteNombre		NVARCHAR(200),
+	emsa_RepresentanteDNI			NVARCHAR(20),
+	emsa_RepresentanteTelefono		NVARCHAR(20),
+	emsa_RepresentanteSexo			CHAR(1),
+	eciv_Id							INT,
+	
+	emsa_UsuCreacion				INT				NOT NULL,
+	emsa_FechaCreacion				DATETIME		NOT NULL CONSTRAINT DF_CALE_tbEmpleados_emsa_FechaCreacion DEFAULT(GETDATE()),
+	emsa_UsuModificacion			INT,
+	emsa_FechaModificacion			DATETIME,
+	emsa_Estado						BIT				NOT NULL CONSTRAINT DF_CALE_tbEmpleados_emsa_Estado DEFAULT(1)
+	
+	CONSTRAINT PK_CALE_tbEmpresas_emsa_Id										PRIMARY KEY(emsa_Id),
+	CONSTRAINT CK_CALE_tbEmpresas_emsa_Sexo										CHECK	   (emsa_RepresentanteSexo IN ('F', 'M')),
+	CONSTRAINT FK_CALE_tbEmpresas_GRAL_tbEstadosCiviles_eciv_Id        			FOREIGN KEY(eciv_Id)					    REFERENCES GRAL.tbEstadosCiviles(eciv_Id),			
+	CONSTRAINT FK_CALE_tbEmpresas_GRAL_tbMunicipios_muni_Id						FOREIGN KEY(muni_Id)						REFERENCES GRAL.tbMunicipios(muni_Id),
+	CONSTRAINT FK_CALE_tbEmpresas_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(emsa_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
+	CONSTRAINT FK_CALE_tbEmpresas_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(emsa_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id)
 );
 GO
 
 
 --********** TABLE TiposdeCaso ************--
 CREATE TABLE CALE.tbTiposdeCaso(
-tica_Id						INT IDENTITY(1,1),
-tica_Nombre					NVARCHAR(100),
-tica_Descripcion			NVARCHAR(200),
-tica_UsuCreacion			INT	NOT NULL,
-tica_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_CALE_tbTiposdeCaso_tica_FechaCreacion DEFAULT(GETDATE()),
-tica_UsuModificacion		INT,
-tica_FechaModificacion		DATETIME,
-tica_Estado					BIT NOT NULL CONSTRAINT DF_CALE_tbTiposdeCaso_tica_Estado DEFAULT(1),
-
-CONSTRAINT PK_CALE_tbTiposdeCaso_tica_Id	PRIMARY KEY(tica_Id),
-CONSTRAINT FK_CALE_tbTiposdeCaso_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(tica_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
-CONSTRAINT FK_CALE_tbTiposdeCaso_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(tica_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
+	tica_Id						INT IDENTITY(1,1),
+	tica_Nombre					NVARCHAR(100),
+	tica_Descripcion			NVARCHAR(200),
+	tica_UsuCreacion			INT	NOT NULL,
+	tica_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_CALE_tbTiposdeCaso_tica_FechaCreacion DEFAULT(GETDATE()),
+	tica_UsuModificacion		INT,
+	tica_FechaModificacion		DATETIME,
+	tica_Estado					BIT NOT NULL CONSTRAINT DF_CALE_tbTiposdeCaso_tica_Estado DEFAULT(1),
+	
+	CONSTRAINT PK_CALE_tbTiposdeCaso_tica_Id	PRIMARY KEY(tica_Id),
+	CONSTRAINT FK_CALE_tbTiposdeCaso_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(tica_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
+	CONSTRAINT FK_CALE_tbTiposdeCaso_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(tica_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
 GO
 
 
 --********** TABLE TIPOSDEEVIDENCIA ************--
 CREATE TABLE CALE.tbTiposdeEvidencia(
-tiev_Id INT IDENTITY(1,1),
-tiev_Nombre NVARCHAR(100),
-tiev_Descripcion NVARCHAR(200),
-
-tiev_UsuCreacion			INT				NOT NULL,
-tiev_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbTiposdeEvidencia_tiev_FechaCreacion DEFAULT(GETDATE()),
-tiev_UsuModificacion		INT,
-tiev_FechaModificacion		DATETIME,
-tiev_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbTiposdeEvidencia_tiev_Estado DEFAULT(1),
-
-CONSTRAINT PK_CALE_tbTiposdeEvidencia_tiev_Id	PRIMARY KEY(tiev_Id),
-CONSTRAINT FK_CALE_tbTiposdeEvidencia_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(tiev_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
-CONSTRAINT FK_CALE_tbTiposdeEvidencia_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(tiev_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
+	tiev_Id INT IDENTITY(1,1),
+	tiev_Nombre NVARCHAR(100),
+	tiev_Descripcion NVARCHAR(200),
+	
+	tiev_UsuCreacion			INT				NOT NULL,
+	tiev_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbTiposdeEvidencia_tiev_FechaCreacion DEFAULT(GETDATE()),
+	tiev_UsuModificacion		INT,
+	tiev_FechaModificacion		DATETIME,
+	tiev_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbTiposdeEvidencia_tiev_Estado DEFAULT(1),
+	
+	CONSTRAINT PK_CALE_tbTiposdeEvidencia_tiev_Id	PRIMARY KEY(tiev_Id),
+	CONSTRAINT FK_CALE_tbTiposdeEvidencia_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(tiev_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
+	CONSTRAINT FK_CALE_tbTiposdeEvidencia_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(tiev_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
 GO
 
@@ -368,106 +368,110 @@ GO
 
 --********** TABLE ACUSADOSPORCASO ************--
 CREATE TABLE CALE.tbAcusadoPorCaso(
-acus_Id						INT IDENTITY(1,1),
-caso_Id						INT,
-acus_TipoAcusado			INT,
-acus_Acusado				INT, 
-
-acus_UsuCreacion			INT				NOT NULL,
-acus_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbSospechososPorCaso_soca_FechaCreacion DEFAULT(GETDATE()),
-acus_UsuModificacion		INT,
-acus_FechaModificacion		DATETIME,
-acus_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbSospechososPorCaso_soca_Estado DEFAULT(1),
-
-CONSTRAINT PK_CALE_tbAcusadoPorCaso_soca_Id	PRIMARY KEY(acus_Id),
-CONSTRAINT FK_CALE_tbAcusadoPorCaso_CALE_tbCasos_caso_Id						FOREIGN KEY(caso_Id)						REFERENCES CALE.tbCasos(caso_Id),
-CONSTRAINT CK_CALE_tbAcusadoPorCaso_CALE_acus_TipoAcusado						CHECK(acus_Acusado IN('E', 'C')),
-CONSTRAINT FK_CALE_tbAcusadoPorCaso_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(acus_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
-CONSTRAINT FK_CALE_tbAcusadoPorCaso_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(acus_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
+	acus_Id						INT IDENTITY(1,1),
+	caso_Id						INT NOT NULL,
+	acus_TipoAcusado			INT NOT NULL,
+	acus_Acusado				INT NOT NULL, 
+	
+	acus_UsuCreacion			INT	NOT NULL,
+	acus_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_CALE_tbSospechososPorCaso_soca_FechaCreacion DEFAULT(GETDATE()),
+	acus_UsuModificacion		INT,
+	acus_FechaModificacion		DATETIME,
+	acus_Estado					BIT	NOT NULL CONSTRAINT DF_CALE_tbSospechososPorCaso_soca_Estado DEFAULT(1),
+	
+	CONSTRAINT PK_CALE_tbAcusadoPorCaso_soca_Id	PRIMARY KEY(acus_Id),
+	CONSTRAINT FK_CALE_tbAcusadoPorCaso_CALE_tbCasos_caso_Id						FOREIGN KEY(caso_Id)						REFERENCES CALE.tbCasos(caso_Id),
+	CONSTRAINT CK_CALE_tbAcusadoPorCaso_CALE_acus_TipoAcusado						CHECK(acus_Acusado IN('E', 'C')),
+	CONSTRAINT FK_CALE_tbAcusadoPorCaso_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(acus_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
+	CONSTRAINT FK_CALE_tbAcusadoPorCaso_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(acus_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
 GO
 
 
 --********** TABLE EVIDENCIASPORCASO ************--
 CREATE TABLE CALE.tbEvidenciasPorCaso(
-evca_Id INT IDENTITY(1,1),
-tiev_Id INT,
-caso_Id INT,
-evca_Descripcion NVARCHAR(300),
-
-evca_UsuCreacion			INT				NOT NULL,
-evca_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbEvidenciasPorCaso_evca_FechaCreacion DEFAULT(GETDATE()),
-evca_UsuModificacion		INT,
-evca_FechaModificacion		DATETIME,
-evca_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbEvidenciasPorCaso_evca_Estado DEFAULT(1),
-
-CONSTRAINT PK_CALE_tbEvidenciasPorCaso_evca_Id	PRIMARY KEY(evca_Id),
-CONSTRAINT FK_CALE_tbEvidenciasPorCaso_CALE_tbTiposdeEvidencia_tiev_Id				FOREIGN KEY(tiev_Id)						REFERENCES CALE.tbTiposdeEvidencia(tiev_Id),
-CONSTRAINT FK_CALE_tbEvidenciasPorCaso_CALE_tbCasos_caso_Id							FOREIGN KEY(caso_Id)						REFERENCES CALE.tbCasos(caso_Id),
-CONSTRAINT FK_CALE_tbEvidenciasPorCaso_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(evca_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
-CONSTRAINT FK_CALE_tbEvidenciasPorCaso_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(evca_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
+	evca_Id INT IDENTITY(1,1),
+	tiev_Id INT NOT NULL,
+	caso_Id INT NOT NULL,
+	evca_Descripcion NVARCHAR(MAX) NOT NULL,
+	
+	evca_UsuCreacion			INT				NOT NULL,
+	evca_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbEvidenciasPorCaso_evca_FechaCreacion DEFAULT(GETDATE()),
+	evca_UsuModificacion		INT,
+	evca_FechaModificacion		DATETIME,
+	evca_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbEvidenciasPorCaso_evca_Estado DEFAULT(1),
+	
+	CONSTRAINT PK_CALE_tbEvidenciasPorCaso_evca_Id	PRIMARY KEY(evca_Id),
+	CONSTRAINT FK_CALE_tbEvidenciasPorCaso_CALE_tbTiposdeEvidencia_tiev_Id				FOREIGN KEY(tiev_Id)						REFERENCES CALE.tbTiposdeEvidencia(tiev_Id),
+	CONSTRAINT FK_CALE_tbEvidenciasPorCaso_CALE_tbCasos_caso_Id							FOREIGN KEY(caso_Id)						REFERENCES CALE.tbCasos(caso_Id),
+	CONSTRAINT FK_CALE_tbEvidenciasPorCaso_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(evca_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
+	CONSTRAINT FK_CALE_tbEvidenciasPorCaso_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(evca_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
 GO
+
 
 --********** TABLE TESTIGOSPORCASO ************--
 CREATE TABLE CALE.tbTestigosPorCaso(
-teca_Id INT IDENTITY(1,1),
-caso_Id INT,
-teca_Testigo INT,
+	teca_Id						INT IDENTITY(1,1),
+	caso_Id						INT NOT NULL,
+	teca_Testigo				INT NOT NULL,
+	teca_Declaracion			NVARCHAR(MAX) NOT NULL,
+	teca_Demandante				BIT DEFAULT 0,
+	teca_Demandado				BIT DEFAULT 0,
 
-teca_UsuCreacion			INT				NOT NULL,
-teca_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbTestigosPorCaso_teca_FechaCreacion DEFAULT(GETDATE()),
-teca_UsuModificacion		INT,
-teca_FechaModificacion		DATETIME,
-teca_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbTestigosPorCaso_teca_Estado DEFAULT(1),
+	teca_UsuCreacion			INT	NOT NULL,
+	teca_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_CALE_tbTestigosPorCaso_teca_FechaCreacion DEFAULT(GETDATE()),
+	teca_UsuModificacion		INT,
+	teca_FechaModificacion		DATETIME,
+	teca_Estado					BIT	NOT NULL CONSTRAINT DF_CALE_tbTestigosPorCaso_teca_Estado DEFAULT(1),
 
-
-CONSTRAINT PK_CALE_tbTestigosPorCaso_teca_Id	PRIMARY KEY(teca_Id),
-CONSTRAINT FK_CALE_tbTestigosPorCaso_CALE_tbCasos_caso_Id					FOREIGN KEY(caso_Id)						REFERENCES CALE.tbCasos(caso_Id),
-CONSTRAINT FK_CALE_tbTestigosPorCaso_CALE_tbCiviles_civi_Id					FOREIGN KEY(teca_Testigo)					REFERENCES CALE.tbCiviles(civi_Id),
-CONSTRAINT FK_CALE_tbTestigosPorCaso_ACCE_tbUsuarios_UserCreate				FOREIGN KEY(teca_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
-CONSTRAINT FK_CALE_tbTestigosPorCaso_ACCE_tbUsuarios_UserUpdate				FOREIGN KEY(teca_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
+	CONSTRAINT PK_CALE_tbTestigosPorCaso_teca_Id	PRIMARY KEY(teca_Id),
+	CONSTRAINT FK_CALE_tbTestigosPorCaso_CALE_tbCasos_caso_Id					FOREIGN KEY(caso_Id)						REFERENCES CALE.tbCasos(caso_Id),
+	CONSTRAINT FK_CALE_tbTestigosPorCaso_CALE_tbCiviles_civi_Id					FOREIGN KEY(teca_Testigo)					REFERENCES CALE.tbCiviles(civi_Id),
+	CONSTRAINT FK_CALE_tbTestigosPorCaso_ACCE_tbUsuarios_UserCreate				FOREIGN KEY(teca_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
+	CONSTRAINT FK_CALE_tbTestigosPorCaso_ACCE_tbUsuarios_UserUpdate				FOREIGN KEY(teca_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
 GO
+
 
 --********** TABLE VEREDICTO ************--
 CREATE TABLE CALE.tbVeredictos (
-vere_Id INT IDENTITY(1,1),
-caso_Id INT,
-vere_Descripcion NVARCHAR(300),
-vere_UsuCreacion			INT				NOT NULL,
-vere_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbVeredictos_vere_FechaCreacion DEFAULT(GETDATE()),
-vere_UsuModificacion		INT,
-vere_FechaModificacion		DATETIME,
-vere_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbVeredictos_vere_Estado DEFAULT(1),
+	vere_Id						INT IDENTITY(1,1),
+	caso_Id						INT NOT NULL,
+	vere_Descripcion			NVARCHAR(300),
+	vere_UsuCreacion			INT	NOT NULL,
+	vere_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_CALE_tbVeredictos_vere_FechaCreacion DEFAULT(GETDATE()),
+	vere_UsuModificacion		INT,
+	vere_FechaModificacion		DATETIME,
+	vere_Estado					BIT	NOT NULL CONSTRAINT DF_CALE_tbVeredictos_vere_Estado DEFAULT(1),
 
-CONSTRAINT PK_CALE_tbVeredictos_teca_Id	PRIMARY KEY(vere_Id),
-CONSTRAINT FK_CALE_tbVeredictos_CALE_tbCasos_caso_Id					FOREIGN KEY(caso_Id)						REFERENCES CALE.tbCasos(caso_Id),
-CONSTRAINT FK_CALE_tbVeredictos_ACCE_tbUsuarios_UserCreate				FOREIGN KEY(vere_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
-CONSTRAINT FK_CALE_tbVeredictos_ACCE_tbUsuarios_UserUpdate				FOREIGN KEY(vere_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
+	CONSTRAINT PK_CALE_tbVeredictos_teca_Id	PRIMARY KEY(vere_Id),
+	CONSTRAINT FK_CALE_tbVeredictos_CALE_tbCasos_caso_Id					FOREIGN KEY(caso_Id)						REFERENCES CALE.tbCasos(caso_Id),
+	CONSTRAINT FK_CALE_tbVeredictos_ACCE_tbUsuarios_UserCreate				FOREIGN KEY(vere_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
+	CONSTRAINT FK_CALE_tbVeredictos_ACCE_tbUsuarios_UserUpdate				FOREIGN KEY(vere_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
 GO
 
+
 --********** TABLE DTALLESVEREDICTO ************--
 CREATE TABLE CALE.tbDetallesVeredictos (
-deve_Id						INT IDENTITY(1,1),
-vere_Id						INT,
-deve_EsInocente				BIT,
-deve_ESCulpable				BIT,
-deve_TipoEmpresaCivil		CHAR(1),
-deve_EmpresaCivil			INT,
-deve_UsuCreacion			INT				NOT NULL,
-deve_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbDetallesVeredictos_deve_FechaCreacion DEFAULT(GETDATE()),
-deve_UsuModificacion		INT,
-deve_FechaModificacion		DATETIME,
-deve_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbDetallesVeredictos_deve_Estado DEFAULT(1),
+	deve_Id						INT IDENTITY(1,1),
+	vere_Id						INT NOT NULL,
+	deve_EsInocente				BIT DEFAULT 0,
+	deve_EsCulpable				BIT DEFAULT 0,
+	deve_TipoEmpresaCivil		CHAR(1) NOT NULL,
+	deve_EmpresaCivil			INT NOT NULL,
+	deve_UsuCreacion			INT	NOT NULL,
+	deve_FechaCreacion			DATETIME NOT NULL CONSTRAINT DF_CALE_tbDetallesVeredictos_deve_FechaCreacion DEFAULT(GETDATE()),
+	deve_UsuModificacion		INT,
+	deve_FechaModificacion		DATETIME,
+	deve_Estado					BIT	NOT NULL CONSTRAINT DF_CALE_tbDetallesVeredictos_deve_Estado DEFAULT(1),
 
-
-CONSTRAINT PK_CALE_tbDetallesVeredictos_deve_Id	PRIMARY KEY(deve_Id),
-CONSTRAINT CK_CALE_tbDetallesVeredictos_CALE_acus_deve_TipoEmpresaCivil			CHECK(deve_TipoEmpresaCivil IN('E', 'C')),
-CONSTRAINT FK_CALE_tbDetallesVeredictos_CALE_TBvEREDICTOS_vere_Id				FOREIGN KEY(vere_Id)						REFERENCES CALE.tbVeredictos(vere_Id),
-CONSTRAINT FK_CALE_tbDetallesVeredictos_ACCE_tbUsuarios_UserCreate				FOREIGN KEY(deve_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
-CONSTRAINT FK_CALE_tbDetallesVeredictos_ACCE_tbUsuarios_UserUpdate				FOREIGN KEY(deve_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
+	CONSTRAINT PK_CALE_tbDetallesVeredictos_deve_Id	PRIMARY KEY(deve_Id),
+	CONSTRAINT CK_CALE_tbDetallesVeredictos_CALE_acus_deve_TipoEmpresaCivil			CHECK(deve_TipoEmpresaCivil IN('E', 'C')),
+	CONSTRAINT FK_CALE_tbDetallesVeredictos_CALE_TBvEREDICTOS_vere_Id				FOREIGN KEY(vere_Id)						REFERENCES CALE.tbVeredictos(vere_Id),
+	CONSTRAINT FK_CALE_tbDetallesVeredictos_ACCE_tbUsuarios_UserCreate				FOREIGN KEY(deve_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
+	CONSTRAINT FK_CALE_tbDetallesVeredictos_ACCE_tbUsuarios_UserUpdate				FOREIGN KEY(deve_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
 GO
 

@@ -19,6 +19,16 @@ namespace CasosLegales.DataAccess.Context
         {
         }
 
+        public virtual DbSet<VW_tbAbogadosJueces> VW_tbAbogadosJueces { get; set; }
+        public virtual DbSet<VW_tbCargos> VW_tbCargos { get; set; }
+        public virtual DbSet<VW_tbCiviles> VW_tbCiviles { get; set; }
+        public virtual DbSet<VW_tbDepartamentos> VW_tbDepartamentos { get; set; }
+        public virtual DbSet<VW_tbEmpleados> VW_tbEmpleados { get; set; }
+        public virtual DbSet<VW_tbEmpresas> VW_tbEmpresas { get; set; }
+        public virtual DbSet<VW_tbEstadosCiviles> VW_tbEstadosCiviles { get; set; }
+        public virtual DbSet<VW_tbMunicipios> VW_tbMunicipios { get; set; }
+        public virtual DbSet<VW_tbTiposdeCaso> VW_tbTiposdeCaso { get; set; }
+        public virtual DbSet<VW_tbTiposdeEvidencia> VW_tbTiposdeEvidencia { get; set; }
         public virtual DbSet<tbAbogadosJueces> tbAbogadosJueces { get; set; }
         public virtual DbSet<tbAcusadoPorCaso> tbAcusadoPorCaso { get; set; }
         public virtual DbSet<tbCargos> tbCargos { get; set; }
@@ -174,6 +184,10 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.Property(e => e.civi_FechaNacimiento).HasColumnType("date");
 
+                entity.Property(e => e.civi_NombreCompleto)
+                    .IsRequired()
+                    .HasMaxLength(401);
+
                 entity.Property(e => e.civi_Nombres)
                     .IsRequired()
                     .HasMaxLength(200);
@@ -188,11 +202,25 @@ namespace CasosLegales.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(20);
 
+                entity.Property(e => e.depa_Id)
+                    .IsRequired()
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.depa_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
                 entity.Property(e => e.muni_Id)
                     .IsRequired()
                     .HasMaxLength(4)
                     .IsUnicode(false)
                     .IsFixedLength(true);
+
+                entity.Property(e => e.muni_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(80);
 
                 entity.Property(e => e.user_Creacion)
                     .IsRequired()
@@ -561,6 +589,7 @@ namespace CasosLegales.DataAccess.Context
                 entity.HasOne(d => d.caso)
                     .WithMany(p => p.tbAcusadoPorCaso)
                     .HasForeignKey(d => d.caso_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CALE_tbAcusadoPorCaso_CALE_tbCasos_caso_Id");
             });
 
@@ -615,12 +644,6 @@ namespace CasosLegales.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.caso_FechaModificacion).HasColumnType("datetime");
-
-                entity.Property(e => e.caso_TipoDemandado)
-                    .IsRequired()
-                    .HasMaxLength(1)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
 
                 entity.Property(e => e.caso_TipoDemandante)
                     .IsRequired()
@@ -788,6 +811,10 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.ToTable("tbDetallesVeredictos", "CALE");
 
+                entity.Property(e => e.deve_EsCulpable).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.deve_EsInocente).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.deve_Estado)
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
@@ -799,6 +826,7 @@ namespace CasosLegales.DataAccess.Context
                 entity.Property(e => e.deve_FechaModificacion).HasColumnType("datetime");
 
                 entity.Property(e => e.deve_TipoEmpresaCivil)
+                    .IsRequired()
                     .HasMaxLength(1)
                     .IsUnicode(false)
                     .IsFixedLength(true);
@@ -817,6 +845,7 @@ namespace CasosLegales.DataAccess.Context
                 entity.HasOne(d => d.vere)
                     .WithMany(p => p.tbDetallesVeredictos)
                     .HasForeignKey(d => d.vere_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CALE_tbDetallesVeredictos_CALE_TBvEREDICTOS_vere_Id");
             });
 
@@ -989,7 +1018,7 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.ToTable("tbEvidenciasPorCaso", "CALE");
 
-                entity.Property(e => e.evca_Descripcion).HasMaxLength(300);
+                entity.Property(e => e.evca_Descripcion).IsRequired();
 
                 entity.Property(e => e.evca_Estado)
                     .IsRequired()
@@ -1004,6 +1033,7 @@ namespace CasosLegales.DataAccess.Context
                 entity.HasOne(d => d.caso)
                     .WithMany(p => p.tbEvidenciasPorCaso)
                     .HasForeignKey(d => d.caso_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CALE_tbEvidenciasPorCaso_CALE_tbCasos_caso_Id");
 
                 entity.HasOne(d => d.evca_UsuCreacionNavigation)
@@ -1020,6 +1050,7 @@ namespace CasosLegales.DataAccess.Context
                 entity.HasOne(d => d.tiev)
                     .WithMany(p => p.tbEvidenciasPorCaso)
                     .HasForeignKey(d => d.tiev_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CALE_tbEvidenciasPorCaso_CALE_tbTiposdeEvidencia_tiev_Id");
             });
 
@@ -1197,6 +1228,12 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.ToTable("tbTestigosPorCaso", "CALE");
 
+                entity.Property(e => e.teca_Declaracion).IsRequired();
+
+                entity.Property(e => e.teca_Demandado).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.teca_Demandante).HasDefaultValueSql("((0))");
+
                 entity.Property(e => e.teca_Estado)
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
@@ -1210,11 +1247,13 @@ namespace CasosLegales.DataAccess.Context
                 entity.HasOne(d => d.caso)
                     .WithMany(p => p.tbTestigosPorCaso)
                     .HasForeignKey(d => d.caso_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CALE_tbTestigosPorCaso_CALE_tbCasos_caso_Id");
 
                 entity.HasOne(d => d.teca_TestigoNavigation)
                     .WithMany(p => p.tbTestigosPorCaso)
                     .HasForeignKey(d => d.teca_Testigo)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CALE_tbTestigosPorCaso_CALE_tbCiviles_civi_Id");
 
                 entity.HasOne(d => d.teca_UsuCreacionNavigation)
@@ -1357,6 +1396,7 @@ namespace CasosLegales.DataAccess.Context
                 entity.HasOne(d => d.caso)
                     .WithMany(p => p.tbVeredictos)
                     .HasForeignKey(d => d.caso_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_CALE_tbVeredictos_CALE_tbCasos_caso_Id");
 
                 entity.HasOne(d => d.vere_UsuCreacionNavigation)

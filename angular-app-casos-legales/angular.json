@@ -42,7 +42,8 @@
               "node_modules/swiper/swiper-bundle.css",
               "src/assets/scss/config/galaxy/bootstrap.scss",
               "src/assets/scss/config/galaxy/app.scss",
-              "src/assets/scss/icons.scss"
+              "src/assets/scss/icons.scss",
+              "node_modules/angular-archwizard/styles/archwizard.css"
             ],
             "scripts":
             [

@@ -7,11 +7,11 @@
    "IncludeConnectionString": false,
    "ModelNamespace": null,
    "OutputContextPath": null,
-   "OutputPath": null,
+   "OutputPath": "Context",
    "ProjectRootNamespace": "CasosLegales.DataAccess",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
-   "SelectedToBeGenerated": 0,
+   "SelectedToBeGenerated": 1,
    "Tables": [
       {
          "Name": "[ACCE].[tbPantallas]",
@@ -92,19 +92,51 @@
       {
          "Name": "[GRAL].[tbMunicipios]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[CALE].[VW_tbAbogadosJueces]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[CALE].[VW_tbCiviles]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[CALE].[VW_tbEmpleados]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[CALE].[VW_tbEmpresas]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[CALE].[VW_tbTiposdeCaso]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[CALE].[VW_tbTiposdeEvidencia]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[GRAL].[VW_tbCargos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[GRAL].[VW_tbDepartamentos]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[GRAL].[VW_tbEstadosCiviles]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[GRAL].[VW_tbMunicipios]",
+         "ObjectType": 3
       }
    ],
-<<<<<<< HEAD
-<<<<<<< HEAD
    "UiHint": "DESKTOP-5RUMQNH\\SQLEXPRESS.DB_CasosLegales",
-=======
-   "UiHint": "DESKTOP-6FS11M8\\MSSQLSERVER1.DB_CasosLegales",
->>>>>>> Francisco
-=======
-   "UiHint": "DESKTOP-BPGLHI0\\SQLEXPRESSLOCAL.DB_CasosLegales",
->>>>>>> Cristian
    "UseBoolPropertiesWithoutDefaultSql": false,
-   "UseDatabaseNames": false,
+   "UseDatabaseNames": true,
    "UseDbContextSplitting": false,
    "UseFluentApiOnly": true,
    "UseHandleBars": false,

@@ -17,15 +17,18 @@ import { DataTablesModule } from 'angular-datatables';
 import {MatTabsModule} from '@angular/material/tabs';
 import { DropdownModule, NavModule, TabsModule } from '@coreui/angular';
 import { TablesModule } from './tables/tables.module';
+import {MatStepperModule} from '@angular/material/stepper';
 
 // Swiper Slider
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 
 import { LightboxModule } from 'ngx-lightbox';
 
+import { ArchwizardModule } from 'angular-archwizard';
 // Load Icons
 import { defineElement } from 'lord-icon-element';
 import lottie from 'lottie-web';
+import {MatDividerModule} from '@angular/material/divider';
 
 // Pages Routing
 import { PagesRoutingModule } from "./pages-routing.module";
@@ -133,7 +136,10 @@ import { EditarComponent  as EditarEmpresa} from './casoslegales/empresa/editar/
     NgbNavModule,
     NgSelectModule,
     DropdownModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    MatStepperModule,
+    ArchwizardModule,
+    MatDividerModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

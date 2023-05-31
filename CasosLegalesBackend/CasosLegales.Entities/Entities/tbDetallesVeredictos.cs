@@ -9,16 +9,16 @@ namespace CasosLegales.Entities.Entities
     public partial class tbDetallesVeredictos
     {
         public int deve_Id { get; set; }
-        public int? vere_Id { get; set; }
-        public bool? deve_EsInocente { get; set; }
-        public bool? deve_ESCulpable { get; set; }
+        public int vere_Id { get; set; }
+        public bool deve_EsInocente { get; set; }
+        public bool deve_EsCulpable { get; set; }
         public string deve_TipoEmpresaCivil { get; set; }
-        public int? deve_EmpresaCivil { get; set; }
+        public int deve_EmpresaCivil { get; set; }
         public int deve_UsuCreacion { get; set; }
         public DateTime deve_FechaCreacion { get; set; }
         public int? deve_UsuModificacion { get; set; }
         public DateTime? deve_FechaModificacion { get; set; }
-        public bool? deve_Estado { get; set; }
+        public bool deve_Estado { get; set; }
 
         public virtual tbUsuarios deve_UsuCreacionNavigation { get; set; }
         public virtual tbUsuarios deve_UsuModificacionNavigation { get; set; }
