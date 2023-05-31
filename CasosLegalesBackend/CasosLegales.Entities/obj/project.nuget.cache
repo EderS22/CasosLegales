@@ -1,21 +1,15 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "9EwhgGAUMbVdivcsFcFXxUVNvF8ORKmp/ycVAbakSLt13IyAPdYf05+l28rRpPX7KGA9g0Ak79CA3S/AD6OdRQ==",
+  "dgSpecHash": "AZrsT6KxJjqXTSIImWUvR2PXmjY/2t3bkfCdjSvehu/Hetjv/Z69pFlvPQzk+9fHfPjmrRrvB84FhtaCjsTVYw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\El pancho\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
-=======
-  "dgSpecHash": "NIFBdphQqjgVYXWagqUB6V22l2NNaxu1fD/B0jrHPu04IVZSpDOIr+RQrDR6neTWkD2o5c4uN98396kTXQRsJA==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
->>>>>>> 3b7305972693227696012a708147e238b2773029
+  "projectFilePath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
   "expectedPackageFiles": [],
   "logs": [
     {
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Problema al leer el archivo de caché C:\\Users\\LAB02\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+      "message": "Problema al leer el archivo de caché C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
     }
   ]
 }

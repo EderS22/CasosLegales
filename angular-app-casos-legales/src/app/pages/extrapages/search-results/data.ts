@@ -72,7 +72,7 @@ const gallery = [
   },
   {
       id:3,
-      img:'assets/images/small/img-3.jpg',
+      img:'assets/images/small/img-33.jpg',
       title:"Photo was taken in Beach",
       auther:"Elwood Arter",
       likes:"2.2K",
@@ -177,7 +177,7 @@ const news =[
   },
   {
       id:3,
-      img:'assets/images/small/img-3.jpg',
+      img:'assets/images/small/img-33.jpg',
       badgeClass:"info",
       badgeText:"Fashion",
       title:"How to become a best sale marketer in a year!",

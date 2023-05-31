@@ -38,7 +38,7 @@ export class filterObject {
 export const productList: productModel[] = [
   {
       id: 1,
-      images: ['assets/images/products/img-8.png', 'assets/images/products/img-6.png', 'assets/images/products/img-1.png'],
+      images: ['assets/images/products/img-8.png', 'assets/images/products/img-6.png', 'assets/images/products/img-1.jpg'],
       name: 'Full Sleeve Sweatshirt for Men (Pink)',
       category: 'Tommy Hilfiger',
       seller: 'Zoetic Fashion',
@@ -102,7 +102,7 @@ export const productList: productModel[] = [
       services: ['10 Days Replacement', 'Cash on Delivery available'],
       colorVariant: [{
           key: 'Gray',
-          value: 'assets/images/product/img-1.png'
+          value: 'assets/images/product/img-1.jpg'
       },
       {
           key: 'Dark',
@@ -110,7 +110,7 @@ export const productList: productModel[] = [
       },
       {
         key: 'Purple',
-        value: 'assets/images/product/img-3.png'
+        value: 'assets/images/product/img-33.jpg'
       }],
   }
 ];

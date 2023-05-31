@@ -18,7 +18,7 @@ const joblist = [
     {
         id: 2,
         logo: 'assets/images/companies/img-6.png',
-        coverimage: 'assets/images/small/img-3.jpg',
+        coverimage: 'assets/images/small/img-33.jpg',
         title: 'Project Manager',
         companyname: 'Syntyce Solutions',
         content: "In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated.",
@@ -59,7 +59,7 @@ const joblist = [
     },
     {
         id: 5,
-        logo: 'assets/images/companies/img-3.png',
+        logo: 'assets/images/companies/img-33.jpg',
         coverimage: 'assets/images/small/img-2.jpg',
         title: 'UI/UX designer',
         companyname: 'Nesta Technologies',

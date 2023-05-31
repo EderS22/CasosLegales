@@ -394,7 +394,7 @@ import { ChartOptions } from './sellers.model';
 
 const sellerDetals = [
   {
-    image:'assets/images/companies/img-1.png',
+    image:'assets/images/companies/img-1.jpg',
     name: 'Force Medicines',
     sellername: 'David Marshall',
     stock: '452',
@@ -413,7 +413,7 @@ const sellerDetals = [
     chart:MicroChart
   },
   {
-    image:'assets/images/companies/img-3.png',
+    image:'assets/images/companies/img-33.jpg',
     name: 'Nesta Technologies',
     sellername: 'Harley Fuller',
     stock: '320',

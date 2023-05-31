@@ -93,10 +93,10 @@
                     <div class="col-1"></div>
                     <div class="col-5 mt-1">
                         <label class="form-label">Departamento</label>
-                        <ng-select class="form-control" #selectDepartamento
-                            (change)="AsignarIdDepartamento(selectDepartamento.value)" required
+                        <ng-select #selectDepartamento required
                             formControlName="depa_Id" [ngClass]="{'is-invalid': submit && form['depa_Id'].errors}"
                             placeholder="Seleccione un Departamento">
+                            <option value="" selected hidden>Seleccione un Departamento</option>
                             <ng-option *ngFor="let item of DepartamentoDLL" [value]="item.depa_Id">
                                 {{item.depa_Nombre}}
                             </ng-option>
@@ -138,9 +138,9 @@
             </div>
             <div class="modal-footer">
                 <div class="hstack gap-2 justify-content-end">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal"
                         (click)="modal.close('Close click')">Cerrar</button>
-                    <button type="submit" class="btn btn-success" id="add-btn">Agregar Municipio</button>
+                    <button type="submit" class="btn btn-primary" id="add-btn">Agregar Municipio</button>
                 </div>
             </div>
         </form>
@@ -178,9 +178,9 @@
             </div>
             <div class="modal-footer">
                 <div class="hstack gap-2 justify-content-end">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal"
                         (click)="modal.close('Close click')">Cerrar</button>
-                    <button type="submit" class="btn btn-success" id="add-btn">Guardar Municipio</button>
+                    <button type="submit" class="btn btn-primary" id="add-btn">Guardar Municipio</button>
                 </div>
             </div>
         </form>
@@ -210,7 +210,7 @@
                 </div>
             </div>
             <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                <button class="btn btn-link link-success fw-medium text-decoration-none" data-bs-dismiss="modal"
+                <button class="btn btn-dark fw-medium text-decoration-none" data-bs-dismiss="modal"
                     (click)="modal.close('Close click')">
                     <i class="ri-close-line me-1 align-middle"></i>
                     Cerrar

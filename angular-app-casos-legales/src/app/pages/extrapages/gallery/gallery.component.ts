@@ -59,7 +59,7 @@ export class GalleryComponent implements OnInit {
     },
     {
       id:3,
-      img:'assets/images/small/img-3.jpg',
+      img:'assets/images/small/img-33.jpg',
       title:"Photo was taken in Beach",
       auther:"Elwood Arter",
       likes:"2.2K",
@@ -221,7 +221,7 @@ export class GalleryComponent implements OnInit {
     },
     {
       id:21,
-      img:'assets/images/small/img-3.jpg',
+      img:'assets/images/small/img-33.jpg',
       title:"Photo was taken in Beach",
       auther:"Elwood Arter",
       likes:"2.2K",

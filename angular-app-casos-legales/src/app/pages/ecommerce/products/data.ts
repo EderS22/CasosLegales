@@ -1,7 +1,7 @@
 
 const Products = [
   {
-    image: 'assets/images/products/img-1.png',
+    image: 'assets/images/products/img-1.jpg',
     name: 'Half Sleeve Round Neck T-Shirts',
     category: 'Clothes',
     stock: '12',

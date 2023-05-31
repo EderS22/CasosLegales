@@ -134,9 +134,11 @@
                         </div>
                         <div class="col-6 mt-3">
                             <label for="depa_Id" class="form-label">Departamento</label>
-                            <ng-select formControlName="depa_Id" class="form-control" #selectDepartamento
-                                (change)="CargarMunicipios(selectDepartamento.value)" required formControlName="depa_Id"
-                                [ngClass]="{'is-invalid': submit && form['depa_Id'].errors}" placeholder="Seleccione un Departamento">
+                            <ng-select formControlName="depa_Id" #selectDepartamento
+                                 required formControlName="depa_Id"
+                                [ngClass]="{'is-invalid': submit && form['depa_Id'].errors}" placeholder="Seleccione un Departamento"
+                                >
+                                <!-- (change)="CargarMunicipios(selectDepartamento.value)" -->
                                 <ng-option *ngFor="let item of DepartamentoDLL" [value]="item.depa_Id">
                                     {{item.depa_Nombre}}
                                 </ng-option>
@@ -145,10 +147,9 @@
                         </div>
                         <div class="col-6 mt-3">
                             <label class="form-label">Municipios</label>
-                            <ng-select class="form-control" [disabled]="MunicipioDesactivado" required
+                            <ng-select [disabled]="MunicipioDesactivado" required
                                 formControlName="muni_Id"
                                 [ngClass]="{'is-invalid': submitMunicipio && form['muni_Id'].errors}" placeholder="Seleccione un Municipios">
-                                <ng-option value="" selected hidden>Seleccione un municipio</option>
                                 <ng-option *ngFor="let item of MunicipioDDL" [value]="item.muni_Id">
                                     {{item.muni_Nombre}}
                                 </ng-option>
@@ -164,10 +165,10 @@
                     </div>
                     <div class="row mt-4" style="text-align: center;">
                         <div class="col-6">
-                            <button type="submit" class="btn btn-soft-primary col-8">Guardar</button>
+                            <button type="submit" class="btn btn-primary col-8">Guardar</button>
                         </div>
                         <div class="col-6">
-                            <button type="button" class="btn btn-soft-secondary col-8" (click)="regresar()">Cancelar</button>
+                            <button type="button" class="btn btn-dark col-8" (click)="regresar()">Cancelar</button>
                         </div>
                     </div>
                 </form>

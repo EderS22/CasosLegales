@@ -88,7 +88,7 @@
   },
   {
       id : 9,
-      backgroundImg :'assets/images/small/img-3.jpg',
+      backgroundImg :'assets/images/small/img-33.jpg',
       userImage : 'assets/images/users/avatar-5.jpg',
       name : "Erica Kernan",
       jobPosition : "Web Designer",

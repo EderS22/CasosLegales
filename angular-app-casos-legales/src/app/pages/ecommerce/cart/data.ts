@@ -20,7 +20,7 @@ const cartData = [
       id:"2",
   },
   {
-      image: 'assets/images/products/img-3.png',
+      image: 'assets/images/products/img-33.jpg',
       name: '350 ml Glass Grocery Container',
       color: 'White',
       size: '350 ml',

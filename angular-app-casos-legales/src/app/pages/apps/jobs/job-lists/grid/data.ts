@@ -12,7 +12,7 @@ const jobgrid = [
     },
     {
         id: '1',
-        logo: 'assets/images/companies/img-1.png',
+        logo: 'assets/images/companies/img-1.jpg',
         title: 'Education Training',
         companyname: 'Micro Design',
         content: "As a Product Designer, you will work within a Product Delivery Team fused with UX,engineering, product and data talent.",
@@ -32,7 +32,7 @@ const jobgrid = [
     },
     {
         id: '3',
-        logo: 'assets/images/companies/img-3.png',
+        logo: 'assets/images/companies/img-33.jpg',
         title: 'Product Designer',
         companyname: 'Themesbrand',
         content: "As a Product Designer, you will work within a Product Delivery Team fused with UX,engineering, product and data talent.",
@@ -92,7 +92,7 @@ const jobgrid = [
     },
     {
         id: '9',
-        logo: 'assets/images/companies/img-3.png',
+        logo: 'assets/images/companies/img-33.jpg',
         title: 'Business Associate',
         companyname: 'Themesbrand',
         content: "As a Product Designer, you will work within a Product Delivery Team fused with UX,engineering, product and data talent.",

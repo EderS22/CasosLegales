@@ -18,7 +18,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h4 class="card-title mb-0">{{isEdit ? 'Editar' : 'Agregar'}} caso</h4>
+        <h4 class="card-title mb-0">{{isEdit ? 'Editar' : 'Nuevo'}} caso</h4>
     </div>
     <div class="card-body">
         <form [formGroup]="casoForm">
@@ -190,8 +190,8 @@
             </div>
             <br/>
             <div style="text-align: center;">
-                <button type="submit" class="btn btn-success col-6" id="add-btn" (click)="onSubmit()">
-                    {{isEdit ? 'Editar' : 'Agregar'}} caso
+                <button type="submit" class="btn btn-primary col-6" id="add-btn" (click)="onSubmit()">
+                    {{isEdit ? 'Editar' : 'Nuevo'}} caso
                 </button>
             </div>
         </form>

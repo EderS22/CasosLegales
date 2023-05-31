@@ -5,7 +5,7 @@ import { ChartType } from './dashboard.model';
  */
  const BestSelling = [
   {
-      image: "assets/images/products/img-1.png",
+      image: "assets/images/products/img-1.jpg",
       pName: 'Branded T-Shirts',
       date: '24 Apr 2021',
       price: '29.00',
@@ -23,7 +23,7 @@ import { ChartType } from './dashboard.model';
     amount: '2982',
   },
   {
-    image: "assets/images/products/img-3.png",
+    image: "assets/images/products/img-33.jpg",
     pName: 'Borosil Paper Cup',
     date: '01 Mar 2021',
     price: '14.00',
@@ -56,7 +56,7 @@ import { ChartType } from './dashboard.model';
  */
  const TopSelling = [
     {
-        image: "assets/images/companies/img-1.png",
+        image: "assets/images/companies/img-1.jpg",
         pName: 'iTest Factory',
         subtitle: 'Oliver Tyler',
         type: 'Bags and Wallets',
@@ -74,7 +74,7 @@ import { ChartType } from './dashboard.model';
       percentage: '79',
     },
     {
-      image: "assets/images/companies/img-3.png",
+      image: "assets/images/companies/img-33.jpg",
       pName: 'Nesta Technologies',
       subtitle: 'Harley Fuller',
       type: 'Bike Accessories',

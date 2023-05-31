@@ -27,7 +27,7 @@ const Companies = [
       isSelected:false
   },
   {
-      img: 'assets/images/companies/img-1.png',
+      img: 'assets/images/companies/img-1.jpg',
       companyName: "Digitech Galaxy",
       owner: "Alexis Clarke",
       industryType: "Telecommunications Services",
@@ -63,7 +63,7 @@ const Companies = [
       isSelected:false
   },
   {
-      img: 'assets/images/companies/img-3.png',
+      img: 'assets/images/companies/img-33.jpg',
       companyName: "Meta4Systems",
       owner: "Nancy Martino",
       industryType: "Computer Industry",

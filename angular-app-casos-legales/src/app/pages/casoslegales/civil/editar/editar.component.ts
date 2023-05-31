@@ -88,7 +88,7 @@ export class EditarComponent {
     })
 
     this.breadCrumbItems = [
-      { label: 'Empleados' },
+      { label: 'Civiles' },
       { label: 'Editar', active: true }
     ];
 
