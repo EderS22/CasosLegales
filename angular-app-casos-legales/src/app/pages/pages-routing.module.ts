@@ -29,6 +29,7 @@ import { EditarComponent as EditarAbogadosJueces } from './casoslegales/abogados
 import { ListadoComponent as ListadoEmpresas } from './casoslegales/empresa/listado/listado.component';
 import { CrearComponent as CrearEmpresa } from './casoslegales/empresa/crear/crear.component';
 import { EditarComponent as EditarEmpresa } from './casoslegales/empresa/editar/editar.component';
+import { ReportecasoComponent } from './reportes/reporte/reportecaso/reportecaso.component';
 
 const routes: Routes = [
     {
@@ -144,6 +145,10 @@ const routes: Routes = [
     {
       path: "casoslegales/empresa/editar",
       component: EditarEmpresa
+    },
+    {
+      path: "reportes/reporte/reportecaso",
+      component: ReportecasoComponent
     }
 
 ];

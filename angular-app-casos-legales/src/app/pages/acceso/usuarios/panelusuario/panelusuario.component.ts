@@ -86,7 +86,6 @@ export class PanelusuarioComponent implements OnInit {
     return this.validationform.controls;
   }
 
-
   onFileSelected(event: any) {
     this.selectedImage = event.target.files[0];
     this.mostrarBotonImg = false;
@@ -111,11 +110,7 @@ export class PanelusuarioComponent implements OnInit {
           console.log(data)
           console.log(data.data.url)
           console.log(this.imagen)
-
         }
-
-
-
       })
   }
 
