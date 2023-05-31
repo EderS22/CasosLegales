@@ -87,11 +87,12 @@ export class AuthenticationService {
      * Reset password
      * @param email email
      */
-    resetPassword(email: string) {
-        return getFirebaseBackend()!.forgetPassword(email).then((response: any) => {
-            const message = response.data;
-            return message;
-        });
+    resetPassword(email: string, password:string) {
+        let parametro = {
+            usua_Nombre: email,
+            usua_Clave: password
+        }
+        return this.http.post(AUTH_API + 'Login/ActualizarContrasenia',parametro )
     }
 
 }
