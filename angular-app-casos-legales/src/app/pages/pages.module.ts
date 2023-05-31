@@ -17,6 +17,8 @@ import { DataTablesModule } from 'angular-datatables';
 import {MatTabsModule} from '@angular/material/tabs';
 import { DropdownModule, NavModule, TabsModule } from '@coreui/angular';
 import { TablesModule } from './tables/tables.module';
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
+import { ArchwizardModule } from 'angular-archwizard';
 
 // Swiper Slider
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
@@ -133,7 +135,9 @@ import { EditarComponent  as EditarEmpresa} from './casoslegales/empresa/editar/
     NgbNavModule,
     NgSelectModule,
     DropdownModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    DropzoneModule,
+    ArchwizardModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
