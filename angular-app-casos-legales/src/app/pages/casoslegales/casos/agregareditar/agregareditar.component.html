@@ -42,7 +42,7 @@
                                     Descripción del caso
                                 </label>
                                 <div class="mx-n3">
-                                    <ngx-simplebar style="max-height: 100px;" class="px-3">
+                                    <ngx-simplebar style="max-height: 110px;" class="px-3">
                                         <textarea class="form-control" placeholder="Ingrese una descripción"
                                             formControlName="caso_Descripcion" rows="3"
                                             [ngClass]="{ 'is-invalid': submitted && form['caso_Descripcion'].errors }">
@@ -353,7 +353,7 @@
                         </form>
                     </div>
                     <div class="mt-4">
-                        <ng-container *ngIf="listadoTestigosDemandante.length > 0">
+                        <ng-container *ngIf="listadoTestigosDemandados.length > 0">
                             <h5 style="text-align: center;" class="mb-3">Testigos del demandado</h5>
                         </ng-container>
                         <div class="mx-n3">

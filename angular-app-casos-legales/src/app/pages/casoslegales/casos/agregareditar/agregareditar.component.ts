@@ -15,10 +15,10 @@ import { TiposdecasoService } from 'src/app/pages/services/casolegales/tiposdeca
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-agregareditar',
-  templateUrl: './agregareditar.component.html',
-  styleUrls: ['./agregareditar.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-agregareditar',
+    templateUrl: './agregareditar.component.html',
+    styleUrls: ['./agregareditar.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class AgregareditarComponent implements OnInit {
 
@@ -31,7 +31,7 @@ export class AgregareditarComponent implements OnInit {
         private formBuilder: UntypedFormBuilder,
         private router: Router
     ) { }
-    
+
     breadCrumbItems!: Array<{}>;
     dateNow: Date = new Date();
     isEdit: boolean = false;
@@ -54,20 +54,20 @@ export class AgregareditarComponent implements OnInit {
 
     listadoEmpresas: empresa[] = [];
     listadoCiviles: civiles[] = [];
-    
+
     listadoEmpresasDemandante: empresa[] = [];
     listadoEmpresasDemandado: empresa[] = [];
 
     listadoCivilesDemandante: civiles[] = [];
     listadoCivilesDemandado: civiles[] = [];
-    
+
     listadoTestigosFull: civiles[] = [];
     listadoTestigosDemandanteFull: civiles[] = [];
     listadoTestigosDemandadosFull: civiles[] = [];
 
     listadoTestigosDemandante: TestigosPorCaso[] = [];
     listadoTestigosDemandados: TestigosPorCaso[] = [];
-    
+
     ngOnInit(): void {
         if (!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin) {
             const ropaAcceso = new ropa();
@@ -85,9 +85,9 @@ export class AgregareditarComponent implements OnInit {
 
         this.caso_IdEditar = parseInt(localStorage.getItem("caso_IdEditar") ?? '0', 0);
 
-        if(this.caso_IdEditar > 0){
+        if (this.caso_IdEditar > 0) {
             this.isEdit = true;
-        }else{
+        } else {
             this.isEdit = false;
         }
 
@@ -126,75 +126,73 @@ export class AgregareditarComponent implements OnInit {
         });
 
         this.tiposCasoService.getTiposdecaso()
-        .subscribe((data:any) => {
-            if(data.code === 200){
-                this.listadoTiposDeCaso = data.data;
-            }
-        })
+            .subscribe((data: any) => {
+                if (data.code === 200) {
+                    this.listadoTiposDeCaso = data.data;
+                }
+            })
 
         this.abogadosJuecesService.DdlAbogados()
-        .subscribe((data:any) => {
-            if(data.code === 200){
-                this.listadoAbogados = data.data;
+            .subscribe((data: any) => {
+                if (data.code === 200) {
+                    this.listadoAbogados = data.data;
 
-                this.listadoAbogadosDemandados = data.data;
-                this.listadoAbogadosDemandantes = data.data;
-            }
-        })
-        
+                    this.listadoAbogadosDemandados = data.data;
+                    this.listadoAbogadosDemandantes = data.data;
+                }
+            })
+
         this.abogadosJuecesService.DdlJueces()
-        .subscribe((data:any) => {
-            if(data.code === 200){
-                this.listadoJueces = data.data;
-            }
-        })
+            .subscribe((data: any) => {
+                if (data.code === 200) {
+                    this.listadoJueces = data.data;
+                }
+            })
 
         this.civilesService.getCiviles()
-        .subscribe((data:any) => {
-            if(data.code === 200){
-                this.listadoCiviles = data.data;
+            .subscribe((data: any) => {
+                if (data.code === 200) {
+                    this.listadoCiviles = data.data;
 
-                this.listadoCivilesDemandante = data.data;
-                this.listadoCivilesDemandado = data.data;
-                this.listadoTestigosFull = data.data;
-            }
-        })
+                    this.listadoCivilesDemandante = data.data;
+                    this.listadoCivilesDemandado = data.data;
+                    this.listadoTestigosFull = data.data;
+                }
+            })
 
         this.empresasService.getempresas()
-        .subscribe((data:any) => {
-            if(data.code === 200){
-                this.listadoEmpresas = data.data;
+            .subscribe((data: any) => {
+                if (data.code === 200) {
+                    this.listadoEmpresas = data.data;
 
-                this.listadoEmpresasDemandante = data.data;
-                this.listadoEmpresasDemandado = data.data;
-            }
-        })
+                    this.listadoEmpresasDemandante = data.data;
+                    this.listadoEmpresasDemandado = data.data;
+                }
+            })
     }
 
-    get form(){
+    get form() {
         return this.casoForm.controls;
     }
 
-    get formTestigoDemandante(){
+    get formTestigoDemandante() {
         return this.testigoDemandanteForm.controls;
     }
 
-    get formTestigoDemandado(){
+    get formTestigoDemandado() {
         return this.testigoDemandadoForm.controls;
     }
 
-    onSubmit(){
-       this.submitted = true;
-
-
+    onSubmit() {
+        this.submitted = true;
 
 
     }
 
-    agregarTestigoDemandante(){
+    agregarTestigoDemandante() {
         this.submittedTestigoDemandante = true;
 
-        if(this.testigoDemandanteForm.valid){
+        if (this.testigoDemandanteForm.valid) {
             const testigoTemp = new TestigosPorCaso();
             testigoTemp.caso_Id = this.formTestigoDemandante["caso_Id"].value;
             testigoTemp.teca_Testigo = this.formTestigoDemandante["teca_Testigo"].value;
@@ -207,10 +205,11 @@ export class AgregareditarComponent implements OnInit {
 
             this.listadoTestigosDemandante.push(testigoTemp);
 
-            this.listadoTestigosDemandanteFull = this.listadoTestigosDemandanteFull.filter(item => item.civi_Id !==  testigoTemp.teca_Testigo);
-            this.listadoTestigosFull = this.listadoTestigosFull.filter(item => item.civi_Id !==  testigoTemp.teca_Testigo);
+            this.listadoTestigosFull = this.listadoTestigosFull.filter(item => item.civi_Id !== testigoTemp.teca_Testigo);
+            
+            this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
+            this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
 
-            this.listadoCiviles = this.listadoCiviles.filter(item => item.civi_Id !== testigoTemp.teca_Testigo);
             this.listadoCivilesDemandado = this.listadoCivilesDemandado.filter(item => item.civi_Id !== testigoTemp.teca_Testigo);
             this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(item => item.civi_Id !== testigoTemp.teca_Testigo);
 
@@ -219,10 +218,10 @@ export class AgregareditarComponent implements OnInit {
         }
     }
 
-    agregarTestigoDemandado(){
+    agregarTestigoDemandado() {
         this.submittedTestigoDemandado = true;
 
-        if(this.testigoDemandadoForm.valid){
+        if (this.testigoDemandadoForm.valid) {
             const testigoTemp = new TestigosPorCaso();
             testigoTemp.caso_Id = this.formTestigoDemandado["caso_Id"].value;
             testigoTemp.teca_Testigo = this.formTestigoDemandado["teca_Testigo"].value;
@@ -235,10 +234,11 @@ export class AgregareditarComponent implements OnInit {
 
             this.listadoTestigosDemandados.push(testigoTemp);
 
-            this.listadoTestigosDemandadosFull = this.listadoTestigosDemandanteFull.filter(item => item.civi_Id !==  testigoTemp.teca_Testigo);
             this.listadoTestigosFull = this.listadoTestigosFull.filter(item => item.civi_Id !== testigoTemp.teca_Testigo);
+            
+            this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
+            this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
 
-            this.listadoCiviles = this.listadoCiviles.filter(item => item.civi_Id !== testigoTemp.teca_Testigo);
             this.listadoCivilesDemandado = this.listadoCivilesDemandado.filter(item => item.civi_Id !== testigoTemp.teca_Testigo);
             this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(item => item.civi_Id !== testigoTemp.teca_Testigo);
 
@@ -247,104 +247,202 @@ export class AgregareditarComponent implements OnInit {
         }
     }
 
-    eliminarTestigoDemandado(value:number){
-        if(value > 0){
+    eliminarTestigoDemandado(value: number) {
+        if (value > 0) {
             this.listadoTestigosDemandados = this.listadoTestigosDemandados.filter(item => item.teca_Testigo !== value);
-            
-            this.listadoTestigosDemandadosFull.push(this.listadoCiviles.filter(item => item.civi_Id === value)[0]);
-            this.listadoTestigosDemandanteFull.push(this.listadoCiviles.filter(item => item.civi_Id === value)[0]);
-            this.listadoTestigosFull.push(this.listadoCiviles.filter(item => item.civi_Id === value)[0]);
+
+            this.listadoCivilesDemandado.push(this.listadoCiviles.filter(item => item.civi_Id === value)[0]);
+            this.listadoCivilesDemandante.push(this.listadoCiviles.filter(item => item.civi_Id === value)[0]);
+
+            if(this.form['caso_TipoDemandante'].value === "C"){
+                this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== this.form['caso_IdDemandante'].value);
+
+                this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
+                this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
+            }
         }
     }
 
-    eliminarTestigoDemandante(value:number){
-        if(value > 0){
+    eliminarTestigoDemandante(value: number) {
+        if (value > 0) {
             this.listadoTestigosDemandante = this.listadoTestigosDemandante.filter(item => item.teca_Testigo !== value);
-            
-            this.listadoTestigosDemandadosFull.push(this.listadoCiviles.filter(item => item.civi_Id === value)[0]);
-            this.listadoTestigosDemandanteFull.push(this.listadoCiviles.filter(item => item.civi_Id === value)[0]);
-            this.listadoTestigosFull.push(this.listadoCiviles.filter(item => item.civi_Id === value)[0]);
+
+            this.listadoCivilesDemandado.push(this.listadoCiviles.filter(item => item.civi_Id === value)[0]);
+            this.listadoCivilesDemandante.push(this.listadoCiviles.filter(item => item.civi_Id === value)[0]);
+
+            if(this.form['caso_TipoDemandante'].value === "C"){
+                this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== this.form['caso_IdDemandante'].value);
+
+                this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
+                this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
+            }
         }
     }
-   
-    tipoDemandanteChange(){
-       this.form['caso_IdDemandante'].setValue(null);
-       this.listadoEmpresasDemandado = this.listadoEmpresas;
-       this.listadoCivilesDemandado = this.listadoCiviles;
+
+    tipoDemandanteChange() {
+        this.form['caso_IdDemandante'].setValue(null);
+        this.listadoEmpresasDemandado = this.listadoEmpresas;
+        this.listadoCivilesDemandado = this.listadoCiviles;
+
+        if (this.listadoTestigosDemandados.length > 0) {
+            this.listadoTestigosDemandados.forEach(item => {
+                this.listadoCivilesDemandado = this.listadoCivilesDemandado.filter(val => val.civi_Id !== item.teca_Testigo);
+            })
+        }
+        
+        if (this.listadoTestigosDemandante.length > 0) {
+            this.listadoTestigosDemandante.forEach(item => {
+                this.listadoCivilesDemandado = this.listadoCivilesDemandado.filter(val => val.civi_Id !== item.teca_Testigo);
+            })
+        }
+        
     }
 
-    tipoDemandadoChange(){
+    tipoDemandadoChange() {
         this.form['caso_IdDemandado'].setValue(null);
         this.listadoEmpresasDemandante = this.listadoEmpresas;
         this.listadoCivilesDemandante = this.listadoCiviles;
-    }
 
-    demandanteChange(value:number){
-        this.listadoEmpresasDemandado = this.listadoEmpresas;
-        this.listadoCivilesDemandado = this.listadoCiviles;
-        this.listadoTestigosFull = this.listadoCiviles;
-
-        if(value > 0 && this.form['caso_TipoDemandante'].value === "E")
-        {
-            this.listadoEmpresasDemandado = this.listadoEmpresasDemandado.filter(item => item.emsa_Id !== value);
+        if (this.listadoTestigosDemandados.length > 0) {
+            this.listadoTestigosDemandados.forEach(item => {
+                this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(val => val.civi_Id !== item.teca_Testigo);
+            })
         }
-        else if (value > 0 && this.form['caso_TipoDemandante'].value === "C")
-        {
-            this.listadoCivilesDemandado = this.listadoCivilesDemandado.filter(item => item.civi_Id !== value);
-
-            this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== value);
-            this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
-            this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
-        }
-    }
-
-    demandadoChange(value:number[]){
-        this.listadoEmpresasDemandante = this.listadoEmpresas;
-        this.listadoCivilesDemandante = this.listadoCiviles;
-        this.listadoTestigosFull = this.listadoCiviles;
-
-        if(value.length > 0 && this.form['caso_TipoDemandado'].value === "E"){
-            value.forEach(element => {
-                this.listadoEmpresasDemandante = this.listadoEmpresasDemandante.filter(item => item.emsa_Id !== element);  
+        
+        if (this.listadoTestigosDemandante.length > 0) {
+            this.listadoTestigosDemandante.forEach(item => {
+                this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(val => val.civi_Id !== item.teca_Testigo);
             })
         } 
-        else if (value.length > 0 && this.form['caso_TipoDemandado'].value === "C")
-        {
-            value.forEach(element => {
-                this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(item => item.civi_Id !== element);
-                this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== element && item.civi_Id !== this.form['caso_IdDemandante'].value);
+
+    }
+
+    demandanteChange(value: number) {
+        this.listadoEmpresasDemandado = this.listadoEmpresas;
+        this.listadoCivilesDemandado = this.listadoCiviles;
+
+        if (this.listadoTestigosDemandados.length > 0) {
+            this.listadoTestigosDemandados.forEach(item => {
+                this.listadoCivilesDemandado =  this.listadoCivilesDemandado.filter(val => val.civi_Id !== item.teca_Testigo);
             })
+        } 
+        
+        if (this.listadoTestigosDemandante.length > 0) {
+            this.listadoTestigosDemandante.forEach(item => {
+                this.listadoCivilesDemandado =  this.listadoCivilesDemandado.filter(val => val.civi_Id !== item.teca_Testigo);
+            })
+        }
+
+        if (value > 0 && this.form['caso_TipoDemandante'].value === "E") {
+            this.listadoEmpresasDemandado = this.listadoEmpresasDemandado.filter(item => item.emsa_Id !== value);
+        }
+        else if (value > 0 && this.form['caso_TipoDemandante'].value === "C") 
+        {
+            this.listadoCivilesDemandado = this.listadoCivilesDemandado.filter(item => item.civi_Id !== value);
+        }
+
+        if(this.form['caso_IdDemandado'].value){
+            if(this.form['caso_IdDemandado'].value.length > 0){
+                const demandados: number [] = this.form['caso_IdDemandado'].value;
+
+                if(this.form['caso_TipoDemandante'].value === "C"){
+                    demandados.forEach(element => {
+                        this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== value && item.civi_Id !== element);
+                    });
+                }else{
+                    demandados.forEach(element => {
+                        this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== element);
+                    });
+                }  
+            }
+            this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
+            this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
+        }
+
+        if(this.form['caso_TipoDemandado'].value === "E" && this.form['caso_TipoDemandante'].value === "E"){
+            this.listadoTestigosFull =  this.listadoCivilesDemandado;
+
             this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
             this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
         }
     }
 
-    abogadoDemandanteChange(value:number){
+    demandadoChange(value: number[]) {
+        this.listadoEmpresasDemandante = this.listadoEmpresas;
+        this.listadoCivilesDemandante = this.listadoCiviles;
+
+        if (this.listadoTestigosDemandados.length > 0) {
+            this.listadoTestigosDemandados.forEach(item => {
+                this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(val => val.civi_Id !== item.teca_Testigo);
+            })
+        } 
+        
+        if (this.listadoTestigosDemandante.length > 0) {
+            this.listadoTestigosDemandante.forEach(item => {
+                this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(val => val.civi_Id !== item.teca_Testigo);
+            })
+        }
+
+        if (value.length > 0 && this.form['caso_TipoDemandado'].value === "E") {
+            value.forEach(element => {
+                this.listadoEmpresasDemandante = this.listadoEmpresasDemandante.filter(item => item.emsa_Id !== element);
+            })
+        }
+        else if (value.length > 0 && this.form['caso_TipoDemandado'].value === "C") 
+        {   
+            value.forEach(element => {
+                this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(item => item.civi_Id !== element);
+
+                if(this.form['caso_IdDemandante'].value > 0){
+                    this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== element && item.civi_Id !== this.form['caso_IdDemandante'].value);
+                }
+            })
+
+            this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
+            this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
+        }
+
+        if(this.form['caso_TipoDemandado'].value === "E" && this.form['caso_TipoDemandante'].value === "C"){
+            this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== this.form['caso_IdDemandante'].value);
+
+            this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
+            this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
+        }
+
+        if(this.form['caso_TipoDemandado'].value === "E" && this.form['caso_TipoDemandante'].value === "E"){
+            this.listadoTestigosFull = this.listadoCivilesDemandante;
+
+            this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
+            this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
+        }
+    }
+
+    abogadoDemandanteChange(value: number) {
         this.listadoAbogadosDemandados = this.listadoAbogados;
-        if(value > 0){
+        if (value > 0) {
             this.listadoAbogadosDemandados = this.listadoAbogadosDemandados.filter(item => item.abju_Id !== value);
         }
     }
 
-    abogadoDemandadoChange(value:number){
+    abogadoDemandadoChange(value: number) {
         this.listadoAbogadosDemandantes = this.listadoAbogados;
-        if(value > 0){
+        if (value > 0) {
             this.listadoAbogadosDemandantes = this.listadoAbogadosDemandantes.filter(item => item.abju_Id !== value);
         }
     }
 
-    testigosDemandadoChange(value:number){
+    testigosDemandadoChange(value: number) {
         this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
 
-        if(value > 0){
+        if (value > 0) {
             this.listadoTestigosDemandanteFull = this.listadoTestigosDemandanteFull.filter(item => item.civi_Id !== value);
         }
     }
 
-    testigosDemandanteChange(value:number){
+    testigosDemandanteChange(value: number) {
         this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
 
-        if(value > 0){
+        if (value > 0) {
             this.listadoTestigosDemandadosFull = this.listadoTestigosDemandadosFull.filter(item => item.civi_Id !== value);
         }
     }
