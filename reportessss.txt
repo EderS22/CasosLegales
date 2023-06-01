@@ -1,0 +1,110 @@
+
+    
+    /*
+    autoTable(doc, {
+      didDrawPage: function (data) {
+        // Agregar el logo en todas las páginas
+        doc.addImage(logoImg, 'PNG', 180, 5, 25, 25);
+      },
+    });
+ 
+    */
+
+    // Agregar el título "Listado de Empleados"
+    doc.setFontSize(18);
+    doc.text('Casos Legales LeyMaxima', 60, 20);
+
+
+    this.UsuarioService.getUsuarios().subscribe(
+      (data: any) => {
+        const totalImages = data.length;
+        let imagesLoaded = 0;
+
+        //console.log(data.data[0].usua_img);
+        const x = 180; // Coordenada x de la posición de la imagen
+        const y = 40 + (imagesLoaded * 60);
+        const width = 25; // Ancho de la imagen
+        const height = 25; // Alto de la imagen
+
+        localStorage.setItem('imagen', data.data[0].usua_img)
+
+        //addImageFromLocalStorage(doc,data.data[0].usua_img.toString(), x, y, width, height)
+
+        imagesLoaded++;
+      },
+      (error: any) => {
+        console.error('Ocurrió un error:', error);
+      }
+    );
+
+    
+    
+    
+    
+    //DEFINIR EL ANCHO DE LA PAGINA DONDE ESTARA EL FOOTER
+    // const pageHeight = doc.internal.pageSize.height || doc.internal.pageSize.getHeight();
+    // const pageWidth = doc.internal.pageSize.width || doc.internal.pageSize.getWidth();
+
+    // //FOOTER
+    // const pageCount1 = doc.getNumberOfPages();
+    // const myFooter1 = ['Casos Legales LeyMaxima', pageCount1.toString()];
+    // doc.setFontSize(10);
+    // doc.setTextColor(100)
+    // doc.text(myFooter1, pageWidth / 2, pageHeight - 7, { align: 'center' });
+    // doc.addPage()
+
+
+
+
+    //*prueba
+    // Agregar el título "Listado de Empleados"
+    //const text = 'Casos Legales LeyMaximafffyyyyyyyyyyyyyyyyyyyyyyyyfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhffffffffffffffffffff';
+
+
+
+    // var x = 10;
+    // var y = 200;
+    // var w = 25;
+    // var h = 25;
+    // for (let index = 0; index < 20; index++) {
+
+    //   const img2 = localStorage.getItem('imagen')?.toString();
+
+
+    //   if (img2) {
+    //     doc.addImage(img2, '', x, y, w, h);
+    //     x = x + 20;
+    //     console.log(x)
+    //   } else {
+    //     console.error('La imagen no está disponible');
+    //   }
+
+    // }
+
+
+    ///////////////////////////////////
+    // const lineHeight = doc.getLineHeight();
+    // const maxWidth = doc.internal.pageSize.getWidth(); // Ancho máximo de la página
+
+    // const textLines = doc.splitTextToSize(text, maxWidth);
+    // const textHeight = textLines.length * lineHeight;
+
+    // if (doc.getVerticalCoordinateString(doc.internal.pageSize.getHeight() - textHeight) < 0) {
+    //   doc.addPage();
+    // }
+
+    // doc.setFontSize(12);
+    // doc.text(textLines, 3, 10);
+
+
+
+    //FOOTER
+    // const pageCount = doc.getNumberOfPages();
+    // const myFooter = ['Casos Legales LeyMaxima', pageCount.toString()];
+    // doc.setFontSize(10);
+    // doc.setTextColor(100)
+    // doc.text(myFooter, pageWidth / 2, pageHeight - 7, { align: 'center' });
+
+
+    // const pdfDataUri = doc.output('datauristring');
+    // this.pdfViewer.nativeElement.src = pdfDataUri;
