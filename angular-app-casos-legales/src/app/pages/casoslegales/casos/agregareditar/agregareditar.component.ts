@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
+import { FileDetail } from 'src/app/pages/models/casoslegales/FileDetail';
 import { TestigosPorCaso } from 'src/app/pages/models/casoslegales/TestigosPorCaso';
 import { abogadosjueces } from 'src/app/pages/models/casoslegales/abogadosjueces';
 import { civiles } from 'src/app/pages/models/casoslegales/civil';
@@ -9,6 +10,7 @@ import { empresa } from 'src/app/pages/models/casoslegales/empresa';
 import { tiposdecaso } from 'src/app/pages/models/casoslegales/tiposdecaso';
 import { RolService } from 'src/app/pages/services/acceso/rol/rol.service';
 import { AbogadosjuecesService } from 'src/app/pages/services/casolegales/abogadosjuecesservice/abogadosjueces.service';
+import { CasosService } from 'src/app/pages/services/casolegales/casos/casos.service';
 import { CivilService } from 'src/app/pages/services/casolegales/civilesservice/civil.service';
 import { EmpresaService } from 'src/app/pages/services/casolegales/empresaservice/empresa.service';
 import { TiposdecasoService } from 'src/app/pages/services/casolegales/tiposdecasoservice/tiposdecaso.service';
@@ -25,6 +27,7 @@ export class AgregareditarComponent implements OnInit {
     constructor(
         private rolService: RolService,
         private tiposCasoService: TiposdecasoService,
+        private casoService: CasosService,
         private abogadosJuecesService: AbogadosjuecesService,
         private empresasService: EmpresaService,
         private civilesService: CivilService,
@@ -67,6 +70,12 @@ export class AgregareditarComponent implements OnInit {
 
     listadoTestigosDemandante: TestigosPorCaso[] = [];
     listadoTestigosDemandados: TestigosPorCaso[] = [];
+
+    filesImgDemandado: File[] = [];
+    filesDocumentDemandado: File[] = [];
+    
+    filesImgDemandante: File[] = [];
+    filesDocumentDemandante: File[] = [];
 
     ngOnInit(): void {
         if (!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin) {
@@ -446,6 +455,147 @@ export class AgregareditarComponent implements OnInit {
             this.listadoTestigosDemandadosFull = this.listadoTestigosDemandadosFull.filter(item => item.civi_Id !== value);
         }
     }
+   
+	onSelectFileImgDemandado(event:any) {
+        let filesTemp: File[] = event.addedFiles;
+
+        if(this.filesImgDemandado.length > 0){
+            filesTemp.forEach(element => {
+                this.filesImgDemandado.forEach(value => {
+                    if(element.name === value.name){
+                        this.mensajeWarning("Una o varias imagenes que intenta agregar ya han sido subidas");
+                        filesTemp = filesTemp.filter(item => item.name !== value.name);
+                    }
+                })
+            });
+        }
+
+        if(this.filesImgDemandante.length > 0){
+            filesTemp.forEach(element => {
+                this.filesImgDemandante.forEach(value => {
+                    if(element.name === value.name){
+                        this.mensajeWarning("Una o varias imagenes que intenta agregar ya han sido subidas");
+                        filesTemp = filesTemp.filter(item => item.name !== value.name);
+                    }
+                })
+            });
+        }
+
+        this.filesImgDemandado.push(...filesTemp);
+	}
+
+	onRemoveFileImgDemandado(event:any) {		
+		this.filesImgDemandado.splice(this.filesImgDemandado.indexOf(event), 1);
+	}
+   
+    onSelectFileDocumentDemandado(event:any){
+        let filesDocumentTemp: File[] = event.addedFiles;
+
+        if(this.filesDocumentDemandado.length > 0){
+            filesDocumentTemp.forEach(element => {
+                this.filesDocumentDemandado.forEach(value => {
+                    if(element.name === value.name){
+                        this.mensajeWarning("Uno o varios documentos que intenta agregar ya han sido subidos");
+                        filesDocumentTemp = filesDocumentTemp.filter(item => item.name !== value.name);
+                    }
+                })
+            });
+        }
+
+        if(this.filesDocumentDemandante.length > 0){
+            filesDocumentTemp.forEach(element => {
+                this.filesDocumentDemandante.forEach(value => {
+                    if(element.name === value.name){
+                        this.mensajeWarning("Uno o varios documentos que intenta agregar ya han sido subidos");
+                        filesDocumentTemp = filesDocumentTemp.filter(item => item.name !== value.name);
+                    }
+                })
+            });
+        }
+
+        this.filesDocumentDemandado.push(...filesDocumentTemp);
+    }
+
+    onRemoveFileDocumentDemandado(event:any){
+        this.filesDocumentDemandado.splice(this.filesDocumentDemandado.indexOf(event), 1);
+    }
+
+    onSelectFileImgDemandante(event:any) {
+        let filesTemp: File[] = event.addedFiles;
+
+        if(this.filesImgDemandado.length > 0){
+            filesTemp.forEach(element => {
+                this.filesImgDemandado.forEach(value => {
+                    if(element.name === value.name){
+                        this.mensajeWarning("Una o varias imagenes que intenta agregar ya han sido subidas");
+                        filesTemp = filesTemp.filter(item => item.name !== value.name);
+                    }
+                })
+            });
+        }
+
+        if(this.filesImgDemandante.length > 0){
+            filesTemp.forEach(element => {
+                this.filesImgDemandante.forEach(value => {
+                    if(element.name === value.name){
+                        this.mensajeWarning("Una o varias imagenes que intenta agregar ya han sido subidas");
+                        filesTemp = filesTemp.filter(item => item.name !== value.name);
+                    }
+                })
+            });
+        }
+
+		this.filesImgDemandante.push(...filesTemp);
+	}
+
+	onRemoveFileImgDemandante(event:any) {		
+		this.filesImgDemandante.splice(this.filesImgDemandante.indexOf(event), 1);
+	}
+   
+    onSelectFileDocumentDemandante(event:any){
+        let filesDocumentTemp: File[] = event.addedFiles;
+
+        if(this.filesDocumentDemandado.length > 0){
+            filesDocumentTemp.forEach(element => {
+                this.filesDocumentDemandado.forEach(value => {
+                    if(element.name === value.name){
+                        this.mensajeWarning("Uno o varios documentos que intenta agregar ya han sido subidos");
+                        filesDocumentTemp = filesDocumentTemp.filter(item => item.name !== value.name);
+                    }
+                })
+            });
+        }
+
+        if(this.filesDocumentDemandante.length > 0){
+            filesDocumentTemp.forEach(element => {
+                this.filesDocumentDemandante.forEach(value => {
+                    if(element.name === value.name){
+                        this.mensajeWarning("Uno o varios documentos que intenta agregar ya han sido subidos");
+                        filesDocumentTemp = filesDocumentTemp.filter(item => item.name !== value.name);
+                    }
+                })
+            });
+        }
+
+        this.filesDocumentDemandante.push(...filesDocumentTemp);
+    }
+
+    onRemoveFileDocumentDemandante(event:any){
+        this.filesDocumentDemandante.splice(this.filesDocumentDemandante.indexOf(event), 1);
+    }
+
+
+    getLinkImageDemandante(){
+        const fileTemp = new FormData();
+
+        fileTemp.append('file', this.filesImgDemandado[0], this.filesImgDemandado[0].name);
+        
+        this.casoService.getLinkImageDemandante(fileTemp).subscribe((data:any) => {
+            if (typeof (data) === 'object') {
+                console.log(data.link);
+            }
+        });
+    }   
 
     mensajeSuccess(messageBody: string) {
         Swal.fire({
@@ -463,7 +613,7 @@ export class AgregareditarComponent implements OnInit {
             icon: 'warning',
             title: messageBody,
             showConfirmButton: false,
-            timer: 2000,
+            timer: 2500,
         });
     }
 

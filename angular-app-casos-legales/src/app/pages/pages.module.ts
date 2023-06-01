@@ -18,6 +18,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { DropdownModule, NavModule, TabsModule } from '@coreui/angular';
 import { TablesModule } from './tables/tables.module';
 import {MatStepperModule} from '@angular/material/stepper';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 // Swiper Slider
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
@@ -139,7 +140,9 @@ import { EditarComponent  as EditarEmpresa} from './casoslegales/empresa/editar/
     AutocompleteLibModule,
     MatStepperModule,
     ArchwizardModule,
-    MatDividerModule
+    MatDividerModule,
+    NgxDropzoneModule,
+    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
