@@ -18,6 +18,7 @@ namespace CasosLegales.Entities.Entities
         public string civi_CorreoElectronico { get; set; }
         public DateTime civi_FechaNacimiento { get; set; }
         public int eciv_Id { get; set; }
+        public string eciv_Descripcion { get; set; }
         public string muni_Id { get; set; }
         public string muni_Nombre { get; set; }
         public string depa_Id { get; set; }

@@ -72,7 +72,7 @@ namespace CasosLegales.Entities.Entities
 
         [NotMapped]
         public string empe_Apellidos { get; set; }
-        
+
         public virtual tbRoles role { get; set; }
         public virtual tbUsuarios usua_IdCreacionNavigation { get; set; }
         public virtual tbUsuarios usua_IdModificacionNavigation { get; set; }
