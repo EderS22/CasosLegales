@@ -12,15 +12,25 @@ export class CasosService {
   constructor(private http: HttpClient) { }
 
   getLinkImageDemandante(file:FormData){
-    return this.http.post('https://file.io', file, {
-        params: {
-            expires: '2023-06-16T06:26:57.690Z',
-            maxDownloads: 20,
-            autoDelete: false
-        }
-    });
+    return this.http.post('https://file.io', file);
   }   
 
+  getLinkImage(file:FormData){
+    return this.http.post('https://store1.gofile.io/uploadFile', file, {
+      params: {
+        token: 'G2awcsshYkCoKrpXPhrVSauOhXLjBqcF',
+        folderId: 'f318b7b8-c776-472e-8bea-81424bb8771a'
+      }
+    });
+  }
 
+  getLinkDocument(file:FormData){
+    return this.http.post('https://store1.gofile.io/uploadFile', file, {
+      params: {
+        token: 'G2awcsshYkCoKrpXPhrVSauOhXLjBqcF',
+        folderId: 'f318b7b8-c776-472e-8bea-81424bb8771a'
+      }
+    });
+  }
   
 }

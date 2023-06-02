@@ -52,16 +52,20 @@
     "angular-shepherd": "^14.0.0",
     "angularx-flatpickr": "^7.0.0",
     "apexcharts": "^3.36.3",
+    "assert": "^2.0.0",
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
     "browserslist": "^4.21.4",
     "chart.js": "^3.9.1",
+    "crypto-browserify": "^3.12.0",
     "datatables.net": "^1.13.4",
     "datatables.net-dt": "^1.13.4",
     "echarts": "^5.4.1",
     "echarts-gl": "^2.0.9",
     "firebase": "^9.15.0",
     "flatpickr": "^4.6.13",
+    "fs": "^0.0.1-security",
+    "https-browserify": "^1.0.0",
     "intersection-observer": "^0.12.2",
     "jasmine-core": "^4.5.0",
     "jquery": "^3.7.0",
@@ -91,9 +95,12 @@
     "ngx-nestable": "^0.9.4",
     "ngx-ui-switch": "^14.0.3",
     "ngx-useful-swiper": "^10.0.1",
+    "os-browserify": "^0.3.0",
     "prismjs": "^1.29.0",
     "rxjs": "^7.6.0",
     "simplebar-angular": "^2.5.0",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
     "sweetalert2": "^11.6.15",
     "tslib": "^2.4.1",
     "zone.js": "^0.12.0"
@@ -110,21 +117,11 @@
     "@types/lodash": "^4.14.191",
     "@types/node": "^18.11.17",
     "@types/quill": "^2.0.10",
-    "assert": "^2.0.0",
-    "buffer": "^6.0.3",
-    "crypto-browserify": "^3.12.0",
-    "https-browserify": "^1.0.0",
     "karma-jasmine": "^5.1.0",
     "karma-jasmine-html-reporter": "^2.0.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
-    "os-browserify": "^0.3.0",
-    "process": "^0.11.10",
-    "react-app-rewired": "^2.2.1",
-    "stream-browserify": "^3.0.0",
-    "stream-http": "^3.2.0",
     "swiper": "^9.3.2",
-    "typescript": "~4.8.4",
-    "url": "^0.11.0"
+    "typescript": "~4.8.4"
   },
   "browserslist": [
     "last 1 version",
@@ -133,5 +130,8 @@
   ],
   "overrides": {
     "autoprefixer": "10.4.5"
+  },
+  "browser": {
+    "fs": false
   }
 }

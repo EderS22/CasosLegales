@@ -21,6 +21,7 @@ import Swal from 'sweetalert2';
     styleUrls: ['./agregareditar.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
+
 export class AgregareditarComponent implements OnInit {
 
     constructor(
@@ -457,7 +458,6 @@ export class AgregareditarComponent implements OnInit {
    
 	onSelectFileImgDemandado(event:any) {
         let filesTemp: File[] = event.addedFiles;
-        console.log(event);
         if(this.filesImgDemandado.length > 0){
             filesTemp.forEach(element => {
                 this.filesImgDemandado.forEach(value => {
@@ -583,7 +583,6 @@ export class AgregareditarComponent implements OnInit {
         this.filesDocumentDemandante.splice(this.filesDocumentDemandante.indexOf(event), 1);
     }
 
-
     getLinkImageDemandante(){
         const fileTemp = new FormData();
 
@@ -596,6 +595,32 @@ export class AgregareditarComponent implements OnInit {
             }
         });
     }   
+
+    getLinkImage(){
+        const fileTemp = new FormData();
+
+        fileTemp.append('file', this.filesImgDemandado[0], this.filesImgDemandado[0].name);
+
+        this.casoService.getLinkImage(fileTemp)
+        .subscribe((data:any) => {
+            if (data.status === 'ok') {
+                console.log(data.data.downloadPage)
+            }
+        })
+    }
+
+    getLinkDocument(){
+        const fileTemp = new FormData();
+
+        fileTemp.append('file', this.filesDocumentDemandante[0], this.filesDocumentDemandante[0].name);
+
+        this.casoService.getLinkDocument(fileTemp)
+        .subscribe((data:any) => {
+            if (data.status === 'ok') {
+                console.log(data.data.downloadPage)
+            }
+        })
+    }
 
     mensajeSuccess(messageBody: string) {
         Swal.fire({
