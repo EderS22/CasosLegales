@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
-import { FileDetail } from 'src/app/pages/models/casoslegales/FileDetail';
 import { TestigosPorCaso } from 'src/app/pages/models/casoslegales/TestigosPorCaso';
 import { abogadosjueces } from 'src/app/pages/models/casoslegales/abogadosjueces';
 import { civiles } from 'src/app/pages/models/casoslegales/civil';
@@ -458,7 +457,7 @@ export class AgregareditarComponent implements OnInit {
    
 	onSelectFileImgDemandado(event:any) {
         let filesTemp: File[] = event.addedFiles;
-
+        console.log(event);
         if(this.filesImgDemandado.length > 0){
             filesTemp.forEach(element => {
                 this.filesImgDemandado.forEach(value => {
@@ -593,6 +592,7 @@ export class AgregareditarComponent implements OnInit {
         this.casoService.getLinkImageDemandante(fileTemp).subscribe((data:any) => {
             if (typeof (data) === 'object') {
                 console.log(data.link);
+
             }
         });
     }   
