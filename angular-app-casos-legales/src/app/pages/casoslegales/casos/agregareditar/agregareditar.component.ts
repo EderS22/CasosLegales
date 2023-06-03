@@ -73,7 +73,7 @@ export class AgregareditarComponent implements OnInit {
 
     filesImgDemandado: File[] = [];
     filesDocumentDemandado: File[] = [];
-    
+
     filesImgDemandante: File[] = [];
     filesDocumentDemandante: File[] = [];
 
@@ -195,7 +195,41 @@ export class AgregareditarComponent implements OnInit {
     onSubmit() {
         this.submitted = true;
 
+        if(this.filesImgDemandado.length > 0){
+            this.filesImgDemandado.forEach(element => {
+                const fileTemp = new FormData();
+                fileTemp.append('file', element, element.name);
+    
+                this.casoService.getLinkFile(fileTemp)
+                .subscribe((data:any) => {
+                   if(data.status === 'ok'){
+                       this.casoService.setLinkDirect(data.data.fileId)
+                       .subscribe((data:any) => {
+                           console.log(element.name);
+                           console.log(data.data);
+                       })              
+                   }
+                })
+             }) 
+        }
 
+        if(this.filesImgDemandado.length > 0){
+            this.filesImgDemandado.forEach(element => {
+                const fileTemp = new FormData();
+                fileTemp.append('file', element, element.name);
+    
+                this.casoService.getLinkFile(fileTemp)
+                .subscribe((data:any) => {
+                   if(data.status === 'ok'){
+                       this.casoService.setLinkDirect(data.data.fileId)
+                       .subscribe((data:any) => {
+                           console.log(element.name);
+                           console.log(data.data);
+                       })              
+                   }
+                })
+             }) 
+        }
     }
 
     agregarTestigoDemandante() {
@@ -215,7 +249,7 @@ export class AgregareditarComponent implements OnInit {
             this.listadoTestigosDemandante.push(testigoTemp);
 
             this.listadoTestigosFull = this.listadoTestigosFull.filter(item => item.civi_Id !== testigoTemp.teca_Testigo);
-            
+
             this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
             this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
 
@@ -244,7 +278,7 @@ export class AgregareditarComponent implements OnInit {
             this.listadoTestigosDemandados.push(testigoTemp);
 
             this.listadoTestigosFull = this.listadoTestigosFull.filter(item => item.civi_Id !== testigoTemp.teca_Testigo);
-            
+
             this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
             this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
 
@@ -298,13 +332,13 @@ export class AgregareditarComponent implements OnInit {
                 this.listadoCivilesDemandado = this.listadoCivilesDemandado.filter(val => val.civi_Id !== item.teca_Testigo);
             })
         }
-        
+
         if (this.listadoTestigosDemandante.length > 0) {
             this.listadoTestigosDemandante.forEach(item => {
                 this.listadoCivilesDemandado = this.listadoCivilesDemandado.filter(val => val.civi_Id !== item.teca_Testigo);
             })
         }
-        
+
     }
 
     tipoDemandadoChange() {
@@ -317,12 +351,12 @@ export class AgregareditarComponent implements OnInit {
                 this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(val => val.civi_Id !== item.teca_Testigo);
             })
         }
-        
+
         if (this.listadoTestigosDemandante.length > 0) {
             this.listadoTestigosDemandante.forEach(item => {
                 this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(val => val.civi_Id !== item.teca_Testigo);
             })
-        } 
+        }
 
     }
 
@@ -334,8 +368,8 @@ export class AgregareditarComponent implements OnInit {
             this.listadoTestigosDemandados.forEach(item => {
                 this.listadoCivilesDemandado =  this.listadoCivilesDemandado.filter(val => val.civi_Id !== item.teca_Testigo);
             })
-        } 
-        
+        }
+
         if (this.listadoTestigosDemandante.length > 0) {
             this.listadoTestigosDemandante.forEach(item => {
                 this.listadoCivilesDemandado =  this.listadoCivilesDemandado.filter(val => val.civi_Id !== item.teca_Testigo);
@@ -345,7 +379,7 @@ export class AgregareditarComponent implements OnInit {
         if (value > 0 && this.form['caso_TipoDemandante'].value === "E") {
             this.listadoEmpresasDemandado = this.listadoEmpresasDemandado.filter(item => item.emsa_Id !== value);
         }
-        else if (value > 0 && this.form['caso_TipoDemandante'].value === "C") 
+        else if (value > 0 && this.form['caso_TipoDemandante'].value === "C")
         {
             this.listadoCivilesDemandado = this.listadoCivilesDemandado.filter(item => item.civi_Id !== value);
         }
@@ -362,7 +396,7 @@ export class AgregareditarComponent implements OnInit {
                     demandados.forEach(element => {
                         this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== element);
                     });
-                }  
+                }
             }
             this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
             this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
@@ -384,8 +418,8 @@ export class AgregareditarComponent implements OnInit {
             this.listadoTestigosDemandados.forEach(item => {
                 this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(val => val.civi_Id !== item.teca_Testigo);
             })
-        } 
-        
+        }
+
         if (this.listadoTestigosDemandante.length > 0) {
             this.listadoTestigosDemandante.forEach(item => {
                 this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(val => val.civi_Id !== item.teca_Testigo);
@@ -397,8 +431,8 @@ export class AgregareditarComponent implements OnInit {
                 this.listadoEmpresasDemandante = this.listadoEmpresasDemandante.filter(item => item.emsa_Id !== element);
             })
         }
-        else if (value.length > 0 && this.form['caso_TipoDemandado'].value === "C") 
-        {   
+        else if (value.length > 0 && this.form['caso_TipoDemandado'].value === "C")
+        {
             value.forEach(element => {
                 this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(item => item.civi_Id !== element);
 
@@ -455,7 +489,7 @@ export class AgregareditarComponent implements OnInit {
             this.listadoTestigosDemandadosFull = this.listadoTestigosDemandadosFull.filter(item => item.civi_Id !== value);
         }
     }
-   
+
 	onSelectFileImgDemandado(event:any) {
         let filesTemp: File[] = event.addedFiles;
         if(this.filesImgDemandado.length > 0){
@@ -483,10 +517,10 @@ export class AgregareditarComponent implements OnInit {
         this.filesImgDemandado.push(...filesTemp);
 	}
 
-	onRemoveFileImgDemandado(event:any) {		
+	onRemoveFileImgDemandado(event:any) {
 		this.filesImgDemandado.splice(this.filesImgDemandado.indexOf(event), 1);
 	}
-   
+
     onSelectFileDocumentDemandado(event:any){
         let filesDocumentTemp: File[] = event.addedFiles;
 
@@ -547,10 +581,10 @@ export class AgregareditarComponent implements OnInit {
 		this.filesImgDemandante.push(...filesTemp);
 	}
 
-	onRemoveFileImgDemandante(event:any) {		
+	onRemoveFileImgDemandante(event:any) {
 		this.filesImgDemandante.splice(this.filesImgDemandante.indexOf(event), 1);
 	}
-   
+
     onSelectFileDocumentDemandante(event:any){
         let filesDocumentTemp: File[] = event.addedFiles;
 
@@ -581,45 +615,6 @@ export class AgregareditarComponent implements OnInit {
 
     onRemoveFileDocumentDemandante(event:any){
         this.filesDocumentDemandante.splice(this.filesDocumentDemandante.indexOf(event), 1);
-    }
-
-    getLinkImageDemandante(){
-        const fileTemp = new FormData();
-
-        fileTemp.append('file', this.filesImgDemandado[0], this.filesImgDemandado[0].name);
-        
-        this.casoService.getLinkImageDemandante(fileTemp).subscribe((data:any) => {
-            if (typeof (data) === 'object') {
-                console.log(data.link);
-
-            }
-        });
-    }   
-
-    getLinkImage(){
-        const fileTemp = new FormData();
-
-        fileTemp.append('file', this.filesImgDemandado[0], this.filesImgDemandado[0].name);
-
-        this.casoService.getLinkImage(fileTemp)
-        .subscribe((data:any) => {
-            if (data.status === 'ok') {
-                console.log(data.data.downloadPage)
-            }
-        })
-    }
-
-    getLinkDocument(){
-        const fileTemp = new FormData();
-
-        fileTemp.append('file', this.filesDocumentDemandante[0], this.filesDocumentDemandante[0].name);
-
-        this.casoService.getLinkDocument(fileTemp)
-        .subscribe((data:any) => {
-            if (data.status === 'ok') {
-                console.log(data.data.downloadPage)
-            }
-        })
     }
 
     mensajeSuccess(messageBody: string) {

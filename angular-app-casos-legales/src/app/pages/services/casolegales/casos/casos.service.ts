@@ -4,33 +4,33 @@ import { GlobalComponent } from 'src/app/global-component';
 
 const API_URL = GlobalComponent.API_URL;
 
+const tokenGoFile = 'G2awcsshYkCoKrpXPhrVSauOhXLjBqcF';
+const folderIdCasosLegales = '8034a3c7-5bc4-4306-95ff-b3c6496dda3b';
+
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
+
 export class CasosService {
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
 
-  getLinkImageDemandante(file:FormData){
-    return this.http.post('https://file.io', file);
-  }   
+    getLinkFile(file: FormData) {
+        file.append('token', tokenGoFile);
+        file.append('folderId', folderIdCasosLegales);
 
-  getLinkImage(file:FormData){
-    return this.http.post('https://store1.gofile.io/uploadFile', file, {
-      params: {
-        token: 'G2awcsshYkCoKrpXPhrVSauOhXLjBqcF',
-        folderId: 'f318b7b8-c776-472e-8bea-81424bb8771a'
-      }
-    });
-  }
+        return this.http.post('https://store1.gofile.io/uploadFile', file);
+    }
 
-  getLinkDocument(file:FormData){
-    return this.http.post('https://store1.gofile.io/uploadFile', file, {
-      params: {
-        token: 'G2awcsshYkCoKrpXPhrVSauOhXLjBqcF',
-        folderId: 'f318b7b8-c776-472e-8bea-81424bb8771a'
-      }
-    });
-  }
-  
+    setLinkDirect(contentId:string){
+        const body = {
+            contentId: contentId,
+            token: tokenGoFile,
+            option: 'directLink',
+            value: 'true',
+        }
+
+        return this.http.put<any>('https://api.gofile.io/setOption', body);
+    }
+
 }

@@ -390,16 +390,17 @@ GO
 
 --********** TABLE EVIDENCIASPORCASO ************--
 CREATE TABLE CALE.tbEvidenciasPorCaso(
-	evca_Id INT IDENTITY(1,1),
-	tiev_Id INT NOT NULL,
-	caso_Id INT NOT NULL,
-	evca_Descripcion NVARCHAR(MAX) NOT NULL,
-	
-	evca_UsuCreacion			INT				NOT NULL,
-	evca_FechaCreacion			DATETIME		NOT NULL CONSTRAINT DF_CALE_tbEvidenciasPorCaso_evca_FechaCreacion DEFAULT(GETDATE()),
-	evca_UsuModificacion		INT,
-	evca_FechaModificacion		DATETIME,
-	evca_Estado					BIT				NOT NULL CONSTRAINT DF_CALE_tbEvidenciasPorCaso_evca_Estado DEFAULT(1),
+	evca_Id							INT IDENTITY(1,1),
+	tiev_Id							INT NOT NULL,
+	caso_Id							INT NOT NULL,
+	evca_NombreArchivo				NVARCHAR(255) NOT NULL,
+	evca_UrlArchivo					NVARCHAR(255) NOT NULL,
+
+	evca_UsuCreacion				INT	NOT NULL,
+	evca_FechaCreacion				DATETIME NOT NULL CONSTRAINT DF_CALE_tbEvidenciasPorCaso_evca_FechaCreacion DEFAULT(GETDATE()),
+	evca_UsuModificacion			INT,
+	evca_FechaModificacion			DATETIME,
+	evca_Estado						BIT				NOT NULL CONSTRAINT DF_CALE_tbEvidenciasPorCaso_evca_Estado DEFAULT(1),
 	
 	CONSTRAINT PK_CALE_tbEvidenciasPorCaso_evca_Id	PRIMARY KEY(evca_Id),
 	CONSTRAINT FK_CALE_tbEvidenciasPorCaso_CALE_tbTiposdeEvidencia_tiev_Id				FOREIGN KEY(tiev_Id)						REFERENCES CALE.tbTiposdeEvidencia(tiev_Id),

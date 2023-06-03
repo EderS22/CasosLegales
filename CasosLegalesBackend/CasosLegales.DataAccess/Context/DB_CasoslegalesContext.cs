@@ -52,7 +52,7 @@ namespace CasosLegales.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
+            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
             modelBuilder.Entity<VW_tbAbogadosJueces>(entity =>
             {
@@ -1018,8 +1018,6 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.ToTable("tbEvidenciasPorCaso", "CALE");
 
-                entity.Property(e => e.evca_Descripcion).IsRequired();
-
                 entity.Property(e => e.evca_Estado)
                     .IsRequired()
                     .HasDefaultValueSql("((1))");
@@ -1029,6 +1027,14 @@ namespace CasosLegales.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.evca_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.evca_NombreArchivo)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.evca_UrlArchivo)
+                    .IsRequired()
+                    .HasMaxLength(255);
 
                 entity.HasOne(d => d.caso)
                     .WithMany(p => p.tbEvidenciasPorCaso)

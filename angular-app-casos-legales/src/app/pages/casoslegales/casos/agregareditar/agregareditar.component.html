@@ -385,7 +385,6 @@
                     class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Siguiente</button>
         </div>
     </aw-wizard-step>
-
     <aw-wizard-step>
         <ng-template awWizardStepSymbol>
             <li class="nav-item" role="presentation">
@@ -394,6 +393,14 @@
                     aria-controls="pills-success" aria-selected="false">3</button>
             </li>
         </ng-template>
+        <div class="d-flex align-items-start gap-3 mt-4 mb-4">
+            <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
+                data-previous="pills-gen-info-tab" awPreviousStep (click)="testigoDemandanteForm.reset()">
+                <i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Regresar</button>
+            <button type="button" class="btn btn-primary btn-label right ms-auto nexttab nexttab"
+                data-nexttab="pills-success-tab" awNextStep><i
+                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Siguiente</button>
+        </div>
         <div class="mb-4">
             <div class="row">
                 <div class="col-sm-6">
@@ -452,12 +459,62 @@
                 </div>
             </div>
            <div class="mt-4">
-            <button (click)="getLinkImage()" class="btn btn-primary">Cargar Imagen</button>
-            <a href="https://store1.gofile.io/download/f179f901-5cf4-41e0-b20c-dc4205b999be/WhatsApp%20Image%202023-03-23%20at%2010.04.50%20AM%20(3).jpeg">
-                <button class="btn btn-info">Descargar Imagen</button>
-            </a>
-            <button (click)="getLinkDocument()" class="btn btn-primary">Cargar Documento</button>
-           </div>
+                
+            </div>
+        </div>
+        <div class="d-flex align-items-start gap-3 mt-4 mb-4">
+            <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
+                data-previous="pills-gen-info-tab" awPreviousStep (click)="testigoDemandanteForm.reset()">
+                <i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Regresar</button>
+            <button type="button" class="btn btn-primary btn-label right ms-auto nexttab nexttab"
+                data-nexttab="pills-success-tab" awNextStep><i
+                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Siguiente</button>
+        </div>
+    </aw-wizard-step>
+    <aw-wizard-step>
+        <ng-template awWizardStepSymbol>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill" data-progressbar="custom-progress-bar" id="pills-success-tab"
+                    data-bs-toggle="pill" data-bs-target="#pills-success" type="button" role="tab"
+                    aria-controls="pills-success" aria-selected="false">4</button>
+            </li>
+        </ng-template>
+        <div class="d-flex align-items-start gap-3 mt-4 mb-4">
+            <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
+                data-previous="pills-gen-info-tab" awPreviousStep (click)="testigoDemandanteForm.reset()">
+                <i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Regresar</button>
+            <button type="button" class="btn btn-primary btn-label right ms-auto nexttab nexttab"
+                data-nexttab="pills-success-tab" awNextStep ><i
+                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Guardar caso</button>
+        </div>
+        <div class="mb-4">
+          
+        </div>
+        <div class="d-flex align-items-start gap-3 mt-4 mb-4">
+            <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
+                data-previous="pills-gen-info-tab" awPreviousStep (click)="testigoDemandanteForm.reset()">
+                <i class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Regresar</button>
+            <button type="button" class="btn btn-primary btn-label right ms-auto nexttab nexttab"
+                data-nexttab="pills-success-tab" awNextStep ><i
+                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Guardar caso</button>
+        </div>
+    </aw-wizard-step>
+    <aw-wizard-step>
+        <ng-template awWizardStepSymbol>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link rounded-pill" data-progressbar="custom-progress-bar" id="pills-success-tab"
+                    data-bs-toggle="pill" data-bs-target="#pills-success" type="button" role="tab"
+                    aria-controls="pills-success" aria-selected="false">5</button>
+            </li>
+        </ng-template>
+        <div>
+            <div class="text-center">
+                <div class="mb-4">
+                  <lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon>
+                </div>
+                <h5>Exitoso !</h5>
+                <p class="text-muted">Caso {{isEdit ? 'editado' : 'guardado'}} con éxito</p>
+            </div>
         </div>
     </aw-wizard-step>
 </aw-wizard>
