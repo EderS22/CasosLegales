@@ -117,11 +117,30 @@
         public static string EliminarAbogadosJueces     = "CALE.UDP_tbAbogadosJueces_Delete";
         public static string CargarAbogadosJueces       = "cale.UDP_tbAbogadosJueces_Find";
 
-        public static string DdlAbogados = "CALE.UDP_tbAbogadosJueces_DdlAbogados";
-        public static string DdlJueces = "CALE.UDP_tbAbogadosJueces_DdlJueces";
         #endregion
 
+        #region Casos y relacionado 
+        public static string DdlAbogados = "CALE.UDP_tbAbogadosJueces_DdlAbogados";
+        public static string DdlJueces = "CALE.UDP_tbAbogadosJueces_DdlJueces";
 
 
+        public static string UDP_tbCasos_Insert = "CALE.UDP_tbCasos_Insert";
+
+
+        public static string UDP_tbAcusadosPorCaso_Insert = "CALE.UDP_tbAcusadosPorCaso_Insert";
+
+
+        public static string UDP_tbTestigosPorCaso_Insert = "CALE.UDP_tbTestigosPorCaso_Insert";
+
+
+        public static string UDP_tbEvidenciasPorCaso_Insert = "CALE.UDP_tbEvidenciasPorCaso_Insert";
+        public static string UDP_tbEvidenciasPorCaso_Delete = "CALE.UDP_tbEvidenciasPorCaso_Delete";
+
+
+        public static string UDP_tbVeredictos_Insert = "CALE.UDP_tbVeredictos_Insert";
+
+
+        public static string UDP_tbDetallesVeredictos_Insert = "CALE.UDP_tbDetallesVeredictos_Insert";
+        #endregion
     }
 }

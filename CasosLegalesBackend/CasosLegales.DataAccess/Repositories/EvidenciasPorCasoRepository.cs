@@ -1,6 +1,9 @@
 ﻿using CasosLegales.Entities.Entities;
+using Dapper;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +24,24 @@ namespace CasosLegales.DataAccess.Repositories
 
         public RequestStatus Insert(tbEvidenciasPorCaso item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@caso_Id", item.caso_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@tiev_Id", item.tiev_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@evca_NombreArchivo", item.evca_NombreArchivo, DbType.String, ParameterDirection.Input);
+            parametros.Add("@evca_UrlArchivo", item.evca_UrlArchivo, DbType.String, ParameterDirection.Input);
+            parametros.Add("@evca_Demandante", item.evca_Demandante, DbType.Boolean, ParameterDirection.Input);
+            parametros.Add("@evca_Demandado", item.evca_Demandado, DbType.Boolean, ParameterDirection.Input);
+            parametros.Add("@evca_UsuCreacion", item.evca_UsuCreacion, DbType.Int32, ParameterDirection.Input);
+
+            var result = db.QueryFirst<int>(ScriptsDataBase.UDP_tbEvidenciasPorCaso_Insert, parametros, commandType: CommandType.StoredProcedure);
+
+            return new RequestStatus()
+            {
+                CodeStatus = result,
+                MessageStatus = "Estado Insert"
+            };
         }
 
         public IEnumerable<tbEvidenciasPorCaso> List()

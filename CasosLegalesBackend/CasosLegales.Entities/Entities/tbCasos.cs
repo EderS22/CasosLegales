@@ -22,8 +22,6 @@ namespace CasosLegales.Entities.Entities
         public int abju_IdJuez { get; set; }
         public string caso_TipoDemandante { get; set; }
         public int caso_IdDemandante { get; set; }
-        public string caso_TipoDemandado { get; set; }
-        public int caso_IdDemandado { get; set; }
         public int abju_IdAbogadoDemandante { get; set; }
         public int abju_IdAbogadoDemandado { get; set; }
         public bool caso_Abierto { get; set; }

@@ -10,7 +10,7 @@ namespace CasosLegales.Entities.Entities
     {
         public int acus_Id { get; set; }
         public int caso_Id { get; set; }
-        public int acus_TipoAcusado { get; set; }
+        public string acus_TipoAcusado { get; set; }
         public int acus_Acusado { get; set; }
         public int acus_UsuCreacion { get; set; }
         public DateTime acus_FechaCreacion { get; set; }

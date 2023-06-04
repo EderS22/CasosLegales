@@ -1,6 +1,9 @@
 ﻿using CasosLegales.Entities.Entities;
+using Dapper;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +24,25 @@ namespace CasosLegales.DataAccess.Repositories
 
         public RequestStatus Insert(tbCasos item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@caso_Descripcion", item.caso_Descripcion, DbType.String, ParameterDirection.Input);
+            parametros.Add("@tica_Id", item.tica_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@abju_IdJuez", item.abju_IdJuez, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@caso_TipoDemandante", item.caso_TipoDemandante, DbType.String, ParameterDirection.Input);
+            parametros.Add("@caso_IdDemandante", item.tica_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@abju_IdAbogadoDemandante", item.abju_IdAbogadoDemandante, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@abju_IdAbogadoDemandado", item.abju_IdAbogadoDemandado, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@caso_Abierto", item.caso_Abierto, DbType.Boolean, ParameterDirection.Input);
+            parametros.Add("@usua_IdCreacion", item.usua_IdCreacion, DbType.Int32, ParameterDirection.Input);
+
+            var result = db.QueryFirst<int>(ScriptsDataBase.UDP_tbCasos_Insert, parametros, commandType: CommandType.StoredProcedure);
+
+            return new RequestStatus() { 
+                CodeStatus = result,
+                MessageStatus = "Id Caso"
+            };
         }
 
         public IEnumerable<tbCasos> List()

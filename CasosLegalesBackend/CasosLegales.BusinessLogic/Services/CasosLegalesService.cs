@@ -16,15 +16,25 @@ namespace CasosLegales.BusinessLogic.Services
         private readonly EmpleadosRepository _empleadosRepository;
         private readonly TiposDeCasoRepository _tiposDeCasoRepository;
         private readonly AbogadosJuecesRepository _abogadosJuecesRepository;
-        
-        
+        private readonly CasosRepository _casosRepository;
+        private readonly AcusadoPorCasoRepository _acusadoPorCasoRepository;
+        private readonly EvidenciasPorCasoRepository _evidenciasPorCasoRepository;
+        private readonly TestigosPorCasoRepository _testigosPorCasoRepository;
+        private readonly VeredictosRepository _veredictosRepository;
+        private readonly DetallesVeredictosRepository _detallesVeredictosRepository;
 
         public CasosLegalesService(CivilesRepository civilesRepository,
                                    EmpleadosRepository empleadosRepository,
                                    TiposDeCasoRepository tiposDeCasoRepository,
                                    AbogadosJuecesRepository abogadosJuecesRepository,
                                    TiposDeEvidenciaRepository tiposDeEvidenciaRepository,
-                                   EmpresasRepository empresasRepository)
+                                   EmpresasRepository empresasRepository,
+                                   CasosRepository casosRepository,
+                                   AcusadoPorCasoRepository acusadoPorCasoRepository,
+                                   EvidenciasPorCasoRepository evidenciasPorCasoRepository,
+                                   TestigosPorCasoRepository testigosPorCasoRepository,
+                                   VeredictosRepository veredictosRepository,
+                                   DetallesVeredictosRepository detallesVeredictosRepository)
         {
             _tiposDeEvidenciaRepository = tiposDeEvidenciaRepository;
             _civilesRepository = civilesRepository;
@@ -32,6 +42,12 @@ namespace CasosLegales.BusinessLogic.Services
             _empleadosRepository = empleadosRepository;
             _tiposDeCasoRepository = tiposDeCasoRepository;
             _abogadosJuecesRepository = abogadosJuecesRepository;
+            _casosRepository = casosRepository;
+            _acusadoPorCasoRepository = acusadoPorCasoRepository;
+            _evidenciasPorCasoRepository = evidenciasPorCasoRepository;
+            _testigosPorCasoRepository = testigosPorCasoRepository;
+            _veredictosRepository = veredictosRepository;
+            _detallesVeredictosRepository = detallesVeredictosRepository;
         }
 
         #region Tipos de Evidencias
@@ -307,7 +323,6 @@ namespace CasosLegales.BusinessLogic.Services
 
         #endregion
 
-
         #region Empleados
 
         public ServiceResult ListadoEmpleados()
@@ -398,7 +413,6 @@ namespace CasosLegales.BusinessLogic.Services
         }
 
         #endregion
-
 
         #region Tipos de Caso
 
@@ -612,5 +626,110 @@ namespace CasosLegales.BusinessLogic.Services
         }
         #endregion
 
+        #region Casos
+        public ServiceResult InsertarCaso(tbCasos item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _casosRepository.Insert(item);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
+        #endregion
+
+        #region Acusados por caso 
+        public ServiceResult InsertarAcusadoPorCaso(tbAcusadoPorCaso item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _acusadoPorCasoRepository.Insert(item);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
+
+        #endregion
+
+        #region Testigos por caso
+
+        public ServiceResult InsertarTestigoPorCaso(tbTestigosPorCaso item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _testigosPorCasoRepository.Insert(item);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
+
+
+        #endregion
+
+        #region Evidencias por caso
+
+        public ServiceResult InsertarEvidenciaPorCaso(tbEvidenciasPorCaso item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _evidenciasPorCasoRepository.Insert(item);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
+
+        #endregion
+
+        #region Veredictos
+
+        public ServiceResult InsertarVeredicto(tbVeredictos item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _veredictosRepository.Insert(item);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
+
+
+        #endregion
+
+        #region DetallesVeredictos
+        public ServiceResult InsertarDetalleVeredicto(tbDetallesVeredictos item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _detallesVeredictosRepository.Insert(item);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
+
+        #endregion
     }
 }

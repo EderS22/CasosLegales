@@ -1,8 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
-import { TestigosPorCaso } from 'src/app/pages/models/casoslegales/TestigosPorCaso';
+import { AcusadoPorCaso } from 'src/app/pages/models/casoslegales/AcusadoPorCaso';
+import { Caso } from 'src/app/pages/models/casoslegales/Caso';
+import { EvidenciaPorCaso } from 'src/app/pages/models/casoslegales/EvidenciaPorCaso';
+import { TestigoPorCaso } from 'src/app/pages/models/casoslegales/TestigoPorCaso';
+import { Veredicto } from 'src/app/pages/models/casoslegales/Veredicto';
 import { abogadosjueces } from 'src/app/pages/models/casoslegales/abogadosjueces';
 import { civiles } from 'src/app/pages/models/casoslegales/civil';
 import { empresa } from 'src/app/pages/models/casoslegales/empresa';
@@ -35,10 +39,21 @@ export class AgregareditarComponent implements OnInit {
         private router: Router
     ) { }
 
+    TipoDema: TipoDeman[] = [
+        { tide_Id: 'E', tide_Tipo: 'Empresa' },
+        { tide_Id: 'C', tide_Tipo: 'Civil' }
+    ]
+
+    TipoDema1: TipoDeman[] = [];
+    TipoDema2: TipoDeman[] = [];
+
     breadCrumbItems!: Array<{}>;
     dateNow: Date = new Date();
     isEdit: boolean = false;
     caso_IdEditar: number = 0;
+    allCorrect: boolean = true;
+
+    veredicto: Veredicto = new Veredicto();
 
     submitted: boolean = false;
     submittedTestigoDemandante: boolean = false;
@@ -68,8 +83,8 @@ export class AgregareditarComponent implements OnInit {
     listadoTestigosDemandanteFull: civiles[] = [];
     listadoTestigosDemandadosFull: civiles[] = [];
 
-    listadoTestigosDemandante: TestigosPorCaso[] = [];
-    listadoTestigosDemandados: TestigosPorCaso[] = [];
+    listadoTestigosDemandante: TestigoPorCaso[] = [];
+    listadoTestigosDemandados: TestigoPorCaso[] = [];
 
     filesImgDemandado: File[] = [];
     filesDocumentDemandado: File[] = [];
@@ -115,7 +130,7 @@ export class AgregareditarComponent implements OnInit {
             caso_TipoDemandado: [null, Validators.required],
             caso_IdDemandado: [[], Validators.required],
             abju_IdAbogadoDemandante: [null, Validators.required],
-            abju_IdAbogadoDemandado: [null, Validators.required]
+            abju_IdAbogadoDemandado: [null, Validators.required]            
         });
 
         this.testigoDemandanteForm = this.formBuilder.group({
@@ -178,6 +193,8 @@ export class AgregareditarComponent implements OnInit {
                     this.listadoEmpresasDemandado = data.data;
                 }
             })
+        this.TipoDema1 = this.TipoDema;
+        this.TipoDema2 = this.TipoDema;
     }
 
     get form() {
@@ -195,40 +212,241 @@ export class AgregareditarComponent implements OnInit {
     onSubmit() {
         this.submitted = true;
 
-        if(this.filesImgDemandado.length > 0){
-            this.filesImgDemandado.forEach(element => {
-                const fileTemp = new FormData();
-                fileTemp.append('file', element, element.name);
-    
-                this.casoService.getLinkFile(fileTemp)
-                .subscribe((data:any) => {
-                   if(data.status === 'ok'){
-                       this.casoService.setLinkDirect(data.data.fileId)
-                       .subscribe((data:any) => {
-                           console.log(element.name);
-                           console.log(data.data);
-                       })              
-                   }
-                })
-             }) 
-        }
+        if(this.casoForm.valid){
+            if(this.isEdit){
 
-        if(this.filesImgDemandado.length > 0){
-            this.filesImgDemandado.forEach(element => {
-                const fileTemp = new FormData();
-                fileTemp.append('file', element, element.name);
-    
-                this.casoService.getLinkFile(fileTemp)
+
+            }else{
+                const casoTemp = new Caso();
+                casoTemp.caso_Descripcion = this.casoForm.get('caso_Descripcion')?.value;
+                casoTemp.tica_Id = this.casoForm.get('tica_Id')?.value;
+                casoTemp.abju_IdJuez = this.casoForm.get('abju_IdJuez')?.value;
+                casoTemp.caso_TipoDemandante = this.casoForm.get('caso_TipoDemandante')?.value;
+                casoTemp.caso_IdDemandante = this.casoForm.get('caso_IdDemandante')?.value;
+                casoTemp.abju_IdAbogadoDemandante = this.casoForm.get('abju_IdAbogadoDemandante')?.value;
+                casoTemp.abju_IdAbogadoDemandado = this.casoForm.get('abju_IdAbogadoDemandado')?.value;
+                casoTemp.usua_IdCreacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+                
+                if(this.veredicto.vere_Descripcion !== undefined){
+                    if(this.veredicto.vere_Descripcion !== ''){
+                        casoTemp.caso_Abierto = false;
+                    }else{
+                        casoTemp.caso_Abierto = true;
+                    }
+                }
+                
+
+                this.casoService.insertarCaso(casoTemp)
                 .subscribe((data:any) => {
-                   if(data.status === 'ok'){
-                       this.casoService.setLinkDirect(data.data.fileId)
-                       .subscribe((data:any) => {
-                           console.log(element.name);
-                           console.log(data.data);
-                       })              
-                   }
+                    if(data.code === 200){
+                        if(data.data.codeStatus > 0){
+                            const IdCaso = data.data.codeStatus;
+
+                            const ListDemandado: number[] = this.casoForm.get('caso_IdDemandado')?.value;
+                            ListDemandado.forEach(item => {
+                                const DemandadoTemp = new AcusadoPorCaso();
+                                DemandadoTemp.caso_Id = IdCaso;
+                                DemandadoTemp.acus_TipoAcusado = this.casoForm.get('caso_TipoDemandado')?.value;
+                                DemandadoTemp.acus_Acusado = item;
+                                DemandadoTemp.acus_UsuCreacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+
+                                this.casoService.insertarAcusadoPorCaso(DemandadoTemp)
+                                .subscribe((data:any) => {
+                                    if(data.code.codeStatus === 0){
+                                        this.allCorrect = false;
+                                    }
+                                })
+                            })
+                            
+                            if(this.listadoTestigosDemandados.length > 0){
+                                this.listadoTestigosDemandados.forEach(element => {
+                                    element.caso_Id = IdCaso;
+                                    element.teca_UsuCreacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+
+                                    this.casoService.insertTestigoPorCaso(element)
+                                    .subscribe((data:any) => {
+                                        if(data.code.codeStatus === 0){
+                                            this.allCorrect = false;
+                                        }
+                                    })
+                                })
+                            }
+
+                            if(this.listadoTestigosDemandante.length > 0){
+                                this.listadoTestigosDemandante.forEach(element => {
+                                    element.caso_Id = IdCaso;
+                                    element.teca_UsuCreacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+
+                                    this.casoService.insertTestigoPorCaso(element)
+                                    .subscribe((data:any) => {
+                                        if(data.code.codeStatus === 0){
+                                            this.allCorrect = false;
+                                        }
+                                    })
+                                })
+                            }
+
+                            if (this.filesImgDemandado.length > 0) {
+                                this.filesImgDemandado.forEach(element => {
+                                    const fileTemp = new FormData();
+                                    fileTemp.append('file', element, element.name);
+                    
+                                    this.casoService.getLinkFile(fileTemp)
+                                        .subscribe((data: any) => {
+                                            if (data.status === 'ok') {
+                                                this.casoService.setLinkDirect(data.data.fileId)
+                                                    .subscribe((data: any) => {
+                                                        const evidenciaTemp = new EvidenciaPorCaso();
+
+                                                        evidenciaTemp.caso_Id = IdCaso;
+                                                        evidenciaTemp.evca_Demandado = true;
+                                                        evidenciaTemp.tiev_Id = 1;
+                                                        evidenciaTemp.evca_NombreArchivo = element.name;
+                                                        evidenciaTemp.evca_UrlArchivo = data.data;
+                                                        evidenciaTemp.evca_UsuCreacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+
+
+                                                        this.casoService.insertEvidenciaPorCaso(evidenciaTemp)
+                                                        .subscribe((data:any) => {
+                                                            if(data.code.codeStatus === 0){                                                                
+                                                                this.allCorrect = false;
+                                                            }
+                                                        })
+                                                    })
+                                            }
+                                        })
+                                })
+                            }
+                            
+                            if (this.filesDocumentDemandado.length > 0) {
+                                this.filesDocumentDemandado.forEach(element => {
+                                    const fileTemp = new FormData();
+                                    fileTemp.append('file', element, element.name);
+                    
+                                    this.casoService.getLinkFile(fileTemp)
+                                        .subscribe((data: any) => {
+                                            if (data.status === 'ok') {
+                                                this.casoService.setLinkDirect(data.data.fileId)
+                                                    .subscribe((data: any) => {
+                                                        const evidenciaTemp = new EvidenciaPorCaso();
+
+                                                        evidenciaTemp.caso_Id = IdCaso;
+                                                        evidenciaTemp.evca_Demandado = true;
+                                                        evidenciaTemp.tiev_Id = 2;
+                                                        evidenciaTemp.evca_NombreArchivo = element.name;
+                                                        evidenciaTemp.evca_UrlArchivo = data.data;
+                                                        evidenciaTemp.evca_UsuCreacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+
+
+                                                        this.casoService.insertEvidenciaPorCaso(evidenciaTemp)
+                                                        .subscribe((data:any) => {
+                                                            if(data.code.codeStatus === 0){
+                                                                this.allCorrect = false;
+                                                            }
+                                                        })        
+                                                    })
+                                            }
+                                        })
+                                })
+                            }
+                    
+                            if (this.filesImgDemandante.length > 0) {
+                                this.filesImgDemandante.forEach(element => {
+                                    const fileTemp = new FormData();
+                                    fileTemp.append('file', element, element.name);
+                    
+                                    this.casoService.getLinkFile(fileTemp)
+                                        .subscribe((data: any) => {
+                                            if (data.status === 'ok') {
+                                                this.casoService.setLinkDirect(data.data.fileId)
+                                                    .subscribe((data: any) => {
+                                                        const evidenciaTemp = new EvidenciaPorCaso();
+
+                                                        evidenciaTemp.caso_Id = IdCaso;
+                                                        evidenciaTemp.evca_Demandante = true;
+                                                        evidenciaTemp.tiev_Id = 1;
+                                                        evidenciaTemp.evca_NombreArchivo = element.name;
+                                                        evidenciaTemp.evca_UrlArchivo = data.data;
+                                                        evidenciaTemp.evca_UsuCreacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+
+
+                                                        this.casoService.insertEvidenciaPorCaso(evidenciaTemp)
+                                                        .subscribe((data:any) => {
+                                                            if(data.code.codeStatus === 0){
+                                                                this.allCorrect = false;
+                                                            }
+                                                        })
+                                                    })
+                                            }
+                                        })
+                                })
+                            }
+                    
+                            if (this.filesDocumentDemandante.length > 0) {
+                                this.filesDocumentDemandante.forEach(element => {
+                                    const fileTemp = new FormData();
+                                    fileTemp.append('file', element, element.name);
+                    
+                                    this.casoService.getLinkFile(fileTemp)
+                                        .subscribe((data: any) => {
+                                            if (data.status === 'ok') {
+                                                this.casoService.setLinkDirect(data.data.fileId)
+                                                    .subscribe((data: any) => {
+                                                        const evidenciaTemp = new EvidenciaPorCaso();
+
+                                                        evidenciaTemp.caso_Id = IdCaso;
+                                                        evidenciaTemp.evca_Demandante = true;
+                                                        evidenciaTemp.tiev_Id = 2;
+                                                        evidenciaTemp.evca_NombreArchivo = element.name;
+                                                        evidenciaTemp.evca_UrlArchivo = data.data;
+                                                        evidenciaTemp.evca_UsuCreacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+
+
+                                                        this.casoService.insertEvidenciaPorCaso(evidenciaTemp)
+                                                        .subscribe((data:any) => {
+                                                            if(data.code.codeStatus === 0){
+                                                                this.allCorrect = false;
+                                                            }
+                                                        })
+                                                    })
+                                            }
+                                        })
+                                })
+                            }
+
+                            if(this.veredicto.vere_Descripcion !== undefined){
+                                if(this.veredicto.vere_Descripcion !== ''){
+                                    this.veredicto.caso_Id = IdCaso;
+                                    this.veredicto.vere_UsuCreacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+
+                                    this.casoService.insertarVeredicto(this.veredicto)
+                                    .subscribe((data:any) => {
+                                        if(data.code.codeStatus === 0){
+                                            this.allCorrect = false;
+                                        }else{
+                                            console.log(data.data.codeStatus);
+                                        }
+                                    })
+                                }
+                            }
+
+                            if(!this.allCorrect){
+                                localStorage.setItem("casoAllCorrect", "false");
+                            }else{
+                                localStorage.setItem("casoAllCorrect", "true");
+                               this.router.navigate(["casoslegales/casos/listado"]);
+                            }
+                        }
+                    }
                 })
-             }) 
+
+            }
+        }
+    }
+
+    TipoCasoChange(event: any) {
+        if (event > 0) {
+
         }
     }
 
@@ -236,7 +454,7 @@ export class AgregareditarComponent implements OnInit {
         this.submittedTestigoDemandante = true;
 
         if (this.testigoDemandanteForm.valid) {
-            const testigoTemp = new TestigosPorCaso();
+            const testigoTemp = new TestigoPorCaso();
             testigoTemp.caso_Id = this.formTestigoDemandante["caso_Id"].value;
             testigoTemp.teca_Testigo = this.formTestigoDemandante["teca_Testigo"].value;
             testigoTemp.teca_Declaracion = this.formTestigoDemandante["teca_Declaracion"].value;
@@ -265,11 +483,11 @@ export class AgregareditarComponent implements OnInit {
         this.submittedTestigoDemandado = true;
 
         if (this.testigoDemandadoForm.valid) {
-            const testigoTemp = new TestigosPorCaso();
+            const testigoTemp = new TestigoPorCaso();
             testigoTemp.caso_Id = this.formTestigoDemandado["caso_Id"].value;
             testigoTemp.teca_Testigo = this.formTestigoDemandado["teca_Testigo"].value;
             testigoTemp.teca_Declaracion = this.formTestigoDemandado["teca_Declaracion"].value;
-            testigoTemp.teca_Demandante = true;
+            testigoTemp.teca_Demandado = true;
 
             testigoTemp.civi_DNI = this.listadoCiviles.filter(item => item.civi_Id === testigoTemp.teca_Testigo)[0].civi_DNI;
             testigoTemp.civi_Nombres = this.listadoCiviles.filter(item => item.civi_Id === testigoTemp.teca_Testigo)[0].civi_Nombres;
@@ -297,7 +515,7 @@ export class AgregareditarComponent implements OnInit {
             this.listadoCivilesDemandado.push(this.listadoCiviles.filter(item => item.civi_Id === value)[0]);
             this.listadoCivilesDemandante.push(this.listadoCiviles.filter(item => item.civi_Id === value)[0]);
 
-            if(this.form['caso_TipoDemandante'].value === "C"){
+            if (this.form['caso_TipoDemandante'].value === "C") {
                 this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== this.form['caso_IdDemandante'].value);
 
                 this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
@@ -313,7 +531,7 @@ export class AgregareditarComponent implements OnInit {
             this.listadoCivilesDemandado.push(this.listadoCiviles.filter(item => item.civi_Id === value)[0]);
             this.listadoCivilesDemandante.push(this.listadoCiviles.filter(item => item.civi_Id === value)[0]);
 
-            if(this.form['caso_TipoDemandante'].value === "C"){
+            if (this.form['caso_TipoDemandante'].value === "C") {
                 this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== this.form['caso_IdDemandante'].value);
 
                 this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
@@ -366,33 +584,32 @@ export class AgregareditarComponent implements OnInit {
 
         if (this.listadoTestigosDemandados.length > 0) {
             this.listadoTestigosDemandados.forEach(item => {
-                this.listadoCivilesDemandado =  this.listadoCivilesDemandado.filter(val => val.civi_Id !== item.teca_Testigo);
+                this.listadoCivilesDemandado = this.listadoCivilesDemandado.filter(val => val.civi_Id !== item.teca_Testigo);
             })
         }
 
         if (this.listadoTestigosDemandante.length > 0) {
             this.listadoTestigosDemandante.forEach(item => {
-                this.listadoCivilesDemandado =  this.listadoCivilesDemandado.filter(val => val.civi_Id !== item.teca_Testigo);
+                this.listadoCivilesDemandado = this.listadoCivilesDemandado.filter(val => val.civi_Id !== item.teca_Testigo);
             })
         }
 
         if (value > 0 && this.form['caso_TipoDemandante'].value === "E") {
             this.listadoEmpresasDemandado = this.listadoEmpresasDemandado.filter(item => item.emsa_Id !== value);
         }
-        else if (value > 0 && this.form['caso_TipoDemandante'].value === "C")
-        {
+        else if (value > 0 && this.form['caso_TipoDemandante'].value === "C") {
             this.listadoCivilesDemandado = this.listadoCivilesDemandado.filter(item => item.civi_Id !== value);
         }
 
-        if(this.form['caso_IdDemandado'].value){
-            if(this.form['caso_IdDemandado'].value.length > 0){
-                const demandados: number [] = this.form['caso_IdDemandado'].value;
+        if (this.form['caso_IdDemandado'].value) {
+            if (this.form['caso_IdDemandado'].value.length > 0) {
+                const demandados: number[] = this.form['caso_IdDemandado'].value;
 
-                if(this.form['caso_TipoDemandante'].value === "C"){
+                if (this.form['caso_TipoDemandante'].value === "C") {
                     demandados.forEach(element => {
                         this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== value && item.civi_Id !== element);
                     });
-                }else{
+                } else {
                     demandados.forEach(element => {
                         this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== element);
                     });
@@ -402,8 +619,8 @@ export class AgregareditarComponent implements OnInit {
             this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
         }
 
-        if(this.form['caso_TipoDemandado'].value === "E" && this.form['caso_TipoDemandante'].value === "E"){
-            this.listadoTestigosFull =  this.listadoCivilesDemandado;
+        if (this.form['caso_TipoDemandado'].value === "E" && this.form['caso_TipoDemandante'].value === "E") {
+            this.listadoTestigosFull = this.listadoCivilesDemandado;
 
             this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
             this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
@@ -431,12 +648,11 @@ export class AgregareditarComponent implements OnInit {
                 this.listadoEmpresasDemandante = this.listadoEmpresasDemandante.filter(item => item.emsa_Id !== element);
             })
         }
-        else if (value.length > 0 && this.form['caso_TipoDemandado'].value === "C")
-        {
+        else if (value.length > 0 && this.form['caso_TipoDemandado'].value === "C") {
             value.forEach(element => {
                 this.listadoCivilesDemandante = this.listadoCivilesDemandante.filter(item => item.civi_Id !== element);
 
-                if(this.form['caso_IdDemandante'].value > 0){
+                if (this.form['caso_IdDemandante'].value > 0) {
                     this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== element && item.civi_Id !== this.form['caso_IdDemandante'].value);
                 }
             })
@@ -445,14 +661,14 @@ export class AgregareditarComponent implements OnInit {
             this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
         }
 
-        if(this.form['caso_TipoDemandado'].value === "E" && this.form['caso_TipoDemandante'].value === "C"){
+        if (this.form['caso_TipoDemandado'].value === "E" && this.form['caso_TipoDemandante'].value === "C") {
             this.listadoTestigosFull = this.listadoCivilesDemandante.filter(item => item.civi_Id !== this.form['caso_IdDemandante'].value);
 
             this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
             this.listadoTestigosDemandadosFull = this.listadoTestigosFull;
         }
 
-        if(this.form['caso_TipoDemandado'].value === "E" && this.form['caso_TipoDemandante'].value === "E"){
+        if (this.form['caso_TipoDemandado'].value === "E" && this.form['caso_TipoDemandante'].value === "E") {
             this.listadoTestigosFull = this.listadoCivilesDemandante;
 
             this.listadoTestigosDemandanteFull = this.listadoTestigosFull;
@@ -490,12 +706,12 @@ export class AgregareditarComponent implements OnInit {
         }
     }
 
-	onSelectFileImgDemandado(event:any) {
+    onSelectFileImgDemandado(event: any) {
         let filesTemp: File[] = event.addedFiles;
-        if(this.filesImgDemandado.length > 0){
+        if (this.filesImgDemandado.length > 0) {
             filesTemp.forEach(element => {
                 this.filesImgDemandado.forEach(value => {
-                    if(element.name === value.name){
+                    if (element.name === value.name) {
                         this.mensajeWarning("Una o varias imagenes que intenta agregar ya han sido subidas");
                         filesTemp = filesTemp.filter(item => item.name !== value.name);
                     }
@@ -503,10 +719,10 @@ export class AgregareditarComponent implements OnInit {
             });
         }
 
-        if(this.filesImgDemandante.length > 0){
+        if (this.filesImgDemandante.length > 0) {
             filesTemp.forEach(element => {
                 this.filesImgDemandante.forEach(value => {
-                    if(element.name === value.name){
+                    if (element.name === value.name) {
                         this.mensajeWarning("Una o varias imagenes que intenta agregar ya han sido subidas");
                         filesTemp = filesTemp.filter(item => item.name !== value.name);
                     }
@@ -515,19 +731,19 @@ export class AgregareditarComponent implements OnInit {
         }
 
         this.filesImgDemandado.push(...filesTemp);
-	}
+    }
 
-	onRemoveFileImgDemandado(event:any) {
-		this.filesImgDemandado.splice(this.filesImgDemandado.indexOf(event), 1);
-	}
+    onRemoveFileImgDemandado(event: any) {
+        this.filesImgDemandado.splice(this.filesImgDemandado.indexOf(event), 1);
+    }
 
-    onSelectFileDocumentDemandado(event:any){
+    onSelectFileDocumentDemandado(event: any) {
         let filesDocumentTemp: File[] = event.addedFiles;
 
-        if(this.filesDocumentDemandado.length > 0){
+        if (this.filesDocumentDemandado.length > 0) {
             filesDocumentTemp.forEach(element => {
                 this.filesDocumentDemandado.forEach(value => {
-                    if(element.name === value.name){
+                    if (element.name === value.name) {
                         this.mensajeWarning("Uno o varios documentos que intenta agregar ya han sido subidos");
                         filesDocumentTemp = filesDocumentTemp.filter(item => item.name !== value.name);
                     }
@@ -535,10 +751,10 @@ export class AgregareditarComponent implements OnInit {
             });
         }
 
-        if(this.filesDocumentDemandante.length > 0){
+        if (this.filesDocumentDemandante.length > 0) {
             filesDocumentTemp.forEach(element => {
                 this.filesDocumentDemandante.forEach(value => {
-                    if(element.name === value.name){
+                    if (element.name === value.name) {
                         this.mensajeWarning("Uno o varios documentos que intenta agregar ya han sido subidos");
                         filesDocumentTemp = filesDocumentTemp.filter(item => item.name !== value.name);
                     }
@@ -549,17 +765,17 @@ export class AgregareditarComponent implements OnInit {
         this.filesDocumentDemandado.push(...filesDocumentTemp);
     }
 
-    onRemoveFileDocumentDemandado(event:any){
+    onRemoveFileDocumentDemandado(event: any) {
         this.filesDocumentDemandado.splice(this.filesDocumentDemandado.indexOf(event), 1);
     }
 
-    onSelectFileImgDemandante(event:any) {
+    onSelectFileImgDemandante(event: any) {
         let filesTemp: File[] = event.addedFiles;
 
-        if(this.filesImgDemandado.length > 0){
+        if (this.filesImgDemandado.length > 0) {
             filesTemp.forEach(element => {
                 this.filesImgDemandado.forEach(value => {
-                    if(element.name === value.name){
+                    if (element.name === value.name) {
                         this.mensajeWarning("Una o varias imagenes que intenta agregar ya han sido subidas");
                         filesTemp = filesTemp.filter(item => item.name !== value.name);
                     }
@@ -567,10 +783,10 @@ export class AgregareditarComponent implements OnInit {
             });
         }
 
-        if(this.filesImgDemandante.length > 0){
+        if (this.filesImgDemandante.length > 0) {
             filesTemp.forEach(element => {
                 this.filesImgDemandante.forEach(value => {
-                    if(element.name === value.name){
+                    if (element.name === value.name) {
                         this.mensajeWarning("Una o varias imagenes que intenta agregar ya han sido subidas");
                         filesTemp = filesTemp.filter(item => item.name !== value.name);
                     }
@@ -578,20 +794,20 @@ export class AgregareditarComponent implements OnInit {
             });
         }
 
-		this.filesImgDemandante.push(...filesTemp);
-	}
+        this.filesImgDemandante.push(...filesTemp);
+    }
 
-	onRemoveFileImgDemandante(event:any) {
-		this.filesImgDemandante.splice(this.filesImgDemandante.indexOf(event), 1);
-	}
+    onRemoveFileImgDemandante(event: any) {
+        this.filesImgDemandante.splice(this.filesImgDemandante.indexOf(event), 1);
+    }
 
-    onSelectFileDocumentDemandante(event:any){
+    onSelectFileDocumentDemandante(event: any) {
         let filesDocumentTemp: File[] = event.addedFiles;
 
-        if(this.filesDocumentDemandado.length > 0){
+        if (this.filesDocumentDemandado.length > 0) {
             filesDocumentTemp.forEach(element => {
                 this.filesDocumentDemandado.forEach(value => {
-                    if(element.name === value.name){
+                    if (element.name === value.name) {
                         this.mensajeWarning("Uno o varios documentos que intenta agregar ya han sido subidos");
                         filesDocumentTemp = filesDocumentTemp.filter(item => item.name !== value.name);
                     }
@@ -599,10 +815,10 @@ export class AgregareditarComponent implements OnInit {
             });
         }
 
-        if(this.filesDocumentDemandante.length > 0){
+        if (this.filesDocumentDemandante.length > 0) {
             filesDocumentTemp.forEach(element => {
                 this.filesDocumentDemandante.forEach(value => {
-                    if(element.name === value.name){
+                    if (element.name === value.name) {
                         this.mensajeWarning("Uno o varios documentos que intenta agregar ya han sido subidos");
                         filesDocumentTemp = filesDocumentTemp.filter(item => item.name !== value.name);
                     }
@@ -613,7 +829,7 @@ export class AgregareditarComponent implements OnInit {
         this.filesDocumentDemandante.push(...filesDocumentTemp);
     }
 
-    onRemoveFileDocumentDemandante(event:any){
+    onRemoveFileDocumentDemandante(event: any) {
         this.filesDocumentDemandante.splice(this.filesDocumentDemandante.indexOf(event), 1);
     }
 
@@ -646,4 +862,9 @@ export class AgregareditarComponent implements OnInit {
             timer: 2000,
         });
     }
+}
+
+class TipoDeman {
+    tide_Id!: string;
+    tide_Tipo!: string;
 }

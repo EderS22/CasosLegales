@@ -575,6 +575,12 @@ namespace CasosLegales.DataAccess.Context
 
                 entity.Property(e => e.acus_FechaModificacion).HasColumnType("datetime");
 
+                entity.Property(e => e.acus_TipoAcusado)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
                 entity.HasOne(d => d.acus_UsuCreacionNavigation)
                     .WithMany(p => p.tbAcusadoPorCasoacus_UsuCreacionNavigation)
                     .HasForeignKey(d => d.acus_UsuCreacion)

@@ -38,6 +38,17 @@ export class ListadoComponent implements OnInit {
                 })
         }
 
+        const casoAllCorrect = localStorage.getItem("casoAllCorrect");
+
+        if(casoAllCorrect){
+            if(casoAllCorrect){
+                this.mensajeSuccess("Caso agregado con exito");
+            }else{
+                this.mensajeError("Ocurrio un error al intentar agregar el caso")       
+            }
+
+            localStorage.removeItem("casoAllCorrect");
+        }
         this.breadCrumbItems = [
             { label: 'Casos' },
             { label: 'Listado', active: true }

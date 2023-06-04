@@ -669,6 +669,213 @@ BEGIN
 END
 GO
 
---**********************************************************/TABLES CALE***********************************************************--
+--*********************************************************************************************************************************--
+--*********************************************************************************************************************************--
+--*********************************************************************************************************************************--
 
+--**********************************************************TABLE Casos************************************************************--
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbCasos_Insert
+	@caso_Descripcion			NVARCHAR(200),
+	@tica_Id					INT,
+	@abju_IdJuez				INT,
+	@caso_TipoDemandante		CHAR(1),
+	@caso_IdDemandante			INT,
+	@abju_IdAbogadoDemandante	INT,
+	@abju_IdAbogadoDemandado	INT,
+	@usua_IdCreacion			INT,
+	@caso_Abierto				BIT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+			INSERT INTO [CALE].[tbCasos] ([caso_Descripcion], [tica_Id], [abju_IdJuez], [caso_TipoDemandante], [caso_IdDemandante], [abju_IdAbogadoDemandante], [abju_IdAbogadoDemandado], [caso_Abierto], [usua_IdCreacion])
+			VALUES (@caso_Descripcion, @tica_Id, @abju_IdJuez, @caso_TipoDemandante, @caso_IdDemandante, @abju_IdAbogadoDemandante, @abju_IdAbogadoDemandado, @caso_Abierto, @usua_IdCreacion)
+
+		COMMIT
+		SELECT TOP 1 caso_Id FROM [CALE].[tbCasos] ORDER BY [caso_Id] DESC
+	END TRY
+	BEGIN CATCH
+		ROLLBACK 
+		SELECT 0
+	END CATCH
+END
+GO
+
+--*********************************************************/TABLE Casos************************************************************--
+
+--*****************************************************TABLE Acusados por caso******************************************************--
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbAcusadosPorCaso_Insert
+	@caso_Id			INT,
+	@acus_TipoAcusado	CHAR(1),
+	@acus_Acusado		INT,
+	@acus_UsuCreacion	INT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN 
+			INSERT INTO [CALE].[tbAcusadoPorCaso] ([caso_Id], [acus_TipoAcusado], [acus_Acusado], [acus_UsuCreacion])
+			VALUES (@caso_Id, @acus_TipoAcusado, @acus_Acusado, @acus_UsuCreacion)
+		COMMIT
+		SELECT 1		
+	END TRY
+	BEGIN CATCH
+		SELECT 0
+	END CATCH
+END
+GO
+
+
+--****************************************************/TABLE Acusados por caso******************************************************--
+
+--*****************************************************TABLE Testigos por caso******************************************************--
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbTestigosPorCaso_Insert
+	@caso_Id			INT,
+	@teca_Testigo		INT,
+	@teca_Declaracion	NVARCHAR(MAX),
+	@teca_Demandante	BIT,
+	@teca_Demandado		BIT,
+	@teca_UsuCreacion	INT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+			
+			INSERT INTO CALE.tbTestigosPorCaso ([caso_Id], [teca_Testigo], [teca_Declaracion], [teca_Demandante], [teca_Demandado], [teca_UsuCreacion])
+			VALUES (@caso_Id, @teca_Testigo, @teca_Declaracion, @teca_Demandante, @teca_Demandado, @teca_UsuCreacion)
+		COMMIT
+		SELECT 1
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+		SELECT 0
+	END CATCH
+END
+GO
+
+--****************************************************/TABLE Testigos por caso******************************************************--
+
+--****************************************************TABLE Evidencias por caso*****************************************************--
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbEvidenciasPorCaso_Insert
+	@caso_Id				INT,
+	@tiev_Id				INT,
+	@evca_NombreArchivo		NVARCHAR(250),
+	@evca_UrlArchivo		NVARCHAR(MAX),
+	@evca_Demandante		BIT,
+	@evca_Demandado			BIT,
+	@evca_UsuCreacion		INT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+		DECLARE @evca_Id INT
+
+		SELECT @evca_Id = evca_Id FROM [CALE].[tbEvidenciasPorCaso] WHERE evca_NombreArchivo = @evca_NombreArchivo AND caso_Id = @caso_Id AND evca_Estado = 0
+
+		IF @evca_Id > 0
+		BEGIN
+			UPDATE CALE.tbEvidenciasPorCaso 
+			   SET evca_Estado = 1,
+				   evca_Demandante = @evca_Demandante,
+				   evca_Demandado = @evca_Demandado,
+				   evca_UsuModificacion = @evca_UsuCreacion,
+				   evca_FechaModificacion = GETDATE()
+			 WHERE evca_Id = @evca_Id
+		END
+		ELSE
+		BEGIN
+			INSERT INTO CALE.tbEvidenciasPorCaso (caso_Id, tiev_Id, evca_NombreArchivo, evca_Demandante, evca_Demandado, evca_UrlArchivo, evca_UsuCreacion)
+			VALUES (@caso_Id, @tiev_Id, @evca_NombreArchivo, @evca_Demandante, @evca_Demandado, @evca_UrlArchivo, @evca_UsuCreacion)
+		END
+
+		COMMIT
+		SELECT 1
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+		SELECT 0
+	END CATCH
+END
+GO
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbEvidenciasPorCaso_Delete
+	@evca_Id				INT,
+	@evca_UsuModificacion	INT
+AS
+BEGIN
+	BEGIN TRY
+		UPDATE CALE.tbEvidenciasPorCaso 
+		   SET evca_Estado = 0,
+			   evca_UsuModificacion = @evca_UsuModificacion,
+			   evca_FechaModificacion = GETDATE()
+		 WHERE evca_Id = @evca_Id
+
+		SELECT 1
+	END TRY
+	BEGIN CATCH	
+		SELECT 0
+	END CATCH
+END
+GO
+
+--***************************************************/TABLE Evidencias por caso*****************************************************--
+
+--********************************************************TABLE Veredictos**********************************************************--
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbVeredictos_Insert
+	@caso_Id			INT,
+	@vere_Descripcion	NVARCHAR(MAX),
+	@vere_UsuCreacion	INT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+			
+			INSERT INTO [CALE].[tbVeredictos] ([caso_Id], [vere_Descripcion], [vere_UsuCreacion])
+			VALUES (@caso_Id, @vere_Descripcion, @vere_UsuCreacion)
+
+		COMMIT
+		SELECT TOP 1 vere_Id FROM [CALE].[tbVeredictos] ORDER BY [vere_Id] DESC
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+		SELECT 0
+	END CATCH
+END
+GO
+
+--*******************************************************/TABLE Veredictos**********************************************************--
+
+--****************************************************TABLE Detalles Veredictos**********************************************************--
+
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbDetallesVeredictos_Insert
+	@vere_Id				INT,
+	@deve_EsInocente		BIT,
+	@deve_EsCulpable		BIT,
+	@deve_TipoEmpresaCivil	CHAR(1),
+	@deve_EmpresaCivil		INT,
+	@deve_UsuCreacion		INT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN 
+			INSERT INTO [CALE].[tbDetallesVeredictos] ([vere_Id], [deve_EsInocente], [deve_EsCulpable], [deve_TipoEmpresaCivil], [deve_EmpresaCivil], [deve_UsuCreacion])
+			VALUES (@vere_Id, @deve_EsInocente, @deve_EsCulpable, @deve_TipoEmpresaCivil, @deve_EmpresaCivil, @deve_UsuCreacion)
+		COMMIT
+		SELECT 1
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+		SELECT 0
+	END CATCH
+END
+GO
+	
+--****************************************************/TABLE Detalles Veredictos**********************************************************--
+
+--**********************************************************/TABLES CALE************************************************************--
 

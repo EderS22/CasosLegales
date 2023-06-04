@@ -11,6 +11,8 @@ namespace CasosLegales.Entities.Entities
         public int evca_Id { get; set; }
         public int tiev_Id { get; set; }
         public int caso_Id { get; set; }
+        public bool evca_Demandante { get; set; }
+        public bool evca_Demandado { get; set; }
         public string evca_NombreArchivo { get; set; }
         public string evca_UrlArchivo { get; set; }
         public int evca_UsuCreacion { get; set; }

@@ -1,6 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GlobalComponent } from 'src/app/global-component';
+import { AcusadoPorCaso } from 'src/app/pages/models/casoslegales/AcusadoPorCaso';
+import { Caso } from 'src/app/pages/models/casoslegales/Caso';
+import { DetalleVeredicto } from 'src/app/pages/models/casoslegales/DetalleVeredicto';
+import { EvidenciaPorCaso } from 'src/app/pages/models/casoslegales/EvidenciaPorCaso';
+import { TestigoPorCaso } from 'src/app/pages/models/casoslegales/TestigoPorCaso';
+import { Veredicto } from 'src/app/pages/models/casoslegales/Veredicto';
 
 const API_URL = GlobalComponent.API_URL;
 
@@ -33,4 +39,27 @@ export class CasosService {
         return this.http.put<any>('https://api.gofile.io/setOption', body);
     }
 
+    insertarCaso(item:Caso){
+        return this.http.post(API_URL + 'Casos/Insertar', item);
+    }
+
+    insertarAcusadoPorCaso(item:AcusadoPorCaso){
+        return this.http.post(API_URL + 'AcusadosPorCaso/Insertar', item);
+    }
+
+    insertTestigoPorCaso(item:TestigoPorCaso){
+        return this.http.post(API_URL + 'TestigosPorCaso/Insertar', item);
+    }
+
+    insertEvidenciaPorCaso(item:EvidenciaPorCaso){
+        return this.http.post(API_URL + 'EvidenciasPorCaso/Insertar', item);
+    }
+
+    insertarVeredicto(item:Veredicto){
+        return this.http.post(API_URL + 'Veredictos/Insertar', item);
+    }
+
+    insertarDetalleVeredicto(item:DetalleVeredicto){
+        return this.http.post(API_URL + 'DetallesVeredicto/Insertar', item);
+    }
 }

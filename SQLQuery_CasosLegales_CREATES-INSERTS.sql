@@ -370,7 +370,7 @@ GO
 CREATE TABLE CALE.tbAcusadoPorCaso(
 	acus_Id						INT IDENTITY(1,1),
 	caso_Id						INT NOT NULL,
-	acus_TipoAcusado			INT NOT NULL,
+	acus_TipoAcusado			CHAR(1) NOT NULL,
 	acus_Acusado				INT NOT NULL, 
 	
 	acus_UsuCreacion			INT	NOT NULL,
@@ -378,10 +378,9 @@ CREATE TABLE CALE.tbAcusadoPorCaso(
 	acus_UsuModificacion		INT,
 	acus_FechaModificacion		DATETIME,
 	acus_Estado					BIT	NOT NULL CONSTRAINT DF_CALE_tbSospechososPorCaso_soca_Estado DEFAULT(1),
-	
 	CONSTRAINT PK_CALE_tbAcusadoPorCaso_soca_Id	PRIMARY KEY(acus_Id),
 	CONSTRAINT FK_CALE_tbAcusadoPorCaso_CALE_tbCasos_caso_Id						FOREIGN KEY(caso_Id)						REFERENCES CALE.tbCasos(caso_Id),
-	CONSTRAINT CK_CALE_tbAcusadoPorCaso_CALE_acus_TipoAcusado						CHECK(acus_Acusado IN('E', 'C')),
+	CONSTRAINT CK_CALE_tbAcusadoPorCaso_CALE_acus_TipoAcusado						CHECK(acus_TipoAcusado IN('E', 'C')),
 	CONSTRAINT FK_CALE_tbAcusadoPorCaso_ACCE_tbUsuarios_UserCreate					FOREIGN KEY(acus_UsuCreacion)				REFERENCES ACCE.tbUsuarios(usua_Id),
 	CONSTRAINT FK_CALE_tbAcusadoPorCaso_ACCE_tbUsuarios_UserUpdate					FOREIGN KEY(acus_UsuModificacion)			REFERENCES ACCE.tbUsuarios(usua_Id),
 );
@@ -393,6 +392,8 @@ CREATE TABLE CALE.tbEvidenciasPorCaso(
 	evca_Id							INT IDENTITY(1,1),
 	tiev_Id							INT NOT NULL,
 	caso_Id							INT NOT NULL,
+	evca_Demandante					BIT NOT NULL,
+	evca_Demandado					BIT NOT NULL,
 	evca_NombreArchivo				NVARCHAR(255) NOT NULL,
 	evca_UrlArchivo					NVARCHAR(255) NOT NULL,
 
@@ -572,7 +573,7 @@ VALUES('Abogados y Jueces', 'casoslegales/abogadosjueces/listado', 'CasosLegales
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Casos', 'casoslegales/casos/listado', 'CasosLegales', 'ri-file-text-line', 1)
+VALUES('Casos', 'casoslegales/casos/listado', 'CasosLegales', 'ri-scales-line', 1)
 GO
 
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
@@ -609,10 +610,12 @@ INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono
 VALUES('Tipos de evidencia', 'casoslegales/tiposdeevidencia/listado', 'CasosLegales', 'ri-loader-2-line', 1)
 GO
 
+/*
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
 VALUES('Veredictos', 'casoslegales/veredictos/listado', 'CasosLegales', 'ri-scales-line', 1)
 GO
-
+*/
+ 
 --*******************************************************/TABLE Pantallas**********************************************************--
 
 --***************************************************TABLE Roles por Pantallas*****************************************************--
@@ -1134,6 +1137,14 @@ INSERT INTO CALE.tbEmpresas (emsa_Nombre, emsa_RTN, muni_Id, emsa_Direccion, ems
 VALUES('SULA S.A de C.V', '1894562314875', '0906', 'El palenque 5 calle entre 18 y 19 Ave. SO', 'Sofia Lopez', '1802199916354', '+504 9192-3435', 'F', 4, 1)
 GO
 
+
+INSERT INTO CALE.tbTiposdeEvidencia (tiev_Nombre, tiev_Descripcion, tiev_UsuCreacion)
+VALUES('Multimedia', 'Abarca todo tipo de archivo multimedia', 1)
+GO
+
+INSERT INTO CALE.tbTiposdeEvidencia (tiev_Nombre, tiev_Descripcion, tiev_UsuCreacion)
+VALUES('Documento', 'Abarca todo tipo de documento; pdf, word, hojas de cálculo, etc.', 1)
+GO
 --***********************************************************TABLES CALE***********************************************************--
 
 --********************************************************/INSERTS TABLES**********************************************************--
