@@ -17,8 +17,8 @@
 </div>
 
 <aw-wizard [navBarLayout]="'large-empty-symbols'" class="nav nav-pills progress-bar-tab custom-nav">
-    <aw-wizard-step>
-    <!-- <aw-wizard-step [canExit]="casoForm.valid" > -->
+    <!-- <aw-wizard-step> -->
+    <aw-wizard-step [canExit]="casoForm.valid" >
         <ng-template awWizardStepSymbol>
             <li class="nav-item" role="presentation">
                 <button class="nav-link rounded-pill active" data-progressbar="custom-progress-bar"

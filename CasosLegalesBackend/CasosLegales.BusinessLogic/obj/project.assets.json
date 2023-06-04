@@ -2921,6 +2921,7 @@
       "path": "system.appcontext/4.1.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -5324,6 +5325,7 @@
       "path": "system.runtime.interopservices.runtimeinformation/4.0.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -6621,52 +6623,19 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
-<<<<<<< HEAD
     "C:\\Users\\eders\\.nuget\\packages\\": {}
-=======
-    "C:\\Users\\LAB01\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
->>>>>>> Francisco
-=======
-    "C:\\Users\\LAB01\\.nuget\\packages\\": {}
->>>>>>> Cristian
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\eders\\OneDrive\\Documentos\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
       "projectName": "CasosLegales.BusinessLogic",
       "projectPath": "C:\\Users\\eders\\OneDrive\\Documentos\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
       "packagesPath": "C:\\Users\\eders\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\eders\\OneDrive\\Documentos\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\obj\\",
-=======
-      "projectUniqueName": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
-      "projectName": "CasosLegales.BusinessLogic",
-      "projectPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
-      "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\obj\\",
->>>>>>> Francisco
       "projectStyle": "PackageReference",
       "configFilePaths": [
-<<<<<<< HEAD
         "C:\\Users\\eders\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-        "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
->>>>>>> Francisco
-=======
-      "projectUniqueName": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
-      "projectName": "CasosLegales.BusinessLogic",
-      "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
-      "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\obj\\",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> Cristian
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6680,18 +6649,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-<<<<<<< HEAD
-<<<<<<< HEAD
             "C:\\Users\\eders\\OneDrive\\Documentos\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj": {
               "projectPath": "C:\\Users\\eders\\OneDrive\\Documentos\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj"
-=======
-            "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj": {
-              "projectPath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj"
->>>>>>> Francisco
-=======
-            "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj": {
-              "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj"
->>>>>>> Cristian
             }
           }
         }
@@ -6723,21 +6682,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
       }
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
   }
-=======
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problema al leer el archivo de caché C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
->>>>>>> Francisco
-=======
-  }
->>>>>>> Cristian
 }
