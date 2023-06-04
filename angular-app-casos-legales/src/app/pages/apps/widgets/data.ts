@@ -316,7 +316,7 @@ const tileBoxs4 = [
 const tileBoxs5 = [
     {
         id: 1,
-        icon: "assets/images/companies/img-3.png",
+        icon: "assets/images/companies/img-33.jpg",
         label: "Marketing Director",
         experience: '2-4 Yrs Exp.',
         companyname: 'Themesbrand',
@@ -545,7 +545,7 @@ const widgetsTasks = [
 const hotproducts = [
     {
         id: '1',
-        image: 'assets/images/products/img-3.png',
+        image: 'assets/images/products/img-33.jpg',
         price: '99.94',
         name: '350 ml Glass Grocery Container'
     },

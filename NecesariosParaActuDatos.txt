@@ -27,5 +27,4 @@ this.tdp.tica_Descripcion = '';
 this.tdp = { ...tc };
 
 //En cada funcion(CUD)
-this.rerender()
-xdddddd
+this.rerender().

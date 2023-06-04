@@ -316,7 +316,7 @@ private _pieWithImageChart(colors:any) {
       opacity: 0.85,
       image: {
         src: [
-          'assets/images/small/img-3.jpg', 'assets/images/small/img-5.jpg', 'assets/images/small/img-2.jpg',
+          'assets/images/small/img-33.jpg', 'assets/images/small/img-5.jpg', 'assets/images/small/img-2.jpg',
         ],
         width: 25,
       },

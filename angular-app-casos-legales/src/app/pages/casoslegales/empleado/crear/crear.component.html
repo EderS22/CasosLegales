@@ -146,46 +146,38 @@
 
                         <div class="col-6 mt-3">
                             <label class="form-label">Estado Civil</label>
-                            <select class="form-control" required formControlName="eciv_Id"
-                                [ngClass]="{'is-invalid': submit && form['eciv_Id'].errors}">
-
-                                <option value="" selected hidden>Seleccione un Estado Civil</option>
-
-                                <option *ngFor="let item of EstadoCivilDLL" [ngValue]="item.eciv_Id">
+                            <ng-select required formControlName="eciv_Id"
+                                [ngClass]="{'is-invalid': submit && form['eciv_Id'].errors}"
+                                placeholder="Seleccione un Estado Civil">
+                                <ng-option *ngFor="let item of EstadoCivilDLL" [ngValue]="item.eciv_Id">
                                     {{item.eciv_Descripcion}}
-                                </option>
-
-                            </select>
+                                </ng-option>
+                            </ng-select>
                             <div class="invalid-feedback">Por favor, selecione un estado civil</div>
                         </div>
 
                         <div class="col-6 mt-3">
                             <label class="form-label">Departamento</label>
-                            <select class="form-control" #selectDepartamento
-                                (change)="CargarMunicipios(selectDepartamento.value)" required formControlName="depa_Id"
-                                [ngClass]="{'is-invalid': submit && form['depa_Id'].errors}">
-
-                                <option value="" selected hidden>Seleccione un Departamento</option>
-                                <option *ngFor="let item of DepartamentoDLL" [value]="item.depa_Id">
+                            <ng-select #selectDepartamento required formControlName="depa_Id"
+                                [ngClass]="{'is-invalid': submit && form['depa_Id'].errors}"
+                                placeholder="Seleccione un Departamento">
+                                <ng-option *ngFor="let item of DepartamentoDLL" [value]="item.depa_Id">
                                     {{item.depa_Nombre}}
-                                </option>
-                            </select>
+                                </ng-option>
+                            </ng-select>
                             <div class="invalid-feedback">Por favor, selecione un departamento</div>
                         </div>
 
                         <div class="col-6 mt-3">
                             <label class="form-label">Municipios</label>
-                            <select class="form-control" [disabled]="MunicipioDesactivado" required
+                            <ng-select [disabled]="MunicipioDesactivado" required
                                 formControlName="muni_Id"
-                                [ngClass]="{'is-invalid': submitMunicipio && form['muni_Id'].errors}">
-
-                                <option value="" selected hidden>Seleccione un municipio</option>
-
-                                <option *ngFor="let item of MunicipioDDL" [value]="item.muni_Id">
+                                [ngClass]="{'is-invalid': submitMunicipio && form['muni_Id'].errors}"
+                                placeholder="Seleccione un Municipio">
+                                <ng-option *ngFor="let item of MunicipioDDL" [value]="item.muni_Id">
                                     {{item.muni_Nombre}}
-                                </option>
-
-                            </select>
+                                </ng-option>
+                            </ng-select>
                             <div class="invalid-feedback">Por favor, selecione un Municipio</div>
                         </div>
 
@@ -198,10 +190,10 @@
                     </div>
                     <div class="row mt-4" style="text-align: center;">
                         <div class="col-6">
-                            <button type="submit" class="btn btn-soft-primary col-8">Guardar</button>
+                            <button type="submit" class="btn btn-primary col-8">Guardar</button>
                         </div>
                         <div class="col-6">
-                            <button type="button" class="btn btn-soft-secondary col-8" (click)="regresar()">Cancelar</button>
+                            <button type="button" class="btn btn-dark col-8" (click)="regresar()">Cancelar</button>
                         </div>
                     </div>
                 </form>

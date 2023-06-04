@@ -2,7 +2,7 @@
 const companieslist = [
     {
         id: "1",
-        image_src: "assets/images/companies/img-3.png",
+        image_src: "assets/images/companies/img-33.jpg",
         name: "Martin's Solutions",
         industry_type: "IT Department",
         vacancy: "97",
@@ -28,7 +28,7 @@ const companieslist = [
         since: "2001"
     }, {
         id: "3",
-        image_src: "assets/images/companies/img-1.png",
+        image_src: "assets/images/companies/img-1.jpg",
         name: "Moetic Fashion",
         industry_type: "Textiles: Clothing, Footwear",
         vacancy: "641",
@@ -54,7 +54,7 @@ const companieslist = [
         since: "2019"
     }, {
         id: "5",
-        image_src: "assets/images/companies/img-1.png",
+        image_src: "assets/images/companies/img-1.jpg",
         name: "Kent's",
         industry_type: "IT Department",
         vacancy: "10",
@@ -146,7 +146,7 @@ const companieslist = [
         since: "2015"
     }, {
         id: "12",
-        image_src: "assets/images/companies/img-3.png",
+        image_src: "assets/images/companies/img-33.jpg",
         name: "Micro Design",
         industry_type: "IT Department",
         vacancy: "23",
@@ -172,7 +172,7 @@ const companieslist = [
         since: "2016"
     }, {
         id: "14",
-        image_src: "assets/images/companies/img-1.png",
+        image_src: "assets/images/companies/img-1.jpg",
         name: "Asiatic Solutions",
         industry_type: "Health Services",
         vacancy: "9",
@@ -185,7 +185,7 @@ const companieslist = [
         since: "2019"
     }, {
         id: "15",
-        image_src: "assets/images/companies/img-1.png",
+        image_src: "assets/images/companies/img-1.jpg",
         name: "Great Clothes",
         industry_type: "Textiles: Clothing, Footwear",
         vacancy: "60",

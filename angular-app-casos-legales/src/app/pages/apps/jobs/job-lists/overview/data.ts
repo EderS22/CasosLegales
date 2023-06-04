@@ -2,7 +2,7 @@
 const related = [
     {
         id: '1',
-        logo: 'assets/images/companies/img-1.png',
+        logo: 'assets/images/companies/img-1.jpg',
         title: 'Web designer',
         companyname: 'Themesbrand',
         content: "As a Product Designer, you will work within a Product Delivery Team fused with UX,engineering, product and data talent.",
@@ -22,7 +22,7 @@ const related = [
     },
     {
         id: '3',
-        logo: 'assets/images/companies/img-3.png',
+        logo: 'assets/images/companies/img-33.jpg',
         title: 'Product Sales Specialist',
         companyname: 'Themesbrand',
         content: "As a Product Designer, you will work within a Product Delivery Team fused with UX,engineering, product and data talent.",
@@ -32,7 +32,7 @@ const related = [
     },
     {
         id: '4',
-        logo: 'assets/images/companies/img-1.png',
+        logo: 'assets/images/companies/img-1.jpg',
         title: 'Web designer',
         companyname: 'Themesbrand',
         content: "As a Product Designer, you will work within a Product Delivery Team fused with UX,engineering, product and data talent.",
@@ -52,7 +52,7 @@ const related = [
     },
     {
         id: '6',
-        logo: 'assets/images/companies/img-3.png',
+        logo: 'assets/images/companies/img-33.jpg',
         title: 'Product Sales Specialist',
         companyname: 'Themesbrand',
         content: "As a Product Designer, you will work within a Product Delivery Team fused with UX,engineering, product and data talent.",

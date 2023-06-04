@@ -30,7 +30,7 @@ const application = [
         status: "New"
     }, {
         id: 4,
-        img: "assets/images/companies/img-3.png",
+        img: "assets/images/companies/img-33.jpg",
         name: "Meta4Systems",
         designation: "Magento Developer",
         date: "27 Sep, 2022",
@@ -75,7 +75,7 @@ const application = [
         status: "Pending"
     }, {
         id: 9,
-        img: "assets/images/companies/img-1.png",
+        img: "assets/images/companies/img-1.jpg",
         name: "Digitech Galaxy",
         designation: "Magento Developer",
         date: "29 Sep, 2022",

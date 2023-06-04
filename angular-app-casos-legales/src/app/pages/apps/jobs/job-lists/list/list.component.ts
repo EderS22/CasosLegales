@@ -151,7 +151,7 @@ export class ListComponent implements OnInit {
         // this.service.products = this.applications
       } else {
         const logo = "/assets/images/brands/slack.png";
-        const coverimage = "assets/images/small/img-3.jpg";
+        const coverimage = "assets/images/small/img-33.jpg";
         const title = this.jobData.get('jobtitle')?.value;
         const companyname = this.jobData.get('name')?.value;
         const content = this.jobData.get('description')?.value;

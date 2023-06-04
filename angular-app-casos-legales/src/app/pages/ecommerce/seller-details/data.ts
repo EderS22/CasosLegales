@@ -2,7 +2,7 @@ import { ChartType } from './seller-details.model';
 
 const sellerDetals = [
   {
-    image: 'assets/images/products/img-1.png',
+    image: 'assets/images/products/img-1.jpg',
     name: 'Half Sleeve Round Neck T-Shirts',
     cat: 'Clothes',
     stock: '12',
@@ -14,7 +14,7 @@ const sellerDetals = [
     type: 'Published'
   },
   {
-    image: 'assets/images/products/img-1.png',
+    image: 'assets/images/products/img-1.jpg',
     name: 'Half Sleeve Round Neck T-Shirts',
     cat: 'Clothes',
     stock: '12',
@@ -58,7 +58,7 @@ const sellerDetals = [
     time: '01:31 PM'
   },
   {
-    image: 'assets/images/products/img-3.png',
+    image: 'assets/images/products/img-33.jpg',
     name: '350 ml Glass Grocery Container',
     cat: 'Kitchen Storage & Containers',
     stock: '10',

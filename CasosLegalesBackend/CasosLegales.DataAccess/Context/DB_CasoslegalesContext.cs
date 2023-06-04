@@ -29,6 +29,16 @@ namespace CasosLegales.DataAccess.Context
         public virtual DbSet<VW_tbMunicipios> VW_tbMunicipios { get; set; }
         public virtual DbSet<VW_tbTiposdeCaso> VW_tbTiposdeCaso { get; set; }
         public virtual DbSet<VW_tbTiposdeEvidencia> VW_tbTiposdeEvidencia { get; set; }
+        public virtual DbSet<VW_tbAbogadosJueces> VW_tbAbogadosJueces { get; set; }
+        public virtual DbSet<VW_tbCargos> VW_tbCargos { get; set; }
+        public virtual DbSet<VW_tbCiviles> VW_tbCiviles { get; set; }
+        public virtual DbSet<VW_tbDepartamentos> VW_tbDepartamentos { get; set; }
+        public virtual DbSet<VW_tbEmpleados> VW_tbEmpleados { get; set; }
+        public virtual DbSet<VW_tbEmpresas> VW_tbEmpresas { get; set; }
+        public virtual DbSet<VW_tbEstadosCiviles> VW_tbEstadosCiviles { get; set; }
+        public virtual DbSet<VW_tbMunicipios> VW_tbMunicipios { get; set; }
+        public virtual DbSet<VW_tbTiposdeCaso> VW_tbTiposdeCaso { get; set; }
+        public virtual DbSet<VW_tbTiposdeEvidencia> VW_tbTiposdeEvidencia { get; set; }
         public virtual DbSet<tbAbogadosJueces> tbAbogadosJueces { get; set; }
         public virtual DbSet<tbAcusadoPorCaso> tbAcusadoPorCaso { get; set; }
         public virtual DbSet<tbCargos> tbCargos { get; set; }
@@ -188,6 +198,10 @@ namespace CasosLegales.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(401);
 
+                entity.Property(e => e.civi_NombreCompleto)
+                    .IsRequired()
+                    .HasMaxLength(401);
+
                 entity.Property(e => e.civi_Nombres)
                     .IsRequired()
                     .HasMaxLength(200);
@@ -212,11 +226,29 @@ namespace CasosLegales.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(100);
 
+                entity.Property(e => e.depa_Id)
+                    .IsRequired()
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.depa_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.eciv_Descripcion)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
                 entity.Property(e => e.muni_Id)
                     .IsRequired()
                     .HasMaxLength(4)
                     .IsUnicode(false)
                     .IsFixedLength(true);
+
+                entity.Property(e => e.muni_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(80);
 
                 entity.Property(e => e.muni_Nombre)
                     .IsRequired()

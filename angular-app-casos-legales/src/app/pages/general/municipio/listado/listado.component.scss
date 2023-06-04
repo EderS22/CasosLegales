@@ -1,0 +1,7 @@
+.dropdown {
+    z-index: 9999; /* Valor alto para asegurar que aparezca por encima del modal */
+  }
+  .modal {
+    z-index: 10000; /* Valor alto para asegurar que aparezca por encima del dropdown */
+  }
+    

@@ -262,7 +262,7 @@
   //galaxy demo
   --#{$prefix}card-bg-fill:                           #{$gray-200};
   &[data-body-image="img-1"], [data-body-image="img-1"] {
-    --#{$prefix}body-bg-image:                              url('../../../images/galaxy/img-1.png');
+    --#{$prefix}body-bg-image:                              url('../../../images/galaxy/img-1.jpg');
   }
   
   &[data-body-image="img-2"], [data-body-image="img-2"] {
@@ -270,7 +270,7 @@
   }
   
   &[data-body-image="img-3"], [data-body-image="img-3"] {
-    --#{$prefix}body-bg-image:                              url('../../../images/galaxy/img-3.png');
+    --#{$prefix}body-bg-image:                              url('../../../images/galaxy/img-33.jpg');
   }
 }
 

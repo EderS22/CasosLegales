@@ -18,8 +18,8 @@ import { departamento } from 'src/app/pages/models/general/departeamento';
 
 export class ListadoComponent {
 
-  munic!: municipio[];
   @ViewChild(DataTableDirective, { static: false })
+  munic!: municipio[];
   dtElement!: DataTableDirective;
 
   DepartamentoDLL!: departamento[];

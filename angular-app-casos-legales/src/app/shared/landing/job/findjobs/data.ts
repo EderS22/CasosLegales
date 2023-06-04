@@ -2,7 +2,7 @@
 const findjob = [
     {
         id: '1',
-        logo: 'assets/images/companies/img-3.png',
+        logo: 'assets/images/companies/img-33.jpg',
         name: 'UI/UX designer',
         comapny: 'Nesta Technologies',
         location: 'USA',
@@ -42,7 +42,7 @@ const findjob = [
     },
     {
         id: '5',
-        logo: 'assets/images/companies/img-1.png',
+        logo: 'assets/images/companies/img-1.jpg',
         name: 'Project Manager',
         comapny: 'Syntyce Solutions',
         location: 'Germany',

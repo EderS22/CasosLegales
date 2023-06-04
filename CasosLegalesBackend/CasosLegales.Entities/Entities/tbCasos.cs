@@ -25,21 +25,19 @@ namespace CasosLegales.Entities.Entities
         public int abju_IdAbogadoDemandante { get; set; }
         public int abju_IdAbogadoDemandado { get; set; }
         public bool caso_Abierto { get; set; }
-        public DateTime caso_Fecha { get; set; }
-
-        public bool caso_Estado { get; set; }
+        public DateTime? caso_Fecha { get; set; }
+        public bool? caso_Estado { get; set; }
         public int usua_IdCreacion { get; set; }
-        public DateTime caso_FechaCreacion { get; set; }
+        public DateTime? caso_FechaCreacion { get; set; }
         public int? usua_IdModificacion { get; set; }
         public DateTime? caso_FechaModificacion { get; set; }
-
 
         public virtual tbAbogadosJueces abju_IdAbogadoDemandadoNavigation { get; set; }
         public virtual tbAbogadosJueces abju_IdAbogadoDemandanteNavigation { get; set; }
         public virtual tbAbogadosJueces abju_IdJuezNavigation { get; set; }
+        public virtual tbTiposdeCaso tica { get; set; }
         public virtual tbUsuarios usua_IdCreacionNavigation { get; set; }
         public virtual tbUsuarios usua_IdModificacionNavigation { get; set; }
-        public virtual tbTiposdeCaso tica { get; set; }
         public virtual ICollection<tbAcusadoPorCaso> tbAcusadoPorCaso { get; set; }
         public virtual ICollection<tbEvidenciasPorCaso> tbEvidenciasPorCaso { get; set; }
         public virtual ICollection<tbTestigosPorCaso> tbTestigosPorCaso { get; set; }

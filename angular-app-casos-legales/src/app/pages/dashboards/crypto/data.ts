@@ -452,7 +452,7 @@ import { ChartOptions } from './crypto.model';
     time: '12:09 PM'
   },
   {
-    image: "assets/images/small/img-3.jpg",
+    image: "assets/images/small/img-33.jpg",
     content: "The bitcoin-holding U.S. senator is trying to “fully integrate” crypto",
     date: 'Nov 22, 2021',
     time: '11:47 AM'
