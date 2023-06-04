@@ -1,6 +1,7 @@
 {
   "version": 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
   "dgSpecHash": "2sbJWh7YY35rNXYFx0MXOwgQ24KjGINLIwYfXbKZ4FTA02BvU4E/KhYwBLxh9eD8FvOO/4Q9ABuXaAeoL9jOLA==",
   "success": true,
   "projectFilePath": "C:\\Users\\eders\\OneDrive\\Documentos\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
@@ -134,6 +135,12 @@
   "success": true,
   "projectFilePath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
   "expectedPackageFiles": [
+=======
+  "dgSpecHash": "jBH/gIK+826wiYl/RrXWlEeghC8bbD+guxsoShBdC2XGPRJK2EeJzQqsNuB5iM3cSbAq6dZmPBr3pam93iORmg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.BusinessLogic\\CasosLegales.BusinessLogic.csproj",
+  "expectedPackageFiles": [
+>>>>>>> Cristian
     "C:\\Users\\LAB01\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\LAB01\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\LAB01\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
@@ -257,6 +264,7 @@
     "C:\\Users\\LAB01\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\LAB01\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
+<<<<<<< HEAD
   "logs": [
     {
       "code": "Undefined",
@@ -266,4 +274,7 @@
     }
   ]
 >>>>>>> Francisco
+=======
+  "logs": []
+>>>>>>> Cristian
 }

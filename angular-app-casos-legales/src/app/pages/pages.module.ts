@@ -19,6 +19,7 @@ import { DropdownModule, NavModule, TabsModule } from '@coreui/angular';
 import { TablesModule } from './tables/tables.module';
 import {MatStepperModule} from '@angular/material/stepper';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
 
 // Swiper Slider
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
@@ -71,6 +72,7 @@ import { EditarComponent as EditarEmpleados} from './casoslegales/empleado/edita
 import { ListadoComponent as ListadoEmpresas } from './casoslegales/empresa/listado/listado.component';
 import { CrearComponent as CrearEmpresa} from './casoslegales/empresa/crear/crear.component';
 import { EditarComponent  as EditarEmpresa} from './casoslegales/empresa/editar/editar.component';
+import { ReportecasoComponent } from './reportes/reporte/reportecaso/reportecaso.component';
 
 
 @NgModule({
@@ -106,7 +108,8 @@ import { EditarComponent  as EditarEmpresa} from './casoslegales/empresa/editar/
     ListadoEmpresas,
     CrearEmpresa,
     EditarEmpresa,
-    PanelusuarioComponent
+    PanelusuarioComponent,
+    ReportecasoComponent
   ],
   imports: [
     CommonModule,
@@ -139,10 +142,10 @@ import { EditarComponent  as EditarEmpresa} from './casoslegales/empresa/editar/
     DropdownModule,
     AutocompleteLibModule,
     MatStepperModule,
-    ArchwizardModule,
     MatDividerModule,
     NgxDropzoneModule,
-    
+    DropzoneModule,
+    ArchwizardModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

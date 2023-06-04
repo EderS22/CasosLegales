@@ -30,4 +30,9 @@ export class EmpleadoService {
   EditarEmpleado(empleado: any){
     return this.http.post<empleado[]>(API_URL + 'Empleados/Editar', empleado)
   }
+
+  prueba(){
+    return this.http.get<[]>('https://jsonplaceholder.typicode.com/albums/1/photos')
+  }
+
 }

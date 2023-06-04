@@ -1,6 +1,7 @@
 {
   "version": 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
   "dgSpecHash": "ALTiUW7XmQC7XzPXwZ2mN2o28M9O4AOd/EvSDX/GG6tG5EcPTNw/r+ns9ldHUQJVLjItpgdcujUdNoO+Qqj5sg==",
   "success": true,
   "projectFilePath": "C:\\Users\\eders\\OneDrive\\Documentos\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\CasosLegales.API.csproj",
@@ -199,6 +200,12 @@
   "success": true,
   "projectFilePath": "C:\\Users\\LAB01\\Documents\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\CasosLegales.API.csproj",
   "expectedPackageFiles": [
+=======
+  "dgSpecHash": "p02Zr4yy2J+cPbeZBEYXhCMxtwDoN426k4K4weblOEo1964juhbIjbnpeKRigeApX+CvVaTHwDYTEzZEPkCkeQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.API\\CasosLegales.API.csproj",
+  "expectedPackageFiles": [
+>>>>>>> Cristian
     "C:\\Users\\LAB01\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\LAB01\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\LAB01\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
@@ -388,7 +395,10 @@
     "C:\\Users\\LAB01\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\LAB01\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\LAB01\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+<<<<<<< HEAD
 >>>>>>> Francisco
+=======
+>>>>>>> Cristian
   ],
   "logs": []
 }

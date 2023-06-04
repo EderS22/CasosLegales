@@ -9,15 +9,20 @@
   },
   "packageFolders": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "C:\\Users\\eders\\.nuget\\packages\\": {}
 =======
     "C:\\Users\\LAB01\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
 >>>>>>> Francisco
+=======
+    "C:\\Users\\LAB01\\.nuget\\packages\\": {}
+>>>>>>> Cristian
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
 <<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\eders\\OneDrive\\Documentos\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
       "projectName": "CasosLegales.Entities",
@@ -39,6 +44,16 @@
         "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
 >>>>>>> Francisco
+=======
+      "projectUniqueName": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
+      "projectName": "CasosLegales.Entities",
+      "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
+      "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> Cristian
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -82,6 +97,7 @@
       }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
   }
 =======
   },
@@ -94,4 +110,7 @@
     }
   ]
 >>>>>>> Francisco
+=======
+  }
+>>>>>>> Cristian
 }

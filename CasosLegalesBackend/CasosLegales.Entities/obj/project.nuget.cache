@@ -1,6 +1,7 @@
 {
   "version": 2,
 <<<<<<< HEAD
+<<<<<<< HEAD
   "dgSpecHash": "UMw5JXuAWMBLoRIAmVIapSSrvAjnERW1Xt0IHumwKbWV1HFhCbEkkE8hbkVENbOn8biVOqOvYc1k8e3Oed7JiA==",
   "success": true,
   "projectFilePath": "C:\\Users\\eders\\OneDrive\\Documentos\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
@@ -20,4 +21,11 @@
     }
   ]
 >>>>>>> Francisco
+=======
+  "dgSpecHash": "uPTDem2ifCTBMgXlriVPpJLB+8w13CXf8TWhboR0Mn4GXFEsDLHFjpbRVAqp/t6xqd/jltm4nNdFQ3PgafeUmg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
+  "expectedPackageFiles": [],
+  "logs": []
+>>>>>>> Cristian
 }
