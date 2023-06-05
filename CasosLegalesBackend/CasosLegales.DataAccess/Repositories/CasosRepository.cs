@@ -61,7 +61,7 @@ namespace CasosLegales.DataAccess.Repositories
             using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
             var parametros = new DynamicParameters();
 
-            parametros.Add("@caso_Id", item.tica_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@caso_Id", item.caso_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@caso_Descripcion", item.caso_Descripcion, DbType.String, ParameterDirection.Input);
             parametros.Add("@tica_Id", item.tica_Id, DbType.Int32, ParameterDirection.Input);
             parametros.Add("@abju_IdJuez", item.abju_IdJuez, DbType.Int32, ParameterDirection.Input);

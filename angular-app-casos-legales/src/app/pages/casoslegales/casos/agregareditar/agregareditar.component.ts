@@ -401,9 +401,9 @@ export class AgregareditarComponent implements OnInit {
                 if (this.veredicto.vere_Descripcion !== undefined) {
                     if (this.veredicto.vere_Descripcion !== '') {
                         casoTemp.caso_Abierto = false;
-                    } else {
-                        casoTemp.caso_Abierto = true;
-                    }
+                    } 
+                }else {
+                    casoTemp.caso_Abierto = true;
                 }
 
                 this.casoService.editarCaso(casoTemp)
@@ -651,9 +651,9 @@ export class AgregareditarComponent implements OnInit {
                 if (this.veredicto.vere_Descripcion !== undefined) {
                     if (this.veredicto.vere_Descripcion !== '') {
                         casoTemp.caso_Abierto = false;
-                    } else {
-                        casoTemp.caso_Abierto = true;
-                    }
+                    } 
+                }else{
+                    casoTemp.caso_Abierto = true;
                 }
 
                 this.casoService.insertarCaso(casoTemp)
