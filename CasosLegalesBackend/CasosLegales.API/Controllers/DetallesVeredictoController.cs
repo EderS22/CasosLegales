@@ -30,5 +30,24 @@ namespace CasosLegales.API.Controllers
             var response = _casosLegalesService.InsertarDetalleVeredicto(_mapper.Map<tbDetallesVeredictos>(item));
             return Ok(response);
         }
+
+        [HttpGet("ObtenerPorIdVeredicto")]
+        public IActionResult ObtenerPorIdVeredicto(int id)
+        {
+            var response = _casosLegalesService.ObtenerDetalleVeredictoPorIdVeredicto(id);
+
+            response.Data = _mapper.Map<IEnumerable<DetallesVeredictoViewModel>>(response.Data);
+
+            return Ok(response);
+        }
+
+        [HttpGet("EliminarTodoPorIdVeredicto")]
+        public IActionResult EliminarTodoPorIdVeredicto(int id)
+        {
+            var response = _casosLegalesService.EliminarTodoDetalleVeredictoPorIdVeredicto(id);
+
+            return Ok(response);
+        }
+
     }
 }

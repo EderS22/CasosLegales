@@ -31,5 +31,22 @@ namespace CasosLegales.API.Controllers
             var response = _casosLegalesService.InsertarEvidenciaPorCaso(_mapper.Map<tbEvidenciasPorCaso>(item));
             return Ok(response);
         }
+
+        [HttpPost("Eliminar")]
+        public IActionResult Delete(EvidenciasPorCasoViewModel item)
+        {
+            var response = _casosLegalesService.EliminarEvidenciaPorCaso(_mapper.Map<tbEvidenciasPorCaso>(item));
+            return Ok(response);
+        }
+
+        [HttpGet("ObtenerEvidenciasPorIdCaso")]
+        public IActionResult ObtenerEvidenciasPorIdCaso(int id)
+        {
+            var response = _casosLegalesService.ObtenerEvidenciaPorIdCaso(id);
+
+            response.Data = _mapper.Map<IEnumerable<EvidenciasPorCasoViewModel>>(response.Data);
+
+            return Ok(response);
+        }
     }
 }

@@ -9,7 +9,6 @@ namespace CasosLegales.API.Models
     {
         public int deve_Id { get; set; }
         public int vere_Id { get; set; }
-        public bool deve_EsInocente { get; set; }
         public bool deve_EsCulpable { get; set; }
         public string deve_TipoEmpresaCivil { get; set; }
         public int deve_EmpresaCivil { get; set; }

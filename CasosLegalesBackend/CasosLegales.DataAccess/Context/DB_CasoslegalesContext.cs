@@ -188,10 +188,6 @@ namespace CasosLegales.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(401);
 
-                entity.Property(e => e.civi_NombreCompleto)
-                    .IsRequired()
-                    .HasMaxLength(401);
-
                 entity.Property(e => e.civi_Nombres)
                     .IsRequired()
                     .HasMaxLength(200);
@@ -216,16 +212,6 @@ namespace CasosLegales.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(100);
 
-                entity.Property(e => e.depa_Id)
-                    .IsRequired()
-                    .HasMaxLength(2)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
-
-                entity.Property(e => e.depa_Nombre)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
                 entity.Property(e => e.eciv_Descripcion)
                     .IsRequired()
                     .HasMaxLength(250);
@@ -235,10 +221,6 @@ namespace CasosLegales.DataAccess.Context
                     .HasMaxLength(4)
                     .IsUnicode(false)
                     .IsFixedLength(true);
-
-                entity.Property(e => e.muni_Nombre)
-                    .IsRequired()
-                    .HasMaxLength(80);
 
                 entity.Property(e => e.muni_Nombre)
                     .IsRequired()
@@ -840,8 +822,6 @@ namespace CasosLegales.DataAccess.Context
                 entity.ToTable("tbDetallesVeredictos", "CALE");
 
                 entity.Property(e => e.deve_EsCulpable).HasDefaultValueSql("((0))");
-
-                entity.Property(e => e.deve_EsInocente).HasDefaultValueSql("((0))");
 
                 entity.Property(e => e.deve_Estado)
                     .IsRequired()

@@ -28,7 +28,6 @@ namespace CasosLegales.DataAccess.Repositories
             var parametros = new DynamicParameters();
 
             parametros.Add("@vere_Id", item.vere_Id, DbType.Int32, ParameterDirection.Input);
-            parametros.Add("@deve_EsInocente", item.deve_EsInocente, DbType.Boolean, ParameterDirection.Input);
             parametros.Add("@deve_EsCulpable", item.deve_EsCulpable, DbType.Boolean, ParameterDirection.Input);
             parametros.Add("@deve_TipoEmpresaCivil", item.deve_TipoEmpresaCivil, DbType.String, ParameterDirection.Input);
             parametros.Add("@deve_EmpresaCivil", item.deve_EmpresaCivil, DbType.Int32, ParameterDirection.Input);
@@ -51,6 +50,32 @@ namespace CasosLegales.DataAccess.Repositories
         public RequestStatus Update(tbDetallesVeredictos item)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<tbDetallesVeredictos> ObtenerPorIdVeredicto(int id)
+        {
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@vere_Id", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.Query<tbDetallesVeredictos>(ScriptsDataBase.UDP_tbDetallesVeredicto_ObtenerPorIdVeredicto, parametros, commandType: CommandType.StoredProcedure);
+        }
+
+        public RequestStatus EliminarTodoPorIdVeredicto(int id)
+        {
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@vere_Id", id, DbType.Int32, ParameterDirection.Input);
+
+            var result = db.QueryFirst<int>(ScriptsDataBase.UDP_tbDetallesVeredicto_EliminarTodosPorIdVeredicto, parametros, commandType: CommandType.StoredProcedure);
+
+            return new RequestStatus()
+            {
+                CodeStatus = result,
+                MessageStatus = "Estado operacion"
+            };
         }
     }
 }

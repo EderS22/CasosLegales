@@ -675,6 +675,27 @@ GO
 
 --**********************************************************TABLE Casos************************************************************--
 
+CREATE OR ALTER PROCEDURE CALE.UDP_tbCasos_Listado	
+AS
+BEGIN
+	SELECT [caso_Id],
+		   [caso_Descripcion],
+		   tb1.[tica_Id],
+		   tb2.tica_Nombre,
+		   [caso_Abierto],
+		   [caso_Fecha],
+		   abju_DNI,
+		   abju_Nombres,
+		   abju_Apellidos
+	  FROM [CALE].[tbCasos] tb1
+INNER JOIN [CALE].[tbTiposdeCaso] tb2
+		ON tb1.tica_Id = tb2.tica_Id
+ LEFT JOIN [CALE].[tbAbogadosJueces] tb3
+	    ON tb1.abju_IdJuez = tb3.abju_Id
+	 WHERE [caso_Estado] = 1
+END
+GO
+
 CREATE OR ALTER PROCEDURE CALE.UDP_tbCasos_Insert
 	@caso_Descripcion			NVARCHAR(200),
 	@tica_Id					INT,
@@ -702,6 +723,61 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE CALE.UDP_tbCasos_Editar
+	@caso_Id					INT,
+	@caso_Descripcion			NVARCHAR(200),
+	@tica_Id					INT,
+	@abju_IdJuez				INT,
+	@caso_TipoDemandante		CHAR(1),
+	@caso_IdDemandante			INT,
+	@abju_IdAbogadoDemandante	INT,
+	@abju_IdAbogadoDemandado	INT,
+	@usua_IdModificacion		INT,
+	@caso_Abierto				BIT
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+			UPDATE [CALE].[tbCasos]
+			   SET [caso_Descripcion] = @caso_Descripcion,
+				   [tica_Id] = @tica_Id,
+				   [abju_IdJuez] = @abju_IdJuez,
+				   [caso_TipoDemandante] = @caso_TipoDemandante,
+				   [caso_IdDemandante] = @caso_IdDemandante,
+				   [abju_IdAbogadoDemandante] = @abju_IdAbogadoDemandante,
+				   [abju_IdAbogadoDemandado] = @abju_IdAbogadoDemandado,
+				   [caso_Abierto] = @caso_Abierto,
+				   [usua_IdModificacion] = @usua_IdModificacion,
+				   [caso_FechaModificacion] = GETDATE()
+			 WHERE [caso_Id] = @caso_Id
+		
+		COMMIT
+		SELECT 1
+	END TRY
+	BEGIN CATCH
+		ROLLBACK 
+		SELECT 0
+	END CATCH
+END
+GO
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbCasos_ObtenerCasoPorId
+	@caso_Id	INT
+AS
+BEGIN
+	SELECT [caso_Id],
+		   [caso_Descripcion],
+		   [tica_Id],
+		   [abju_IdJuez],
+		   [caso_TipoDemandante],
+		   [caso_IdDemandante],
+		   [abju_IdAbogadoDemandante],
+		   [abju_IdAbogadoDemandado]
+	  FROM [CALE].[tbCasos]
+	 WHERE [caso_Id] = @caso_Id
+END
+GO
+
 --*********************************************************/TABLE Casos************************************************************--
 
 --*****************************************************TABLE Acusados por caso******************************************************--
@@ -715,8 +791,24 @@ AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN 
-			INSERT INTO [CALE].[tbAcusadoPorCaso] ([caso_Id], [acus_TipoAcusado], [acus_Acusado], [acus_UsuCreacion])
-			VALUES (@caso_Id, @acus_TipoAcusado, @acus_Acusado, @acus_UsuCreacion)
+			DECLARE @acus_Id INT
+
+			SELECT @acus_Id = [acus_Id] FROM [CALE].[tbAcusadoPorCaso] WHERE [caso_Id] = @caso_Id AND [acus_Acusado] = @acus_Acusado AND [acus_Estado] = 0
+
+			IF @acus_Id > 0
+			BEGIN
+				UPDATE [CALE].[tbAcusadoPorCaso]
+				   SET [acus_Estado] = 1,
+					   [acus_UsuModificacion] = @acus_UsuCreacion,
+					   [acus_FechaModificacion] = GETDATE()
+				 WHERE [acus_Id] = @acus_Id
+			END
+			ELSE
+			BEGIN
+				INSERT INTO [CALE].[tbAcusadoPorCaso] ([caso_Id], [acus_TipoAcusado], [acus_Acusado], [acus_UsuCreacion])
+				VALUES (@caso_Id, @acus_TipoAcusado, @acus_Acusado, @acus_UsuCreacion)
+			END
+		
 		COMMIT
 		SELECT 1		
 	END TRY
@@ -726,6 +818,37 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE CALE.UDP_tbAcusadosPorCaso_ObtenerPorIdCaso
+	@caso_Id	INT
+AS
+BEGIN
+	SELECT [acus_Id],
+		   [caso_Id],
+		   [acus_TipoAcusado],
+		   [acus_Acusado]
+	  FROM [CALE].[tbAcusadoPorCaso]
+	 WHERE [caso_Id] = @caso_Id
+	   AND [acus_Estado] = 1
+END
+GO
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbAcusadosPorCaso_EliminarTodosPorCasoId
+	@caso_Id	INT
+AS
+BEGIN
+	BEGIN TRY
+		UPDATE [CALE].[tbAcusadoPorCaso]
+		   SET [acus_Estado] = 0
+		 WHERE [caso_Id] = @caso_Id
+		   AND [acus_Estado] = 1
+
+		SELECT 1
+	END TRY
+	BEGIN CATCH
+		SELECT 0
+	END CATCH
+END
+GO
 
 --****************************************************/TABLE Acusados por caso******************************************************--
 
@@ -742,14 +865,66 @@ AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN
+			DECLARE @teca_Id INT
+
+			SELECT @teca_Id = [teca_Id] FROM [CALE].[tbTestigosPorCaso] WHERE [caso_Id] = @caso_Id AND [teca_Testigo] = @teca_Testigo AND [teca_Estado] = 0
+
+			IF @teca_Id > 0
+			BEGIN
+				 UPDATE [CALE].[tbTestigosPorCaso]
+					SET [teca_Estado] = 1,
+						[teca_Declaracion] = @teca_Declaracion,
+						[teca_Demandante] = @teca_Demandante,
+						[teca_Demandado] = @teca_Demandado,
+						[teca_UsuModificacion] = @teca_UsuCreacion,
+						[teca_FechaModificacion] = GETDATE()
+				  WHERE [teca_Id] = @teca_Id
+
+			END
+			ELSE
+			BEGIN
+				INSERT INTO CALE.tbTestigosPorCaso ([caso_Id], [teca_Testigo], [teca_Declaracion], [teca_Demandante], [teca_Demandado], [teca_UsuCreacion])
+				VALUES (@caso_Id, @teca_Testigo, @teca_Declaracion, @teca_Demandante, @teca_Demandado, @teca_UsuCreacion)
+			END
 			
-			INSERT INTO CALE.tbTestigosPorCaso ([caso_Id], [teca_Testigo], [teca_Declaracion], [teca_Demandante], [teca_Demandado], [teca_UsuCreacion])
-			VALUES (@caso_Id, @teca_Testigo, @teca_Declaracion, @teca_Demandante, @teca_Demandado, @teca_UsuCreacion)
 		COMMIT
 		SELECT 1
 	END TRY
 	BEGIN CATCH
 		ROLLBACK
+		SELECT 0
+	END CATCH
+END
+GO
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbTestigosPorCaso_ObtenerPorCasoId
+	@caso_Id	INT
+AS
+BEGIN
+	SELECT [teca_Id],
+		   [caso_Id],
+		   [teca_Testigo],
+		   [teca_Declaracion],
+		   [teca_Demandante],
+		   [teca_Demandado]
+	  FROM [CALE].[tbTestigosPorCaso]
+	 WHERE [caso_Id] = @caso_Id
+	   AND [teca_Estado] = 1
+END
+GO
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbTestigosPorCaso_EliminarTodosPorIdCaso
+	@caso_Id	INT
+AS
+BEGIN
+	BEGIN TRY
+		UPDATE [CALE].[tbTestigosPorCaso]
+		   SET [teca_Estado] = 0
+		 WHERE [caso_Id] = @caso_Id
+
+		 SELECT 1
+	END TRY
+	BEGIN CATCH
 		SELECT 0
 	END CATCH
 END
@@ -821,6 +996,26 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE CALE.UDP_tbEvidenciasPorCaso_ObtenerPorIdCaso
+	@caso_Id	INT
+AS
+BEGIN
+	SELECT [evca_Id],
+		   tb1.[tiev_Id],
+		   tb2.tiev_Nombre,
+		   [caso_Id],
+		   [evca_Demandante],
+		   [evca_Demandado],
+		   [evca_NombreArchivo],
+		   [evca_UrlArchivo]
+	  FROM [CALE].[tbEvidenciasPorCaso] tb1
+INNER JOIN [CALE].[tbTiposdeEvidencia] tb2
+        ON tb1.tiev_Id = tb2.tiev_Id
+	 WHERE [caso_Id] = @caso_Id
+	   AND [evca_Estado] = 1
+END
+GO
+
 --***************************************************/TABLE Evidencias por caso*****************************************************--
 
 --********************************************************TABLE Veredictos**********************************************************--
@@ -833,17 +1028,46 @@ AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN
-			
-			INSERT INTO [CALE].[tbVeredictos] ([caso_Id], [vere_Descripcion], [vere_UsuCreacion])
-			VALUES (@caso_Id, @vere_Descripcion, @vere_UsuCreacion)
+			DECLARE @vere_Id INT
+
+			SELECT @vere_Id = [vere_Id] FROM [CALE].[tbVeredictos] WHERE [caso_Id] = @caso_Id
+
+			IF @vere_Id > 0
+			BEGIN
+				UPDATE [CALE].[tbVeredictos]
+				   SET [vere_Descripcion] = @vere_Descripcion,
+					   [vere_UsuModificacion] = @vere_UsuCreacion,
+					   [vere_FechaModificacion] = GETDATE()
+				 WHERE [vere_Id] = @vere_Id
+			END
+			ELSE
+			BEGIN
+				INSERT INTO [CALE].[tbVeredictos] ([caso_Id], [vere_Descripcion], [vere_UsuCreacion])
+				VALUES (@caso_Id, @vere_Descripcion, @vere_UsuCreacion)
+
+				SELECT TOP 1 @vere_Id = vere_Id FROM [CALE].[tbVeredictos] ORDER BY [vere_Id] DESC
+			END
 
 		COMMIT
-		SELECT TOP 1 vere_Id FROM [CALE].[tbVeredictos] ORDER BY [vere_Id] DESC
+		SELECT @vere_Id
 	END TRY
 	BEGIN CATCH
 		ROLLBACK
 		SELECT 0
 	END CATCH
+END
+GO
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbVeredictos_ObtenerPorIdCaso
+	@caso_Id	INT
+AS
+BEGIN
+	SELECT [vere_Id],
+		   [caso_Id],
+		   [vere_Descripcion]
+	  FROM [CALE].[tbVeredictos]
+	 WHERE [caso_Id] = @caso_Id
+	   AND [vere_Estado] = 1
 END
 GO
 
@@ -854,7 +1078,6 @@ GO
 
 CREATE OR ALTER PROCEDURE CALE.UDP_tbDetallesVeredictos_Insert
 	@vere_Id				INT,
-	@deve_EsInocente		BIT,
 	@deve_EsCulpable		BIT,
 	@deve_TipoEmpresaCivil	CHAR(1),
 	@deve_EmpresaCivil		INT,
@@ -863,8 +1086,25 @@ AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRAN 
-			INSERT INTO [CALE].[tbDetallesVeredictos] ([vere_Id], [deve_EsInocente], [deve_EsCulpable], [deve_TipoEmpresaCivil], [deve_EmpresaCivil], [deve_UsuCreacion])
-			VALUES (@vere_Id, @deve_EsInocente, @deve_EsCulpable, @deve_TipoEmpresaCivil, @deve_EmpresaCivil, @deve_UsuCreacion)
+			DECLARE @deve_Id INT
+
+			SELECT @deve_Id = [deve_Id] FROM [CALE].[tbDetallesVeredictos] WHERE [vere_Id] = @vere_Id AND [deve_EmpresaCivil] = @deve_EmpresaCivil AND [deve_TipoEmpresaCivil] = @deve_TipoEmpresaCivil AND [deve_Estado] = 0 
+
+			IF @deve_Id > 0
+			BEGIN
+				UPDATE [CALE].[tbDetallesVeredictos]
+				   SET [deve_Estado] = 1,
+					   [deve_EsCulpable] = @deve_EsCulpable,
+					   [deve_UsuModificacion] = @deve_UsuCreacion,
+					   [deve_FechaModificacion] = GETDATE()
+			     WHERE [deve_Id] = @deve_Id
+			END
+			ELSE
+			BEGIN
+				INSERT INTO [CALE].[tbDetallesVeredictos] ([vere_Id], [deve_EsCulpable], [deve_TipoEmpresaCivil], [deve_EmpresaCivil], [deve_UsuCreacion])
+				VALUES (@vere_Id, @deve_EsCulpable, @deve_TipoEmpresaCivil, @deve_EmpresaCivil, @deve_UsuCreacion)
+			END
+
 		COMMIT
 		SELECT 1
 	END TRY
@@ -875,6 +1115,37 @@ BEGIN
 END
 GO
 	
+CREATE OR ALTER PROCEDURE CALE.UDP_tbDetallesVeredicto_ObtenerPorIdVeredicto
+	@vere_Id	INT
+AS
+BEGIN
+	SELECT [deve_Id],
+		   [vere_Id],
+		   [deve_EsCulpable],
+		   [deve_TipoEmpresaCivil],
+		   [deve_EmpresaCivil]
+	  FROM [CALE].[tbDetallesVeredictos]
+	 WHERE [vere_Id] = @vere_Id
+	   AND [deve_Estado] = 1
+END
+GO
+
+CREATE OR ALTER PROCEDURE CALE.UDP_tbDetallesVeredicto_EliminarTodosPorIdVeredicto
+	@vere_Id	INT
+AS
+BEGIN
+	BEGIN TRY
+		UPDATE [CALE].[tbDetallesVeredictos]
+		   SET [deve_Estado] = 0
+		   WHERE [vere_Id] = @vere_Id
+
+		SELECT 1
+	END TRY
+	BEGIN CATCH
+		SELECT 0
+	END CATCH
+END
+GO
 --****************************************************/TABLE Detalles Veredictos**********************************************************--
 
 --**********************************************************/TABLES CALE************************************************************--

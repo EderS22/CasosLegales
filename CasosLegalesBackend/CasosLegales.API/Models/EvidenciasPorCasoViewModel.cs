@@ -12,6 +12,7 @@ namespace CasosLegales.API.Models
         public int caso_Id { get; set; }
         public bool evca_Demandante { get; set; }
         public bool evca_Demandado { get; set; }
+        public string tiev_Nombre { get; set; }
         public string evca_NombreArchivo { get; set; }
         public string evca_UrlArchivo { get; set; }
         public int evca_UsuCreacion { get; set; }

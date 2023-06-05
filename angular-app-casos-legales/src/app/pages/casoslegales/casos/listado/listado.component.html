@@ -10,70 +10,83 @@
         </div>
         <div class="card- d-flex justify-content-between align-items-center">
             <h1 class="mb-2 mt-2 text-center flex-grow-1">Casos</h1>
-            <img src="../../../../../assets/images/layouts/logoLeyMaxima.png"
-            alt="Logo" class="logo-image" style="width: 80px; height: 80px; border-radius: 40px;">
+            <img src="../../../../../assets/images/layouts/logoLeyMaxima.png" alt="Logo" class="logo-image"
+                style="width: 80px; height: 80px; border-radius: 40px;">
         </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Agregar, editar y eliminar casos</h4>
-            </div>
-            <div class="card-body">
-                <div class="row g-4 mb-3">
-                    <div class="col-sm-auto">
-                        <div class="d-flex gap-1">
-                            <button type="button" class="btn btn-primary add-btn" 
-                                (click)="editarAgregarCaso(0)">
-                                <i class="ri-add-line align-bottom me-1"></i>
-                                Nuevo
-                            </button>
-                        </div>
-                    </div>
+        <div class="row g-4 mb-4">
+            <div class="col-sm-auto">
+                <div class="d-flex gap-1">
+                    <button type="button" class="btn btn-primary add-btn" (click)="editarAgregarCaso(0)">
+                        <i class="ri-add-line align-bottom me-1"></i>
+                        Nuevo
+                    </button>
                 </div>
-                <div class="table-responsive table-card mt-3 mb-1">
-                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-                                <th style="text-align: center;">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <div class="col-sm-auto">
-                                        <div class="d-flex gap-1" style="justify-content: center;">
-                                            <button type="button" class="btn btn-soft-primary"
-                                               >
-                                                <i class="ri-edit-2-line"></i>
-                                                Editar
-                                            </button>
-                                            <button type="button" class="btn btn-soft-danger"
-                                                >
-                                                <i class="ri-delete-bin-line"></i>
-                                                Eliminar
-                                            </button>
-                                            <button type="button" class="btn btn-soft-secondary"
-                                                >
-                                                <i class="ri-file-list-2-line"></i>
-                                                Detalles
-                                            </button>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="search-name mb-4">
+                <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTerm$.next($any($event.target).value)">
+            </div>
+            <div class="mx-n3">
+                <ngx-simplebar style="max-height: 960px;" class="px-3">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 25px; height: 960px;">
+                        <div class="card ribbon-box border shadow-none mb-lg-0" *ngFor="let item of ListadoCasosFiltered" style="height: 480px;">
+                            <div class="card-body text-muted">
+                                <div [class]="item.caso_Abierto ? 'ribbon-two ribbon-two-success' : 'ribbon-two ribbon-two-danger'"><span>{{item.caso_Abierto ? 'Abierto' : 'Cerrado'}}</span></div>
+                                <h5 class="fs-14 text-end mb-3">{{item.tica_Nombre}}</h5>
+                                <div class="mb-0">
+                                    <div class="row mb-3">
+                                        <div class="col-sm-12">
+                                            <label>
+                                                Fecha
+                                            </label>
+                                            <input type="text" class="form-control" [value]="item.caso_Fecha" disabled>
                                         </div>
                                     </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-12">
+                                            <label>Juez</label>
+                                            <input type="text" class="form-control" [value]="item.abju_DNI + [' - '] + item.abju_Nombres + [' '] + item.abju_Apellidos" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-12">
+                                            <label>Descripción</label>
+                                            <div class="mx-n3">
+                                                <ngx-simplebar style="max-height: 140px;" class="px-3">
+                                                    <textarea type="text" class="form-control" [value]="item.caso_Descripcion" style="text-align: justify;" disabled rows="6"></textarea>
+                                                </ngx-simplebar>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-auto">
+                                            <div class="d-flex gap-2" style="justify-content: center;">
+                                                <button type="button" class="btn btn-icon btn-primary" title="Editar"
+                                                    (click)="editarAgregarCaso(item.caso_Id)">
+                                                    <i class="ri-edit-2-line"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-icon btn-danger"  title="Eliminar"
+                                                    >
+                                                    <i class="ri-delete-bin-line"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-icon btn-secondary" title="Reporte"
+                                                    >
+                                                    <i class="ri-file-list-2-line"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ngx-simplebar>
             </div>
         </div>
     </div>

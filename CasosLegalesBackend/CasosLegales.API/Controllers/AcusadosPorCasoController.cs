@@ -30,5 +30,23 @@ namespace CasosLegales.API.Controllers
             var response = _casosLegalesService.InsertarAcusadoPorCaso(_mapper.Map<tbAcusadoPorCaso>(item));
             return Ok(response);
         }
+
+        [HttpGet("ObtenerAcusadosPorIdCaso")]
+        public IActionResult ObtenerAcusadosPorIdCaso(int id)
+        {
+            var response = _casosLegalesService.ObtenerAcusadosPorIdCaso(id);
+
+            response.Data = _mapper.Map<IEnumerable<AcusadoPorCasoViewModel>>(response.Data);
+
+            return Ok(response);
+        }
+
+        [HttpGet("EliminarTodosPorIdCaso")]
+        public IActionResult EliminarTodosPorIdCaso(int id)
+        {
+            var response = _casosLegalesService.EliminarTodosAcusadosPorIdCaso(id);
+
+            return Ok(response);
+        }
     }
 }

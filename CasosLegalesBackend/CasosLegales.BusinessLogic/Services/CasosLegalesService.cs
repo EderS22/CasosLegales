@@ -640,6 +640,49 @@ namespace CasosLegales.BusinessLogic.Services
                 return result.Error(e.Message);
             }
         }
+
+        public ServiceResult EditarCaso(tbCasos item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _casosRepository.Update(item);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
+
+        public ServiceResult ListadoCasos()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _casosRepository.List();
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
+
+        public ServiceResult ObtenerCasoPorId(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _casosRepository.Find(id);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
+
         #endregion
 
         #region Acusados por caso 
@@ -657,6 +700,33 @@ namespace CasosLegales.BusinessLogic.Services
             }
         }
 
+        public ServiceResult ObtenerAcusadosPorIdCaso(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _acusadoPorCasoRepository.ObtenerAcusadosPorIdCaso(id);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
+
+        public ServiceResult EliminarTodosAcusadosPorIdCaso(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _acusadoPorCasoRepository.EliminarTodosAcusadosPorIdCaso(id);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
         #endregion
 
         #region Testigos por caso
@@ -675,7 +745,33 @@ namespace CasosLegales.BusinessLogic.Services
             }
         }
 
+        public ServiceResult ObtenerTestigosPorIdCaso(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _testigosPorCasoRepository.ObtenerTestigosPorCasoId(id);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
 
+        public ServiceResult EliminarTodosTestigosPorIdCaso(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _testigosPorCasoRepository.EliminarTodosTestigosPorIdCaso(id);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
         #endregion
 
         #region Evidencias por caso
@@ -694,6 +790,33 @@ namespace CasosLegales.BusinessLogic.Services
             }
         }
 
+        public ServiceResult ObtenerEvidenciaPorIdCaso(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _evidenciasPorCasoRepository.ObtenerEvidenciaPorIdCaso(id);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
+
+        public ServiceResult EliminarEvidenciaPorCaso(tbEvidenciasPorCaso item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _evidenciasPorCasoRepository.Delete(item);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
         #endregion
 
         #region Veredictos
@@ -712,6 +835,19 @@ namespace CasosLegales.BusinessLogic.Services
             }
         }
 
+        public ServiceResult ObtenerVeredictoPorIdCaso(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _veredictosRepository.Find(id);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
 
         #endregion
 
@@ -730,6 +866,33 @@ namespace CasosLegales.BusinessLogic.Services
             }
         }
 
+        public ServiceResult ObtenerDetalleVeredictoPorIdVeredicto(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _detallesVeredictosRepository.ObtenerPorIdVeredicto(id);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
+
+        public ServiceResult EliminarTodoDetalleVeredictoPorIdVeredicto(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var response = _detallesVeredictosRepository.EliminarTodoPorIdVeredicto(id);
+                return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
         #endregion
     }
 }

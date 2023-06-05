@@ -21,6 +21,10 @@ export class CasosService {
 
     constructor(private http: HttpClient) { }
 
+    getListadoCasos(){
+        return this.http.get(API_URL + 'Casos/List');
+    }
+
     getLinkFile(file: FormData) {
         file.append('token', tokenGoFile);
         file.append('folderId', folderIdCasosLegales);
@@ -43,6 +47,10 @@ export class CasosService {
         return this.http.post(API_URL + 'Casos/Insertar', item);
     }
 
+    editarCaso(item:Caso){
+        return this.http.post(API_URL + 'Casos/Editar', item);
+    }
+
     insertarAcusadoPorCaso(item:AcusadoPorCaso){
         return this.http.post(API_URL + 'AcusadosPorCaso/Insertar', item);
     }
@@ -62,4 +70,45 @@ export class CasosService {
     insertarDetalleVeredicto(item:DetalleVeredicto){
         return this.http.post(API_URL + 'DetallesVeredicto/Insertar', item);
     }
+
+    getCasoById(item:number){
+        return this.http.get(API_URL + `Casos/ObtenerCasoPorId?id=${item}`)
+    }
+
+    getAcusadosPorIdCaso(item:number){
+        return this.http.get(API_URL + `AcusadosPorCaso/ObtenerAcusadosPorIdCaso?id=${item}`);
+    }
+
+    getTestigosPorIdCaso(item:number){
+        return this.http.get(API_URL + `TestigosPorCaso/ObtenerTestigosPorIdCaso?id=${item}`);
+    }
+
+    getEvidenciasPorIdCaso(item:number){
+        return this.http.get(API_URL + `EvidenciasPorCaso/ObtenerEvidenciasPorIdCaso?id=${item}`);
+    }
+
+    getVeredictoPorIdCaso(item:number){
+        return this.http.get(API_URL + `Veredictos/ObtenerPorIdCaso?id=${item}`);
+    }
+
+    getDetallesVeredictoPorIdVeredicto(item:number){
+        return this.http.get(API_URL + `DetallesVeredicto/ObtenerPorIdVeredicto?id=${item}`);
+    }
+
+    eliminarDetallesVeredictos(item:number){
+        return this.http.get(API_URL + `DetallesVeredicto/EliminarTodoPorIdVeredicto?id=${item}`);
+    }
+
+    eliminarAcusadosPorCaso(item:number){
+        return this.http.get(API_URL + `AcusadosPorCaso/EliminarTodosPorIdCaso?id=${item}`);
+    }
+
+    eliminarTodosTestigosPorCaso(item:number){
+        return this.http.get(API_URL + `TestigosPorCaso/EliminarTodosPorIdCaso?id=${item}`);
+    }
+
+    eliminarEvidenciaPorId(item:EvidenciaPorCaso){
+        return this.http.post(API_URL + 'EvidenciasPorCaso/Eliminar', item);
+    }
+
 }

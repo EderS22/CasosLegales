@@ -52,5 +52,31 @@ namespace CasosLegales.DataAccess.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<tbTestigosPorCaso> ObtenerTestigosPorCasoId(int id)
+        {
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            
+            parametros.Add("@caso_Id", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.Query<tbTestigosPorCaso>(ScriptsDataBase.UDP_tbTestigosPorCaso_ObtenerPorCasoId, parametros, commandType: CommandType.StoredProcedure);
+
+        }
+
+        public RequestStatus EliminarTodosTestigosPorIdCaso(int id)
+        {
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@caso_Id", id, DbType.Int32, ParameterDirection.Input);
+
+            var result = db.QueryFirst<int>(ScriptsDataBase.UDP_tbTestigosPorCaso_EliminarTodosPorIdCaso, parametros, commandType: CommandType.StoredProcedure);
+
+            return new RequestStatus()
+            {
+                CodeStatus = result,
+                MessageStatus = "Estado operacion"
+            };
+        }
     }
 }

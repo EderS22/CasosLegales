@@ -17,7 +17,6 @@
 </div>
 
 <aw-wizard [navBarLayout]="'large-empty-symbols'" class="nav nav-pills progress-bar-tab custom-nav">
-    <!-- <aw-wizard-step> -->
     <aw-wizard-step [canExit]="casoForm.valid" >
         <ng-template awWizardStepSymbol>
             <li class="nav-item" role="presentation">
@@ -28,6 +27,10 @@
         </ng-template>
         <!-- wizard-tab -->
         <div class="d-flex align-items-start gap-3 mt-2 mb-4">
+            <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
+            data-previous="pills-gen-info-tab" awPreviousStep (click)="regresar()"
+            (click)="testigoDemandadoForm.reset()"><i
+                class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Regresar</button>
             <button type="button" class="btn btn-primary btn-label right ms-auto nexttab nexttab"
                 data-nexttab="pills-info-desc-tab" awNextStep (click)="submitted = true"><i
                     class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Siguiente</button>
@@ -187,26 +190,23 @@
                                 <div class="invalid-feedback">Por favor seleccione el/o los demandados.</div>
                             </div>
                         </div>
-                        <!-- <br/>
-                        <div style="text-align: center;">
-                            <button type="submit" class="btn btn-secondary col-6" (click)="onSubmit()">
-                                {{isEdit ? 'Editar' : 'Agregar'}} caso
-                            </button>
-                        </div> -->
                     </form>
                 </div>
             </div>
         </div>
         <!-- wizard-tab -->
         <div class="d-flex align-items-start gap-3 mt-4 mb-4">
+            <button type="button" class="btn btn-link text-decoration-none btn-label previestab"
+            data-previous="pills-gen-info-tab" awPreviousStep (click)="regresar()"
+            (click)="testigoDemandadoForm.reset()"><i
+                class="ri-arrow-left-line label-icon align-middle fs-16 me-2"></i> Regresar</button>
             <button type="button" class="btn btn-primary btn-label right ms-auto nexttab nexttab"
                 data-nexttab="pills-info-desc-tab" (click)="submitted = true" awNextStep><i
                     class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>Siguiente</button>
         </div>
     </aw-wizard-step>
 
-    <!-- <aw-wizard-step [canEnter]="casoForm.valid"> -->
-    <aw-wizard-step>
+    <aw-wizard-step [canEnter]="casoForm.valid">
         <ng-template awWizardStepSymbol>
             <li class="nav-item" role="presentation">
                 <button class="nav-link rounded-pill" data-progressbar="custom-progress-bar" id="pills-info-desc-tab"
@@ -458,8 +458,105 @@
                     </ngx-dropzone>
                 </div>
             </div>
-           <div class="mt-4">
-                
+           <div class="mt-4" *ngIf="isEdit">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive table-card mt-3 mb-1">
+                                    <table datatable [dtOptions]="dtOptions[0]" [dtTrigger]="dtTrigger1" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Tipo evidencia</th>
+                                                <th>Nombre archivo</th>
+                                                <th style="text-align: center;">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of evidenciasDemandante">
+                                                <td>{{item.evca_Id}}</td>
+                                                <td>{{item.tiev_Nombre}}</td>
+                                                <td>
+                                                    <a href="{{item.evca_UrlArchivo}}">
+                                                        {{item.evca_NombreArchivo}}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <div class="col-sm-auto">
+                                                        <div class="d-flex gap-1" style="justify-content: center;">
+                                                            <a href="{{item.evca_UrlArchivo}}">
+                                                                <button type="button" class="btn btn-icon btn-info" 
+                                                                title="Descargar"
+                                                            >
+                                                                <i class=" ri-download-line"></i> 
+                                                            </button>
+                                                            </a>
+                                                            <button class="btn btn-icon btn-danger"
+                                                                title="Eliminar"
+                                                                (click)="eliminarEvidencia(item.evca_Id)"
+                                                            >
+                                                                <i class="ri-delete-bin-line"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive table-card mt-3 mb-1">
+                                    <table datatable [dtOptions]="dtOptions[1]" [dtTrigger]="dtTrigger2" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Tipo evidencia</th>
+                                                <th>Nombre archivo</th>
+                                                <th style="text-align: center;">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of evidenciasDemandado">
+                                                <td>{{item.evca_Id}}</td>
+                                                <td>{{item.tiev_Nombre}}</td>
+                                                <td>
+                                                    <a href="{{item.evca_UrlArchivo}}">
+                                                        {{item.evca_NombreArchivo}}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <div class="col-sm-auto">
+                                                        <div class="d-flex gap-1" style="justify-content: center;">
+                                                            <a href="{{item.evca_UrlArchivo}}">
+                                                                <button type="button" class="btn btn-icon btn-info" 
+                                                                title="Descargar"
+                                                                >
+                                                                    <i class=" ri-download-line"></i> 
+                                                                </button>
+                                                            </a>
+                                                            <button class="btn btn-icon btn-danger"
+                                                                title="Eliminar"
+                                                                (click)="eliminarEvidencia(item.evca_Id)"
+                                                            >
+                                                                <i class="ri-delete-bin-line"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="d-flex align-items-start gap-3 mt-4 mb-4">
@@ -495,8 +592,74 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="">Veredicto</label>
-                            <textarea class="form-control" rows="6" placeholder="Veredicto" [(ngModel)]="veredicto.vere_Descripcion"></textarea>
+                            <div class="mb-4">
+                                <label for="">Veredicto</label>
+                                <div class="mx-n3">
+                                    <ngx-simplebar style="max-height: 150px;" class="px-3">
+                                        <textarea class="form-control" rows="6" placeholder="Veredicto" [(ngModel)]="veredicto.vere_Descripcion"></textarea>
+                                    </ngx-simplebar>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="search-name">
+                                    <input type="text" value="" class="form-control" placeholder="Buscar" (keyup)="searchTerm$.next($any($event.target).value)">
+                                </div>
+                                <br/>
+                                <div class="mx-n3">
+                                    <ngx-simplebar style="max-height: 400px;" class="px-3">
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 25px; height: 400px;">
+                                            <ng-container *ngFor="let item of listadoDetalleVeredictoFilter">
+                                                <div *ngIf="item.deve_TipoEmpresaCivil === 'C'" class="card" style="height: 180px;">
+                                                    <div class="card-body">
+                                                        <div>
+                                                            <div class="mb-3">
+                                                                <label for="">Acusado</label>
+                                                                <input type="text"
+                                                                    [value]="item.civi_DNI + [' - '] + item.civi_Nombres + [' '] + item.civi_Apellidos"
+                                                                    disabled class="form-control" />
+                                                            </div>
+                                                            <div>
+                                                                <label for="teca_Declaracion">Declarado</label> 
+                                                                <ng-select [ngModel]="item.deve_EsCulpable ? 'C' : 'I'" (change)="$event === 'C' ? item.deve_EsCulpable = true : item.deve_EsCulpable = false">
+                                                                    <ng-option value="C">
+                                                                        Culpable
+                                                                    </ng-option>
+                                                                    <ng-option value="I">
+                                                                        Inocente
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div *ngIf="item.deve_TipoEmpresaCivil === 'E'" class="card" style="height: 180px;">
+                                                    <div class="card-body">
+                                                        <div>
+                                                            <div class="mb-3">
+                                                                <label for="">Acusado</label>
+                                                                <input type="text"
+                                                                    [value]="item.emsa_Nombre"
+                                                                    disabled class="form-control" />
+                                                            </div>
+                                                            <div>
+                                                                <label for="teca_Declaracion">Declarado</label> 
+                                                                <ng-select [ngModel]="item.deve_EsCulpable ? 'C' : 'I'" (change)="$event === 'C' ? item.deve_EsCulpable = true : item.deve_EsCulpable = false">
+                                                                    <ng-option value="C">
+                                                                        Culpable
+                                                                    </ng-option>
+                                                                    <ng-option value="I">
+                                                                        Inocente
+                                                                    </ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </ngx-simplebar>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

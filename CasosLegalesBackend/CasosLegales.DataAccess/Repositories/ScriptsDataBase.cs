@@ -123,24 +123,31 @@
         public static string DdlAbogados = "CALE.UDP_tbAbogadosJueces_DdlAbogados";
         public static string DdlJueces = "CALE.UDP_tbAbogadosJueces_DdlJueces";
 
-
         public static string UDP_tbCasos_Insert = "CALE.UDP_tbCasos_Insert";
-
+        public static string UDP_tbCasos_Listado = "CALE.UDP_tbCasos_Listado";
+        public static string UDP_tbCasos_ObtenerCasoPorId = "CALE.UDP_tbCasos_ObtenerCasoPorId";
+        public static string UDP_tbCasos_Editar = "CALE.UDP_tbCasos_Editar";
 
         public static string UDP_tbAcusadosPorCaso_Insert = "CALE.UDP_tbAcusadosPorCaso_Insert";
-
+        public static string UDP_tbAcusadosPorCaso_ObtenerPorIdCaso = "CALE.UDP_tbAcusadosPorCaso_ObtenerPorIdCaso";
+        public static string UDP_tbAcusadosPorCaso_EliminarTodosPorCasoId = "CALE.UDP_tbAcusadosPorCaso_EliminarTodosPorCasoId";
 
         public static string UDP_tbTestigosPorCaso_Insert = "CALE.UDP_tbTestigosPorCaso_Insert";
+        public static string UDP_tbTestigosPorCaso_ObtenerPorCasoId = "CALE.UDP_tbTestigosPorCaso_ObtenerPorCasoId";
+        public static string UDP_tbTestigosPorCaso_EliminarTodosPorIdCaso = "CALE.UDP_tbTestigosPorCaso_EliminarTodosPorIdCaso";
 
 
         public static string UDP_tbEvidenciasPorCaso_Insert = "CALE.UDP_tbEvidenciasPorCaso_Insert";
         public static string UDP_tbEvidenciasPorCaso_Delete = "CALE.UDP_tbEvidenciasPorCaso_Delete";
+        public static string UDP_tbEvidenciasPorCaso_ObtenerPorIdCaso = "CALE.UDP_tbEvidenciasPorCaso_ObtenerPorIdCaso";
 
 
         public static string UDP_tbVeredictos_Insert = "CALE.UDP_tbVeredictos_Insert";
-
+        public static string UDP_tbVeredictos_ObtenerPorIdCaso = "CALE.UDP_tbVeredictos_ObtenerPorIdCaso";
 
         public static string UDP_tbDetallesVeredictos_Insert = "CALE.UDP_tbDetallesVeredictos_Insert";
+        public static string UDP_tbDetallesVeredicto_ObtenerPorIdVeredicto = "CALE.UDP_tbDetallesVeredicto_ObtenerPorIdVeredicto";
+        public static string UDP_tbDetallesVeredicto_EliminarTodosPorIdVeredicto = "CALE.UDP_tbDetallesVeredicto_EliminarTodosPorIdVeredicto";
         #endregion
     }
 }

@@ -2,6 +2,7 @@ export class Caso {
     caso_Id!: number;
     caso_Descripcion!: string;
     tica_Id!: number;
+    tica_Nombre!: string;
     abju_IdJuez!: number;
     caso_TipoDemandante!: string;
     caso_IdDemandante!: number;
@@ -13,4 +14,7 @@ export class Caso {
     caso_FechaCreacion!: Date;
     usua_IdModificacion!: number;
     caso_FechaModificacion!: Date;
+    abju_DNI!: string;
+    abju_Nombres!: string;
+    abju_Apellidos!: string;
 }

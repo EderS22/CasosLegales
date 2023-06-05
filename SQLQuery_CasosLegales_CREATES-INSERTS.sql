@@ -459,7 +459,6 @@ GO
 CREATE TABLE CALE.tbDetallesVeredictos (
 	deve_Id						INT IDENTITY(1,1),
 	vere_Id						INT NOT NULL,
-	deve_EsInocente				BIT DEFAULT 0,
 	deve_EsCulpable				BIT DEFAULT 0,
 	deve_TipoEmpresaCivil		CHAR(1) NOT NULL,
 	deve_EmpresaCivil			INT NOT NULL,

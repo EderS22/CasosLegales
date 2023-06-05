@@ -93,14 +93,15 @@
                     <div class="col-1"></div>
                     <div class="col-5 mt-1">
                         <label class="form-label">Departamento</label>
-                        <ng-select #selectDepartamento required
+                        <select #selectDepartamento required
+                            class="form-select"
                             formControlName="depa_Id" [ngClass]="{'is-invalid': submit && form['depa_Id'].errors}"
                             placeholder="Seleccione un Departamento">
                             <option value="" selected hidden>Seleccione un Departamento</option>
-                            <ng-option *ngFor="let item of DepartamentoDLL" [value]="item.depa_Id">
+                            <option *ngFor="let item of DepartamentoDLL" [value]="item.depa_Id">
                                 {{item.depa_Nombre}}
-                            </ng-option>
-                        </ng-select>
+                            </option>
+                        </select>
                         <div class="invalid-feedback">Por favor, selecione un departamento</div>
                     </div>
 

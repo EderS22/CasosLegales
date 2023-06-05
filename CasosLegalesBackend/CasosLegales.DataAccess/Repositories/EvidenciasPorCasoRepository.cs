@@ -14,7 +14,19 @@ namespace CasosLegales.DataAccess.Repositories
     {
         public RequestStatus Delete(tbEvidenciasPorCaso item)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@evca_Id", item.evca_Id, DbType.Int32, ParameterDirection.Input);
+            parametros.Add("@evca_UsuModificacion", item.evca_UsuModificacion, DbType.Int32, ParameterDirection.Input);
+
+            var result = db.QueryFirst<int>(ScriptsDataBase.UDP_tbEvidenciasPorCaso_Delete, parametros, commandType: CommandType.StoredProcedure);
+
+            return new RequestStatus()
+            {
+                CodeStatus = result,
+                MessageStatus = "Estado Delete"
+            };
         }
 
         public tbEvidenciasPorCaso Find(int? id)
@@ -52,6 +64,16 @@ namespace CasosLegales.DataAccess.Repositories
         public RequestStatus Update(tbEvidenciasPorCaso item)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<tbEvidenciasPorCaso> ObtenerEvidenciaPorIdCaso(int id)
+        {
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@caso_Id", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.Query<tbEvidenciasPorCaso>(ScriptsDataBase.UDP_tbEvidenciasPorCaso_ObtenerPorIdCaso, parametros, commandType: CommandType.StoredProcedure);
         }
     }
 }

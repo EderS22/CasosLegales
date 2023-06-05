@@ -10,4 +10,5 @@ export class EvidenciaPorCaso{
     evca_FechaCreacion!: Date;
     evca_UsuModificacion!: number;
     evca_FechaModificacion!: Date;
+    tiev_Nombre!: string;
 }

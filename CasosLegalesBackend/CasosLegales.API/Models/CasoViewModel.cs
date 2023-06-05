@@ -10,6 +10,7 @@ namespace CasosLegales.API.Models
         public int caso_Id { get; set; }
         public string caso_Descripcion { get; set; }
         public int tica_Id { get; set; }
+        public string tica_Nombre { get; set; }
         public int abju_IdJuez { get; set; }
         public string caso_TipoDemandante { get; set; }
         public int caso_IdDemandante { get; set; }
@@ -21,5 +22,8 @@ namespace CasosLegales.API.Models
         public DateTime caso_FechaCreacion { get; set; }
         public int? usua_IdModificacion { get; set; }
         public DateTime? caso_FechaModificacion { get; set; }
+        public string abju_DNI { get; set; }
+        public string abju_Nombres { get; set; }
+        public string abju_Apellidos { get; set; }
     }
 }

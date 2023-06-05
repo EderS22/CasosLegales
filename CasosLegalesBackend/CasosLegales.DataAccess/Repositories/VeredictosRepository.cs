@@ -19,7 +19,12 @@ namespace CasosLegales.DataAccess.Repositories
 
         public tbVeredictos Find(int? id)
         {
-            throw new NotImplementedException();
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@caso_Id", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.QueryFirst<tbVeredictos>(ScriptsDataBase.UDP_tbVeredictos_ObtenerPorIdCaso, parametros, commandType: CommandType.StoredProcedure);
         }
 
         public RequestStatus Insert(tbVeredictos item)

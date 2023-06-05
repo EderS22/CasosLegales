@@ -3,7 +3,9 @@ import { UntypedFormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
+import { Caso } from 'src/app/pages/models/casoslegales/Caso';
 import { RolService } from 'src/app/pages/services/acceso/rol/rol.service';
+import { CasosService } from 'src/app/pages/services/casolegales/casos/casos.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,12 +16,19 @@ import Swal from 'sweetalert2';
 export class ListadoComponent implements OnInit {
     
     constructor(
+        private casoService: CasosService,
         private rolService: RolService,
         private router: Router
     ) { }
 
     breadCrumbItems!: Array<{}>;
     dateNow: Date = new Date();
+
+    ListadoCasos: Caso[] = [];
+    ListadoCasosFiltered: Caso[] = [];
+
+    searchTerm$ = new Subject<string>();
+
     dtOptions: DataTables.Settings = {};
     dtTrigger: Subject<any> = new Subject<any>();
 
@@ -38,6 +47,7 @@ export class ListadoComponent implements OnInit {
                 })
         }
 
+        const casoAllCorrectEdit = localStorage.getItem("casoAllCorrectEdit");
         const casoAllCorrect = localStorage.getItem("casoAllCorrect");
 
         if(casoAllCorrect){
@@ -49,6 +59,17 @@ export class ListadoComponent implements OnInit {
 
             localStorage.removeItem("casoAllCorrect");
         }
+
+        if(casoAllCorrectEdit){
+            if(casoAllCorrectEdit){
+                this.mensajeSuccess("Caso editado con exito");
+            }else{
+                this.mensajeError("Ocurrio un error al intentar editar el caso")       
+            }
+
+            localStorage.removeItem("casoAllCorrectEdit");
+        }
+
         this.breadCrumbItems = [
             { label: 'Casos' },
             { label: 'Listado', active: true }
@@ -66,6 +87,23 @@ export class ListadoComponent implements OnInit {
                 },
             ]
         };
+
+        this.casoService.getListadoCasos()
+        .subscribe((data:any) => {
+            if(data.code === 200){
+                this.ListadoCasos = data.data;
+                this.ListadoCasosFiltered = data.data;
+            }
+        })
+
+        this.filterList();
+    }
+
+    filterList(): void {
+        this.searchTerm$.subscribe(term => {
+            this.ListadoCasosFiltered = this.ListadoCasos
+            .filter(item => item.caso_Fecha.toString().toLowerCase().indexOf(term.toLowerCase()) >= 0 || item.caso_Descripcion.toLowerCase().indexOf(term.toLowerCase()) >= 0 || item.abju_DNI.toLowerCase().indexOf(term.toLowerCase()) >= 0 || item.abju_Nombres.toLowerCase().indexOf(term.toLowerCase()) >= 0 || item.abju_Apellidos.toLowerCase().indexOf(term.toLowerCase()) >= 0);
+        });
     }
 
     editarAgregarCaso(id:number){
