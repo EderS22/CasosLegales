@@ -33,7 +33,7 @@
             </div><!--end row-->
 
             <div class="row">
-                <div class="col-xl-4">
+                <div class="col-xl-12">
                     <div class="card card-height-100">
                         <div class="card-header align-items-center d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Store Visits by Source</h4>
@@ -59,25 +59,6 @@
                                 [legend]="SalesCategoryChart.legend" [stroke]="SalesCategoryChart.stroke"
                                 [dataLabels]="SalesCategoryChart.dataLabels" [colors]="SalesCategoryChart.colors"
                                 dir="ltr"></apx-chart>
-                        </div>
-                    </div> <!-- .card-->
-                </div> <!-- .col-->
-
-                <div class="col-xl-8">
-                    <div class="card">
-                        <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Recent Orders</h4>
-                            <div class="flex-shrink-0">
-                                <button type="button" class="btn btn-soft-info btn-sm">
-                                    <i class="ri-file-list-3-line align-middle"></i> Generate Report
-                                </button>
-                            </div>
-                        </div><!-- end card header -->
-
-                        <div class="card-body">
-                            <div class="table-responsive table-card">
-                                <app-recent-orders [RecentSelling]="RecentSelling"></app-recent-orders>
-                            </div>
                         </div>
                     </div> <!-- .card-->
                 </div> <!-- .col-->

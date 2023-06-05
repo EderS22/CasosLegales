@@ -28,9 +28,7 @@ namespace CasosLegales.DataAccess.Context
         public virtual DbSet<VW_tbEmpleados> VW_tbEmpleados { get; set; }
         public virtual DbSet<VW_tbEmpresas> VW_tbEmpresas { get; set; }
         public virtual DbSet<VW_tbEstadosCiviles> VW_tbEstadosCiviles { get; set; }
-
         public virtual DbSet<VW_tbEvidenciasPorCaso> VW_tbEvidenciasPorCaso { get; set; }
-
         public virtual DbSet<VW_tbMunicipios> VW_tbMunicipios { get; set; }
         public virtual DbSet<VW_tbTiposdeCaso> VW_tbTiposdeCaso { get; set; }
         public virtual DbSet<VW_tbTiposdeEvidencia> VW_tbTiposdeEvidencia { get; set; }
@@ -57,7 +55,7 @@ namespace CasosLegales.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AI");
+            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
 
             modelBuilder.Entity<VW_tbAbogadosJueces>(entity =>
             {

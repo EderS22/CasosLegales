@@ -111,6 +111,8 @@ export class AgregareditarComponent implements OnInit {
     dtTrigger1: Subject<any> = new Subject<any>();
     dtTrigger2: Subject<any> = new Subject<any>();
 
+    SelectMultiple: boolean = true;
+
     ngOnInit(): void {
         if (!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin) {
             const ropaAcceso = new ropa();
@@ -209,6 +211,7 @@ export class AgregareditarComponent implements OnInit {
                     this.listadoEmpresasDemandado = data.data;
                 }
             })
+
         this.TipoDema1 = this.TipoDema;
         this.TipoDema2 = this.TipoDema;
         this.filterList();
@@ -871,7 +874,6 @@ export class AgregareditarComponent implements OnInit {
                             }
                         }
                     })
-
             }
         }
     }
@@ -894,7 +896,46 @@ export class AgregareditarComponent implements OnInit {
 
     TipoCasoChange(event: any) {
         if (event > 0) {
+            this.TipoDema1 = this.TipoDema;
+            this.TipoDema2 = this.TipoDema;
+            this.SelectMultiple = true;
 
+            if(event === 1){
+                this.TipoDema2 = this.TipoDema2.filter(item => item.tide_Id === 'C');
+              
+                if( this.form['caso_TipoDemandado'].value === 'E'){
+                    this.form['caso_TipoDemandado'].setValue(null);
+                    this.form['caso_IdDemandado'].setValue(null);
+                }
+            }
+
+            if(event === 2 || event === 4 || event === 5){
+                this.TipoDema1 = this.TipoDema2.filter(item => item.tide_Id === 'C');
+                this.TipoDema2 = this.TipoDema2.filter(item => item.tide_Id === 'C');
+               
+                if( this.form['caso_TipoDemandado'].value === 'E'){
+                    this.form['caso_TipoDemandado'].setValue(null);
+                    this.form['caso_IdDemandado'].setValue(null);
+                }
+
+                if( this.form['caso_TipoDemandante'].value === 'E'){
+                    this.form['caso_TipoDemandante'].setValue(null);
+                    this.form['caso_IdDemandante'].setValue(null);
+                }
+            }
+
+            if(event === 3){
+                this.TipoDema1 = this.TipoDema2.filter(item => item.tide_Id === 'C');
+                this.SelectMultiple = false;
+
+                if( this.form['caso_TipoDemandante'].value === 'E'){
+                    this.form['caso_TipoDemandante'].setValue(null);
+                    this.form['caso_IdDemandante'].setValue(null);
+                }
+
+            }
+
+           
         }
     }
 

@@ -34,8 +34,9 @@ export class ReportecasoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.IdCaso = 5;
-    if (this.IdCaso === null) {
+    this.IdCaso = parseInt(localStorage.getItem("caso_IdReporte") ?? '0', 0);
+
+    if (this.IdCaso === 0) {
       this.router.navigate([""]);
     }
 
@@ -358,29 +359,37 @@ export class ReportecasoComponent implements OnInit {
     //EVIDENCIA
     this.CasoService.ReporteEvidenciaporCaso(this.IdCaso)
       .subscribe((acus: any) => {
+          localStorage.setItem('EvidenciaDemandante', '')
+          localStorage.setItem('EvidenciaDemandado', '')
+          
+        if (acus.data.length > 0) {
+        
 
-        localStorage.setItem('EvidenciaDemandante', '')
-        localStorage.setItem('EvidenciaDemandado', '')
+          acus.data.forEach((item: any) => {
 
-        acus.data.forEach((item: any) => {
+            if (item.tiev_Id == 1 && item.evca_Demandante == true) {
 
-          if (item.tiev_Id == 1 && item.evca_Demandante == true) {
+              localStorage.setItem(
+                'EvidenciaDemandante',
+                localStorage.getItem('EvidenciaDemandante') + item.evca_UrlArchivo + ',,,&&&,,,'
+              )
 
-            localStorage.setItem(
-              'EvidenciaDemandante',
-              localStorage.getItem('EvidenciaDemandante') + item.evca_UrlArchivo + ',,,&&&,,,'
-            )
+            }
+            else if (item.tiev_Id == 1 && item.evca_Demandado == true) {
 
-          }
-          else if (item.tiev_Id == 1 && item.evca_Demandado == true) {
+              localStorage.setItem(
+                'EvidenciaDemandado',
+                localStorage.getItem('EvidenciaDemandado') + item.evca_UrlArchivo + ',,,&&&,,,'
+              )
+            }
 
-            localStorage.setItem(
-              'EvidenciaDemandado',
-              localStorage.getItem('EvidenciaDemandado') + item.evca_UrlArchivo + ',,,&&&,,,'
-            )
-          }
 
-        })
+          })
+
+        }
+
+
+
 
       })
 
@@ -400,10 +409,12 @@ export class ReportecasoComponent implements OnInit {
     const imgDemnadante = localStorage.getItem('EvidenciaDemandado');
 
     if (currentUserString !== null) {
+     
       const URLImagen = currentUserString.split(',,,&&&,,,'); // Divide el texto en un array de palabras separadas por coma
       var i = 1;
+      
       for (let index = 0; index < URLImagen.length - 1; index++, i++) {
-
+        
         doc.addImage(URLImagen[index], '', mx, y, w, h);
         mx = mx + 45
         if (i == 4) {
@@ -422,10 +433,10 @@ export class ReportecasoComponent implements OnInit {
 
     if (imgDemnadante !== null) {
       const URLImagenDemnadado = imgDemnadante.split(',,,&&&,,,');
-
+      console.log(URLImagenDemnadado)
       var i = 1;
       for (let index = 0; index < URLImagenDemnadado.length - 1; index++, i++) {
-        console.log(URLImagenDemnadado[index])
+        
         doc.addImage(URLImagenDemnadado[index], '', mx, y, w, h);
         mx = mx + 45
         if (i == 4) {
@@ -444,7 +455,7 @@ export class ReportecasoComponent implements OnInit {
     /*
     let y = marginY; // Posición vertical inicial
     const lines = doc.splitTextToSize(text, maxWidth, { align: "justify" }); // Dividir el texto en líneas
-
+    
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
       if (y + lineHeight > doc.internal.pageSize.height - marginY) {
@@ -470,8 +481,8 @@ export class ReportecasoComponent implements OnInit {
       doc.text(lines2[i], marginX, y, { align: 'justify', lineHeightFactor: 1.5, maxWidth: 190 }); // Agregar la línea de texto
       y += lineHeight; // Aumentar la posición vertical
     }
-
-
+    
+    
     */
 
     /*
@@ -483,18 +494,18 @@ export class ReportecasoComponent implements OnInit {
         console.error('Ocurrió un error:', error);
       }
     );
-
+    
     var w = 25;
     var h = 25;
     var mx = 15
     const currentUserString = localStorage.getItem('imagen');
     let img2: any; // Puedes ajustar el tipo de 'currentUser' según la estructura del objeto esperado
-
+    
     if (currentUserString !== null) {
       img2 = JSON.parse(currentUserString);
       var i = 1;
       for (let index = 0; index < img2.length; index++, i++) {
-
+    
         doc.addImage('https://i.ibb.co/khddQKD/logoe.png', '', mx, y, w, h);
         mx = mx + 25
         if (i == 7) {
@@ -503,7 +514,7 @@ export class ReportecasoComponent implements OnInit {
           mx = 15
         }
         //doc.addImage('', '', mx, y, w, h);
-
+    
         // if (img2[index]) {
         //   doc.addImage(img2[1].usua_img, '', mx, y, w, h);
         //   mx = mx + 20
@@ -514,8 +525,8 @@ export class ReportecasoComponent implements OnInit {
         // }
       }
     }
-
-
+    
+    
     */
 
     // Agregar imagen en todas las páginas
@@ -551,6 +562,7 @@ export class ReportecasoComponent implements OnInit {
     const pdfDataUri = doc.output('datauristring'); //hace visual el pdf
     this.pdfViewer.nativeElement.src = pdfDataUri;
 
+    
   }
 
 }

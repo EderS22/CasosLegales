@@ -111,6 +111,11 @@ export class ListadoComponent implements OnInit {
         this.router.navigate(["casoslegales/casos/agregareditar"]);
     }
 
+    reporteCaso(id:number){
+        localStorage.setItem("caso_IdReporte", id.toString());
+        this.router.navigate(["reportes/reporte/reportecaso"]);
+    }
+
     mensajeSuccess(messageBody: string) {
         Swal.fire({
             position: 'center',

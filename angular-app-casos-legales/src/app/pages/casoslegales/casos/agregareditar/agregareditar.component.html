@@ -171,7 +171,7 @@
                                 <label for="caso_IdDemandado" class="form-label">
                                     Demandados
                                 </label>
-                                <ng-select [multiple]="true" [closeOnSelect]="false" [hideSelected]="true"
+                                <ng-select [multiple]="SelectMultiple" [closeOnSelect]="false" [hideSelected]="true"
                                     formControlName="caso_IdDemandado"
                                     [ngClass]="{ 'is-invalid': submitted && form['caso_IdDemandado'].errors }"
                                     [placeholder]="form['caso_TipoDemandado'].value === null ? 'Seleccione un tipo de demandado' : 'Seleccione al demandado'"

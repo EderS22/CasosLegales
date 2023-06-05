@@ -587,9 +587,6 @@ INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono
 VALUES('Empresas', 'casoslegales/empresa/listado', 'CasosLegales', 'ri-building-4-line', 1)
 GO
 
-INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
-VALUES('Reporte', 'reportes/reporte/reportecaso', 'CasosLegales', 'ri-building-4-line', 1)
-GO
 
 /*
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)

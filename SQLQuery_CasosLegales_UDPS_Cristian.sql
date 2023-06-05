@@ -1007,12 +1007,12 @@ FROM CALE.tbEvidenciasPorCaso AS T1 INNER JOIN CALE.tbTiposdeEvidencia AS T2
 ON T1.tiev_Id = T2.tiev_Id
 
 GO
-CREATE OR ALTER PROCEDURE CALE.UDP_tbEvidenciasPorCaso_Reporte
+CREATE OR ALTER PROCEDURE CALE.UDP_tbEvidenciasPorCaso_Reporte 
 (@caso_Id INT)
 AS
 BEGIN
 	SELECT * FROM CALE.VW_tbEvidenciasPorCaso
-	WHERE caso_Id = @caso_Id
+	WHERE caso_Id = @caso_Id AND evca_Estado = 1
 END
 
 -- TESTIGOS POR CASO

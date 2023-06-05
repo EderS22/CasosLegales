@@ -135,7 +135,6 @@
         public static string UDP_tbCasos_DatosReporte = "CALE.UDP_tbCasos_Reporte";
 
 
-        public static string UDP_tbAcusadosPorCaso_Insert = "CALE.UDP_tbAcusadosPorCaso_Insert";
         public static string UDP_tbAcusadoPorCaso_Reporte = "CALE.UDP_tbAcusadoPorCaso_Reporte";
         public static string UDP_tbTestigosPorCaso_Reporte = "CALE.UDP_tbTestigosPorCaso_Reporte";
 
@@ -154,10 +153,7 @@
         public static string UDP_tbVeredictos_ObtenerPorIdCaso = "CALE.UDP_tbVeredictos_ObtenerPorIdCaso";
         public static string UDP_tbEvidenciasPorCaso_Reporte = "CALE.UDP_tbEvidenciasPorCaso_Reporte";
 
-
-        public static string UDP_tbVeredictos_Insert = "CALE.UDP_tbVeredictos_Insert";
         public static string UDP_tbVeredictos_Reporte = "CALE.UDP_tbVeredictos_Reporte";
-
 
         public static string UDP_tbDetallesVeredictos_Insert = "CALE.UDP_tbDetallesVeredictos_Insert";
         public static string UDP_tbDetallesVeredicto_ObtenerPorIdVeredicto = "CALE.UDP_tbDetallesVeredicto_ObtenerPorIdVeredicto";
