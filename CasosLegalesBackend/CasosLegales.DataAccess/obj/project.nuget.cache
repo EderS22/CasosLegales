@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "lq6Wx64/kmzuHZD9oPQ6wB02MwieUoVR5qQyzR65tmOXc2RypbOa5FFwRzRgJvWwu0MWXXq8etc45lD/Uvoigw==",
+=======
+  "dgSpecHash": "WRp/X/1KrrF64OfrSB9C/RD2K4CFZIKRpma+HMzR9vZLZWXNCmQPIYw1mCS8lkehLP8yj9yjo/3yMAv0vIpKkQ==",
+>>>>>>> f4b5c79bb00fa15ce6d503d22d5473f8687c2ea6
   "success": true,
   "projectFilePath": "C:\\Users\\ALEXANDER\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\CasosLegales.DataAccess.csproj",
   "expectedPackageFiles": [
@@ -127,6 +131,7 @@
     "C:\\Users\\ALEXANDER\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\ALEXANDER\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
+<<<<<<< HEAD
   "logs": [
     {
       "code": "Undefined",
@@ -135,4 +140,7 @@
       "message": "Problema al leer el archivo de caché C:\\Users\\ALEXANDER\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.DataAccess\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
     }
   ]
+=======
+  "logs": []
+>>>>>>> f4b5c79bb00fa15ce6d503d22d5473f8687c2ea6
 }

@@ -7,4 +7,8 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = CasosLegales.DataAccess
+<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\ALEXANDER\Documents\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\
+=======
+build_property.ProjectDir = C:\Users\eders\OneDrive\Documentos\GitHub\CasosLegales\CasosLegalesBackend\CasosLegales.DataAccess\
+>>>>>>> f4b5c79bb00fa15ce6d503d22d5473f8687c2ea6
