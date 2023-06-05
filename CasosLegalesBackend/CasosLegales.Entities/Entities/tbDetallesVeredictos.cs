@@ -17,7 +17,7 @@ namespace CasosLegales.Entities.Entities
         public DateTime deve_FechaCreacion { get; set; }
         public int? deve_UsuModificacion { get; set; }
         public DateTime? deve_FechaModificacion { get; set; }
-        public bool deve_Estado { get; set; }
+        public bool? deve_Estado { get; set; }
 
         public virtual tbUsuarios deve_UsuCreacionNavigation { get; set; }
         public virtual tbUsuarios deve_UsuModificacionNavigation { get; set; }

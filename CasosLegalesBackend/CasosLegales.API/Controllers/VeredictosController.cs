@@ -40,5 +40,12 @@ namespace CasosLegales.API.Controllers
 
             return Ok(response);
         }
+        
+        [HttpGet("VeredictoReporte")]
+        public IActionResult Find(int? id)
+        {
+            var list = _casosLegalesService.VeredictosReporte(id);
+            return Ok(list);
+        }
     }
 }

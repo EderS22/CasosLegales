@@ -48,5 +48,12 @@ namespace CasosLegales.API.Controllers
 
             return Ok(response);
         }
+        
+        [HttpGet("AcusadoPorCasoReporte")]
+        public IActionResult AcusadoPorCasoReporte(int? id)
+        {
+            var list = _casosLegalesService.AcusadoPorCasoReporte(id);
+            return Ok(list);
+        }
     }
 }

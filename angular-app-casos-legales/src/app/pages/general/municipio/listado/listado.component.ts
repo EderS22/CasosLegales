@@ -6,7 +6,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
-
+import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
+import { RolService } from 'src/app/pages/services/acceso/rol/rol.service';
+import { Router } from '@angular/router';
 import { DepartamentoService } from 'src/app/pages/services/general/departamentoservice/departamento.service';
 import { departamento } from 'src/app/pages/models/general/departeamento';
 
@@ -38,7 +40,9 @@ export class ListadoComponent {
     private service: MunicipioService,
     private modalService: NgbModal,
     private formBuilder: UntypedFormBuilder,
-    private DepartamentoService: DepartamentoService
+    private DepartamentoService: DepartamentoService,
+    private rolService: RolService,
+    private router: Router
   ) {
     this.MunicipioForm = this.formBuilder.group({
       muni_Id: ['0000', [Validators.required]],
@@ -51,6 +55,21 @@ export class ListadoComponent {
   }
 
   ngOnInit(): void {
+
+    if (!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin) {
+      const ropaAcceso = new ropa();
+      ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').role_Id;
+      ropaAcceso.pant_Pantalla = "Municipios";
+      this.rolService.validarRolTienePantalla(ropaAcceso)
+        .subscribe((data: any) => {
+          if (data.code === 200) {
+            if (data.data.codeStatus === 0) {
+              this.router.navigate([""]);
+            }
+          }
+        })
+    }
+
 
     this.dtOptions = {
       pagingType: 'simple_numbers',

@@ -58,5 +58,12 @@ namespace CasosLegales.API.Controllers
 
             return Ok(response);
         }
+        
+        [HttpGet("BuscarDatosReporte")]
+        public IActionResult Find(int? id)
+        {
+            var list = _casosLegalesService.DatosReporte(id);
+            return Ok(list);
+        }
     }
 }

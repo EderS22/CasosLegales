@@ -98,6 +98,14 @@
          "ObjectType": 3
       },
       {
+         "Name": "[CALE].[VW_tbAcusadoPorCaso]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[CALE].[VW_tbCasos]",
+         "ObjectType": 3
+      },
+      {
          "Name": "[CALE].[VW_tbCiviles]",
          "ObjectType": 3
       },
@@ -107,6 +115,10 @@
       },
       {
          "Name": "[CALE].[VW_tbEmpresas]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[CALE].[VW_tbEvidenciasPorCaso]",
          "ObjectType": 3
       },
       {
@@ -134,7 +146,11 @@
          "ObjectType": 3
       }
    ],
+<<<<<<< HEAD
    "UiHint": "EJSM\\SQLEXPRESS.DB_CasosLegales",
+=======
+   "UiHint": "DESKTOP-NC80200\\SQLEXPRESS.DB_CasosLegales",
+>>>>>>> Cristian
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

@@ -3,6 +3,7 @@ export class AcusadoPorCaso{
     caso_Id!: number;
     acus_TipoAcusado!: string;
     acus_Acusado!: number;
+    acus_AcusadoDatos!: string;
     acus_UsuCreacion!: number;
     acus_FechaCreacion!: Date;
     acus_UsuModificacion!: number;

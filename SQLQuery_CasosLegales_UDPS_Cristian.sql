@@ -24,7 +24,7 @@ SELECT	depa_Id,
 		depa_UsuCreacion, 
 		T2.usua_Nombre AS user_Creacion,
 		depa_FechaCreacion, 
-		depa_UsuModificacion, 
+		depa_UsuModificacion,
 		T3.usua_Nombre AS user_Modificacion,
 		depa_FechaModificacion, 
 		depa_Estado
@@ -901,4 +901,138 @@ BEGIN
 	BEGIN CATCH
 		SELECT 0 codeStatus
 	END CATCH
+END
+
+
+
+
+
+--///// PROCEDIMIENTOS Y VISTAS NUESVOS
+
+
+-- TB CASOS
+GO
+CREATE OR ALTER VIEW CALE.VW_tbCasos
+AS
+SELECT  caso_Id, 
+		caso_Descripcion, 
+		T1.tica_Id, 
+		T2.tica_Nombre,
+		abju_IdJuez, 
+		T3.abju_Nombres + ' ' + T3.abju_Apellidos AS abju_AbogadoNombre,
+		caso_TipoDemandante, 
+		caso_IdDemandante, 
+		CASE
+			WHEN caso_TipoDemandante = 'C' THEN (SELECT civi_Nombres + ' '+ civi_Apellidos FROM CALE.tbCiviles WHERE civi_Id = caso_IdDemandante)
+			WHEN caso_TipoDemandante = 'E' THEN (SELECT emsa_Nombre FROM CALE.tbEmpresas WHERE emsa_Id = caso_IdDemandante)
+			ELSE ''
+		END AS caso_DemandanteNombre,
+		abju_IdAbogadoDemandante, 
+		T4.abju_Nombres + ' ' + T4.abju_Apellidos AS abju_AbogadoDemandanteNombre,
+		abju_IdAbogadoDemandado, 
+		T5.abju_Nombres + ' ' + T5.abju_Apellidos AS abju_AbogadoDemandadoNombre,
+		caso_Abierto, 
+		caso_Fecha, 
+		caso_Estado, 
+		usua_IdCreacion, 
+		caso_FechaCreacion, 
+		usua_IdModificacion, 
+		caso_FechaModificacion
+FROM CALE.tbCasos AS T1 INNER JOIN CALE.tbTiposdeCaso AS T2
+ON T1.tica_Id = T2.tica_Id INNER JOIN CALE.tbAbogadosJueces AS T3
+ON T1.abju_IdJuez = T3.abju_Id INNER JOIN CALE.tbAbogadosJueces AS T4
+ON T1.abju_IdAbogadoDemandante = T4.abju_Id INNER JOIN CALE.tbAbogadosJueces AS T5
+ON T1.abju_IdAbogadoDemandado = T5.abju_Id 
+
+GO
+CREATE OR ALTER PROCEDURE CALE.UDP_tbCasos_Reporte 
+(@caso_Id INT )
+AS
+BEGIN
+	SELECT * FROM CALE.VW_tbCasos
+	WHERE caso_Id = @caso_Id
+END
+
+
+-- acusado por caso
+GO
+CREATE OR ALTER VIEW CALE.VW_tbAcusadoPorCaso
+AS
+SELECT	acus_Id, 
+		caso_Id, 
+		acus_TipoAcusado, 
+		acus_Acusado, 
+		CASE
+			WHEN acus_TipoAcusado = 'C' THEN (SELECT civi_Nombres + ' '+ civi_Apellidos FROM CALE.tbCiviles WHERE civi_Id = acus_Acusado)
+			WHEN acus_TipoAcusado = 'E' THEN (SELECT emsa_Nombre FROM CALE.tbEmpresas WHERE emsa_Id = acus_Acusado)
+			ELSE ''
+		END AS acus_AcusadoDatos,
+		acus_UsuCreacion, 
+
+		acus_FechaCreacion, 
+		acus_UsuModificacion, 
+		acus_FechaModificacion, 
+		acus_Estado
+FROM CALE.tbAcusadoPorCaso
+
+
+GO
+CREATE OR ALTER PROCEDURE CALE.UDP_tbAcusadoPorCaso_Reporte 
+(@caso_Id INT )
+AS
+BEGIN
+	SELECT * FROM CALE.VW_tbAcusadoPorCaso
+	WHERE caso_Id = @caso_Id
+END
+
+
+--EVIDENCIA POR CASO 
+GO
+CREATE OR ALTER VIEW CALE.VW_tbEvidenciasPorCaso
+AS
+SELECT	evca_Id, 
+		T1.tiev_Id, 
+		T2.tiev_Descripcion,
+		caso_Id, 
+		evca_Demandante, 
+		evca_Demandado, 
+		evca_NombreArchivo, 
+		evca_UrlArchivo, 
+		evca_UsuCreacion, 
+		evca_FechaCreacion, 
+		evca_UsuModificacion, 
+		evca_FechaModificacion, 
+		evca_Estado
+FROM CALE.tbEvidenciasPorCaso AS T1 INNER JOIN CALE.tbTiposdeEvidencia AS T2
+ON T1.tiev_Id = T2.tiev_Id
+
+GO
+CREATE OR ALTER PROCEDURE CALE.UDP_tbEvidenciasPorCaso_Reporte
+(@caso_Id INT)
+AS
+BEGIN
+	SELECT * FROM CALE.VW_tbEvidenciasPorCaso
+	WHERE caso_Id = @caso_Id
+END
+
+-- TESTIGOS POR CASO
+GO
+CREATE OR ALTER PROCEDURE CALE.UDP_tbTestigosPorCaso_Reporte
+(@caso_Id INT)
+AS
+BEGIN
+	SELECT * FROM CALE.tbTestigosPorCaso
+	WHERE caso_Id = @caso_Id
+END
+
+
+
+--VEREDICTO 
+GO
+CREATE OR ALTER PROCEDURE CALE.UDP_tbVeredictos_Reporte
+(@caso_Id INT)
+AS
+BEGIN
+	SELECT * FROM CALE.tbVeredictos
+	WHERE caso_Id = @caso_Id
 END

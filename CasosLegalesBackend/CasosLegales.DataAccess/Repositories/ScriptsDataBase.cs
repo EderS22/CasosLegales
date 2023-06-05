@@ -122,6 +122,7 @@
         #region Casos y relacionado 
         public static string DdlAbogados = "CALE.UDP_tbAbogadosJueces_DdlAbogados";
         public static string DdlJueces = "CALE.UDP_tbAbogadosJueces_DdlJueces";
+       
 
         public static string UDP_tbCasos_Insert = "CALE.UDP_tbCasos_Insert";
         public static string UDP_tbCasos_Listado = "CALE.UDP_tbCasos_Listado";
@@ -131,6 +132,13 @@
         public static string UDP_tbAcusadosPorCaso_Insert = "CALE.UDP_tbAcusadosPorCaso_Insert";
         public static string UDP_tbAcusadosPorCaso_ObtenerPorIdCaso = "CALE.UDP_tbAcusadosPorCaso_ObtenerPorIdCaso";
         public static string UDP_tbAcusadosPorCaso_EliminarTodosPorCasoId = "CALE.UDP_tbAcusadosPorCaso_EliminarTodosPorCasoId";
+        public static string UDP_tbCasos_DatosReporte = "CALE.UDP_tbCasos_Reporte";
+
+
+        public static string UDP_tbAcusadosPorCaso_Insert = "CALE.UDP_tbAcusadosPorCaso_Insert";
+        public static string UDP_tbAcusadoPorCaso_Reporte = "CALE.UDP_tbAcusadoPorCaso_Reporte";
+        public static string UDP_tbTestigosPorCaso_Reporte = "CALE.UDP_tbTestigosPorCaso_Reporte";
+
 
         public static string UDP_tbTestigosPorCaso_Insert = "CALE.UDP_tbTestigosPorCaso_Insert";
         public static string UDP_tbTestigosPorCaso_ObtenerPorCasoId = "CALE.UDP_tbTestigosPorCaso_ObtenerPorCasoId";
@@ -144,6 +152,12 @@
 
         public static string UDP_tbVeredictos_Insert = "CALE.UDP_tbVeredictos_Insert";
         public static string UDP_tbVeredictos_ObtenerPorIdCaso = "CALE.UDP_tbVeredictos_ObtenerPorIdCaso";
+        public static string UDP_tbEvidenciasPorCaso_Reporte = "CALE.UDP_tbEvidenciasPorCaso_Reporte";
+
+
+        public static string UDP_tbVeredictos_Insert = "CALE.UDP_tbVeredictos_Insert";
+        public static string UDP_tbVeredictos_Reporte = "CALE.UDP_tbVeredictos_Reporte";
+
 
         public static string UDP_tbDetallesVeredictos_Insert = "CALE.UDP_tbDetallesVeredictos_Insert";
         public static string UDP_tbDetallesVeredicto_ObtenerPorIdVeredicto = "CALE.UDP_tbDetallesVeredicto_ObtenerPorIdVeredicto";

@@ -20,18 +20,19 @@ import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
 })
 
 export class ListadoComponent implements OnInit {
-  @ViewChild(DataTableDirective, {static: false})
-  dtElement!:DataTableDirective;
- 
+  @ViewChild(DataTableDirective, { static: false })
+  dtElement!: DataTableDirective;
+
   usuarios!: usuario[];
   empleadosNoTienenUsuario!: empleado[];
   listadoRoles!: rol[];
- 
+
   fieldTextType!: boolean;
   isEdit = false;
   usua_NombreEdit = '';
   usua_IdEditar = 0;
   empe_IdEditar = '';
+  usua_img = '';
 
   breadCrumbItems!: Array<{}>;
   usuarioForm!: UntypedFormGroup;
@@ -39,28 +40,28 @@ export class ListadoComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   dateNow: Date = new Date();
-  
+
   constructor(
-    private modalService: NgbModal, 
-    private service: UsuariosService, 
+    private modalService: NgbModal,
+    private service: UsuariosService,
     private rolService: RolService,
     private formBuilder: UntypedFormBuilder,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    if(!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin){
+    if (!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin) {
       const ropaAcceso = new ropa();
       ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').role_Id;
       ropaAcceso.pant_Pantalla = "Usuarios";
       this.rolService.validarRolTienePantalla(ropaAcceso)
-      .subscribe((data:any) => {
-          if(data.code === 200){
-              if(data.data.codeStatus === 0){
-                  this.router.navigate([""]);
-              }
+        .subscribe((data: any) => {
+          if (data.code === 200) {
+            if (data.data.codeStatus === 0) {
+              this.router.navigate([""]);
+            }
           }
-      })
+        })
     }
 
     this.breadCrumbItems = [
@@ -77,23 +78,24 @@ export class ListadoComponent implements OnInit {
       usua_Clave: [''],
       role_Id: [''],
       empe_Id: ['', [Validators.required]],
+      usua_img: ['https://i.ibb.co/khddQKD/logoe.png']
     });
 
     this.dtOptions = {
-        pagingType: 'simple_numbers',
-        language: {
-          url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
+      pagingType: 'simple_numbers',
+      language: {
+        url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-MX.json",
+      },
+      columnDefs: [
+        {
+          targets: 6,
+          orderable: false,
         },
-        columnDefs: [
-          {
-            targets: 6,
-            orderable: false,
-          },
-          {
-            targets: 2,
-            orderable: false,
-          },
-        ]
+        {
+          targets: 2,
+          orderable: false,
+        },
+      ]
     };
     this.LoadUsuarios();
   }
@@ -149,6 +151,8 @@ export class ListadoComponent implements OnInit {
           this.usua_NombreEdit = data.data.empe_Nombres + [' '] + data.data.empe_Apellidos;
           this.form['usua_EsAdmin'].setValue(data.data.usua_EsAdmin);
           this.form['role_Id'].setValue(data.data.role_Id);
+          this.form['usua_Clave'].setValue('');
+          this.form['usua_img'].setValue(data.data.usua_img);
         }
       })
     } else {
@@ -156,6 +160,7 @@ export class ListadoComponent implements OnInit {
       this.usua_IdEditar = 0;
       this.empe_IdEditar = '';
       this.form['usua_Nombre'].setValue('');
+      this.form['usua_Clave'].setValue('');
       this.form['empe_Id'].setValue('');
       this.form['usua_EsAdmin'].setValue(false);
       this.form['role_Id'].setValue('');
@@ -170,9 +175,9 @@ export class ListadoComponent implements OnInit {
  */
   usua_IdEliminar: any;
   openEliminar(content: any, id: any) {
-    if(id === JSON.parse(localStorage.getItem("currentUser") || '').usua_Id){
+    if (id === JSON.parse(localStorage.getItem("currentUser") || '').usua_Id) {
       this.mensajeWarning('No puede eliminar su propio usuario');
-    }else{
+    } else {
       this.usua_IdEliminar = id;
       this.modalService.open(content, { centered: true, backdrop: 'static', keyboard: false });
     }
@@ -189,7 +194,9 @@ export class ListadoComponent implements OnInit {
     this.submitted = true;
 
     if (this.isEdit) {
-      this.form['usua_Clave'].reset();
+      if (this.usuarioForm.get('usua_Clave')?.value === '' || this.usuarioForm.get('usua_Clave')?.value === null) {
+        this.usuarioForm.get('usua_Clave')?.setValue(' ');
+      }
     } else {
       if (this.usuarioForm.get('usua_Clave')?.value === '' || this.usuarioForm.get('usua_Clave')?.value === null) {
         this.form['usua_Clave'].setErrors([Validators.required]);
@@ -204,6 +211,8 @@ export class ListadoComponent implements OnInit {
       this.form['role_Id'].reset();
     }
 
+    console.log(this.usuarioForm.value)
+
     if (this.usuarioForm.valid) {
       if (this.isEdit) {
         this.service.validarUsernameExiste(this.usuarioForm.get('usua_Nombre')?.value).subscribe((data: any) => {
@@ -216,24 +225,27 @@ export class ListadoComponent implements OnInit {
                 usuarioEdit.usua_Id = this.usua_IdEditar;
                 usuarioEdit.usua_Nombre = this.usuarioForm.get('usua_Nombre')?.value;
                 usuarioEdit.usua_EsAdmin = this.usuarioForm.get('usua_EsAdmin')?.value;
+                usuarioEdit.usua_Clave = this.usuarioForm.get('usua_Clave')?.value;
                 usuarioEdit.role_Id = this.usuarioForm.get('role_Id')?.value ?? 0;
                 usuarioEdit.empe_Id = this.usuarioForm.get('empe_Id')?.value;
+                usuarioEdit.usua_img = this.usuarioForm.get('usua_img')?.value;
                 usuarioEdit.usua_IdModificacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
+                
 
                 this.service.editarUsuario(usuarioEdit).subscribe((data: any) => {
                   if (data.code === 200) {
                     if (data.data.codeStatus === 1) {
                       this.mensajeSuccess('Datos del usuario editados con exito');
-                      this.modalService.dismissAll();   
+                      this.modalService.dismissAll();
                       this.rerender();
 
                       localStorage.removeItem("currentUser");
                       this.service.getUsuarioEditar(usuarioEdit.usua_Id)
-                      .subscribe((data:any) => {
-                        if(data.code === 200){
+                        .subscribe((data: any) => {
+                          if (data.code === 200) {
                             localStorage.setItem("currentUser", JSON.stringify(data.data));
-                        }
-                      });
+                          }
+                        });
                     } else {
                       this.mensajeError('Ocurrio un error al intentar editar el usuario');
                     }
@@ -248,7 +260,12 @@ export class ListadoComponent implements OnInit {
           }
 
         });
+
+
+
+
       } else {
+
         this.service.validarUsernameExiste(this.usuarioForm.get('usua_Nombre')?.value).subscribe((data: any) => {
           if (data.code === 200) {
             const idUsername = data.data.codeStatus;
@@ -263,7 +280,7 @@ export class ListadoComponent implements OnInit {
               usuarioInsert.role_Id = this.usuarioForm.get('role_Id')?.value ?? 0;
               usuarioInsert.empe_Id = this.usuarioForm.get('empe_Id')?.value;
               usuarioInsert.usua_IdCreacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
-
+              usuarioInsert.usua_img = this.usuarioForm.get('usua_img')?.value;
 
               this.service.insertarNuevoUsuario(usuarioInsert).subscribe((data: any) => {
                 if (data.code === 200) {
@@ -307,7 +324,7 @@ export class ListadoComponent implements OnInit {
     }
   }
 
-  detallesUsuario(id: number){
+  detallesUsuario(id: number) {
     localStorage.setItem("usua_IdDetalles", id.toString());
     this.router.navigate(["acceso/usuarios/detalles"]);
   }

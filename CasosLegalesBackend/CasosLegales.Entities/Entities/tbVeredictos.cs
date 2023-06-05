@@ -20,7 +20,7 @@ namespace CasosLegales.Entities.Entities
         public DateTime vere_FechaCreacion { get; set; }
         public int? vere_UsuModificacion { get; set; }
         public DateTime? vere_FechaModificacion { get; set; }
-        public bool vere_Estado { get; set; }
+        public bool? vere_Estado { get; set; }
 
         public virtual tbCasos caso { get; set; }
         public virtual tbUsuarios vere_UsuCreacionNavigation { get; set; }

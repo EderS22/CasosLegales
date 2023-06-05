@@ -74,5 +74,14 @@ namespace CasosLegales.DataAccess.Repositories
                 MessageStatus = "Estado operacion"
             };
         }
+        
+        public IEnumerable<VW_tbAcusadoPorCaso> AcusadoPorCasoReporte(int? id)
+        {
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@caso_Id", id, DbType.Int32, ParameterDirection.Input);
+            return db.Query<VW_tbAcusadoPorCaso>(ScriptsDataBase.UDP_tbAcusadoPorCaso_Reporte, parametros, commandType: System.Data.CommandType.StoredProcedure);
+        }
     }
 }

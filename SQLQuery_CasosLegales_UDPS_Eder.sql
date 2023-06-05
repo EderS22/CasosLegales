@@ -243,6 +243,7 @@ GO
 CREATE OR ALTER PROCEDURE ACCE.UDP_tbUsuarios_EditarUsuarios
 	@usua_Id				INT,
 	@usua_Nombre			NVARCHAR(250),
+	@usua_Clave				NVARCHAR(300),
 	@usua_EsAdmin			BIT,
 	@usua_img				NVARCHAR(MAX),
 	@role_Id				INT,
@@ -253,29 +254,67 @@ BEGIN
 	BEGIN TRY
 
 		BEGIN TRAN 
-
+			
 			IF @role_Id = 0
 			BEGIN 
-				UPDATE ACCE.tbUsuarios
-				   SET usua_Nombre = @usua_Nombre,
-					   usua_EsAdmin = @usua_EsAdmin,
-					   usua_img = @usua_img,
-					   empe_Id = @empe_Id,
-					   usua_IdModificacion = @usua_IdModificacion,
-					   usua_FechaModificacion = GETDATE()
-				 WHERE usua_Id = @usua_Id
+				IF(@usua_Clave != ' ')
+					BEGIN
+							DECLARE @Pass AS NVARCHAR(MAX);
+							SET @Pass = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Usua_Clave), 2);
+						
+						UPDATE ACCE.tbUsuarios
+						   SET usua_Nombre = @usua_Nombre,
+							   usua_Clave = @Pass,
+							   usua_EsAdmin = @usua_EsAdmin,
+							   usua_img = @usua_img,
+							   empe_Id = @empe_Id,
+							   usua_IdModificacion = @usua_IdModificacion,
+							   usua_FechaModificacion = GETDATE()
+						 WHERE usua_Id = @usua_Id
+					END
+				ELSE
+					BEGIN
+						UPDATE ACCE.tbUsuarios
+						   SET usua_Nombre = @usua_Nombre,
+							   usua_EsAdmin = @usua_EsAdmin,
+							   usua_img = @usua_img,
+							   empe_Id = @empe_Id,
+							   usua_IdModificacion = @usua_IdModificacion,
+							   usua_FechaModificacion = GETDATE()
+						 WHERE usua_Id = @usua_Id
+					END
 			END
 			ELSE
 			BEGIN
-				UPDATE ACCE.tbUsuarios
-				   SET usua_Nombre = @usua_Nombre,
-					   usua_EsAdmin = @usua_EsAdmin,
-					   usua_img = @usua_img,
-					   role_Id = @role_Id,
-					   empe_Id = @empe_Id,
-					   usua_IdModificacion = @usua_IdModificacion,
-					   usua_FechaModificacion = GETDATE()
-				 WHERE usua_Id = @usua_Id
+				DECLARE @Pass2 AS NVARCHAR(MAX);
+				SET @Pass2 = CONVERT(NVARCHAR(MAX), HASHBYTES('sha2_512', @Usua_Clave), 2);
+
+				IF(@usua_Clave != ' ')
+				 BEGIN
+						UPDATE ACCE.tbUsuarios
+						   SET usua_Nombre = @usua_Nombre,
+							   usua_Clave = @Pass2,
+							   usua_EsAdmin = @usua_EsAdmin,
+							   usua_img = @usua_img,
+							   role_Id = @role_Id,
+							   empe_Id = @empe_Id,
+							   usua_IdModificacion = @usua_IdModificacion,
+							   usua_FechaModificacion = GETDATE()
+						 WHERE usua_Id = @usua_Id
+				 END
+				ELSE
+				 BEGIN 
+					UPDATE ACCE.tbUsuarios
+						   SET usua_Nombre = @usua_Nombre,
+							   usua_EsAdmin = @usua_EsAdmin,
+							   usua_img = @usua_img,
+							   role_Id = @role_Id,
+							   empe_Id = @empe_Id,
+							   usua_IdModificacion = @usua_IdModificacion,
+							   usua_FechaModificacion = GETDATE()
+						 WHERE usua_Id = @usua_Id
+				 END
+				
 			END
 		
 		COMMIT

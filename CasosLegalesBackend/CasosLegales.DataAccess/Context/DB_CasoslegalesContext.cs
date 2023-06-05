@@ -20,12 +20,17 @@ namespace CasosLegales.DataAccess.Context
         }
 
         public virtual DbSet<VW_tbAbogadosJueces> VW_tbAbogadosJueces { get; set; }
+        public virtual DbSet<VW_tbAcusadoPorCaso> VW_tbAcusadoPorCaso { get; set; }
         public virtual DbSet<VW_tbCargos> VW_tbCargos { get; set; }
+        public virtual DbSet<VW_tbCasos> VW_tbCasos { get; set; }
         public virtual DbSet<VW_tbCiviles> VW_tbCiviles { get; set; }
         public virtual DbSet<VW_tbDepartamentos> VW_tbDepartamentos { get; set; }
         public virtual DbSet<VW_tbEmpleados> VW_tbEmpleados { get; set; }
         public virtual DbSet<VW_tbEmpresas> VW_tbEmpresas { get; set; }
         public virtual DbSet<VW_tbEstadosCiviles> VW_tbEstadosCiviles { get; set; }
+
+        public virtual DbSet<VW_tbEvidenciasPorCaso> VW_tbEvidenciasPorCaso { get; set; }
+
         public virtual DbSet<VW_tbMunicipios> VW_tbMunicipios { get; set; }
         public virtual DbSet<VW_tbTiposdeCaso> VW_tbTiposdeCaso { get; set; }
         public virtual DbSet<VW_tbTiposdeEvidencia> VW_tbTiposdeEvidencia { get; set; }
@@ -52,7 +57,7 @@ namespace CasosLegales.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+            modelBuilder.HasAnnotation("Relational:Collation", "Latin1_General_CI_AI");
 
             modelBuilder.Entity<VW_tbAbogadosJueces>(entity =>
             {
@@ -135,6 +140,27 @@ namespace CasosLegales.DataAccess.Context
                 entity.Property(e => e.user_Modificacion).HasMaxLength(255);
             });
 
+            modelBuilder.Entity<VW_tbAcusadoPorCaso>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbAcusadoPorCaso", "CALE");
+
+                entity.Property(e => e.acus_AcusadoDatos).HasMaxLength(401);
+
+                entity.Property(e => e.acus_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.acus_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.acus_Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.acus_TipoAcusado)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+            });
+
             modelBuilder.Entity<VW_tbCargos>(entity =>
             {
                 entity.HasNoKey();
@@ -154,6 +180,43 @@ namespace CasosLegales.DataAccess.Context
                     .HasMaxLength(255);
 
                 entity.Property(e => e.user_Modificacion).HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<VW_tbCasos>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbCasos", "CALE");
+
+                entity.Property(e => e.abju_AbogadoDemandadoNombre)
+                    .IsRequired()
+                    .HasMaxLength(401);
+
+                entity.Property(e => e.abju_AbogadoDemandanteNombre)
+                    .IsRequired()
+                    .HasMaxLength(401);
+
+                entity.Property(e => e.abju_AbogadoNombre)
+                    .IsRequired()
+                    .HasMaxLength(401);
+
+                entity.Property(e => e.caso_DemandanteNombre).HasMaxLength(401);
+
+                entity.Property(e => e.caso_Descripcion).HasMaxLength(200);
+
+                entity.Property(e => e.caso_Fecha).HasColumnType("date");
+
+                entity.Property(e => e.caso_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.caso_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.caso_TipoDemandante)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.tica_Nombre).HasMaxLength(100);
             });
 
             modelBuilder.Entity<VW_tbCiviles>(entity =>
@@ -408,6 +471,27 @@ namespace CasosLegales.DataAccess.Context
                     .HasMaxLength(255);
 
                 entity.Property(e => e.user_Modificacion).HasMaxLength(255);
+            });
+
+            modelBuilder.Entity<VW_tbEvidenciasPorCaso>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("VW_tbEvidenciasPorCaso", "CALE");
+
+                entity.Property(e => e.evca_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.evca_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.evca_NombreArchivo)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.evca_UrlArchivo)
+                    .IsRequired()
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.tiev_Descripcion).HasMaxLength(200);
             });
 
             modelBuilder.Entity<VW_tbMunicipios>(entity =>

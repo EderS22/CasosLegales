@@ -1,6 +1,7 @@
 export class EvidenciaPorCaso{
     evca_Id!: number;
     tiev_Id!: number;
+    tiev_Descripcion!: number;
     caso_Id!: number;
     evca_Demandante!: boolean;
     evca_Demandado!: boolean;

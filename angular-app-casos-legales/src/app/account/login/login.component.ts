@@ -65,9 +65,12 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     if(this.loginForm.valid){
+        console.log(this.loginForm.value)
         this.authenticationService.login(this.f['email'].value, this.f['password'].value).subscribe((data: any) => {
-            if (data.code === 200) {
+          console.log(data)
+          if (data.code === 200) {
                 if(data.data.usua_Id > 0){
+                
                   localStorage.setItem('currentUser', JSON.stringify(data.data));
                   this.router.navigate(['/']);
                 } else{

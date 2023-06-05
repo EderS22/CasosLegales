@@ -54,5 +54,14 @@ namespace CasosLegales.DataAccess.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public tbVeredictos VeredictosReprte(int? id)
+        {
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@caso_Id", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.QueryFirst<tbVeredictos>(ScriptsDataBase.UDP_tbVeredictos_Reporte, parametros, commandType: System.Data.CommandType.StoredProcedure);
+        }
     }
 }

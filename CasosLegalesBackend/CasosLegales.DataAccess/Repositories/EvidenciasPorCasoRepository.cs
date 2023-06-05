@@ -74,6 +74,16 @@ namespace CasosLegales.DataAccess.Repositories
             parametros.Add("@caso_Id", id, DbType.Int32, ParameterDirection.Input);
 
             return db.Query<tbEvidenciasPorCaso>(ScriptsDataBase.UDP_tbEvidenciasPorCaso_ObtenerPorIdCaso, parametros, commandType: CommandType.StoredProcedure);
+            
         }
+
+        public IEnumerable<VW_tbEvidenciasPorCaso> EvidenciaPorCasoReporte(int? id)
+        {
+             using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+             parametros.Add("@caso_Id", id, DbType.Int32, ParameterDirection.Input);
+            return db.Query<VW_tbEvidenciasPorCaso>(ScriptsDataBase.UDP_tbEvidenciasPorCaso_Reporte, parametros, commandType: System.Data.CommandType.StoredProcedure);
+        }
+
     }
 }

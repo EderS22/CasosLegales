@@ -381,12 +381,22 @@ CREATE OR ALTER PROCEDURE CALE.UDP_tbEmpresas_Delete
 AS
 BEGIN
 	BEGIN TRY
+	IF EXISTS(SELECT * FROM CALE.tbAcusadoPorCaso WHERE acus_TipoAcusado = 'E' AND acus_Acusado = @emsa_Id)
+		 BEGIN
+			SELECT 2 codeStatus
+		 END
+		ELSE IF EXISTS(SELECT * FROM CALE.tbCasos WHERE caso_TipoDemandante = 'E' AND caso_IdDemandante = @emsa_Id)
+		 BEGIN
+			SELECT 2 codeStatus
+		 END
+		ELSE
+		 BEGIN
 			UPDATE	CALE.tbEmpresas
 			SET		emsa_Estado = 0
 			WHERE	emsa_Id = @emsa_Id
 
 			SELECT 1 codeStatus
-		
+		  END
 	END TRY
 	BEGIN CATCH
 		SELECT 0 codeStatus
@@ -882,7 +892,7 @@ BEGIN
 		
 		IF EXISTS(SELECT * FROM CALE.tbEvidenciasPorCaso WHERE tiev_Id = @tiev_Id)
 		 BEGIN
-			SELECT 2 codeStatu
+			SELECT 2 codeStatus
 		 END
 		ELSE
 		 BEGIN 

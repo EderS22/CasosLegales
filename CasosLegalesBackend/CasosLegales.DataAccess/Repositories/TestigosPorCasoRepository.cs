@@ -78,5 +78,14 @@ namespace CasosLegales.DataAccess.Repositories
                 MessageStatus = "Estado operacion"
             };
         }
+        
+        public IEnumerable<tbTestigosPorCaso> TestogosPorCasoReporte(int? id)
+        {
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+
+            parametros.Add("@caso_Id",id, DbType.Int32, ParameterDirection.Input);
+            return db.Query<tbTestigosPorCaso>(ScriptsDataBase.UDP_tbTestigosPorCaso_Reporte, parametros, commandType: System.Data.CommandType.StoredProcedure);
+        }
     }
 }
