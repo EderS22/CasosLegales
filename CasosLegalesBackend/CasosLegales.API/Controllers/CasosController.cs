@@ -31,5 +31,13 @@ namespace CasosLegales.API.Controllers
             var response = _casosLegalesService.InsertarCaso(_mapper.Map<tbCasos>(item));
             return Ok(response);
         }
+
+
+        [HttpGet("BuscarDatosReporte")]
+        public IActionResult Find(int? id)
+        {
+            var list = _casosLegalesService.DatosReporte(id);
+            return Ok(list);
+        }
     }
 }

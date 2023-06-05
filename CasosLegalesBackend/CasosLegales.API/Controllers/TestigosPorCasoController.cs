@@ -30,5 +30,12 @@ namespace CasosLegales.API.Controllers
             var response = _casosLegalesService.InsertarTestigoPorCaso(_mapper.Map<tbTestigosPorCaso>(item));
             return Ok(response);
         }
+
+        [HttpGet("TestigosPorCasoReporte")]
+        public IActionResult TestigosPorCasoReporte(int? id)
+        {
+            var list = _casosLegalesService.TestigosPorCasoReporte(id);
+            return Ok(list);
+        }
     }
 }

@@ -136,7 +136,7 @@ export class CrearComponent implements OnInit {
       }
 
       this.validationform.get('empe_FechaNacimiento')?.setValue(fechaFormateada);
-
+      console.log(this.validationform.value)
       this.service.InsertarEmpleados(this.validationform.value)
         .subscribe((data: any) => {
           console.log(data.data.codeStatus)

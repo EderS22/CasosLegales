@@ -241,7 +241,7 @@ namespace CasosLegales.BusinessLogic.Services
             {
                 var list = _civilesRepository.List();
                 return result.Ok(list);
-            }   
+            }
             catch (Exception e)
             {
                 return result.Error(e.Message);
@@ -446,7 +446,7 @@ namespace CasosLegales.BusinessLogic.Services
                     return result.Error(map);
                 }
             }
-            catch (Exception e )
+            catch (Exception e)
             {
                 return result.Error(e.Message);
             }
@@ -639,6 +639,18 @@ namespace CasosLegales.BusinessLogic.Services
             {
                 return result.Error(e.Message);
             }
+        } 
+        public VW_tbCasos DatosReporte(int? id)
+        {
+            try
+            {
+                var list = _casosRepository.DatosReporte(id);
+                return list;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
         #endregion
 
@@ -650,6 +662,20 @@ namespace CasosLegales.BusinessLogic.Services
             {
                 var response = _acusadoPorCasoRepository.Insert(item);
                 return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
+
+        public ServiceResult AcusadoPorCasoReporte(int? id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _acusadoPorCasoRepository.AcusadoPorCasoReporte(id);
+                return result.Ok(list);
             }
             catch (Exception e)
             {
@@ -675,6 +701,19 @@ namespace CasosLegales.BusinessLogic.Services
             }
         }
 
+        public ServiceResult TestigosPorCasoReporte(int? id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _testigosPorCasoRepository.TestogosPorCasoReporte(id);
+                return result.Ok(list);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
 
         #endregion
 
@@ -687,6 +726,20 @@ namespace CasosLegales.BusinessLogic.Services
             {
                 var response = _evidenciasPorCasoRepository.Insert(item);
                 return result.Ok(response);
+            }
+            catch (Exception e)
+            {
+                return result.Error(e.Message);
+            }
+        }
+
+        public ServiceResult EvidenciaPorCasoReporte(int? id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _evidenciasPorCasoRepository.EvidenciaPorCasoReporte(id);
+                return result.Ok(list);
             }
             catch (Exception e)
             {
@@ -712,6 +765,18 @@ namespace CasosLegales.BusinessLogic.Services
             }
         }
 
+        public tbVeredictos VeredictosReporte(int? id)
+        {
+            try
+            {
+                var list = _veredictosRepository.VeredictosReprte(id);
+                return list;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
         #endregion
 

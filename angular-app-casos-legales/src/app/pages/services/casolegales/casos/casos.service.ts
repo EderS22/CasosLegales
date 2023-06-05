@@ -7,6 +7,7 @@ import { DetalleVeredicto } from 'src/app/pages/models/casoslegales/DetalleVered
 import { EvidenciaPorCaso } from 'src/app/pages/models/casoslegales/EvidenciaPorCaso';
 import { TestigoPorCaso } from 'src/app/pages/models/casoslegales/TestigoPorCaso';
 import { Veredicto } from 'src/app/pages/models/casoslegales/Veredicto';
+import { reporte } from 'src/app/pages/models/casoslegales/reporte';
 
 const API_URL = GlobalComponent.API_URL;
 
@@ -62,4 +63,24 @@ export class CasosService {
     insertarDetalleVeredicto(item:DetalleVeredicto){
         return this.http.post(API_URL + 'DetallesVeredicto/Insertar', item);
     }
+
+
+
+
+    DatosReporte(id: number){
+        return this.http.get<reporte[]>(API_URL + 'Casos/BuscarDatosReporte?id='+ id)
+    }
+    ReporteAcusadosPorCaso(id: number){
+        return this.http.get<AcusadoPorCaso[]>(API_URL + 'AcusadosPorCaso/AcusadoPorCasoReporte?id='+ id)
+    } 
+    ReporteEvidenciaporCaso(id: number){
+        return this.http.get<EvidenciaPorCaso[]>(API_URL + 'EvidenciasPorCaso/ReporteEvidenciaPorCaso?id='+ id)
+    } 
+    ReporteTestigosPorCaso(id: number){
+        return this.http.get<TestigoPorCaso[]>(API_URL + 'TestigosPorCaso/TestigosPorCasoReporte?id='+ id)
+    } 
+    ReporteVeredicto(id: number){
+        return this.http.get<Veredicto[]>(API_URL + 'Veredictos/VeredictoReporte?id='+ id)
+    }
+
 }

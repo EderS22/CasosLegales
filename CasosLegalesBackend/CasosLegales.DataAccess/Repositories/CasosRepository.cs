@@ -54,5 +54,15 @@ namespace CasosLegales.DataAccess.Repositories
         {
             throw new NotImplementedException();
         }
+
+
+        public VW_tbCasos DatosReporte(int? id)
+        {
+            using var db = new SqlConnection(CasosLegalesContext.ConnectionString);
+            var parametros = new DynamicParameters();
+            parametros.Add("@caso_Id", id, DbType.Int32, ParameterDirection.Input);
+
+            return db.QueryFirst<VW_tbCasos>(ScriptsDataBase.UDP_tbCasos_DatosReporte, parametros, commandType: System.Data.CommandType.StoredProcedure);
+        }
     }
 }

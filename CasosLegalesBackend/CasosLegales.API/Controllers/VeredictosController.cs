@@ -30,5 +30,12 @@ namespace CasosLegales.API.Controllers
             var response = _casosLegalesService.InsertarVeredicto(_mapper.Map<tbVeredictos>(item));
             return Ok(response);
         }
+
+        [HttpGet("VeredictoReporte")]
+        public IActionResult Find(int? id)
+        {
+            var list = _casosLegalesService.VeredictosReporte(id);
+            return Ok(list);
+        }
     }
 }

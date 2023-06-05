@@ -34,6 +34,7 @@ export class UsuariosService {
     }
 
     editarUsuario(usuario: usuario){
+        console.log(usuario)
         return this.http.post<usuario>(API_URL + 'Usuarios/Update', usuario);
     }
 

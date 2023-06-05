@@ -6,10 +6,11 @@ using System.Collections.Generic;
 
 namespace CasosLegales.Entities.Entities
 {
-    public partial class tbEvidenciasPorCaso
+    public partial class VW_tbEvidenciasPorCaso
     {
         public int evca_Id { get; set; }
         public int tiev_Id { get; set; }
+        public string tiev_Descripcion { get; set; }
         public int caso_Id { get; set; }
         public bool evca_Demandante { get; set; }
         public bool evca_Demandado { get; set; }
@@ -19,11 +20,6 @@ namespace CasosLegales.Entities.Entities
         public DateTime evca_FechaCreacion { get; set; }
         public int? evca_UsuModificacion { get; set; }
         public DateTime? evca_FechaModificacion { get; set; }
-        public bool? evca_Estado { get; set; }
-
-        public virtual tbCasos caso { get; set; }
-        public virtual tbUsuarios evca_UsuCreacionNavigation { get; set; }
-        public virtual tbUsuarios evca_UsuModificacionNavigation { get; set; }
-        public virtual tbTiposdeEvidencia tiev { get; set; }
+        public bool evca_Estado { get; set; }
     }
 }
