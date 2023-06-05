@@ -1,5 +1,5 @@
-import { Component, OnInit, QueryList, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, QueryList, ViewChild, ViewEncapsulation, ViewChildren } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
@@ -42,8 +42,8 @@ export class AgregareditarComponent implements OnInit {
         private router: Router
     ) { }
 
-    @ViewChild(DataTableDirective, { static: false })
-    dtElements!: QueryList<DataTableDirective>;
+    @ViewChildren(DataTableDirective)
+    dtElements!: QueryList<DataTableDirective> ;
 
     TipoDema: TipoDeman[] = [
         { tide_Id: 'E', tide_Tipo: 'Empresa' },
@@ -141,6 +141,7 @@ export class AgregareditarComponent implements OnInit {
             { label: 'Agregar y editar', active: true }
         ];
 
+        
         this.dtOptions[0] = {
             pagingType: 'simple_numbers',
             language: {
@@ -259,7 +260,8 @@ export class AgregareditarComponent implements OnInit {
                         this.form['caso_IdDemandante'].setValue(data.data.caso_IdDemandante);
                         this.form['abju_IdAbogadoDemandante'].setValue(data.data.abju_IdAbogadoDemandante);
                         this.form['abju_IdAbogadoDemandado'].setValue(data.data.abju_IdAbogadoDemandado);
-
+                        
+                        this.TipoCasoChange(data.data.tica_Id);
                         this.abogadoDemandadoChange(data.data.abju_IdAbogadoDemandante);
                         this.abogadoDemandanteChange(data.data.abju_IdAbogadoDemandado);
                         this.demandanteChange(data.data.caso_IdDemandante);
@@ -306,8 +308,7 @@ export class AgregareditarComponent implements OnInit {
                             })
                     }
                 })
-            this.getListadoEvidencias();
-
+          
             this.casoService.getVeredictoPorIdCaso(this.caso_IdEditar)
                 .subscribe((data: any) => {
                     if (data.code === 200) {
@@ -326,6 +327,8 @@ export class AgregareditarComponent implements OnInit {
                             })
                     }
                 })
+            
+                this.getListadoEvidencias();
         }
     }
 
@@ -333,12 +336,15 @@ export class AgregareditarComponent implements OnInit {
         this.dtElements.forEach((dtElement: DataTableDirective) => {
             dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
                 dtInstance.destroy();
-                this.getListadoEvidencias();
             });
         });
+        this.getListadoEvidencias();
     }
 
     getListadoEvidencias() {
+        this.evidenciasDemandado = [];
+        this.evidenciasDemandante = [];
+
         this.casoService.getEvidenciasPorIdCaso(this.caso_IdEditar)
             .subscribe((data: any) => {
                 if (data.code === 200) {
@@ -882,7 +888,6 @@ export class AgregareditarComponent implements OnInit {
         const evidenciaTemp = new  EvidenciaPorCaso();
         evidenciaTemp.evca_Id = item;
         evidenciaTemp.evca_UsuModificacion = JSON.parse(localStorage.getItem("currentUser") || '').usua_Id;
-
         this.casoService.eliminarEvidenciaPorId(evidenciaTemp)
         .subscribe((data:any) => {
             if(data.code === 200){
@@ -918,7 +923,7 @@ export class AgregareditarComponent implements OnInit {
                     this.form['caso_IdDemandado'].setValue(null);
                 }
 
-                if( this.form['caso_TipoDemandante'].value === 'E'){
+                if(this.form['caso_TipoDemandante'].value === 'E'){
                     this.form['caso_TipoDemandante'].setValue(null);
                     this.form['caso_IdDemandante'].setValue(null);
                 }
@@ -928,14 +933,11 @@ export class AgregareditarComponent implements OnInit {
                 this.TipoDema1 = this.TipoDema2.filter(item => item.tide_Id === 'C');
                 this.SelectMultiple = false;
 
-                if( this.form['caso_TipoDemandante'].value === 'E'){
+                if(this.form['caso_TipoDemandante'].value === 'E'){
                     this.form['caso_TipoDemandante'].setValue(null);
                     this.form['caso_IdDemandante'].setValue(null);
                 }
-
             }
-
-           
         }
     }
 
@@ -1116,7 +1118,9 @@ export class AgregareditarComponent implements OnInit {
         }
     }
 
-    demandadoChange(value: number[]) {
+    demandadoChange(items: any ) {
+        let value: number[] = items;
+
         this.listadoEmpresasDemandante = this.listadoEmpresas;
         this.listadoCivilesDemandante = this.listadoCiviles;
 
