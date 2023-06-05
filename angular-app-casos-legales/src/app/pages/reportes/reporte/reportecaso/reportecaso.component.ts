@@ -430,7 +430,7 @@ export class ReportecasoComponent implements OnInit {
         mx = mx + 45
         if (i == 4) {
           i = 0;
-          y = y + 30;
+          y = y + 45;
           mx = 10
         }
       }
