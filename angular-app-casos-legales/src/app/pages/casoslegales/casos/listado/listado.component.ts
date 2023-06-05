@@ -6,6 +6,7 @@ import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
 import { Caso } from 'src/app/pages/models/casoslegales/Caso';
 import { RolService } from 'src/app/pages/services/acceso/rol/rol.service';
 import { CasosService } from 'src/app/pages/services/casolegales/casos/casos.service';
+import {formatDate} from '@angular/common';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -99,10 +100,14 @@ export class ListadoComponent implements OnInit {
         this.filterList();
     }
 
+    formatFecha(date:Date){
+        return formatDate(date, 'dd-MM-yyyy', 'en');
+    }
+
     filterList(): void {
         this.searchTerm$.subscribe(term => {
             this.ListadoCasosFiltered = this.ListadoCasos
-            .filter(item => item.caso_Fecha.toString().toLowerCase().indexOf(term.toLowerCase()) >= 0 || item.caso_Descripcion.toLowerCase().indexOf(term.toLowerCase()) >= 0 || item.abju_DNI.toLowerCase().indexOf(term.toLowerCase()) >= 0 || item.abju_Nombres.toLowerCase().indexOf(term.toLowerCase()) >= 0 || item.abju_Apellidos.toLowerCase().indexOf(term.toLowerCase()) >= 0);
+            .filter(item => item.caso_Fecha.toString().toLowerCase().indexOf(term.toLowerCase()) >= 0 || item.caso_Descripcion.toLowerCase().indexOf(term.toLowerCase()) >= 0 || item.abju_DNI.toLowerCase().indexOf(term.toLowerCase()) >= 0 || item.abju_Nombres.toLowerCase().indexOf(term.toLowerCase()) >= 0 || item.abju_Apellidos.toLowerCase().indexOf(term.toLowerCase()) >= 0 || item.tica_Nombre.toLowerCase().indexOf(term.toLowerCase()) >= 0);
         });
     }
 

@@ -121,12 +121,17 @@ export class ReportecasoComponent implements OnInit {
             })
         }
 
+        localStorage.setItem('Veredicto','');
         this.CasoService.ReporteVeredicto(this.IdCaso)
           .subscribe((data: any) => {
-            localStorage.setItem(
-              'Veredicto',
-              '\n-Veredicto: ' + data.vere_Descripcion
-            )
+            localStorage.setItem('Veredicto','');
+            console.log(data)
+            if(data.caso_Id > 0){
+              localStorage.setItem(
+                'Veredicto',
+                '\n-Veredicto: ' + data.vere_Descripcion
+              )
+            }
           })
 
 

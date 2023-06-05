@@ -39,7 +39,8 @@ export class SidebarComponent implements OnInit {
                     menuAcceTemp.label = item.pant_Pantalla;
                     menuAcceTemp.icon = item.pant_Icono;
                     menuAcceTemp.link = item.pant_Href;
-        
+                    menuAcceTemp.parentId = 1000;
+
                     this.menuAcce.push(menuAcceTemp);
                 }
         
@@ -50,7 +51,9 @@ export class SidebarComponent implements OnInit {
                     menuGralTemp.label = item.pant_Pantalla;
                     menuGralTemp.icon = item.pant_Icono;
                     menuGralTemp.link = item.pant_Href;
-        
+                    menuGralTemp.parentId = 2000;
+
+
                     this.menuGral.push(menuGralTemp);
                 }
         
@@ -61,17 +64,20 @@ export class SidebarComponent implements OnInit {
                     menuCaleTemp.label = item.pant_Pantalla;
                     menuCaleTemp.icon = item.pant_Icono;
                     menuCaleTemp.link = item.pant_Href;
-        
+                    menuCaleTemp.parentId = 3000;
+
                     this.menuCale.push(menuCaleTemp);
                 }
             });
         
             if(this.menuAcce.length > 0){
                 const itemMenu = new MenuItem();
-        
+
+                itemMenu.id = 1000;
                 itemMenu.label = 'ACCESO';
                 itemMenu.isTitle = true;
-        
+                
+
                 this.menuItems.push(itemMenu);
                 this.menuAcce.forEach(item => {
                     this.menuItems.push(item);
@@ -80,7 +86,8 @@ export class SidebarComponent implements OnInit {
         
             if(this.menuGral.length > 0){
                 const itemMenu = new MenuItem();
-        
+
+                itemMenu.id = 2000;
                 itemMenu.label = 'GENERAL';
                 itemMenu.isTitle = true;
         
@@ -92,7 +99,8 @@ export class SidebarComponent implements OnInit {
         
             if(this.menuCale.length > 0){
                 const itemMenu = new MenuItem();
-        
+
+                itemMenu.id = 3000;
                 itemMenu.label = 'CASOS LEGALES';
                 itemMenu.isTitle = true;
         
