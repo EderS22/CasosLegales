@@ -153,12 +153,6 @@
                             <div class="invalid-feedback">Por favor, selecione un Municipio</div>
                         </div>
                         <div class="col-6 mt-3">
-                            <label class="form-label">Direccion Exacta</label>
-                            <textarea class="form-control" rows="3" required formControlName="abju_Direccion"
-                                [ngClass]="{'is-invalid': submit && form['abju_Direccion'].errors}"></textarea>
-                            <div class="invalid-feedback">Por favor, ingrese una direccion</div>
-                        </div>
-                        <div class="col-6 mt-3">
                             <label class="form-label">Cargos</label>
                             <select class="form-control" required
                                 formControlName="carg_Id"
@@ -170,6 +164,13 @@
                             </select>
                             <div class="invalid-feedback">Por favor, selecione un Cargo</div>
                         </div>
+                        <div class="col-12 mt-3">
+                            <label class="form-label">Direccion Exacta</label>
+                            <textarea class="form-control" rows="3" required formControlName="abju_Direccion"
+                                [ngClass]="{'is-invalid': submit && form['abju_Direccion'].errors}"></textarea>
+                            <div class="invalid-feedback">Por favor, ingrese una direccion</div>
+                        </div>
+
                     </div>
                     <div class="row mt-4" style="text-align: center;">
                         <div class="col-6">

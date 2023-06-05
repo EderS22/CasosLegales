@@ -6,6 +6,9 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
+import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
+import { RolService } from 'src/app/pages/services/acceso/rol/rol.service';
+
 
 @Component({
   selector: 'app-listado',
@@ -28,10 +31,26 @@ export class ListadoComponent {
   constructor(
     private service: AbogadosjuecesService,
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private rolService: RolService,
   ) { }
 
   ngOnInit(): void {
+
+
+    if (!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin) {
+      const ropaAcceso = new ropa();
+      ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').role_Id;
+      ropaAcceso.pant_Pantalla = "Abogados y Jueces";
+      this.rolService.validarRolTienePantalla(ropaAcceso)
+        .subscribe((data: any) => {
+          if (data.code === 200) {
+            if (data.data.codeStatus === 0) {
+              this.router.navigate([""]);
+            }
+          }
+        })
+    }
 
     if(localStorage.getItem('AbogadoInsert') == '1'){
       this.mensajeSuccess('AbogadoJuez Ingresado Correctamente');

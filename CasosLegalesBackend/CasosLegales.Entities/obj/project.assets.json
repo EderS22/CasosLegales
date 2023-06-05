@@ -8,24 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\ALEXANDER\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\LAB01\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ALEXANDER\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
+      "projectUniqueName": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
       "projectName": "CasosLegales.Entities",
-      "projectPath": "C:\\Users\\ALEXANDER\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
-      "packagesPath": "C:\\Users\\ALEXANDER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ALEXANDER\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\obj\\",
+      "projectPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\CasosLegales.Entities.csproj",
+      "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\ALEXANDER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -74,7 +69,7 @@
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Problema al leer el archivo de caché C:\\Users\\ALEXANDER\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+      "message": "Problema al leer el archivo de caché C:\\Users\\LAB01\\Documents\\GitHub\\CasosLegales\\CasosLegalesBackend\\CasosLegales.Entities\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
     }
   ]
 }

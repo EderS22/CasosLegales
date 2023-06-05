@@ -3,6 +3,8 @@ import { CivilService } from 'src/app/pages/services/casolegales/civilesservice/
 import { civiles } from 'src/app/pages/models/casoslegales/civil';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
+import { RolService } from 'src/app/pages/services/acceso/rol/rol.service';
 
 import { EstadocivilService } from 'src/app/pages/services/general/estadocivilservice/estadocivil.service';
 import { estadosciviles } from 'src/app/pages/models/general/estadocivil';
@@ -46,6 +48,7 @@ export class CrearComponent implements OnInit {
     private MunicipioService: MunicipioService,
     private formBuilder: UntypedFormBuilder,
     private router: Router,
+    private rolService: RolService,
   ) {
     this.validationform = this.formBuilder.group({
       civi_DNI: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
@@ -65,6 +68,20 @@ export class CrearComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin) {
+      const ropaAcceso = new ropa();
+      ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').role_Id;
+      ropaAcceso.pant_Pantalla = "Civiles";
+      this.rolService.validarRolTienePantalla(ropaAcceso)
+        .subscribe((data: any) => {
+          if (data.code === 200) {
+            if (data.data.codeStatus === 0) {
+              this.router.navigate([""]);
+            }
+          }
+        })
+    }
+    
     this.EstadoCivilService.getEstadosCiviles() //cargar estado civil
       .subscribe((data: any) => {
         if (data.code === 200) {

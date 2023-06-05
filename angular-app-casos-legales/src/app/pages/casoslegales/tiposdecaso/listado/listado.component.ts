@@ -7,7 +7,9 @@ import { UntypedFormBuilder, UntypedFormGroup, FormArray, Validators } from '@an
 import Swal from 'sweetalert2';
 import { data } from 'jquery';
 import { DataTableDirective } from 'angular-datatables';
-
+import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
+import { RolService } from 'src/app/pages/services/acceso/rol/rol.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listado',
@@ -31,9 +33,27 @@ export class ListadoComponent {
   ticaDescripcionInvalid = false;
   dateNow: Date = new Date();
 
-  constructor(private service: TiposdecasoService, private modalService: NgbModal) { }
+  constructor(
+    private service: TiposdecasoService, 
+    private modalService: NgbModal,
+    private rolService: RolService,
+    private router: Router) { }
 
   ngOnInit(): void {
+
+    if (!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin) {
+      const ropaAcceso = new ropa();
+      ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').role_Id;
+      ropaAcceso.pant_Pantalla = "Tipos de caso";
+      this.rolService.validarRolTienePantalla(ropaAcceso)
+        .subscribe((data: any) => {
+          if (data.code === 200) {
+            if (data.data.codeStatus === 0) {
+              this.router.navigate([""]);
+            }
+          }
+        })
+    }
 
     this.dtOptions = {
       pagingType: 'simple_numbers',

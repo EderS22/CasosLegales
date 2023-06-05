@@ -3,6 +3,8 @@ import { EmpresaService } from 'src/app/pages/services/casolegales/empresaservic
 import { empresa } from 'src/app/pages/models/casoslegales/empresa';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
+import { RolService } from 'src/app/pages/services/acceso/rol/rol.service';
 
 import { EstadocivilService } from 'src/app/pages/services/general/estadocivilservice/estadocivil.service'; 
 import { estadosciviles } from 'src/app/pages/models/general/estadocivil';
@@ -44,6 +46,7 @@ export class CrearComponent {
     private MunicipioService: MunicipioService,
     private formBuilder: UntypedFormBuilder,
     private router: Router,
+    private rolService: RolService,
   ) {
     this.validationform = this.formBuilder.group({
       emsa_Nombre: ['', [Validators.required]],
@@ -61,6 +64,20 @@ export class CrearComponent {
   }
 
   ngOnInit(): void {
+
+    if (!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin) {
+      const ropaAcceso = new ropa();
+      ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').role_Id;
+      ropaAcceso.pant_Pantalla = "Empresas";
+      this.rolService.validarRolTienePantalla(ropaAcceso)
+        .subscribe((data: any) => {
+          if (data.code === 200) {
+            if (data.data.codeStatus === 0) {
+              this.router.navigate([""]);
+            }
+          }
+        })
+    }
 
     this.EstadoCivilService.getEstadosCiviles() //cargar estado civil
       .subscribe((data: any) => {

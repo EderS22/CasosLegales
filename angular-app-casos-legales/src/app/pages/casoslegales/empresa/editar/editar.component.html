@@ -107,38 +107,46 @@
     
                         <div class="col-6 mt-3">
                             <label class="form-label">Estado Civil</label>
-                            <ng-select required formControlName="eciv_Id"
-                                [ngClass]="{'is-invalid': submit && form['eciv_Id'].errors}"
-                                placeholder="Seleccione un Estado Civil">
-                                <ng-option *ngFor="let item of EstadoCivilDLL" [ngValue]="item.eciv_Id">
+                            <select class="form-control" required formControlName="eciv_Id"
+                                [ngClass]="{'is-invalid': submit && form['eciv_Id'].errors}">
+
+                                <option value="" selected hidden>Seleccione un Estado Civil</option>
+
+                                <option *ngFor="let item of EstadoCivilDLL" [ngValue]="item.eciv_Id">
                                     {{item.eciv_Descripcion}}
-                                </ng-option>
-                            </ng-select>
+                                </option>
+
+                            </select>
                             <div class="invalid-feedback">Por favor, selecione un estado civil</div>
                         </div>
 
                         <div class="col-6 mt-3">
                             <label class="form-label">Departamento</label>
-                            <ng-select #selectDepartamento required formControlName="depa_Id"
-                                [ngClass]="{'is-invalid': submit && form['depa_Id'].errors}"
-                                placeholder="Seleccione un Departamento">
-                                <ng-option *ngFor="let item of DepartamentoDLL" [value]="item.depa_Id">
+                            <select class="form-control" #selectDepartamento
+                                (change)="CargarMunicipios(selectDepartamento.value)" required formControlName="depa_Id"
+                                [ngClass]="{'is-invalid': submit && form['depa_Id'].errors}">
+
+                                <option value="" selected hidden>Seleccione un Departamento</option>
+                                <option *ngFor="let item of DepartamentoDLL" [value]="item.depa_Id">
                                     {{item.depa_Nombre}}
-                                </ng-option>
-                            </ng-select>
+                                </option>
+                            </select>
                             <div class="invalid-feedback">Por favor, selecione un departamento</div>
                         </div>
 
                         <div class="col-6 mt-3">
                             <label class="form-label">Municipios</label>
-                            <ng-select [disabled]="MunicipioDesactivado" required
+                            <select class="form-control" [disabled]="MunicipioDesactivado" required
                                 formControlName="muni_Id"
-                                [ngClass]="{'is-invalid': submitMunicipio && form['muni_Id'].errors}"
-                                placeholder="Seleccione un Municipio">
-                                <ng-option *ngFor="let item of MunicipioDDL" [value]="item.muni_Id">
+                                [ngClass]="{'is-invalid': submitMunicipio && form['muni_Id'].errors}">
+
+                                <option value="" selected hidden>Seleccione un municipio</option>
+
+                                <option *ngFor="let item of MunicipioDDL" [value]="item.muni_Id">
                                     {{item.muni_Nombre}}
-                                </ng-option>
-                            </ng-select>
+                                </option>
+
+                            </select>
                             <div class="invalid-feedback">Por favor, selecione un Municipio</div>
                         </div>
 

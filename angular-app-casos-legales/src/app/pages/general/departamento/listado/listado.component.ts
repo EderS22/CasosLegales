@@ -6,6 +6,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
 import { FormControl, ValidatorFn, Validators } from '@angular/forms';
+import { ropa } from 'src/app/pages/models/acceso/rolesporpantalla';
+import { RolService } from 'src/app/pages/services/acceso/rol/rol.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listado',
@@ -31,9 +34,27 @@ export class ListadoComponent {
   depaNombre!: string;
   dateNow: Date = new Date();
 
-  constructor(private service: DepartamentoService, private modalService: NgbModal) { }
+  constructor(
+    private service: DepartamentoService, 
+    private modalService: NgbModal,
+    private rolService: RolService,
+    private router: Router
+    ) { }
   ngOnInit(): void {
 
+    if (!JSON.parse(localStorage.getItem("currentUser") || '').usua_EsAdmin) {
+      const ropaAcceso = new ropa();
+      ropaAcceso.role_Id = JSON.parse(localStorage.getItem("currentUser") || '').role_Id;
+      ropaAcceso.pant_Pantalla = "Departamentos";
+      this.rolService.validarRolTienePantalla(ropaAcceso)
+        .subscribe((data: any) => {
+          if (data.code === 200) {
+            if (data.data.codeStatus === 0) {
+              this.router.navigate([""]);
+            }
+          }
+        })
+    }
 
     this.dtOptions = {
       pagingType: 'simple_numbers',

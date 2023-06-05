@@ -588,6 +588,10 @@ INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono
 VALUES('Empresas', 'casoslegales/empresa/listado', 'CasosLegales', 'ri-building-4-line', 1)
 GO
 
+INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
+VALUES('Reporte', 'reportes/reporte/reportecaso', 'CasosLegales', 'ri-building-4-line', 1)
+GO
+
 /*
 INSERT INTO ACCE.tbPantallas (pant_Pantalla, pant_Href, pant_Esquema, pant_Icono, usua_IdCreacion)
 VALUES('Acusados por caso', 'casoslegales/acusadosporcaso/listado', 'CasosLegales', 'ri-group-line', 1)
@@ -1089,38 +1093,36 @@ VALUES ('Violacion', 'Este tipo de caso abarca todos los relacionados con violac
 GO
 
 --******************************************************/TABLE Tipos de caso*******************************************************--
-
 INSERT INTO CALE.tbAbogadosJueces (abju_DNI, abju_Nombres, abju_Apellidos, abju_Sexo, abju_Telefono, abju_CorreoElectronico, abju_FechaNacimiento, eciv_Id, carg_Id, muni_Id, abju_Direccion, abju_UsuCreacion)
-VALUES ('123456789', 'Juan',	'Pérez',	'M', '123456789', 'juan.perez@gmail.com',		'1990-01-01', 1, 1,'0311',  'Calle Principal 123',	1),
-		('987654321', 'María',	'López',	'F', '987654321', 'maria.lopez@gmail.com',		'1995-05-10', 2, 2,'0311',  'Avenida Secundaria 456',1),
-		('555555555', 'Pedro',	'González', 'M', '555555555', 'pedro.gonzalez@gmail.com',	'1985-12-15', 3, 1,'0311',  'Plaza Central 789',		1),
-		('111111111', 'Ana',	'García',	'F', '111111111', 'ana.garcia@gmail.com',		'1988-06-20', 2, 2,'0311',  'Calle Secundaria 234',	1),
-		('222222222', 'Luis',	'Martínez', 'M', '222222222', 'luis.martinez@gmail.com',	'1992-09-08', 1, 1,'0311',  'Avenida Principal 567', 1),
-		('333333333', 'Laura', 'Rodríguez', 'F', '333333333', 'laura.rodriguez@gmail.com',	'1997-03-12', 3, 2,'0311',  'Plaza Secundaria 890',	1);
-GO																											 
+VALUES ('1234567890123', 'Juan', 'Pérez', 'M', '12345678901', 'juan.perez@gmail.com', '1990-01-01', 1, 1, '0311', 'Calle Principal 123', 1),
+       ('9876543210987', 'María', 'López', 'F', '98765432109', 'maria.lopez@gmail.com', '1995-05-10', 2, 2, '0311', 'Avenida Secundaria 456', 1),
+       ('5555555555555', 'Pedro', 'González', 'M', '55555555555', 'pedro.gonzalez@gmail.com', '1985-12-15', 3, 1, '0311', 'Plaza Central 789', 1),
+       ('1111111111111', 'Ana', 'García', 'F', '11111111111', 'ana.garcia@gmail.com', '1988-06-20', 2, 2, '0311', 'Calle Secundaria 234', 1),
+       ('2222222222222', 'Luis', 'Martínez', 'M', '22222222222', 'luis.martinez@gmail.com', '1992-09-08', 1, 1, '0311', 'Avenida Principal 567', 1),
+       ('3333333333333', 'Laura', 'Rodríguez', 'F', '33333333333', 'laura.rodriguez@gmail.com', '1997-03-12', 3, 2, '0311', 'Plaza Secundaria 890', 1);
 
+GO																											 
 INSERT INTO CALE.tbCiviles (civi_DNI, civi_Nombres, civi_Apellidos, civi_Sexo, civi_Telefono, civi_CorreoElectronico, civi_FechaNacimiento, eciv_Id, muni_Id, civi_Direccion, civi_UsuCreacion)
-VALUES ('123456789', 'Juan',	'Pérez',		'M', '123456789', 'juan.perez@example.com',		'1990-01-01', 1, '0201', 'Calle Principal 123',		 1),
-		('987654321', 'María',	'López',		'F', '987654321', 'maria.lopez@example.com',	'1995-05-10', 2, '0201', 'Avenida Secundaria 456',	1),
-		('555555555', 'Pedro',	'González',		'M', '555555555', 'pedro.gonzalez@example.com', '1985-12-15', 3, '0201', 'Plaza Central 789',		1),
-		('111111111', 'Ana',	'García',		'F', '111111111', 'ana.garcia@example.com',		'1988-06-20', 2, '0201', 'Calle Secundaria 234',	1),
-		('222222222', 'Luis',	'Martínez',		'M', '222222222', 'luis.martinez@example.com',	'1992-09-08', 1, '0201', 'Avenida Principal 567',	1),
-		('333333333', 'Laura',	'Rodríguez',	'F', '333333333', 'laura.rodriguez@example.com','1997-03-12', 3, '0201', 'Plaza Secundaria 890',	1);
-GO
+VALUES	('5678909876751', 'Carlos',	'Méndez',		'M', '123456789', 'carlos.mendez@example.com',		'1990-01-01', 1, '0201', 'Calle Principal 123',		 1),
+		('6234567980451', 'María',	'López',		'F', '987654321', 'maria.lopez@example.com',		'1995-05-10', 2, '0201', 'Avenida Secundaria 456',	1),
+		('5552325555531', 'Pedro',	'González',		'M', '555555555', 'pedro.gonzalez@example.com', 	'1985-12-15', 3, '0201', 'Plaza Central 789',		1),
+		('3554772244231', 'Ana',	'García',		'F', '111111111', 'ana.garcia@example.com',		'1988-06-20', 2, '0201', 'Calle Secundaria 234',	1),
+		('2222344222321', 'Luis',	'Martínez',		'M', '222222222', 'luis.martinez@example.com',	'1992-09-08', 1, '0201', 'Avenida Principal 567',	1),
+		('3333333434331', 'Laura',	'Rodríguez',	'F', '333333333', 'laura.rodriguez@example.com',	'1997-03-12', 3, '0201', 'Plaza Secundaria 890',	1);
 
 INSERT INTO CALE.tbEmpleados (empe_DNI, empe_Nombres, empe_Apellidos, empe_Sexo, empe_Telefono, empe_CorreoElectronico, empe_FechaNacimiento, eciv_Id, muni_Id, empe_Direccion, empe_UsuCreacion)
-VALUES ('111111111', 'Juan',	'Pérez',	'M', '111111111', 'juan.perez@example.com',			'1990-01-01', 1, '0502', 'Calle Principal 123',		1),
-		('222222222', 'María',	'López',	'F', '222222222', 'maria.lopez@example.com',		'1995-05-10', 2, '0502', 'Avenida Secundaria 456',	1),
-		('333333333', 'Pedro',	'González', 'M', '333333333', 'pedro.gonzalez@example.com',		'1985-12-15', 3, '0502', 'Plaza Central 789',		1),
-		('444444444', 'Ana',	'García',	'F', '444444444', 'ana.garcia@example.com',			'1992-06-20', 2, '0502', 'Calle Secundaria 234',		1),
-		('555555555', 'Luis',	'Martínez', 'M', '555555555', 'luis.martinez@example.com',		'1997-09-08', 1, '0502', 'Avenida Principal 567',	1),
-		('666666666', 'Laura',	'Rodríguez','F', '666666666', 'laura.rodriguez@example.com',	'1994-03-12', 3, '0502', 'Plaza Secundaria 890',		1),
-		('777777777', 'Carlos', 'Gómez',	'M', '777777777', 'carlos.gomez@example.com',		'1989-11-25', 2, '0502', 'Calle Principal 789',		1),
-		('888888888', 'María',	'Torres',	'F', '888888888', 'maria.torres@example.com',		'1993-07-18', 3, '0502', 'Avenida Secundaria 456',	1),
-		('999999999', 'Manuel', 'Sánchez',	'M', '999999999', 'manuel.sanchez@example.com',		'1991-04-30', 1, '0502', 'Plaza Central 789',		1),
-		('101010101', 'Susana', 'López',	'F', '101010101', 'susana.lopez@example.com',		'1996-08-05', 2, '0502', 'Calle Secundaria 234',		1);
-GO
+VALUES	('1111111111111', 'Roberto','Pérez',	'M', '11111111111', 'roberto.perez@example.com',		'1990-01-01', 1, '0502', 'Calle Principal 123',		1),
+		('2222222222222', 'Luisa',	'López',	'F', '22222222222', 'maria.lopez@example.com',		'1995-05-10', 2, '0502', 'Avenida Secundaria 456',	1),
+		('3333333333333', 'Pedro',	'González', 'M', '33333333333', 'pedro.gonzalez@example.com',	'1985-12-15', 3, '0502', 'Plaza Central 789',		1),
+		('4444444444444', 'Ana',	'García',	'F', '44444444444', 'ana.garcia@example.com',			'1992-06-20', 2, '0502', 'Calle Secundaria 234',		1),
+		('5555555555555', 'Luis',	'Martínez', 'M', '55555555555', 'luis.martinez@example.com',		'1997-09-08', 1, '0502', 'Avenida Principal 567',	1),
+		('6666666666666', 'Laura',	'Rodríguez','F', '66666666666', 'laura.rodriguez@example.com',	'1994-03-12', 3, '0502', 'Plaza Secundaria 890',		1),
+		('7777777777777', 'Carlos', 'Gómez',	'M', '77777777777', 'carlos.gomez@example.com',		'1989-11-25', 2, '0502', 'Calle Principal 789',		1),
+		('8888888888888', 'María',	'Torres',	'F', '88888888888', 'maria.torres@example.com',		'1993-07-18', 3, '0502', 'Avenida Secundaria 456',	1),
+		('9999999999999', 'Manuel', 'Sánchez',	'M', '99999999999', 'manuel.sanchez@example.com',		'1991-04-30', 1, '0502', 'Plaza Central 789',		1),
+		('1010101010101', 'Susana', 'López',	'F', '10101010101', 'susana.lopez@example.com',		'1996-08-05', 2, '0502', 'Calle Secundaria 234',		1);
 
+GO
 INSERT INTO CALE.tbEmpresas (emsa_Nombre, emsa_RTN, muni_Id, emsa_Direccion, emsa_RepresentanteNombre, emsa_RepresentanteDNI, emsa_RepresentanteTelefono, emsa_RepresentanteSexo, eciv_Id, emsa_UsuCreacion) 
 VALUES('LEYDE S.A de C.V', '19472516348721', '0103', 'Ave. circunvalacion, entre 16 y 15 calle NO', 'Luis Carrasco', '0601197506321', '+504 9152-6874', 'M', 2, 1)
 GO
